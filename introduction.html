@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -183,7 +217,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./extras.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Extras</span></a>
+ <span class="menu-text">Resources</span></a>
   </div>
 </li>
     </ul>
@@ -201,7 +235,10 @@ window.Quarto = {
   <li><a href="#virtual-environment" id="toc-virtual-environment" class="nav-link" data-scroll-target="#virtual-environment">Virtual Environment</a></li>
   </ul></li>
   <li><a href="#numpy" id="toc-numpy" class="nav-link" data-scroll-target="#numpy">NumPy</a></li>
-  <li><a href="#mujoco" id="toc-mujoco" class="nav-link" data-scroll-target="#mujoco">MuJoCo</a></li>
+  <li><a href="#mujoco" id="toc-mujoco" class="nav-link" data-scroll-target="#mujoco">MuJoCo</a>
+  <ul class="collapse">
+  <li><a href="#usage-example-simulation" id="toc-usage-example-simulation" class="nav-link" data-scroll-target="#usage-example-simulation">Usage Example: Simulation</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -268,8 +305,66 @@ pip install &lt;packages above&gt;</code></pre>
 </section>
 <section id="mujoco" class="level2">
 <h2 class="anchored" data-anchor-id="mujoco">MuJoCo</h2>
+<section id="usage-example-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="usage-example-simulation">Usage Example: Simulation</h3>
+<p>Once you have installed <code>mujoco</code> in <code>python</code>, put the code below in a file and then run this command from the command line:</p>
+<pre><code>python3 &lt;filename where you placed code below&gt;</code></pre>
+<p>If you use macOS, the use of <code>mujoco.viewer</code> for visualization requires a different command:</p>
+<pre><code>mjpython &lt;filename where you placed code below&gt;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mujoco</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mujoco.viewer</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a model from a file (won't do this here to avoid external file calls)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple pendulum model from a string containing that xml</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> mujoco.MjModel.from_xml_string(<span class="st">"""</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;mujoco&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;asset&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;texture name="skybox" type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="100" height="100"/&gt;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/asset&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;worldbody&gt;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;light name="light1" pos="0.3 0.3 1"/&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;geom name="ground" type="plane" size="1 1 0.1" rgba="0.8 0.8 0.8 1"/&gt;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;body name="pendulum" pos="0 0 0"&gt;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;joint name="pivot" type="hinge" pos="0 0 0" axis="0 1 0" damping="0.1"/&gt;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;geom name="rod" type="capsule" fromto="0 0 0 0 0 1" size="0.05" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;geom name="mass" type="sphere" pos="0 0 1" size="0.1" rgba="0.8 0.2 0.2 1"/&gt;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/body&gt;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/worldbody&gt;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/mujoco&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">## Set the time step, initial condition</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>dt: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.002</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>model.opt.timestep <span class="op">=</span> dt</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> mujoco.MjData(model)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>data.qpos[<span class="dv">0</span>]<span class="op">=</span><span class="fl">0.01</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a viewer</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>viewer <span class="op">=</span> mujoco.viewer.launch_passive(model, data)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Run a viewer with simulation in 'real-time'</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>: </span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> viewer.is_running():</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        step_start <span class="op">=</span> time.time()</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step the simulation</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>        mujoco.mj_step(model, data)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update the viewer</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>        viewer.sync()</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add a small delay to control frame rate</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>        time_until_next_step <span class="op">=</span> dt <span class="op">-</span> (time.time() <span class="op">-</span> step_start)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> time_until_next_step <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>            time.sleep(time_until_next_step)</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">KeyboardInterrupt</span>:</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Viewer closed by user"</span>)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="cf">finally</span>:</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    viewer.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

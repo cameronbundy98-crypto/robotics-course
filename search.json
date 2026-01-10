@@ -161,12 +161,12 @@
   {
     "objectID": "extras.html",
     "href": "extras.html",
-    "title": "Extras",
+    "title": "Resources",
     "section": "",
-    "text": "Topic\nOther\n\n\n\n\nLinear Algebra\nGilbert Strang’s lectures\n\n\nODEs\nODE Slides ODE Models, Mechanical Sys, Electrical Sys,\n\n\nServo Motors\nmynotes, PID, PMDC Motors, Gears, DC Motor Control\n\n\nControl Systems\nLaplace Transforms, Transfer Functions, Stability\n\n\nLinear Systems\nLinearization, LTI Systems\n\n\nProbability\nCS188 Lec11, mynotes\n\n\nOptimization\nOG Source, Course\n\n\nAI as Search\nBerekeley CS 188 Lec1\n\n\nMarkov decision processes (MDPs)\nCS188 Lec 7, CS188 Lec 8\n\n\nReinforcement Learning\nSergey Levine’s course, mynotes\n\n\nDifferential Geometry\nmynotes",
+    "text": "Topic\nOther\n\n\n\n\nRobotics ’23\nUK Course\n\n\nOptimization\nUK Course\n\n\nConvex Optimization\nOG Source\n\n\nDeep Learning\nUK Course\n\n\nLinear Algebra\nGilbert Strang’s lectures\n\n\nODEs\nODE Slides ODE Models, Mechanical Sys, Electrical Sys,\n\n\nServo Motors\nmynotes, PID, PMDC Motors, Gears, DC Motor Control\n\n\nControl Systems\nLaplace Transforms, Transfer Functions, Stability\n\n\nLinear Systems\nLinearization, LTI Systems\n\n\nProbability\nCS188 Lec11, mynotes\n\n\nAI as Search\nBerekeley CS 188 Lec1\n\n\nMarkov decision processes (MDPs)\nCS188 Lec 7, CS188 Lec 8\n\n\nReinforcement Learning\nSergey Levine’s course, mynotes\n\n\nDifferential Geometry\nmynotes",
     "crumbs": [
       "Home",
-      "Extras"
+      "Resources"
     ]
   },
   {
@@ -214,7 +214,7 @@
     "href": "introduction.html#mujoco",
     "title": "Python Setup",
     "section": "MuJoCo",
-    "text": "MuJoCo",
+    "text": "MuJoCo\n\nUsage Example: Simulation\nOnce you have installed mujoco in python, put the code below in a file and then run this command from the command line:\npython3 &lt;filename where you placed code below&gt;\nIf you use macOS, the use of mujoco.viewer for visualization requires a different command:\nmjpython &lt;filename where you placed code below&gt;\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model from a string containing that xml\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  &lt;asset&gt;\n    &lt;texture name=\"skybox\" type=\"skybox\" builtin=\"gradient\" rgb1=\".3 .5 .7\" rgb2=\"0 0 0\" width=\"100\" height=\"100\"/&gt;\n  &lt;/asset&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" size=\"1 1 0.1\" rgba=\"0.8 0.8 0.8 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 1\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 1\" size=\"0.1\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\n## Set the time step, initial condition\ndt: float = 0.002\nmodel.opt.timestep = dt\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch_passive(model, data)\n# Run a viewer with simulation in 'real-time'\ntry: \n    while viewer.is_running():\n        step_start = time.time()\n        # Step the simulation\n        mujoco.mj_step(model, data)\n        # Update the viewer\n        viewer.sync()\n        # Add a small delay to control frame rate\n        time_until_next_step = dt - (time.time() - step_start)\n        if time_until_next_step &gt; 0:\n            time.sleep(time_until_next_step)\nexcept KeyboardInterrupt:\n    print(\"Viewer closed by user\")\nfinally:\n    viewer.close()",
     "crumbs": [
       "Home",
       "Python"
