@@ -68,6 +68,41 @@
     "text": "Navigation\n\n\n\n\nSimple linear controller &lt;1&lt; 1 MB size\n\nBased on the Support Vector Machine\n\nGuaranteed to navigate hallway without crashing"
   },
   {
+    "objectID": "overview.html#results",
+    "href": "overview.html#results",
+    "title": "Overview",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "overview.html#guaranteed-collision-avoidance",
+    "href": "overview.html#guaranteed-collision-avoidance",
+    "title": "Overview",
+    "section": "Guaranteed Collision Avoidance",
+    "text": "Guaranteed Collision Avoidance"
+  },
+  {
+    "objectID": "overview.html#distance-based-navigation",
+    "href": "overview.html#distance-based-navigation",
+    "title": "Overview",
+    "section": "Distance-based Navigation",
+    "text": "Distance-based Navigation"
+  },
+  {
+    "objectID": "overview.html#object-aware-navigation",
+    "href": "overview.html#object-aware-navigation",
+    "title": "Overview",
+    "section": "Object-aware Navigation",
+    "text": "Object-aware Navigation\n\n \n\n\nReplace 1/r(ϕ)1/r(\\phi) with measure of object presence at ϕ\\phi\n\n\n\n\n\n\n“Find bus below tree. Approach and help people getting on.”"
+  },
+  {
+    "objectID": "overview.html#yolov9-segmentation-model",
+    "href": "overview.html#yolov9-segmentation-model",
+    "title": "Overview",
+    "section": "Yolov9 Segmentation Model",
+    "text": "Yolov9 Segmentation Model\n\n\n\n\nSource: https://img.freepik.com/premium-vector/vector-realistic-washing-machine-white-3d-mockup_208581-782.jpg?semt=ais_hybrid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImplementation by Karthika Hariprasad, Paul Dunbar High School"
+  },
+  {
     "objectID": "overview.html#contact-rich-manipulation",
     "href": "overview.html#contact-rich-manipulation",
     "title": "Overview",
@@ -174,14 +209,36 @@
     "href": "index.html",
     "title": "Robot Modeling Control",
     "section": "",
-    "text": "This course covers methods for planning and executing the movement of mobile robots (navigation), robot arms (manipulation) and legs (manipulation).\nCourse github: poonawalalab/robotics-course"
+    "text": "This course covers methods for planning and executing the movement of mobile robots (navigation), robot arms (manipulation) and legs (locomotion).\nCourse github: poonawalalab/robotics-course"
   },
   {
     "objectID": "introduction.html",
     "href": "introduction.html",
     "title": "Python Setup",
     "section": "",
-    "text": "We use the following major packages in python:\n\nnumpy: working with \\(n\\)-D arrays\nmujoco : Modeling and simulation of robotic systems\nmatplotlib: plotting\n\nThe following command uses pip to install these python packages\npip install numpy mujoco matplotlib\nIf you want to use machine learning, consider the following packages:\n\ntorch: training of differentiable models\ntorchvision: tools for vision models\npandas: working with data\ntqdm: progress bars in the command line\nscikit-learn: source some classic datasets\n\n\n\nVirtual environments allow you to install a custom set of packages with custom package versions for a project.\nInside the robotics-course directory, run\npython -m venv code-venv\nto create a blank virtual environment.\nActivate it, and then install packages. Upon activation, the command line prompt changes to start with the name of the virtual environment. Here, it would be (code-venv):\nsource code-venv/bin/activate\npip install &lt;packages above&gt;\nWhen you are done, you can run deactivate to return to the default global environment.",
+    "text": "See this guide or this guide to using python on Windows.",
+    "crumbs": [
+      "Home",
+      "Python"
+    ]
+  },
+  {
+    "objectID": "introduction.html#windows",
+    "href": "introduction.html#windows",
+    "title": "Python Setup",
+    "section": "",
+    "text": "See this guide or this guide to using python on Windows.",
+    "crumbs": [
+      "Home",
+      "Python"
+    ]
+  },
+  {
+    "objectID": "introduction.html#command-line-tools",
+    "href": "introduction.html#command-line-tools",
+    "title": "Python Setup",
+    "section": "Command Line Tools",
+    "text": "Command Line Tools\nSee this short course for using the command line to run things on your computer.",
     "crumbs": [
       "Home",
       "Python"
@@ -191,8 +248,8 @@
     "objectID": "introduction.html#packages",
     "href": "introduction.html#packages",
     "title": "Python Setup",
-    "section": "",
-    "text": "We use the following major packages in python:\n\nnumpy: working with \\(n\\)-D arrays\nmujoco : Modeling and simulation of robotic systems\nmatplotlib: plotting\n\nThe following command uses pip to install these python packages\npip install numpy mujoco matplotlib\nIf you want to use machine learning, consider the following packages:\n\ntorch: training of differentiable models\ntorchvision: tools for vision models\npandas: working with data\ntqdm: progress bars in the command line\nscikit-learn: source some classic datasets\n\n\n\nVirtual environments allow you to install a custom set of packages with custom package versions for a project.\nInside the robotics-course directory, run\npython -m venv code-venv\nto create a blank virtual environment.\nActivate it, and then install packages. Upon activation, the command line prompt changes to start with the name of the virtual environment. Here, it would be (code-venv):\nsource code-venv/bin/activate\npip install &lt;packages above&gt;\nWhen you are done, you can run deactivate to return to the default global environment.",
+    "section": "Packages",
+    "text": "Packages\nWe use the following major packages in python:\n\nnumpy: working with \\(n\\)-D arrays\nmujoco : Modeling and simulation of robotic systems\nmatplotlib: plotting\n\nThe following command uses pip to install these python packages\npip install numpy mujoco matplotlib\nIf you want to use machine learning, consider the following packages:\n\ntorch: training of differentiable models\ntorchvision: tools for vision models\npandas: working with data\ntqdm: progress bars in the command line\nscikit-learn: source some classic datasets\n\n\nVirtual Environment\nVirtual environments allow you to install a custom set of packages with custom package versions for a project.\nInside the robotics-course directory, run\npython -m venv code-venv\nto create a blank virtual environment.\nActivate it, and then install packages. Upon activation, the command line prompt changes to start with the name of the virtual environment. Here, it would be (code-venv):\nsource code-venv/bin/activate\npip install &lt;packages above&gt;\nWhen you are done, you can run deactivate to return to the default global environment.",
     "crumbs": [
       "Home",
       "Python"
