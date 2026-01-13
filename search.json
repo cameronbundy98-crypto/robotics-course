@@ -40,81 +40,60 @@
     ]
   },
   {
-    "objectID": "overview.html#syllabus",
-    "href": "overview.html#syllabus",
+    "objectID": "overview.html#syllabus-1",
+    "href": "overview.html#syllabus-1",
     "title": "Overview",
     "section": "Syllabus",
     "text": "Syllabus\n\nLecture: Tue & Thur 2:00pm - 3:15pm, FPAT 253.\nOffice Hours: TBD\nText: Notes +Modern Robotics+ Robot Modeling and Control\nWorkload: 2.5 hours of lecture, 8 hours of reading notes, papers, and writing simulation code per week.\nCourse announcements: I use canvas to send information, but don’t read inbox messages. Contacting me by email with [ME 676 RMC]: or [AER 676 RMC]: makes it easy for me to track and respond to your emails.\nCourse website: All course material will be available on the website, which will be updated as the course proceeds."
   },
   {
-    "objectID": "overview.html#syllabus-1",
-    "href": "overview.html#syllabus-1",
+    "objectID": "overview.html#syllabus-2",
+    "href": "overview.html#syllabus-2",
     "title": "Overview",
     "section": "Syllabus",
-    "text": "Syllabus\n\nAcademic Integrity\nAccommodations due to disability\nAttendance Policy\nClassroom Conduct\nExcused Absences & Verification of Absences\nExams: None.\nHomework: Weekly assignments, must adhere to rules in syllabus\nGrading: See Syllabus. Subject to change."
+    "text": "Syllabus\n\nAcademic Integrity\nAccommodations due to disability\nAttendance Policy\nClassroom Conduct\nExcused Absences & Verification of Absences\nExams: None.\nHomework: Intermittent assignments, must adhere to rules in syllabus\nGrading: See Syllabus. Subject to change."
+  },
+  {
+    "objectID": "overview.html#course-overview",
+    "href": "overview.html#course-overview",
+    "title": "Overview",
+    "section": "Course Overview",
+    "text": "Course Overview\n\n\n\n\n\n\nLearning Goal\n\n\nFor you to be able to read and assimilate both recent papers and early foundational papers on robotics. Furthermore, develop programming skills that enable you to implement and try (possibly new) methods in simulation."
+  },
+  {
+    "objectID": "overview.html#course-overview-1",
+    "href": "overview.html#course-overview-1",
+    "title": "Overview",
+    "section": "Course Overview",
+    "text": "Course Overview\nLearning Goals:\n\nUnderstand coordinates and robot configurations.\nUnderstand how to transform the robot configuration into task coordinates and vice versa, along with the challenges in these processes.\nLearn approaches to planning motions in both task coordinates and robot configurations.\nLearn approaches to achieving planned motions using feedback control.\nUnderstand the challenges of state estimation.\nLearn optimization-based approaches to planning and control.\nUnderstand contact modeling and control challenges.\nSimulate robotic systems and test control algorithms."
+  },
+  {
+    "objectID": "overview.html#course-overview-2",
+    "href": "overview.html#course-overview-2",
+    "title": "Overview",
+    "section": "Course Overview",
+    "text": "Course Overview\nApproaches for achieving goals:\n\nLecture/Discussion on\n\nCoordinates\nDynamical Systems: single and articulated rigid bodies\nPlanning Trajectories\nSensing and State Estimation\nFeedback Control\n\nResearch article discussions\nPractice through assignments (code and question) and Course Project"
+  },
+  {
+    "objectID": "overview.html#expectations",
+    "href": "overview.html#expectations",
+    "title": "Overview",
+    "section": "Expectations",
+    "text": "Expectations\n\nYou are reviewing notes and slides.\nComfort with mathematics:\n\nAbstract definitions.\nImagining concrete examples to which they apply.\nApplying definitions to complete derivations and proofs.\n\nComfort with code:\n\nHow to use documentation describing installation and use of packages.\nAwareness of the need to test code frequently tests will need testing.\n\nStudy groups. Don’t go this one alone."
   },
   {
     "objectID": "overview.html#about-me",
     "href": "overview.html#about-me",
     "title": "Overview",
-    "section": "About me",
-    "text": "About me\n\nGrew up in England and India\nUndergraduate degree in Mech. Engg. in India\nMasters in Mech. Engg from U. Michigan\nPh.D in Electrical Engg. from UT Dallas\nPostDoc at UT Austin in Computational Control\n\n\n\n\n\nResearch\n\n\nGoal: Get mechanical robots to control themselves.\nDay-to-day: Theory from dynamics and control systems, simulations/experiments involving machine learning and robots."
+    "section": "About Me",
+    "text": "About Me\n\nGrew up in India (early childhood in England)\nUndergraduate degree in Mech. Engg. in India\nMasters in Mech. Engg focusing on Mechatronics\nPh.D in Electrical Engg. from UT Dallas: Legged Robots -&gt; Graph Theory + Multi-robot coordination + Quadrotors\nPostDoc at UT Austin: Stability Analysis of Classifier-in-the-Loop Systems\n\n\n\n\n\nResearch\n\n\nGoal: Get mechanical robots to control themselves."
   },
   {
-    "objectID": "overview.html#navigation",
-    "href": "overview.html#navigation",
+    "objectID": "overview.html#about-you",
+    "href": "overview.html#about-you",
     "title": "Overview",
-    "section": "Navigation",
-    "text": "Navigation\n\n\n\n\nSimple linear controller &lt;1&lt; 1 MB size\n\nBased on the Support Vector Machine\n\nGuaranteed to navigate hallway without crashing"
-  },
-  {
-    "objectID": "overview.html#results",
-    "href": "overview.html#results",
-    "title": "Overview",
-    "section": "Results",
-    "text": "Results"
-  },
-  {
-    "objectID": "overview.html#guaranteed-collision-avoidance",
-    "href": "overview.html#guaranteed-collision-avoidance",
-    "title": "Overview",
-    "section": "Guaranteed Collision Avoidance",
-    "text": "Guaranteed Collision Avoidance"
-  },
-  {
-    "objectID": "overview.html#distance-based-navigation",
-    "href": "overview.html#distance-based-navigation",
-    "title": "Overview",
-    "section": "Distance-based Navigation",
-    "text": "Distance-based Navigation"
-  },
-  {
-    "objectID": "overview.html#object-aware-navigation",
-    "href": "overview.html#object-aware-navigation",
-    "title": "Overview",
-    "section": "Object-aware Navigation",
-    "text": "Object-aware Navigation\n\n \n\n\nReplace 1/r(ϕ)1/r(\\phi) with measure of object presence at ϕ\\phi\n\n\n\n\n\n\n“Find bus below tree. Approach and help people getting on.”"
-  },
-  {
-    "objectID": "overview.html#yolov9-segmentation-model",
-    "href": "overview.html#yolov9-segmentation-model",
-    "title": "Overview",
-    "section": "Yolov9 Segmentation Model",
-    "text": "Yolov9 Segmentation Model\n\n\n\n\nSource: https://img.freepik.com/premium-vector/vector-realistic-washing-machine-white-3d-mockup_208581-782.jpg?semt=ais_hybrid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImplementation by Karthika Hariprasad, Paul Dunbar High School"
-  },
-  {
-    "objectID": "overview.html#contact-rich-manipulation",
-    "href": "overview.html#contact-rich-manipulation",
-    "title": "Overview",
-    "section": "Contact-Rich Manipulation",
-    "text": "Contact-Rich Manipulation\n\n\n\n\n\nGuided Policy Search\n\n\n\n\nNo guidance"
-  },
-  {
-    "objectID": "overview.html#motivation",
-    "href": "overview.html#motivation",
-    "title": "Overview",
-    "section": "Motivation",
-    "text": "Motivation"
+    "section": "About You",
+    "text": "About You\nOn an index card / sheet of paper, write down:\n\nName\nFirst robot you were aware of and/or Favorite robot\nMotivation for taking this course\nConcerns about the course\nTopics you wish were on the syllabus\nTopics you have already studied\nLearning/teaching styles that you feel work well for you"
   },
   {
     "objectID": "overview.html#motivation-1",
@@ -145,6 +124,20 @@
     "text": "Motivation"
   },
   {
+    "objectID": "overview.html#motivation-5",
+    "href": "overview.html#motivation-5",
+    "title": "Overview",
+    "section": "Motivation",
+    "text": "Motivation"
+  },
+  {
+    "objectID": "overview.html#exercise",
+    "href": "overview.html#exercise",
+    "title": "Overview",
+    "section": "Exercise",
+    "text": "Exercise\nSketch a diagram describing your guess for the underlying system architecture that achieves these kinds of behaviors"
+  },
+  {
     "objectID": "overview.html#whats-left",
     "href": "overview.html#whats-left",
     "title": "Overview",
@@ -152,53 +145,137 @@
     "text": "What’s Left?\n\nTouch feedback\nHuman-Robot Interaction\nSafety\nReliability\nEnergetic Efficiency\n\nPrevious: Will the prototype work?\nNow: Will this be a viable commercial product?"
   },
   {
-    "objectID": "overview.html#tasks-for-robots",
-    "href": "overview.html#tasks-for-robots",
+    "objectID": "overview.html#goal",
+    "href": "overview.html#goal",
     "title": "Overview",
-    "section": "Tasks For Robots",
-    "text": "Tasks For Robots\n\nWhat kinds of tasks requires a physical robot? (Or, what can’t your phone do?)\nHow would you describe the motion you want to a robot?\nHow would you, as a robot, convert that description into action?"
+    "section": "Goal",
+    "text": "Goal\nGoal: Get mechanical robots to control themselves.\nDay-to-day:\n\nTheory from dynamics and control systems,\nAlgorithm development: optimization\n\nSimulations/experiments"
   },
   {
-    "objectID": "overview.html#course-overview",
-    "href": "overview.html#course-overview",
+    "objectID": "overview.html#navigation-using-deep-learning",
+    "href": "overview.html#navigation-using-deep-learning",
     "title": "Overview",
-    "section": "Course Overview",
-    "text": "Course Overview\n\n\n\n\n\n\nLearning Goal\n\n\nFor you to be able to read and assimilate both recent papers and early foundational papers on robotics. Furthermore, develop programming skills that enable you to implement and try (possibly new) methods in simulation."
+    "section": "Navigation using Deep Learning",
+    "text": "Navigation using Deep Learning"
   },
   {
-    "objectID": "overview.html#course-overview-1",
-    "href": "overview.html#course-overview-1",
+    "objectID": "overview.html#end-to-end-neural-net-control",
+    "href": "overview.html#end-to-end-neural-net-control",
     "title": "Overview",
-    "section": "Course Overview",
-    "text": "Course Overview\nLearning Goals:\n\nUnderstand coordinates and robot configurations.\nUnderstand how to transform the robot configuration into task coordinates and vice versa, along with the challenges in these processes.\nLearn approaches to planning motions in both task coordinates and robot configurations.\nLearn approaches to achieving planned motions using feedback control.\nUnderstand the challenges of state estimation.\nLearn optimization-based approaches to planning and control.\nUnderstand contact modeling and control challenges.\nSimulate robotic systems and test control algorithms."
+    "section": "End-to-end Neural Net Control",
+    "text": "End-to-end Neural Net Control"
   },
   {
-    "objectID": "overview.html#course-overview-2",
-    "href": "overview.html#course-overview-2",
+    "objectID": "overview.html#navigation-using-machine-learning",
+    "href": "overview.html#navigation-using-machine-learning",
     "title": "Overview",
-    "section": "Course Overview",
-    "text": "Course Overview\nApproaches for achieving goals:\n\n\nLecture/Discussion on\n\nCoordinates\nDynamical Systems: single and articulated rigid bodies\nPlanning Trajectories\nSensing and State Estimation\nFeedback Control\n\nResearch article discussions\nPractice through assignments (code and question) and Course Project"
+    "section": "Navigation using Machine Learning",
+    "text": "Navigation using Machine Learning\n\n\n\n\nSimple linear controller &lt;1&lt; 1 MB size\n\nBased on the Support Vector Machine\n\nGuaranteed to navigate hallway without crashing"
   },
   {
-    "objectID": "overview.html#expectations",
-    "href": "overview.html#expectations",
+    "objectID": "overview.html#results",
+    "href": "overview.html#results",
     "title": "Overview",
-    "section": "Expectations",
-    "text": "Expectations\n\nYou are reviewing notes and slides.\nComfort with mathematics:\n\nAbstract definitions.\nImagining concrete examples to which they apply.\nApplying definitions to complete derivations and proofs.\n\nComfort with code:\n\nHow to use documentation describing installation and use of packages.\nAwareness of the need to test code frequently tests will need testing.\n\nStudy groups. Don’t go this one alone."
+    "section": "Results",
+    "text": "Results"
   },
   {
-    "objectID": "overview.html#about-you",
-    "href": "overview.html#about-you",
+    "objectID": "overview.html#guaranteed-collision-avoidance",
+    "href": "overview.html#guaranteed-collision-avoidance",
     "title": "Overview",
-    "section": "About You",
-    "text": "About You\nOn an index card / sheet of paper, write down:\n\nName\nFirst robot you were aware of and/or Favorite robot\nMotivation for taking this course\nConcerns about the course\nTopics you wish were on the syllabus\nTopics you have already studied\nLearning/teaching styles that you feel work well for you"
+    "section": "Guaranteed Collision Avoidance",
+    "text": "Guaranteed Collision Avoidance"
+  },
+  {
+    "objectID": "overview.html#mapping",
+    "href": "overview.html#mapping",
+    "title": "Overview",
+    "section": "Mapping",
+    "text": "Mapping\n\n\n\nUses Pose-Graph-based SLAM, A*^*, and pure pursuit algorithm to get to a location."
+  },
+  {
+    "objectID": "overview.html#distance-based-navigation",
+    "href": "overview.html#distance-based-navigation",
+    "title": "Overview",
+    "section": "Distance-based Navigation",
+    "text": "Distance-based Navigation"
+  },
+  {
+    "objectID": "overview.html#object-aware-navigation",
+    "href": "overview.html#object-aware-navigation",
+    "title": "Overview",
+    "section": "Object-aware Navigation",
+    "text": "Object-aware Navigation\n\n \n\n\nReplace 1/r(ϕ)1/r(\\phi) with measure of object presence at ϕ\\phi\n\n\n\n\n\n\n“Find bus below tree. Approach and help people getting on.”"
+  },
+  {
+    "objectID": "overview.html#yolov9-segmentation-model",
+    "href": "overview.html#yolov9-segmentation-model",
+    "title": "Overview",
+    "section": "Yolov9 Segmentation Model",
+    "text": "Yolov9 Segmentation Model\n\n\n\n\nSource: https://img.freepik.com/premium-vector/vector-realistic-washing-machine-white-3d-mockup_208581-782.jpg?semt=ais_hybrid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImplementation by Karthika Hariprasad, Paul Dunbar High School"
+  },
+  {
+    "objectID": "overview.html#contact-rich-manipulation",
+    "href": "overview.html#contact-rich-manipulation",
+    "title": "Overview",
+    "section": "Contact-Rich Manipulation",
+    "text": "Contact-Rich Manipulation"
+  },
+  {
+    "objectID": "overview.html#contact-rich-manipulation-1",
+    "href": "overview.html#contact-rich-manipulation-1",
+    "title": "Overview",
+    "section": "Contact-Rich Manipulation",
+    "text": "Contact-Rich Manipulation\n\n\n\n\n\nGuided Policy Search\n\n\n\n\nNo guidance"
+  },
+  {
+    "objectID": "overview.html#contact-rich-manipulation-2",
+    "href": "overview.html#contact-rich-manipulation-2",
+    "title": "Overview",
+    "section": "Contact-Rich Manipulation",
+    "text": "Contact-Rich Manipulation"
+  },
+  {
+    "objectID": "overview.html#dl-for-smart-sensors-and-data",
+    "href": "overview.html#dl-for-smart-sensors-and-data",
+    "title": "Overview",
+    "section": "DL for Smart Sensors and Data",
+    "text": "DL for Smart Sensors and Data"
+  },
+  {
+    "objectID": "overview.html#tracking-robot-arms",
+    "href": "overview.html#tracking-robot-arms",
+    "title": "Overview",
+    "section": "Tracking Robot Arms",
+    "text": "Tracking Robot Arms"
+  },
+  {
+    "objectID": "overview.html#dream-model",
+    "href": "overview.html#dream-model",
+    "title": "Overview",
+    "section": "DREAM Model",
+    "text": "DREAM Model\n\n\n\n\nhttps://sim2realai.github.io/assets/img/2020-06-29/Lee_etal_2020_dream_panda_reaching_frame.png"
+  },
+  {
+    "objectID": "overview.html#dream-model-1",
+    "href": "overview.html#dream-model-1",
+    "title": "Overview",
+    "section": "DREAM Model",
+    "text": "DREAM Model\n\n\n\n\nhttps://sim2realai.github.io/assets/img/2020-06-29/Lee_etal_2020_dream_pipeline.png\n\n\n\n\n80 - 200 MB model depending on the backbone (VGG-X vs ResNet-X)"
+  },
+  {
+    "objectID": "overview.html#dream-on-jetson-nanos",
+    "href": "overview.html#dream-on-jetson-nanos",
+    "title": "Overview",
+    "section": "DREAM On Jetson Nanos",
+    "text": "DREAM On Jetson Nanos\n\n  \n\n\n\n\n\nImplementation by Varun Hariprasad"
   },
   {
     "objectID": "extras.html",
     "href": "extras.html",
     "title": "Resources",
     "section": "",
-    "text": "Topic\nOther\n\n\n\n\nRobotics ’23\nUK Course\n\n\nOptimization\nUK Course\n\n\nConvex Optimization\nOG Source\n\n\nDeep Learning\nUK Course\n\n\nLinear Algebra\nGilbert Strang’s lectures\n\n\nODEs\nODE Slides ODE Models, Mechanical Sys, Electrical Sys,\n\n\nServo Motors\nmynotes, PID, PMDC Motors, Gears, DC Motor Control\n\n\nControl Systems\nLaplace Transforms, Transfer Functions, Stability\n\n\nLinear Systems\nLinearization, LTI Systems\n\n\nProbability\nCS188 Lec11, mynotes\n\n\nAI as Search\nBerekeley CS 188 Lec1\n\n\nMarkov decision processes (MDPs)\nCS188 Lec 7, CS188 Lec 8\n\n\nReinforcement Learning\nSergey Levine’s course, mynotes\n\n\nDifferential Geometry\nmynotes",
+    "text": "Topic\nOther\n\n\n\n\nRobotics ’23\nUK Course\n\n\nOptimization\nUK Course\n\n\nConvex Optimization\nOG Source\n\n\nDeep Learning\nUK Course\n\n\nList of Robotics Courses\nLink\n\n\nLinear Algebra\nGilbert Strang’s lectures\n\n\nODEs\nODE Slides ODE Models, Mechanical Sys, Electrical Sys,\n\n\nServo Motors\nmynotes, PID, PMDC Motors, Gears, DC Motor Control\n\n\nControl Systems\nLaplace Transforms, Transfer Functions, Stability\n\n\nLinear Systems\nLinearization, LTI Systems\n\n\nProbability\nCS188 Lec11, mynotes\n\n\nAI as Search\nBerekeley CS 188 Lec1\n\n\nMarkov decision processes (MDPs)\nCS188 Lec 7, CS188 Lec 8\n\n\nReinforcement Learning\nSergey Levine’s course, mynotes\n\n\nDifferential Geometry\nmynotes",
     "crumbs": [
       "Home",
       "Resources"
