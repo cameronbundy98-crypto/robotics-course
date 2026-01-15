@@ -230,8 +230,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#windows" id="toc-windows" class="nav-link active" data-scroll-target="#windows">Windows</a></li>
-  <li><a href="#command-line-tools" id="toc-command-line-tools" class="nav-link" data-scroll-target="#command-line-tools">Command Line Tools</a></li>
+  <li><a href="#command-line-tools" id="toc-command-line-tools" class="nav-link active" data-scroll-target="#command-line-tools">Command Line Tools</a>
+  <ul class="collapse">
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
+  </ul></li>
   <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a>
   <ul class="collapse">
   <li><a href="#virtual-environment" id="toc-virtual-environment" class="nav-link" data-scroll-target="#virtual-environment">Virtual Environment</a></li>
@@ -239,6 +241,7 @@ window.Quarto = {
   <li><a href="#numpy" id="toc-numpy" class="nav-link" data-scroll-target="#numpy">NumPy</a></li>
   <li><a href="#mujoco" id="toc-mujoco" class="nav-link" data-scroll-target="#mujoco">MuJoCo</a>
   <ul class="collapse">
+  <li><a href="#drag-and-drop-mode" id="toc-drag-and-drop-mode" class="nav-link" data-scroll-target="#drag-and-drop-mode">Drag-and-Drop Mode</a></li>
   <li><a href="#usage-example-simulation" id="toc-usage-example-simulation" class="nav-link" data-scroll-target="#usage-example-simulation">Usage Example: Simulation</a></li>
   </ul></li>
   </ul>
@@ -266,13 +269,14 @@ window.Quarto = {
 </header>
 
 
-<section id="windows" class="level2">
-<h2 class="anchored" data-anchor-id="windows">Windows</h2>
-<p>See <a href="https://docs.python.org/3/using/windows.html">this guide</a> or <a href="https://www.digitalocean.com/community/tutorials/install-python-windows-10">this guide</a> to using <code>python</code> on Windows.</p>
-</section>
 <section id="command-line-tools" class="level2">
 <h2 class="anchored" data-anchor-id="command-line-tools">Command Line Tools</h2>
-<p>See this <a href="https://missing.csail.mit.edu/">short course</a> for using the command line to run things on your computer.</p>
+<p>The command line interface is a text-based interface for interacting with programs on your computer. By contrast, we interact with many programs through a graphical user interface. For the course, you should get comfortable with command line interfaces. See this <a href="https://missing.csail.mit.edu/">short course</a> for using the command line to run things on your computer.</p>
+<p>Programs like <code>pycharm</code> and <code>VS Code</code> give you a combination of a graphical user interface with a command line tool option, and are popular. However, they introduce an additional learning curve.</p>
+<section id="windows" class="level3">
+<h3 class="anchored" data-anchor-id="windows">Windows</h3>
+<p>See <a href="https://docs.python.org/3/using/windows.html">this guide</a> or <a href="https://www.digitalocean.com/community/tutorials/install-python-windows-10">this guide</a> to using <code>python</code> on Windows.</p>
+</section>
 </section>
 <section id="packages" class="level2">
 <h2 class="anchored" data-anchor-id="packages">Packages</h2>
@@ -315,65 +319,56 @@ pip install &lt;packages above&gt;</code></pre>
 </section>
 <section id="mujoco" class="level2">
 <h2 class="anchored" data-anchor-id="mujoco">MuJoCo</h2>
+<section id="drag-and-drop-mode" class="level3">
+<h3 class="anchored" data-anchor-id="drag-and-drop-mode">Drag-and-Drop Mode</h3>
+<p>Open a terminal window (command window - <code>cmd</code> on Windows) and run</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>python3 <span class="op">-</span>m mujoco.viewer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This command should open a window with nothing visible yet. You can drag <code>xml</code> files describing a <code>MuJoCo</code> environment and it will show up. The <code>xml</code> needs to be self-contained or use complete paths to subfiles.</p>
+</section>
 <section id="usage-example-simulation" class="level3">
 <h3 class="anchored" data-anchor-id="usage-example-simulation">Usage Example: Simulation</h3>
-<p>Once you have installed <code>mujoco</code> in <code>python</code>, put the code below in a file and then run this command from the command line:</p>
-<pre><code>python3 &lt;filename where you placed code below&gt;</code></pre>
-<p>If you use macOS, the use of <code>mujoco.viewer</code> for visualization requires a different command:</p>
-<pre><code>mjpython &lt;filename where you placed code below&gt;</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mujoco</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mujoco.viewer</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a model from a file (won't do this here to avoid external file calls)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple pendulum model from a string containing that xml</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> mujoco.MjModel.from_xml_string(<span class="st">"""</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;mujoco&gt;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;asset&gt;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;texture name="skybox" type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="100" height="100"/&gt;</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/asset&gt;</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;worldbody&gt;</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;light name="light1" pos="0.3 0.3 1"/&gt;</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;geom name="ground" type="plane" size="1 1 0.1" rgba="0.8 0.8 0.8 1"/&gt;</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;body name="pendulum" pos="0 0 0"&gt;</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;joint name="pivot" type="hinge" pos="0 0 0" axis="0 1 0" damping="0.1"/&gt;</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;geom name="rod" type="capsule" fromto="0 0 0 0 0 1" size="0.05" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;geom name="mass" type="sphere" pos="0 0 1" size="0.1" rgba="0.8 0.2 0.2 1"/&gt;</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/body&gt;</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/worldbody&gt;</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/mujoco&gt;</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">## Set the time step, initial condition</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>dt: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.002</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>model.opt.timestep <span class="op">=</span> dt</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> mujoco.MjData(model)</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>data.qpos[<span class="dv">0</span>]<span class="op">=</span><span class="fl">0.01</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a viewer</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>viewer <span class="op">=</span> mujoco.viewer.launch_passive(model, data)</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Run a viewer with simulation in 'real-time'</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>: </span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> viewer.is_running():</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        step_start <span class="op">=</span> time.time()</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step the simulation</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>        mujoco.mj_step(model, data)</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update the viewer</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>        viewer.sync()</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add a small delay to control frame rate</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>        time_until_next_step <span class="op">=</span> dt <span class="op">-</span> (time.time() <span class="op">-</span> step_start)</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> time_until_next_step <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>            time.sleep(time_until_next_step)</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">KeyboardInterrupt</span>:</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Viewer closed by user"</span>)</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="cf">finally</span>:</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    viewer.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once you have installed <code>mujoco</code> in <code>python</code>, you can run <a href="code/basic_mujoco.py">this code</a> by running this command in the command line from the root of this repository:</p>
+<pre><code>python3 code/basic_mujoco.py</code></pre>
+<section id="create-your-own-file" class="level4">
+<h4 class="anchored" data-anchor-id="create-your-own-file">Create your own file</h4>
+<p>Copy the code below and past it in a file <code>&lt;filename&gt;.py</code> in your current folder and save it. Then run</p>
+<pre><code>python3 &lt;filename&gt;.py</code></pre>
+<p>Code inside <code>code/basic_mujoco.py</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mujoco</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mujoco.viewer</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a model from a file (won't do this here to avoid external file calls)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple pendulum model</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> mujoco.MjModel.from_xml_string(<span class="st">"""</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;mujoco&gt;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;worldbody&gt;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;light name="light1" pos="0.3 0.3 1"/&gt;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;geom name="ground" type="plane" pos=" 0 0 -1.2" size="2 2 0.1" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;body name="pendulum" pos="0 0 0"&gt;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;joint name="pivot" type="hinge" pos="0 0 0" axis="1 0 0" damping="0.1"/&gt;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;geom name="rod" type="capsule" fromto="0 0 0 0 0 0.6" size="0.05" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st">      &lt;geom name="mass" type="sphere" pos="0 0 0.6" size="0.07" rgba="0.8 0.2 0.2 1"/&gt;</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/body&gt;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/worldbody&gt;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/mujoco&gt;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> mujoco.MjData(model)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>data.qpos[<span class="dv">0</span>]<span class="op">=</span><span class="fl">0.01</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a viewer</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>viewer <span class="op">=</span> mujoco.viewer.launch(model, data, </span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        show_left_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        show_right_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 </section>
 
