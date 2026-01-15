@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Hasan A. Poonawala">
-  <title>Robot Modeling Control – Overview</title>
+  <title>Robot Modeling Control – MuJoCo</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -195,7 +195,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Overview</h1>
+  <h1 class="title">MuJoCo and XML</h1>
 
 <div class="quarto-title-authors">
 </div>
@@ -211,48 +211,39 @@
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> mujoco</span>
-<span id="cb1-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a><span class="co"># Create a simple pendulum model</span></span>
-<span id="cb1-5"><a></a>model <span class="op">=</span> mujoco.MjModel.from_xml_string(<span class="st">"""</span></span>
-<span id="cb1-6"><a></a><span class="st">&lt;mujoco&gt;</span></span>
-<span id="cb1-7"><a></a><span class="st">  &lt;worldbody&gt;</span></span>
-<span id="cb1-8"><a></a><span class="st">    &lt;light name="light1" pos="0.3 0.3 1"/&gt;</span></span>
-<span id="cb1-9"><a></a><span class="st">    &lt;geom name="ground" type="plane" pos=" 0 0 -1.2" size="2 2 0.1" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
-<span id="cb1-10"><a></a><span class="st">    </span></span>
-<span id="cb1-11"><a></a><span class="st">    &lt;body name="pendulum" pos="0 0 0"&gt;</span></span>
-<span id="cb1-12"><a></a><span class="st">      &lt;joint name="pivot" type="hinge" pos="0 0 0" axis="0 1 0" damping="0.1"/&gt;</span></span>
-<span id="cb1-13"><a></a><span class="st">      &lt;geom name="rod" type="capsule" fromto="0 0 0 0 0 0.6" size="0.05" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
-<span id="cb1-14"><a></a><span class="st">      &lt;geom name="mass" type="sphere" pos="0 0 0.6" size="0.07" rgba="0.8 0.2 0.2 1"/&gt;</span></span>
-<span id="cb1-15"><a></a><span class="st">    &lt;/body&gt;</span></span>
-<span id="cb1-16"><a></a><span class="st">  &lt;/worldbody&gt;</span></span>
-<span id="cb1-17"><a></a><span class="st">&lt;/mujoco&gt;</span></span>
-<span id="cb1-18"><a></a><span class="st">"""</span>)</span>
-<span id="cb1-19"><a></a></span>
-<span id="cb1-20"><a></a>data <span class="op">=</span> mujoco.MjData(model)</span>
-<span id="cb1-21"><a></a>data.qpos[<span class="dv">0</span>]<span class="op">=</span><span class="fl">0.1</span></span>
-<span id="cb1-22"><a></a></span>
-<span id="cb1-23"><a></a><span class="co"># Create renderer</span></span>
-<span id="cb1-24"><a></a>renderer <span class="op">=</span> mujoco.Renderer(model, height<span class="op">=</span><span class="dv">480</span>, width<span class="op">=</span><span class="dv">640</span>)</span>
-<span id="cb1-25"><a></a></span>
-<span id="cb1-26"><a></a><span class="co"># Step simulation to desired state (optional)</span></span>
-<span id="cb1-27"><a></a>mujoco.mj_step(model, data)</span>
-<span id="cb1-28"><a></a></span>
-<span id="cb1-29"><a></a><span class="co"># Update the renderer with current state</span></span>
-<span id="cb1-30"><a></a>renderer.update_scene(data)</span>
-<span id="cb1-31"><a></a></span>
-<span id="cb1-32"><a></a><span class="co"># Render the image</span></span>
-<span id="cb1-33"><a></a>pixels <span class="op">=</span> renderer.render()</span>
-<span id="cb1-34"><a></a></span>
-<span id="cb1-35"><a></a><span class="co"># Display with matplotlib</span></span>
-<span id="cb1-36"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
-<span id="cb1-37"><a></a>plt.imshow(pixels)</span>
-<span id="cb1-38"><a></a>plt.axis(<span class="st">'off'</span>)</span>
-<span id="cb1-39"><a></a>plt.show()</span>
-<span id="cb1-40"><a></a></span>
-<span id="cb1-41"><a></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a></a><span class="im">import</span> mujoco.viewer</span>
+<span id="cb1-3"><a></a><span class="im">import</span> time </span>
+<span id="cb1-4"><a></a></span>
+<span id="cb1-5"><a></a><span class="co"># Load a model from a file (won't do this here to avoid external file calls)</span></span>
+<span id="cb1-6"><a></a><span class="co"># model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')</span></span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a><span class="co"># Create a simple pendulum model</span></span>
+<span id="cb1-9"><a></a>model <span class="op">=</span> mujoco.MjModel.from_xml_string(<span class="st">"""</span></span>
+<span id="cb1-10"><a></a><span class="st">&lt;mujoco&gt;</span></span>
+<span id="cb1-11"><a></a><span class="st">  </span></span>
+<span id="cb1-12"><a></a><span class="st">  &lt;worldbody&gt;</span></span>
+<span id="cb1-13"><a></a><span class="st">    &lt;light name="light1" pos="0.3 0.3 1"/&gt;</span></span>
+<span id="cb1-14"><a></a><span class="st">    &lt;geom name="ground" type="plane" pos=" 0 0 -1.2" size="2 2 0.1" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
+<span id="cb1-15"><a></a><span class="st">    </span></span>
+<span id="cb1-16"><a></a><span class="st">    &lt;body name="pendulum" pos="0 0 0"&gt;</span></span>
+<span id="cb1-17"><a></a><span class="st">      &lt;joint name="pivot" type="hinge" pos="0 0 0" axis="0 1 0" damping="0.1"/&gt;</span></span>
+<span id="cb1-18"><a></a><span class="st">      &lt;geom name="rod" type="capsule" fromto="0 0 0 0 0 0.6" size="0.05" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
+<span id="cb1-19"><a></a><span class="st">      &lt;geom name="mass" type="sphere" pos="0 0 0.6" size="0.07" rgba="0.8 0.2 0.2 1"/&gt;</span></span>
+<span id="cb1-20"><a></a><span class="st">    &lt;/body&gt;</span></span>
+<span id="cb1-21"><a></a><span class="st">  &lt;/worldbody&gt;</span></span>
+<span id="cb1-22"><a></a><span class="st">&lt;/mujoco&gt;</span></span>
+<span id="cb1-23"><a></a><span class="st">"""</span>)</span>
+<span id="cb1-24"><a></a></span>
+<span id="cb1-25"><a></a>data <span class="op">=</span> mujoco.MjData(model)</span>
+<span id="cb1-26"><a></a>data.qpos[<span class="dv">0</span>]<span class="op">=</span><span class="fl">0.01</span></span>
+<span id="cb1-27"><a></a></span>
+<span id="cb1-28"><a></a><span class="co"># Create a viewer</span></span>
+<span id="cb1-29"><a></a>viewer <span class="op">=</span> mujoco.viewer.launch(model, data, </span>
+<span id="cb1-30"><a></a>        show_left_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb1-31"><a></a>        show_right_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb1-32"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:49%;">
-<div id="b07befe6" class="cell" data-execution_count="1">
+<div id="3222f68e" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -263,19 +254,206 @@
 </div>
 <p>Run <code>python3 code/basic_mujoco.py</code></p>
 </div></div>
-</section></section>
-<section>
-<section id="extras" class="title-slide slide level1 center">
-<h1>Extras</h1>
+</section>
+<section id="basic-example-1" class="slide level2">
+<h2>Basic Example</h2>
+<div class="sourceCode" id="cb2" data-code-line-numbers="10-22|10,22|12,21|13|14|16,20|18,19|17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> mujoco</span>
+<span id="cb2-2"><a></a><span class="im">import</span> mujoco.viewer</span>
+<span id="cb2-3"><a></a><span class="im">import</span> time </span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a><span class="co"># Load a model from a file (won't do this here to avoid external file calls)</span></span>
+<span id="cb2-6"><a></a><span class="co"># model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')</span></span>
+<span id="cb2-7"><a></a></span>
+<span id="cb2-8"><a></a><span class="co"># Create a simple pendulum model</span></span>
+<span id="cb2-9"><a></a>model <span class="op">=</span> mujoco.MjModel.from_xml_string(<span class="st">"""</span></span>
+<span id="cb2-10"><a></a><span class="st">&lt;mujoco&gt;</span></span>
+<span id="cb2-11"><a></a><span class="st">  </span></span>
+<span id="cb2-12"><a></a><span class="st">  &lt;worldbody&gt;</span></span>
+<span id="cb2-13"><a></a><span class="st">    &lt;light name="light1" pos="0.3 0.3 1"/&gt;</span></span>
+<span id="cb2-14"><a></a><span class="st">    &lt;geom name="ground" type="plane" pos=" 0 0 -1.2" size="2 2 0.1" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
+<span id="cb2-15"><a></a><span class="st">    </span></span>
+<span id="cb2-16"><a></a><span class="st">    &lt;body name="pendulum" pos="0 0 0"&gt;</span></span>
+<span id="cb2-17"><a></a><span class="st">      &lt;joint name="pivot" type="hinge" pos="0 0 0" axis="0 1 0" damping="0.1"/&gt;</span></span>
+<span id="cb2-18"><a></a><span class="st">      &lt;geom name="rod" type="capsule" fromto="0 0 0 0 0 0.6" size="0.05" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
+<span id="cb2-19"><a></a><span class="st">      &lt;geom name="mass" type="sphere" pos="0 0 0.6" size="0.07" rgba="0.8 0.2 0.2 1"/&gt;</span></span>
+<span id="cb2-20"><a></a><span class="st">    &lt;/body&gt;</span></span>
+<span id="cb2-21"><a></a><span class="st">  &lt;/worldbody&gt;</span></span>
+<span id="cb2-22"><a></a><span class="st">&lt;/mujoco&gt;</span></span>
+<span id="cb2-23"><a></a><span class="st">"""</span>)</span>
+<span id="cb2-24"><a></a></span>
+<span id="cb2-25"><a></a>data <span class="op">=</span> mujoco.MjData(model)</span>
+<span id="cb2-26"><a></a>data.qpos[<span class="dv">0</span>]<span class="op">=</span><span class="fl">0.01</span></span>
+<span id="cb2-27"><a></a></span>
+<span id="cb2-28"><a></a><span class="co"># Create a viewer</span></span>
+<span id="cb2-29"><a></a>viewer <span class="op">=</span> mujoco.viewer.launch(model, data, </span>
+<span id="cb2-30"><a></a>        show_left_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb2-31"><a></a>        show_right_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb2-32"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="basic-example-with-loading" class="slide level2">
+<h2>Basic Example with Loading</h2>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="sourceCode" id="cb3" data-code-line-numbers="|5,6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> mujoco</span>
+<span id="cb3-2"><a></a><span class="im">import</span> mujoco.viewer</span>
+<span id="cb3-3"><a></a><span class="im">import</span> time </span>
+<span id="cb3-4"><a></a></span>
+<span id="cb3-5"><a></a><span class="co"># Load a model from a file (won't do this here to avoid external file calls)</span></span>
+<span id="cb3-6"><a></a><span class="co"># model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')</span></span>
+<span id="cb3-7"><a></a></span>
+<span id="cb3-8"><a></a><span class="co"># Create a simple pendulum model</span></span>
+<span id="cb3-9"><a></a>model <span class="op">=</span> mujoco.MjModel.from_xml_string(<span class="st">"""</span></span>
+<span id="cb3-10"><a></a><span class="st">&lt;mujoco&gt;</span></span>
+<span id="cb3-11"><a></a><span class="st">  </span></span>
+<span id="cb3-12"><a></a><span class="st">  &lt;worldbody&gt;</span></span>
+<span id="cb3-13"><a></a><span class="st">    &lt;light name="light1" pos="0.3 0.3 1"/&gt;</span></span>
+<span id="cb3-14"><a></a><span class="st">    &lt;geom name="ground" type="plane" pos=" 0 0 -1.2" size="2 2 0.1" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
+<span id="cb3-15"><a></a><span class="st">    </span></span>
+<span id="cb3-16"><a></a><span class="st">    &lt;body name="pendulum" pos="0 0 0"&gt;</span></span>
+<span id="cb3-17"><a></a><span class="st">      &lt;joint name="pivot" type="hinge" pos="0 0 0" axis="0 1 0" damping="0.1"/&gt;</span></span>
+<span id="cb3-18"><a></a><span class="st">      &lt;geom name="rod" type="capsule" fromto="0 0 0 0 0 0.6" size="0.05" rgba="0.5 0.5 0.5 1"/&gt;</span></span>
+<span id="cb3-19"><a></a><span class="st">      &lt;geom name="mass" type="sphere" pos="0 0 0.6" size="0.07" rgba="0.8 0.2 0.2 1"/&gt;</span></span>
+<span id="cb3-20"><a></a><span class="st">    &lt;/body&gt;</span></span>
+<span id="cb3-21"><a></a><span class="st">  &lt;/worldbody&gt;</span></span>
+<span id="cb3-22"><a></a><span class="st">&lt;/mujoco&gt;</span></span>
+<span id="cb3-23"><a></a><span class="st">"""</span>)</span>
+<span id="cb3-24"><a></a></span>
+<span id="cb3-25"><a></a>data <span class="op">=</span> mujoco.MjData(model)</span>
+<span id="cb3-26"><a></a>data.qpos[<span class="dv">0</span>]<span class="op">=</span><span class="fl">0.01</span></span>
+<span id="cb3-27"><a></a></span>
+<span id="cb3-28"><a></a><span class="co"># Create a viewer</span></span>
+<span id="cb3-29"><a></a>viewer <span class="op">=</span> mujoco.viewer.launch(model, data, </span>
+<span id="cb3-30"><a></a>        show_left_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb3-31"><a></a>        show_right_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb3-32"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>code/basic_mujoco.py</code></p>
+</div><div class="column" style="width:49%;">
+<div class="sourceCode" id="cb4" data-code-line-numbers="|5,6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> mujoco</span>
+<span id="cb4-2"><a></a><span class="im">import</span> mujoco.viewer</span>
+<span id="cb4-3"><a></a><span class="im">import</span> time </span>
+<span id="cb4-4"><a></a></span>
+<span id="cb4-5"><a></a><span class="co"># Load a model from a file (won't do this here to avoid external file calls)</span></span>
+<span id="cb4-6"><a></a>model <span class="op">=</span> mujoco.MjModel.from_xml_path(<span class="st">'../models/simple_pendulum_act.xml'</span>)</span>
+<span id="cb4-7"><a></a></span>
+<span id="cb4-8"><a></a>data <span class="op">=</span> mujoco.MjData(model)</span>
+<span id="cb4-9"><a></a>data.qpos[<span class="dv">0</span>]<span class="op">=</span><span class="fl">0.01</span></span>
+<span id="cb4-10"><a></a></span>
+<span id="cb4-11"><a></a><span class="co"># Create a viewer</span></span>
+<span id="cb4-12"><a></a>viewer <span class="op">=</span> mujoco.viewer.launch(model, data, </span>
+<span id="cb4-13"><a></a>        show_left_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-14"><a></a>        show_right_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-15"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>code/mujoco_load_xml.py</code></p>
+</div></div>
+</section>
+<section id="interactive" class="slide level2">
+<h2>Interactive</h2>
+<div id="df245ccd" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>python3 <span class="op">-</span>m mujoco.viewer </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and then drag and drop <code>xml</code> files from <code>models/</code></p>
+</section>
+<section id="block-example" class="slide level2">
+<h2>Block Example</h2>
+<div class="sourceCode" id="cb6" data-code-line-numbers="|1,11|2|3,10|4|5|6-9|8|7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="op">&lt;</span>mujoco<span class="op">&gt;</span></span>
+<span id="cb6-2"><a></a><span class="op">&lt;</span>option gravity<span class="op">=</span><span class="st">"0 0 -9.81"</span><span class="op">/&gt;</span></span>
+<span id="cb6-3"><a></a>    <span class="op">&lt;</span>worldbody<span class="op">&gt;</span></span>
+<span id="cb6-4"><a></a>    <span class="op">&lt;</span>light diffuse<span class="op">=</span><span class="st">".5 .5 .5"</span> pos<span class="op">=</span><span class="st">"0 0 3"</span> <span class="bu">dir</span><span class="op">=</span><span class="st">"0 0 -1"</span><span class="op">/&gt;</span></span>
+<span id="cb6-5"><a></a>        <span class="op">&lt;</span>geom <span class="bu">type</span><span class="op">=</span><span class="st">"plane"</span> size<span class="op">=</span><span class="st">"1 1 0.1"</span> rgba<span class="op">=</span><span class="st">".9 0 0 1"</span><span class="op">/&gt;</span></span>
+<span id="cb6-6"><a></a>        <span class="op">&lt;</span>body pos<span class="op">=</span><span class="st">"0 0 1"</span><span class="op">&gt;</span></span>
+<span id="cb6-7"><a></a>            <span class="op">&lt;</span>joint <span class="bu">type</span><span class="op">=</span><span class="st">"free"</span><span class="op">/&gt;</span></span>
+<span id="cb6-8"><a></a>            <span class="op">&lt;</span>geom <span class="bu">type</span><span class="op">=</span><span class="st">"box"</span> size<span class="op">=</span><span class="st">".1 .2 .3"</span> rgba<span class="op">=</span><span class="st">"0 .9 0 1"</span><span class="op">/&gt;</span></span>
+<span id="cb6-9"><a></a>        <span class="op">&lt;/</span>body<span class="op">&gt;</span></span>
+<span id="cb6-10"><a></a>    <span class="op">&lt;/</span>worldbody<span class="op">&gt;</span></span>
+<span id="cb6-11"><a></a><span class="op">&lt;/</span>mujoco<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
+<img data-src="mujoco_files/figure-revealjs/cell-4-output-1.png" class="r-stretch"></section>
+<section id="blocks-example" class="slide level2">
+<h2>Blocks Example</h2>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="sourceCode" id="cb7" data-code-line-numbers="|10-13|10|14-17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="op">&lt;</span>mujoco<span class="op">&gt;</span></span>
+<span id="cb7-2"><a></a><span class="op">&lt;</span>option gravity<span class="op">=</span><span class="st">"0 0 -9.81"</span><span class="op">/&gt;</span></span>
+<span id="cb7-3"><a></a>    <span class="op">&lt;</span>worldbody<span class="op">&gt;</span></span>
+<span id="cb7-4"><a></a>    <span class="op">&lt;</span>light diffuse<span class="op">=</span><span class="st">".5 .5 .5"</span> pos<span class="op">=</span><span class="st">"0 0 3"</span> <span class="bu">dir</span><span class="op">=</span><span class="st">"0 0 -1"</span><span class="op">/&gt;</span></span>
+<span id="cb7-5"><a></a>        <span class="op">&lt;</span>geom <span class="bu">type</span><span class="op">=</span><span class="st">"plane"</span> size<span class="op">=</span><span class="st">"1 1 0.1"</span> rgba<span class="op">=</span><span class="st">".9 0 0 1"</span><span class="op">/&gt;</span></span>
+<span id="cb7-6"><a></a>        <span class="op">&lt;</span>body pos<span class="op">=</span><span class="st">"0 0 1"</span><span class="op">&gt;</span></span>
+<span id="cb7-7"><a></a>            <span class="op">&lt;</span>joint <span class="bu">type</span><span class="op">=</span><span class="st">"free"</span><span class="op">/&gt;</span></span>
+<span id="cb7-8"><a></a>            <span class="op">&lt;</span>geom <span class="bu">type</span><span class="op">=</span><span class="st">"box"</span> size<span class="op">=</span><span class="st">".1 .2 .3"</span> rgba<span class="op">=</span><span class="st">"0 .9 0 1"</span><span class="op">/&gt;</span></span>
+<span id="cb7-9"><a></a>        <span class="op">&lt;/</span>body<span class="op">&gt;</span></span>
+<span id="cb7-10"><a></a>        <span class="op">&lt;</span>body pos<span class="op">=</span><span class="st">"0.1 0 1.5"</span> euler<span class="op">=</span><span class="st">"0 90 0"</span><span class="op">&gt;</span></span>
+<span id="cb7-11"><a></a>            <span class="op">&lt;</span>joint <span class="bu">type</span><span class="op">=</span><span class="st">"free"</span><span class="op">/&gt;</span></span>
+<span id="cb7-12"><a></a>            <span class="op">&lt;</span>geom <span class="bu">type</span><span class="op">=</span><span class="st">"box"</span> size<span class="op">=</span><span class="st">".1 .2 .3"</span> rgba<span class="op">=</span><span class="st">"0 0 0.9 1"</span><span class="op">/&gt;</span></span>
+<span id="cb7-13"><a></a>        <span class="op">&lt;/</span>body<span class="op">&gt;</span></span>
+<span id="cb7-14"><a></a>        <span class="op">&lt;</span>body pos<span class="op">=</span><span class="st">"0.1 0 2.0"</span><span class="op">&gt;</span></span>
+<span id="cb7-15"><a></a>            <span class="op">&lt;</span>joint <span class="bu">type</span><span class="op">=</span><span class="st">"free"</span><span class="op">/&gt;</span></span>
+<span id="cb7-16"><a></a>            <span class="op">&lt;</span>geom <span class="bu">type</span><span class="op">=</span><span class="st">"sphere"</span> size<span class="op">=</span><span class="st">".1"</span> rgba<span class="op">=</span><span class="st">"0.9 0.9 0 1"</span><span class="op">/&gt;</span></span>
+<span id="cb7-17"><a></a>        <span class="op">&lt;/</span>body<span class="op">&gt;</span></span>
+<span id="cb7-18"><a></a>    <span class="op">&lt;/</span>worldbody<span class="op">&gt;</span></span>
+<span id="cb7-19"><a></a><span class="op">&lt;/</span>mujoco<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:49%;">
+<div id="2513c097" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="mujoco_files/figure-revealjs/cell-5-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 </section>
-<section id="models" class="slide level2">
-<h2>Models</h2>
-<p><a href="https://github.com/google-deepmind/mujoco_menagerie">MuJoCo menageris</a></p>
+<section id="actuated-example" class="slide level2">
+<h2>Actuated Example</h2>
+
+<img data-src="mujoco_files/figure-revealjs/cell-6-output-1.png" class="r-stretch"></section>
+<section id="actuated-example-1" class="slide level2">
+<h2>Actuated Example</h2>
+<div id="6b3a701c" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="im">import</span> mujoco</span>
+<span id="cb8-2"><a></a><span class="im">import</span> mujoco.viewer</span>
+<span id="cb8-3"><a></a><span class="im">import</span> time </span>
+<span id="cb8-4"><a></a></span>
+<span id="cb8-5"><a></a><span class="co"># Load a model from a file (won't do this here to avoid external file calls)</span></span>
+<span id="cb8-6"><a></a>model <span class="op">=</span> mujoco.MjModel.from_xml_path(<span class="st">'../models/simple_pendulum_act.xml'</span>)</span>
+<span id="cb8-7"><a></a></span>
+<span id="cb8-8"><a></a></span>
+<span id="cb8-9"><a></a>dt: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.002</span></span>
+<span id="cb8-10"><a></a>model.opt.timestep <span class="op">=</span> dt</span>
+<span id="cb8-11"><a></a>data <span class="op">=</span> mujoco.MjData(model)</span>
+<span id="cb8-12"><a></a>data.qpos[<span class="dv">0</span>]<span class="op">=</span><span class="fl">0.01</span></span>
+<span id="cb8-13"><a></a></span>
+<span id="cb8-14"><a></a><span class="co"># Create a viewer</span></span>
+<span id="cb8-15"><a></a>viewer <span class="op">=</span> mujoco.viewer.launch_passive(model, data,</span>
+<span id="cb8-16"><a></a>        show_left_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb8-17"><a></a>        show_right_ui<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb8-18"><a></a>      )</span>
+<span id="cb8-19"><a></a><span class="cf">try</span>:</span>
+<span id="cb8-20"><a></a>    <span class="cf">while</span> viewer.is_running():</span>
+<span id="cb8-21"><a></a>        step_start <span class="op">=</span> time.time()</span>
+<span id="cb8-22"><a></a>        <span class="co"># Step the simulation</span></span>
+<span id="cb8-23"><a></a>        data.ctrl[<span class="dv">0</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">100</span><span class="op">*</span>data.qpos[<span class="dv">0</span>] <span class="op">-</span> <span class="dv">20</span><span class="op">*</span>data.qvel[<span class="dv">0</span>]</span>
+<span id="cb8-24"><a></a>        <span class="bu">print</span>(data.qpos[<span class="dv">0</span>])</span>
+<span id="cb8-25"><a></a>        mujoco.mj_step(model, data)</span>
+<span id="cb8-26"><a></a>        <span class="co"># Update the viewer</span></span>
+<span id="cb8-27"><a></a>        viewer.sync()</span>
+<span id="cb8-28"><a></a>        <span class="co"># Add a small delay to control frame rate</span></span>
+<span id="cb8-29"><a></a>        time_until_next_step <span class="op">=</span> dt <span class="op">-</span> (time.time() <span class="op">-</span> step_start)</span>
+<span id="cb8-30"><a></a>        <span class="cf">if</span> time_until_next_step <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb8-31"><a></a>            time.sleep(time_until_next_step)</span>
+<span id="cb8-32"><a></a><span class="cf">except</span> <span class="pp">KeyboardInterrupt</span>:</span>
+<span id="cb8-33"><a></a>    <span class="bu">print</span>(<span class="st">"Viewer closed by user"</span>)</span>
+<span id="cb8-34"><a></a><span class="cf">finally</span>:</span>
+<span id="cb8-35"><a></a>    viewer.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>code/mujoco_load_xml_control.py</code></p>
 </section>
-<section id="simulation" class="slide level2">
-<h2>Simulation</h2>
-<p><a href="https://playground.mujoco.org/">MuJoCo Playground</a></p>
+<section id="extras" class="slide level2">
+<h2>Extras</h2>
+<h3 id="models">Models</h3>
+<p><a href="https://github.com/google-deepmind/mujoco_menagerie">MuJoCo menagerie</a></p>
+<h3 id="simulation">Simulation</h3>
+<p><a href="https://playground.mujoco.org/">MuJoCo Playground</a> <a href="https://github.com/kevinzakka/mjctrl">MJ Control</a></p>
 
 
 </section></section>

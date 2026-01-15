@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Topics",
     "section": "",
-    "text": "Date\nTopic\nSlides\nNotes\nModern Robotics Chapter\nRMC Book1\n\n\n\n\nJan 13\nCourse Overview; Motion Tasks\nOverview\n\n1\n1\n\n\nJan 15\nMuJoCo Setup\n\nwebpage",
+    "text": "Date\nTopic\nSlides\nNotes\nModern Robotics Chapter\nRMC Book1\n\n\n\n\nJan 13\nCourse Overview; Motion Tasks\nOverview\n\n1\n1\n\n\nJan 15\nMuJoCo Setup\nMuJoCo\nwebpage",
     "crumbs": [
       "Home",
       "Topics"
@@ -42,23 +42,65 @@
   {
     "objectID": "mujoco.html#basic-example",
     "href": "mujoco.html#basic-example",
-    "title": "Overview",
+    "title": "MuJoCo and XML",
     "section": "Basic Example",
-    "text": "Basic Example\n\n\nimport mujoco\nimport matplotlib.pyplot as plt\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.1\n\n# Create renderer\nrenderer = mujoco.Renderer(model, height=480, width=640)\n\n# Step simulation to desired state (optional)\nmujoco.mj_step(model, data)\n\n# Update the renderer with current state\nrenderer.update_scene(data)\n\n# Render the image\npixels = renderer.render()\n\n# Display with matplotlib\nplt.figure(figsize=(10, 7))\nplt.imshow(pixels)\nplt.axis('off')\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n\nRun python3 code/basic_mujoco.py"
+    "text": "Basic Example\n\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\n\n\n\n\n\n\n\n\n\n\nRun python3 code/basic_mujoco.py"
   },
   {
-    "objectID": "mujoco.html#models",
-    "href": "mujoco.html#models",
-    "title": "Overview",
-    "section": "Models",
-    "text": "Models\nMuJoCo menageris"
+    "objectID": "mujoco.html#basic-example-1",
+    "href": "mujoco.html#basic-example-1",
+    "title": "MuJoCo and XML",
+    "section": "Basic Example",
+    "text": "Basic Example\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)"
   },
   {
-    "objectID": "mujoco.html#simulation",
-    "href": "mujoco.html#simulation",
-    "title": "Overview",
-    "section": "Simulation",
-    "text": "Simulation\nMuJoCo Playground"
+    "objectID": "mujoco.html#basic-example-with-loading",
+    "href": "mujoco.html#basic-example-with-loading",
+    "title": "MuJoCo and XML",
+    "section": "Basic Example with Loading",
+    "text": "Basic Example with Loading\n\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\ncode/basic_mujoco.py\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\nmodel = mujoco.MjModel.from_xml_path('../models/simple_pendulum_act.xml')\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\ncode/mujoco_load_xml.py"
+  },
+  {
+    "objectID": "mujoco.html#interactive",
+    "href": "mujoco.html#interactive",
+    "title": "MuJoCo and XML",
+    "section": "Interactive",
+    "text": "Interactive\n\npython3 -m mujoco.viewer \n\nand then drag and drop xml files from models/"
+  },
+  {
+    "objectID": "mujoco.html#block-example",
+    "href": "mujoco.html#block-example",
+    "title": "MuJoCo and XML",
+    "section": "Block Example",
+    "text": "Block Example\n&lt;mujoco&gt;\n&lt;option gravity=\"0 0 -9.81\"/&gt;\n    &lt;worldbody&gt;\n    &lt;light diffuse=\".5 .5 .5\" pos=\"0 0 3\" dir=\"0 0 -1\"/&gt;\n        &lt;geom type=\"plane\" size=\"1 1 0.1\" rgba=\".9 0 0 1\"/&gt;\n        &lt;body pos=\"0 0 1\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 .9 0 1\"/&gt;\n        &lt;/body&gt;\n    &lt;/worldbody&gt;\n&lt;/mujoco&gt;"
+  },
+  {
+    "objectID": "mujoco.html#blocks-example",
+    "href": "mujoco.html#blocks-example",
+    "title": "MuJoCo and XML",
+    "section": "Blocks Example",
+    "text": "Blocks Example\n\n\n&lt;mujoco&gt;\n&lt;option gravity=\"0 0 -9.81\"/&gt;\n    &lt;worldbody&gt;\n    &lt;light diffuse=\".5 .5 .5\" pos=\"0 0 3\" dir=\"0 0 -1\"/&gt;\n        &lt;geom type=\"plane\" size=\"1 1 0.1\" rgba=\".9 0 0 1\"/&gt;\n        &lt;body pos=\"0 0 1\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 .9 0 1\"/&gt;\n        &lt;/body&gt;\n        &lt;body pos=\"0.1 0 1.5\" euler=\"0 90 0\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 0 0.9 1\"/&gt;\n        &lt;/body&gt;\n        &lt;body pos=\"0.1 0 2.0\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"sphere\" size=\".1\" rgba=\"0.9 0.9 0 1\"/&gt;\n        &lt;/body&gt;\n    &lt;/worldbody&gt;\n&lt;/mujoco&gt;"
+  },
+  {
+    "objectID": "mujoco.html#actuated-example",
+    "href": "mujoco.html#actuated-example",
+    "title": "MuJoCo and XML",
+    "section": "Actuated Example",
+    "text": "Actuated Example"
+  },
+  {
+    "objectID": "mujoco.html#actuated-example-1",
+    "href": "mujoco.html#actuated-example-1",
+    "title": "MuJoCo and XML",
+    "section": "Actuated Example",
+    "text": "Actuated Example\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\nmodel = mujoco.MjModel.from_xml_path('../models/simple_pendulum_act.xml')\n\n\ndt: float = 0.002\nmodel.opt.timestep = dt\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch_passive(model, data,\n        show_left_ui=False,\n        show_right_ui=False,\n      )\ntry:\n    while viewer.is_running():\n        step_start = time.time()\n        # Step the simulation\n        data.ctrl[0] = -100*data.qpos[0] - 20*data.qvel[0]\n        print(data.qpos[0])\n        mujoco.mj_step(model, data)\n        # Update the viewer\n        viewer.sync()\n        # Add a small delay to control frame rate\n        time_until_next_step = dt - (time.time() - step_start)\n        if time_until_next_step &gt; 0:\n            time.sleep(time_until_next_step)\nexcept KeyboardInterrupt:\n    print(\"Viewer closed by user\")\nfinally:\n    viewer.close()\n\ncode/mujoco_load_xml_control.py"
+  },
+  {
+    "objectID": "mujoco.html#extras",
+    "href": "mujoco.html#extras",
+    "title": "MuJoCo and XML",
+    "section": "Extras",
+    "text": "Extras\nModels\nMuJoCo menagerie\nSimulation\nMuJoCo Playground MJ Control"
   },
   {
     "objectID": "overview.html#syllabus-1",
@@ -372,7 +414,7 @@
     "href": "introduction.html#mujoco",
     "title": "Python Setup",
     "section": "MuJoCo",
-    "text": "MuJoCo\n\nDrag-and-Drop Mode\nOpen a terminal window (command window - cmd on Windows) and run\npython3 -m mujoco.viewer\nThis command should open a window with nothing visible yet. You can drag xml files describing a MuJoCo environment and it will show up. The xml needs to be self-contained or use complete paths to subfiles.\n\n\nUsage Example: Simulation\nOnce you have installed mujoco in python, you can run this code by running this command in the command line from the root of this repository:\npython3 code/basic_mujoco.py\n\nCreate your own file\nCopy the code below and past it in a file &lt;filename&gt;.py in your current folder and save it. Then run\npython3 &lt;filename&gt;.py\nCode inside code/basic_mujoco.py:\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"1 0 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)",
+    "text": "MuJoCo\n\nDrag-and-Drop Mode\nOpen a terminal window (command window - cmd on Windows) and run\npython3 -m mujoco.viewer\nThis command should open a window with nothing visible yet. You can drag xml files describing a MuJoCo environment and it will show up. The xml needs to be self-contained or use complete paths to subfiles.\n\n\nUsage Example: Simulation\nOnce you have installed mujoco in python, you can run this code by running this command in the command line from the root of this repository:\npython3 code/basic_mujoco.py\n\nCreate your own file\nCopy the code below and past it in a file &lt;filename&gt;.py in your current folder and save it. Then run\npython3 &lt;filename&gt;.py\nCode inside code/basic_mujoco.py:\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)",
     "crumbs": [
       "Home",
       "Python"
