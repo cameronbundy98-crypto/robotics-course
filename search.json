@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Topics",
     "section": "",
-    "text": "Date\nTopic\nSlides\nNotes\nModern Robotics Chapter\nRMC Book1\n\n\n\n\nJan 13\nCourse Overview; Motion Tasks\nOverview\n\n1\n1\n\n\nJan 15\nMuJoCo Setup\nMuJoCo\nwebpage",
+    "text": "Date\nTopic\nSlides\nNotes\nModern Robotics Chapter\nRMC Book1\n\n\n\n\nJan 13\nCourse Overview; Motion Tasks\nOverview\n\n1\n1\n\n\nJan 15\nMuJoCo Setup\nMuJoCo\nwebpage\n\n\n\n\nJan 20\nNonlinear Least squares\nslides\n\n\n\n\n\nJan 22\nScan Matching\n\n\n\n\n\n\nJan 27\nOdometry\n\n\n\n\n\n\nJan 29\nPose Graph Optimization",
     "crumbs": [
       "Home",
       "Topics"
@@ -22,85 +22,267 @@
     ]
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This website is associated with course ME/AER 676 Robot Modeling and Control offered at the University of Kentucky. Course created by Hasan A. Poonawala."
+    "objectID": "nonlin_lsq.html#optimization-theory-and-practice",
+    "href": "nonlin_lsq.html#optimization-theory-and-practice",
+    "title": "Robot Modeling Control",
+    "section": "Optimization Theory and Practice",
+    "text": "Optimization Theory and Practice\n\n\nNonlinear Least Squares\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  Nonlinear Least Squares  Necessary and Sufficient Conditions  Overview of Algorithms"
   },
   {
-    "objectID": "papers.html",
-    "href": "papers.html",
-    "title": "Papers",
+    "objectID": "nonlin_lsq.html#example-curve-fitting",
+    "href": "nonlin_lsq.html#example-curve-fitting",
+    "title": "Robot Modeling Control",
+    "section": "Example: Curve Fitting",
+    "text": "Example: Curve Fitting\nSuppose we have data in the form of pairs {xi,yi}i∈{1,…,m}.\\{x_{i},y_{i}\\}_ {i \\in \\{1,\\dots,m\\}}.\nWe believe that the model is of the form ϕ(x;θ)=θ1+θ2e(θ3−x)2θ4+θ5cos(θ6x).\\phi(x; \\theta) = \\theta_{1} + \\theta_{2} e^{\\frac{(\\theta_{3}-x )^2}{\\theta_{4}}} + \\theta_{5} \\cos(\\theta_{6} x).\nA standard approach is to find the values of θj\\theta_{j}, j∈{1,…,6}j \\in \\{1,\\dots,6\\} by solving minθ∈ℝ6∑i=1mri2(θ)\\min_{\\theta \\in \\mathbb R^6} \\sum_{i=1}^{m} r_{i}^{2}(\\theta) where ri(θ)=yi−ϕ(xi;θ)r_{i}(\\theta) = y_{i} - \\phi(x_{i}; \\theta)\nThis is a nonlinear least-square problem."
+  },
+  {
+    "objectID": "nonlin_lsq.html#nonlinear-least-squares-1",
+    "href": "nonlin_lsq.html#nonlinear-least-squares-1",
+    "title": "Robot Modeling Control",
+    "section": "Nonlinear Least Squares",
+    "text": "Nonlinear Least Squares\nResidual (or error): ri(θ)=ei(θ)=yi−ϕ(xi;θ)r_{i}(\\theta) = e_{i}(\\theta) = y_{i} - \\phi(x_{i}; \\theta) Loss: Mean Square Error:\nL(θ)=1m∑i=1mri2(θ)=1m∑i=1mri(θ)Tri(θ)=e(θ)Te(θ)\\begin{aligned}\nL(\\theta) &= \\frac{1}{m} \\sum_{i=1}^{m} r_{i}^{2}(\\theta) = \\frac{1}{m} \\sum_{i=1}^{m}  r_{i}(\\theta)^T r_{i}(\\theta)\\\\\n &= e(\\theta)^T e(\\theta)\\\\\n\\end{aligned}\n\n⟹∇θL(θ)=−2eT(θ)J(θ)⟹∇θ2L(θ)=−2JT(θ)J(θ)−2∑ei(θ)Hi(θ)\\begin{aligned}\n\\implies \\nabla_\\theta L(\\theta) &= -2 e^T(\\theta) J(\\theta)\\\\\n\\implies \\nabla_\\theta^2 L(\\theta) &= -2 J^T(\\theta) J(\\theta)- 2 \\sum e_i(\\theta) H_i(\\theta)\n\\end{aligned}\nWhere J(θ)J(\\theta) is the Jacobian ∇θϕ(x;θ)\\nabla_\\theta \\phi(x;\\theta)\nHi(θ)H_i(\\theta) is the Hessian ∇θ2ϕ(xi;θ)\\nabla_\\theta^2 \\phi(x_i;\\theta)"
+  },
+  {
+    "objectID": "nonlin_lsq.html#nonlinear-least-squares-2",
+    "href": "nonlin_lsq.html#nonlinear-least-squares-2",
+    "title": "Robot Modeling Control",
+    "section": "Nonlinear Least Squares",
+    "text": "Nonlinear Least Squares\nResidual (or error): ri(θ)=ei(θ)=yi−ϕ(xi;θ)r_{i}(\\theta) = e_{i}(\\theta) = y_{i} - \\phi(x_{i}; \\theta) Loss: Mean Square Error:\nL(θ)=1m∑i=1mri2(θ)=1m∑i=1mri(θ)Tri(θ)=e(θ)Te(θ)\\begin{aligned}\nL(\\theta) &= \\frac{1}{m} \\sum_{i=1}^{m} r_{i}^{2}(\\theta) = \\frac{1}{m} \\sum_{i=1}^{m}  r_{i}(\\theta)^T r_{i}(\\theta)\\\\\n &= e(\\theta)^T e(\\theta)\n\\end{aligned}\n\n⟹dL(θ)dt=e(θ)T∂e(θ)∂θθ̇(t)=−e(θ)TJ(θ)θ̇(t)\\begin{aligned}\n\\implies \\frac{ \\mathrm{ d} L(\\theta)}{\\mathrm{ d} t} &= e(\\theta)^T \\frac{ \\partial e(\\theta)}{\\partial \\theta} \\dot \\theta(t)  = -e(\\theta)^T J(\\theta) \\dot \\theta(t)\n\\end{aligned}\n\n\nChoosing θ̇(t)\\dot \\theta(t) produces some dL(θ(t))dt\\frac{ \\mathrm{ d} L(\\theta(t))}{\\mathrm{ d} t}. What values should we want for these?"
+  },
+  {
+    "objectID": "nonlin_lsq.html#nonlinear-least-squares-3",
+    "href": "nonlin_lsq.html#nonlinear-least-squares-3",
+    "title": "Robot Modeling Control",
+    "section": "Nonlinear Least Squares",
+    "text": "Nonlinear Least Squares\nWe want dL(θ(t))dt&lt;0\\frac{ \\mathrm{ d} L(\\theta(t))}{\\mathrm{ d} t} &lt; 0 so as to minimize L(θ(t))L(\\theta(t)) as t→∞t \\to \\infty\nWe can achieve that if dL(θ)dt=−e(θ)TBe(θ)\\frac{ \\mathrm{ d} L(\\theta)}{\\mathrm{ d} t} =  - e(\\theta)^T B e(\\theta)\n⟹\\implies solve J(θ)θ̇=Be(θ)J(\\theta) \\dot \\theta = B e(\\theta) for θ̇\\dot \\theta where B=BT≻0B = B^T \\succ 0\nOptions:\n\nSteepest descent: θ̇(t)=J(θ)Te(θ)\\dot \\theta(t) =   J(\\theta)^T e(\\theta)\nGauss-Newton direction: θ̇(t)=J+e(θ)\\dot \\theta(t) = J^{+} e(\\theta)1\nLevenberg–Marquardt direction: θ̇(t)=Jdamped+e(θ)\\dot \\theta(t) = J^{+}_{\\text{damped}} e(\\theta)\n\nJ+J^{+} is the Moore Penrose Pseudoinverse^T"
+  },
+  {
+    "objectID": "nonlin_lsq.html#dimensions",
+    "href": "nonlin_lsq.html#dimensions",
+    "title": "Robot Modeling Control",
+    "section": "Dimensions",
+    "text": "Dimensions\nθ∈ℝp\\theta \\in \\mathbb{R}^p and yi,ϕ(xi;θ),ei∈ℝy_i, \\phi(x_i;\\theta),e_i \\in \\mathbb R,\n⟹e∈ℝm\\implies e \\in \\mathbb R^m ⟹J(θ)∈ℝ(m×p)\\implies J(\\theta) \\in \\mathbb R^(m \\times p), ⟹eTJ(θ)∈ℝ(1×p)\\implies e^T J(\\theta) \\in \\mathbb R^(1 \\times p)\n∇θL(θ)∈ℝ(1×p)\\nabla_\\theta L(\\theta) \\in \\mathbb{R}^(1 \\times p), ∇θ2L(θ)∈ℝ(p×p)\\nabla_\\theta^{2} L(\\theta) \\in \\mathbb{R}^(p \\times p)\nAssume J(θ)=JJ(\\theta) = J has rank min(m,p)\\min(m,p)\nIf m&lt;pm &lt; p then J+=JT(JJT)−1∈ℝ(p×m)J^{+} = J^T ( J J^T )^{-1}   \\in \\mathbb{R}^(p \\times m)\nIf m&gt;pm &gt; p then J+=(JTJ)−1JT∈ℝ(p×m)J^{+} = ( J^T J )^{-1}  J^T  \\in \\mathbb{R}^(p \\times m)\nCompute J+J^{+} using a singular value decomposition of J(θ)J(\\theta)"
+  },
+  {
+    "objectID": "nonlin_lsq.html#solutions",
+    "href": "nonlin_lsq.html#solutions",
+    "title": "Robot Modeling Control",
+    "section": "Solutions",
+    "text": "Solutions\n\n\n\nGlobal minimizer\n\n\nA point x*x^{*} is a global minimizer if f(x*)≤f(x)f(x^*) \\leq f(x)1 for all x∈ℝnx \\in \\mathbb R^n.\n\n\n\n\n\n\nLocal minimizer\n\n\nA point x*x^{*} is a local minimizer if there is a neighborhood 𝒩\\mathcal N of x*x^* where f(x*)≤f(x)f(x^*) \\leq f(x) for all x∈𝒩x \\in \\mathcal N, where a neighborhood of yy is an open set containing yy.\n\n\n\n\n\n\nStrict local minimizer\n\n\nA point x*x^{*} is a strict local minimizer if there is a neighborhood 𝒩\\mathcal N of x*x^* where f(x*)&lt;f(x)f(x^*) &lt; f(x) for all x∈𝒩x \\in \\mathcal N with x≠x*x \\neq x^*.\n\n\n\nf(x)f(x) in optimizer is L(θ)L(\\theta) in curve fitting"
+  },
+  {
+    "objectID": "nonlin_lsq.html#summary",
+    "href": "nonlin_lsq.html#summary",
+    "title": "Robot Modeling Control",
+    "section": "Summary",
+    "text": "Summary\n\n\n\n\n\n\n\n\n\nCondition\nWhat we know\nWhat it tells us\nNotes\n\n\n\n\n1st Ord Necessary\nx⋆x^\\star is LM1, ff differentiable\n∇f(x⋆)=0\\nabla f(x^{\\star})=0\nProof justifies steepest descent\n\n\n2nd Ord Necessary\nx⋆x^\\star is LM, ff and ∇2f\\nabla^2 f exist, are continuous on 𝒩\\mathcal N\n∇f(x⋆)=0\\nabla f(x^{\\star})=0 and ∇2f(x⋆)\\nabla^2 f(x^{\\star}) is PSD\n\n\n\n2nd Ord Sufficient\n∇f(x⋆)=0\\nabla f(x^{\\star})=0 and ∇2f(x⋆)\\nabla^2 f(x^{\\star}) is PD\nx⋆x^\\star is strict LM\nLeads to algorithms for finding LMs\n\n\n1st Ord Sufficient\nff is convex, x⋆x^\\star is LM\nx⋆x^\\star is GM2\n\n\n\n1st Ord Sufficient\nff is convex, differentiable, ∇f(x⋆)=0\\nabla f(x^{\\star})=0\nx⋆x^\\star is GM\nLeads to effective algorithms for finding global minima\n\n\n\n♯\\sharp is the left pseudo-inverse: A♯=(ATA)−1ATA^\\sharp = (A^T A)^{-1} A^TGlobal Minimizer"
+  },
+  {
+    "objectID": "nonlin_lsq.html#overview-of-algorithms",
+    "href": "nonlin_lsq.html#overview-of-algorithms",
+    "title": "Robot Modeling Control",
+    "section": "Overview of Algorithms",
+    "text": "Overview of Algorithms\n\nRecall that the algorithms are iterative\nWe need a starting point 𝐱0\\mathbf x_0\n… and a method to produce iterates 𝐱1\\mathbf{x}_1, 𝐱2\\mathbf{x}_2,…\\dots\nGenerally two methods:\n\nLine Search\nTrust Region\n\n\n\n\n\n\n\n\nNote\n\n\nThe words method and algorithm are used interchangeably"
+  },
+  {
+    "objectID": "nonlin_lsq.html#line-search-methods",
+    "href": "nonlin_lsq.html#line-search-methods",
+    "title": "Robot Modeling Control",
+    "section": "Line Search Methods",
+    "text": "Line Search Methods\n\nThe algorithm chooses a direction pk∈ℝnp_k \\in \\mathbb{R}^n\nThen, minimize f(x)f(x) on the line defined by 𝐱k+αpk\\mathbf{x}_k + \\alpha p_k. That is, solve minα&gt;0f(𝐱k+αpk)(1)\\min_{\\alpha&gt;0}\\quad f(\\mathbf{x}_k + \\alpha p_k) \\qquad(1)\n\nIn practice choose an α\\alpha that makes f(𝐱k+1)&lt;f(𝐱k)f(\\mathbf{x}_{k+1}) &lt; f(\\mathbf{x}_{k}), not solve Equation 1.\nPractical method uses back-tracking line search to pick α\\alpha given pkp_k"
+  },
+  {
+    "objectID": "nonlin_lsq.html#line-search-methods-1",
+    "href": "nonlin_lsq.html#line-search-methods-1",
+    "title": "Robot Modeling Control",
+    "section": "Line Search Methods",
+    "text": "Line Search Methods\n\nTwo common choices for directions.\n\nNegative gradient (steepest descent) pk=−∇f(𝐱k)p_k = - \\nabla f(\\mathbf{x}_{k})\nNewton direction: pk=−(∇2f(𝐱k))−1∇f(𝐱k)p_k = - (\\nabla^2 f(\\mathbf{x}_{k}))^{-1}\\nabla f(\\mathbf{x}_{k})"
+  },
+  {
+    "objectID": "nonlin_lsq.html#example-line-search-algorithms",
+    "href": "nonlin_lsq.html#example-line-search-algorithms",
+    "title": "Robot Modeling Control",
+    "section": "Example: Line Search Algorithms",
+    "text": "Example: Line Search Algorithms\nminimizef(x)=(0.5x1−2)2+(x2−3)2\n\\begin{align}\n\\operatorname{minimize} & f(x) = (0.5 x_1 - 2)^2 + (x_2 - 3)^2\n\\end{align}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nNewton’s method is not always better"
+  },
+  {
+    "objectID": "nonlin_lsq.html#plotting-code",
+    "href": "nonlin_lsq.html#plotting-code",
+    "title": "Robot Modeling Control",
+    "section": "Plotting Code",
+    "text": "Plotting Code\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Define the objective function and its gradient and Hessian\ndef f(x, y):\n    return #&lt;answer&gt;\n\ndef grad_f(x, y):\n    \"\"\"Gradient of f\"\"\"\n    return np.array()\n\ndef hess_f(x, y):\n    \"\"\"Hessian of f\"\"\"\n    return np.array()\n\n\n# Steepest Descent\ndef steepest_descent(start, alpha=0.1,tol=1e-6, max_iter=50):\n    # your code\n    return x, iterates\n\n\n# Plotting\nx = np.linspace(-1, 4, 100)\ny = np.linspace(-1, 5, 100)\nX, Y = np.meshgrid(x, y)\nZ = f(X, Y)\n\nplt.figure(figsize=(8, 6))\n# Contour plot of the objective function\ncontour = plt.contour(X, Y, Z, levels=30, cmap=\"viridis\")\nplt.clabel(contour, inline=True, fontsize=8)\nplt.colorbar(contour, label=\"Objective Function Value\")\n\nplt.plot(4, 3, 'x', color=\"blue\", markersize=10, label=\"True Optimum (4, 3)\")\n\n# Run Steepest Descent\nstart_point = [-1.0, 1.0]\noptimum, iterates = steepest_descent(start_point)\n# Extract iterate points for plotting\niterates = np.array(iterates)\nx_iterates, y_iterates = iterates[:, 0], iterates[:, 1]\nplt.plot(x_iterates, y_iterates, 'o-', color=\"blue\", label=\"SD Iterates alpha=0.1\")\n\n# Annotate start and end points\nplt.annotate(\"Start\", (x_iterates[0], y_iterates[0]), textcoords=\"offset points\", xytext=(-10, 10), ha=\"center\", color=\"red\")\nplt.annotate(\"End\", (x_iterates[-1], y_iterates[-1]), textcoords=\"offset points\", xytext=(-10, -15), ha=\"center\", color=\"red\")\n\n# Labels and legend\nplt.xlabel(\"x_1\")\nplt.ylabel(\"x_2\")\nplt.title(\"Steepest Descent vs Newton's Method for Optimization\")\nplt.legend()\nplt.grid(True)\nplt.show()"
+  },
+  {
+    "objectID": "nonlin_lsq.html#trust-region-methods",
+    "href": "nonlin_lsq.html#trust-region-methods",
+    "title": "Robot Modeling Control",
+    "section": "Trust Region Methods",
+    "text": "Trust Region Methods\n\nApproximate ff near 𝐱k\\mathbf{x}_k using a model function mkm_k\nMinimize mkm_k near 𝐱k\\mathbf{x}_k by solving minpmk(𝐱k+p)s.t.𝐱k+p∈Trust region\n\\begin{align}\n\\min_{p} & m_k\\left(\\mathbf{x}_k+p\\right)\\\\\n\\text{s.t.} & \\mathbf{x}_k+p \\in \\text{Trust region}\n\\end{align}\n\nCommon choice: local quadratic Taylor series, with a spherical trust region\n(trust-region Newton’s method)"
+  },
+  {
+    "objectID": "nonlin_lsq.html#line-search-and-trust-region-methods",
+    "href": "nonlin_lsq.html#line-search-and-trust-region-methods",
+    "title": "Robot Modeling Control",
+    "section": "Line Search and Trust Region Methods",
+    "text": "Line Search and Trust Region Methods\nIn some cases, the two methods overlap 1 minpmk(𝐱k+p)=fK+pT∇fks.t.∥p∥2≤α∥∇fk∥2\n\\begin{align}\n  \\min_{p} & m_k\\left(\\mathbf{x}_k+p\\right) = f_K + p^T \\nabla f_k\\\\\n\\text{s.t.} & \\| p\\|_2 \\leq \\alpha \\| \\nabla f_k\\|_2\n\\end{align} \n  yields p=−α∇fkp = - \\alpha \\nabla f_{k}\nfk=f(𝐱k)f_k = f(\\mathbf{x}_k), ∇fk=∇f(𝐱k)\\nabla f_k = \\nabla f(\\mathbf{x}_k)"
+  },
+  {
+    "objectID": "nonlin_lsq.html#exercise-steepest-descent",
+    "href": "nonlin_lsq.html#exercise-steepest-descent",
+    "title": "Robot Modeling Control",
+    "section": "Exercise: Steepest Descent",
+    "text": "Exercise: Steepest Descent\nminimizef(x)=(1−x1)2+10(x2−x12)2\n\\begin{align}\n\\operatorname{minimize} & f(x) = (1 - x_1)^2 + 10 (x_2 - x_1^2)^2  %a = 1, b = 10\n\\end{align}\n\nThe optimum is at (1,1)(1,1). Test the behavior of steepest descent algorithms xk+1=xk−α∇fkx_{k+1} = x_{k} - \\alpha \\nabla f_k with various constant values of α\\alpha, starting from (0,1)(0,1)."
+  },
+  {
+    "objectID": "nonlin_lsq.html#solution",
+    "href": "nonlin_lsq.html#solution",
+    "title": "Robot Modeling Control",
+    "section": "Solution",
+    "text": "Solution\n\n\n\n∇f=[−2(1−x1)−40(x2−x12)x120(x2−x22)] \\nabla f = \\begin{bmatrix} -2(1-x_1) - 40 (x_2 - x_1^2) x_1\\\\ 20 (x_2-x_2^2)\\end{bmatrix}"
+  },
+  {
+    "objectID": "nonlin_lsq.html#recap",
+    "href": "nonlin_lsq.html#recap",
+    "title": "Robot Modeling Control",
+    "section": "Recap",
+    "text": "Recap\n\nIn Unconstrained Optimization we saw theory that suggests algorithms:\n\nIn proof of First Order Necessary Conditions, we saw that choosing pk=−∇fkp_k = -\\nabla f_k and αk\\alpha_k implies f(xk+1)&lt;f(xk)f(x_{k+1}) &lt; f(x_k)\n\nHowever, decreasing fkf_k does not imply we reach the optimum if the decrease is too small\n\nAnother strategy from the Sufficient Conditions is to solve ∥∇f(x)=0∥\\|\\nabla f(x) = 0\\|\n\nNow we look at rules for αk\\alpha_k and pkp_k in an algorithm xk+1=xk+αkpkx_{k+1} = x_k + \\alpha_k p_k that will\n\ndecrease f(xk)f(x_k) enough so that\nwe solve ∥∇f(x)=0∥\\|\\nabla f(x) = 0\\|"
+  },
+  {
+    "objectID": "nonlin_lsq.html#lipschitz-function",
+    "href": "nonlin_lsq.html#lipschitz-function",
+    "title": "Robot Modeling Control",
+    "section": "Lipschitz Function",
+    "text": "Lipschitz Function\nA function f:ℝm→ℝf \\colon \\mathbb{R}^m \\to \\mathbb{R} is Lipschitz on a set SS if for any x,y∈Sx,y \\in S ∥f(x)−f(y)∥≤L∥x−y∥ \\|f(x) - f(y) \\| \\leq L \\|x - y\\|\nFor twice differentiable functions, ∇f\\nabla f being differentiable is equivalent to ∇2f(w)≼LI \\nabla^2 f(w) \\preceq L I for all w∈Sw \\in S"
+  },
+  {
+    "objectID": "nonlin_lsq.html#steepest-descent",
+    "href": "nonlin_lsq.html#steepest-descent",
+    "title": "Robot Modeling Control",
+    "section": "Steepest Descent",
+    "text": "Steepest Descent\n\n\n\n\n\n\nDescent Lemma\n\n\nLet ff be a twice differentiable function whose gradient ∇f\\nabla f is Lipschitz continuous over some convex set SS. Then, for all x,y∈Sx,y \\in S, by Taylor’s Theorem, f(y)=f(x)+∇f(x)T(y−x)+12(y−x)T∇2f(z)(y−x) f(y) = f(x) + \\nabla f(x)^T (y-x) + \\frac{1}{2} (y-x)^T \\nabla^2 f(z) (y-x)\n⟹f(y)≤f(x)+∇f(x)T(y−x)+L2∥y−x∥2, \\implies f(y) \\leq f(x) + \\nabla f(x)^T (y-x) + \\frac{L}{2} \\|y-x\\|^2,\n\n\n\nThis Lemma says that we can define a local quadratic function that is an upper bound for ff near a point xx.\n\nIf x=xkx = x_k and y=xk−αk∇fky = x_k - \\alpha_k \\nabla f_k, we get fk+1≤fk−αk(2−Lαk)2∥∇fk∥2 f_{k+1} \\leq f_k -\\frac{\\alpha_{k} (2 - L \\alpha_{k} )}{2} \\|\\nabla f_k\\|^2\n\n\n\nIf 0&lt;αk&lt;2L0 &lt; \\alpha_k &lt; \\frac{2}{L}, then fk+1&lt;fkf_{k+1} &lt; f_{k}.\nfk−fk+1f_{k}-f_{k+1} approaches zero only when ∇fk→0\\nabla f_k \\to 0"
+  },
+  {
+    "objectID": "nonlin_lsq.html#example",
+    "href": "nonlin_lsq.html#example",
+    "title": "Robot Modeling Control",
+    "section": "Example",
+    "text": "Example\n\n\nminx∈ℝf(x)=(x−3)2 min_{x \\in \\mathbb{R}} \\quad f(x) = (x-3)^2 \n∇2f=2 \\nabla^2 f = 2\nTo ensure decrease, we need α&lt;2L=1 \\alpha &lt; \\frac{2}{L} = 1\nIf α=1\\alpha =1, then fk+1=fkf_{k+1} = f_{k}\nIf xk=x⋆+yx_k = x^{\\star} + y, then xk+1=x⋆−yx_{k+1} = x^{\\star} -y"
+  },
+  {
+    "objectID": "nonlin_lsq.html#rosenbrock-function",
+    "href": "nonlin_lsq.html#rosenbrock-function",
+    "title": "Robot Modeling Control",
+    "section": "Rosenbrock Function",
+    "text": "Rosenbrock Function\n\n\n\nlogϵ=−mk+c⇔k=−1mlogϵ−cm⇔k=1mlog1ϵ+cm \\log \\epsilon = -m\\ k + c \\iff k = - \\frac{1}{m} \\log \\epsilon -\\frac{c}{m} \\iff k = \\frac{1}{m} \\log \\frac{1}{\\epsilon}  \\quad + \\frac{c}{m}"
+  },
+  {
+    "objectID": "nonlin_lsq.html#condition-number",
+    "href": "nonlin_lsq.html#condition-number",
+    "title": "Robot Modeling Control",
+    "section": "Condition Number",
+    "text": "Condition Number\n\n\n\nf(x,y)=x2+κy2 f(x,y) = x^2 + \\kappa y^2"
+  },
+  {
+    "objectID": "nonlin_lsq.html#motivation",
+    "href": "nonlin_lsq.html#motivation",
+    "title": "Robot Modeling Control",
+    "section": "Motivation",
+    "text": "Motivation\n\nWe know that whatever point we are looking must be a stationary one, it must satisfy ∇f(x)=0\\nabla f(x) = 0.\nNewton’s method applies the Newton root-finding algorithm to ∇f\\nabla f:\n\nTo solve g(x)=0g(x) = 0, iteratively solve 1 g(xk)+(xk+1−xk)T∇g(x)=0⟹xk+1=xk−(∇g(x))♯g(x)g(x_k) + (x_{k+1} - x_k)^T \\nabla g(x) = 0 \\implies x_{k+1} = x_k - (\\nabla g(x) )^{\\sharp} g(x)\n\nApply root finding to ∇f(x)=0\\nabla f(x) = 0: xk+1=xk−(∇2f(x))−1∇f(x)x_{k+1} = x_k - (\\nabla^2 f(x) )^{-1} \\nabla f(x)\n\n♯\\sharp is the left pseudo-inverse: A♯=(ATA)−1ATA^\\sharp = (A^T A)^{-1} A^T"
+  },
+  {
+    "objectID": "nonlin_lsq.html#example-1",
+    "href": "nonlin_lsq.html#example-1",
+    "title": "Robot Modeling Control",
+    "section": "Example",
+    "text": "Example\n\n\n\nWe want to find the minimizer of\n\nf(x)=12x2−sinx,x0=12. f(x) = \\frac{1}{2}x^2 - \\sin{x}, \\quad x_0 = \\frac{1}{2}. \n\nWe want an accuracy of ε=10−5\\varepsilon = 10^{-5}, i.e., stop when\n\n|xk+1−xk|&lt;ε. |x_{k+1} - x_k | &lt; \\varepsilon. \n\nWe compute\n\nf′(x)=x−cosx,f″(x)=1+sinx. f'(x) = x - \\cos{x}, \\quad f''(x) = 1 + \\sin{x}. \n\n  x1=12−12−cos121+sin12=0.7552,x2=x1−f′(x1)f″(x1)=x1−0.027101.685=0.7391,x3=x2−f′(x2)f″(x2)=x2−9.461×10−51.673=0.7390,x4=x3−f′(x3)f″(x3)=x3−1.17×10−91.673=0.7390.\n\\begin{align}\nx_1 &= \\frac{1}{2} - \\frac{\\frac{1}{2} - \\cos{\\frac{1}{2}}}{1 +\n\\sin{\\frac{1}{2}}} = 0.7552, \\\\\nx_2 &= x_1 - \\frac{f'(x_1)}{f''(x_1)} = x_1 - \\frac{0.02710}{1.685} = 0.7391, \\\\\nx_3 &= x_2 - \\frac{f'(x_2)}{f''(x_2)} = x_2 - \\frac{9.461 \\times 10^{-5}}{1.673}\n= 0.7390, \\\\\nx_4 &= x_3 - \\frac{f'(x_3)}{f''(x_3)} = x_3 - \\frac{1.17 \\times 10^{-9}}{1.673}\n= 0.7390.\n\\end{align}"
+  },
+  {
+    "objectID": "nonlin_lsq.html#alternate-motivation",
+    "href": "nonlin_lsq.html#alternate-motivation",
+    "title": "Robot Modeling Control",
+    "section": "Alternate Motivation",
+    "text": "Alternate Motivation\nWhen ∇2fk≻0\\nabla^2 f_k \\succ 0, we are minimizing the quadratic approximation f(x)≈fk+∇fkT(x−xk)+12(x−xk)T∇2fk(x−xk),f(x) \\approx f_k + \\nabla f_k^T (x-x_k) + \\frac{1}{2} (x-x_k)^T \\nabla^2 f_k (x-x_k), which need not have minimum at x⋆x^\\star\n\n\n\n\nExample: Quadratic Function\n\n\nConsider f(x)=xTQx−bTx for Q=QT≻0,f(x) = x^T Q x - b^T x \\quad \\text{ for }Q=Q^T \\succ 0, where x⋆=Q−1bx^\\star = Q^{-1} b  Ideal update: xk+1=xk−(xk−x⋆)=xk−1⋅(xk−Q−1b)Newton update:xk+1=xk+1⋅(−1)⋅Q−1(Qxk−b)=xk−1⋅(xk−Q−1b)Steepest descent:xk+1=xk+αk⋅(−1)⋅(Qxk−b)\\begin{align}\n\\text{ Ideal update: }&& x_{k+1} &= x_k - (x_k - x^\\star) = x_k - 1 \\cdot (x_k - Q^{-1} b )\\\\\n\\text{Newton update:}&& x_{k+1} &= x_k + 1 \\cdot (-1) \\cdot Q^{-1} (Q x_k - b) = x_k -1 \\cdot (x_k - Q^{-1} b)\\\\\n\\text{Steepest descent:}&& x_{k+1} &= x_k + \\alpha_k \\cdot (-1) \\cdot (Q x_k - b)\n\\end{align}\n\n\n\n\n\n\n\n\nWhat happens when Q=QT≺0Q = Q^T \\prec 0?"
+  },
+  {
+    "objectID": "nonlin_lsq.html#example-rosenbrock-function",
+    "href": "nonlin_lsq.html#example-rosenbrock-function",
+    "title": "Robot Modeling Control",
+    "section": "Example: Rosenbrock Function",
+    "text": "Example: Rosenbrock Function"
+  },
+  {
+    "objectID": "nonlin_lsq.html#convergence-rate",
+    "href": "nonlin_lsq.html#convergence-rate",
+    "title": "Robot Modeling Control",
+    "section": "Convergence Rate",
+    "text": "Convergence Rate\n\n\n\n\n\n\nTheorem 3.5\n\n\nSuppose that ff is twice differentiable and that the Hessian ∇2f\\nabla^2 f is Lipschitz continuous in a neighborhood of a solution x⋆x^\\star at which the sufficient conditions are satisfied. Consider the iteration xk+1=xk+pkx_{k+1} = x_k + p_k where pk=−∇2fk−1∇fkp_k = - \\nabla^2 f_k^{-1} \\nabla f_k. Then\n\nIf x0x_0 is sufficiently close to x⋆x^\\star, then xk→x⋆x_k \\to x^\\star\nThe rate of convergence {xk}\\{x_k\\} is quadratic\nThe sequence of gradient norms {∥∇fk∥}\\{\\|\\nabla f_k\\|\\} converges quadratically to zero"
+  },
+  {
+    "objectID": "nonlin_lsq.html#newtons-revenge",
+    "href": "nonlin_lsq.html#newtons-revenge",
+    "title": "Robot Modeling Control",
+    "section": "Newton’s Revenge",
+    "text": "Newton’s Revenge"
+  },
+  {
+    "objectID": "nonlin_lsq.html#modifications",
+    "href": "nonlin_lsq.html#modifications",
+    "title": "Robot Modeling Control",
+    "section": "Modifications",
+    "text": "Modifications\n\n\n\nAlthough Newton’s method is very attractive in terms of its convergence properties the solution, it requires modification before it can be used at points that are far from the solution.\n\n\n\nThe following modifications are typically used:\n\nStep-size reduction (damping)\nModifying Hessian to be positive definite\nApproximation of Hessian"
+  },
+  {
+    "objectID": "nonlin_lsq.html#damping",
+    "href": "nonlin_lsq.html#damping",
+    "title": "Robot Modeling Control",
+    "section": "Damping",
+    "text": "Damping\nA search parameter α\\alpha is introduced 𝐱k+1=𝐱k−αk∇2f(𝐱k)−1∇f(𝐱k), \\bm{x}_{k+1} = \\bm{x}_k - \\alpha_k \\nabla^2 f(\\bm{x}_k)^{-1}\\nabla\nf(\\bm{x}_k),  where αk\\alpha_k is selected to minimize ff.\nA popular selection method is backtracking line search."
+  },
+  {
+    "objectID": "nonlin_lsq.html#positive-definiteness-and-scaling",
+    "href": "nonlin_lsq.html#positive-definiteness-and-scaling",
+    "title": "Robot Modeling Control",
+    "section": "Positive Definiteness and Scaling",
+    "text": "Positive Definiteness and Scaling\nGeneral class of algorithms is given by 𝐱k+1=𝐱k+αpk=𝐱k−αBk∇fk,(2) \\bm{x}_{k+1} = \\bm{x}_k + \\alpha p_k = \\bm{x}_k - \\alpha B_k \\nabla f_k,  \\qquad(2)\n\nSD: Bk=𝐈B_k = \\bm{I}, Newton: Bk=∇2f(𝐱k)−1B_k = \\nabla^2 f(\\bm{x}_k)^{-1}.\n\nFor small α\\alpha, it can be shown that f(𝐱k+1)=f(𝐱k)−α∇fkTBk∇fk+O(α2). f(\\bm{x}_{k+1}) = f(\\bm{x}_k) -\n\\alpha \\nabla f_k^T B_k \\nabla f_k + O(\\alpha^2). \n\nAs α→0\\alpha \\rightarrow 0, the second term on the rhs dominates the third.\nTo guarantee a decrease in ff, we must have ∇fkTBk∇fk&gt;0\\nabla f_k^T B_k \\nabla f_k\n&gt; 0.\n\nSimplest way to ensure this is to require Bk≻𝟎B_k \\succ \\bm{0}."
+  },
+  {
+    "objectID": "nonlin_lsq.html#positive-definiteness-and-scaling-1",
+    "href": "nonlin_lsq.html#positive-definiteness-and-scaling-1",
+    "title": "Robot Modeling Control",
+    "section": "Positive Definiteness and Scaling",
+    "text": "Positive Definiteness and Scaling\n\nIn practice, Newton’s method must be modified to accommodate the possible non-positive definiteness of ∇2f\\nabla^2 f at regions far from the solution.\nCommon approach: Bk=[μk𝐈+∇2f(𝐱k)]−1B_k = [\\mu_k\\bm{I} +\n\\nabla^2 f(\\bm{x}_k)]^{-1} for some μk&gt;0\\mu_k &gt; 0.\nThis can be regarded as a compromise between SD (μk\\mu_k very large) and Newton’s method (μk=0\\mu_k = 0).\n\nLevenberg-Marquardt performs Cholesky factorization for a given value of μk\\mu_k as follows μk𝐈+∇2f(𝐱k)=𝐆T𝐆.\\mu_k \\bm{I} + \\nabla^2 f(\\bm{x}_k) = \\bm{G}^T\\bm{G}. \n\nThis factorization checks implicitly for positive definiteness.\nIf the factorization fails (matrix not PD) μk\\mu_k is increased.\nStep direction is found by solving 𝐆T𝐆pk=−∇fk\\bm{G}^T\\bm{G} p_k = -\\nabla f_k."
+  },
+  {
+    "objectID": "nonlin_lsq.html#newtons-revenge-avenged",
+    "href": "nonlin_lsq.html#newtons-revenge-avenged",
+    "title": "Robot Modeling Control",
+    "section": "Newton’s Revenge Avenged",
+    "text": "Newton’s Revenge Avenged"
+  },
+  {
+    "objectID": "nonlin_lsq.html#summary-2",
+    "href": "nonlin_lsq.html#summary-2",
+    "title": "Robot Modeling Control",
+    "section": "Summary",
+    "text": "Summary\nYou can now minimize f(x)f(x) (when unconstrained) iteratively. Find LM x⋆x^\\star by\n\nChoosing direction pkp_k\n\nSteepest descent with constant step size is easy and reliable but slow\nNewton method is fast but expensive and unreliable\n\nneeds modifications for reliable convergence\n\nQuasi-newton methods are a balance, but tricky\n\nChoosing step size αk\\alpha_k\n\nBack-tracking for SD and modified NM improves performance\nStrong Wolfe conditions for Quasi-newton methods\n\nNot tackled: constraints, expensive ff/∇f\\nabla f, discrete xx, non-smooth ff"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Robot Modeling Control",
     "section": "",
-    "text": "Description\nTitle\nSource\nPreprint\n\n\n\n\nPID Control\nOn the PID tracking control of robot manipulators\nSCL\n\n\n\nGravity Compensation\nGravity compensation in robotics\nT&F\n\n\n\nControl\nExperimental evaluation of feedforward and computed torque control\nIEEE\n\n\n\nForce Control\nCompliance and Force Control for Computer Controlled Manipulators\nIEEE\n\n\n\nPDW\nPassive Dynamic Walking\nlink\n\n\n\nHybrid Zero Dynamics\nHybrid zero dynamics of planar biped walkers\nIEEE\n\n\n\nUnderactuation\nThe swing up control problem for the Acrobot\nIEEE\n\n\n\nUnderactuation\nPartial feedback linearization of underactuated mechanical systems\nIEEE\n\n\n\nPush recovery\nCapture Point: A Step toward Humanoid Push Recovery\nIEEE\n\n\n\nQuadrotor Diff Flatness\nA prototype of an autonomous controller for a quadrotor UAV\nIEEE\n\n\n\nQuadrotor\nTrajectory generation and control for precise aggressive maneuvers with quadrotors\nIJRR\n\n\n\nDifferential Drive Robots\nMinimum Wheel-Rotation Paths for Differential-Drive Mobile Robots\nIJRR\n\n\n\nMedical\nNonholonomic Modeling of Needle Steering\nIJRR\n\n\n\nConsensus-based Methods\nConsensus and Cooperation in Networked Multi-Agent Systems\nIEEE\n\n\n\nFormation Control\nModeling and control of formations of nonholonomic mobile robots\nIEEE\n\n\n\nSubsumption (Brooks)\nA robust layered control system for a mobile robot\nIEEE\n\n\n\nExoskeletons\nBiomechanical design of the Berkeley lower extremity exoskeleton (BLEEX)\nIEEE\n\n\n\nFiltering Body Pose\nDesign, Implementation, and Experimental Results of a Quaternion-Based Kalman Filter for Human Body Motion Tracking\nIEEE\n\n\n\nSnake Robot\nDesign of a modular snake robot\nIEEE",
+    "text": "This course covers methods for planning and executing the movement of mobile robots (navigation), robot arms (manipulation) and legs (locomotion).\nCourse github: poonawalalab/robotics-course"
+  },
+  {
+    "objectID": "extras.html",
+    "href": "extras.html",
+    "title": "Resources",
+    "section": "",
+    "text": "Topic\nOther\n\n\n\n\nRobotics ’23\nUK Course\n\n\nOptimization\nUK Course\n\n\nConvex Optimization\nOG Source\n\n\nDeep Learning\nUK Course\n\n\nList of Robotics Courses\nLink\n\n\nLinear Algebra\nGilbert Strang’s lectures\n\n\nODEs\nODE Slides ODE Models, Mechanical Sys, Electrical Sys,\n\n\nServo Motors\nmynotes, PID, PMDC Motors, Gears, DC Motor Control\n\n\nControl Systems\nLaplace Transforms, Transfer Functions, Stability\n\n\nLinear Systems\nLinearization, LTI Systems\n\n\nProbability\nCS188 Lec11, mynotes\n\n\nAI as Search\nBerekeley CS 188 Lec1\n\n\nMarkov decision processes (MDPs)\nCS188 Lec 7, CS188 Lec 8\n\n\nReinforcement Learning\nSergey Levine’s course, mynotes\n\n\nDifferential Geometry\nmynotes",
     "crumbs": [
       "Home",
-      "Papers"
+      "Resources"
     ]
-  },
-  {
-    "objectID": "mujoco.html#basic-example",
-    "href": "mujoco.html#basic-example",
-    "title": "MuJoCo and XML",
-    "section": "Basic Example",
-    "text": "Basic Example\n\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\n\n\n\n\n\n\n\n\n\n\nRun python3 code/basic_mujoco.py"
-  },
-  {
-    "objectID": "mujoco.html#basic-example-1",
-    "href": "mujoco.html#basic-example-1",
-    "title": "MuJoCo and XML",
-    "section": "Basic Example",
-    "text": "Basic Example\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)"
-  },
-  {
-    "objectID": "mujoco.html#basic-example-with-loading",
-    "href": "mujoco.html#basic-example-with-loading",
-    "title": "MuJoCo and XML",
-    "section": "Basic Example with Loading",
-    "text": "Basic Example with Loading\n\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\ncode/basic_mujoco.py\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\nmodel = mujoco.MjModel.from_xml_path('../models/simple_pendulum_act.xml')\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\ncode/mujoco_load_xml.py"
-  },
-  {
-    "objectID": "mujoco.html#interactive",
-    "href": "mujoco.html#interactive",
-    "title": "MuJoCo and XML",
-    "section": "Interactive",
-    "text": "Interactive\n\npython3 -m mujoco.viewer \n\nand then drag and drop xml files from models/"
-  },
-  {
-    "objectID": "mujoco.html#block-example",
-    "href": "mujoco.html#block-example",
-    "title": "MuJoCo and XML",
-    "section": "Block Example",
-    "text": "Block Example\n&lt;mujoco&gt;\n&lt;option gravity=\"0 0 -9.81\"/&gt;\n    &lt;worldbody&gt;\n    &lt;light diffuse=\".5 .5 .5\" pos=\"0 0 3\" dir=\"0 0 -1\"/&gt;\n        &lt;geom type=\"plane\" size=\"1 1 0.1\" rgba=\".9 0 0 1\"/&gt;\n        &lt;body pos=\"0 0 1\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 .9 0 1\"/&gt;\n        &lt;/body&gt;\n    &lt;/worldbody&gt;\n&lt;/mujoco&gt;"
-  },
-  {
-    "objectID": "mujoco.html#blocks-example",
-    "href": "mujoco.html#blocks-example",
-    "title": "MuJoCo and XML",
-    "section": "Blocks Example",
-    "text": "Blocks Example\n\n\n&lt;mujoco&gt;\n&lt;option gravity=\"0 0 -9.81\"/&gt;\n    &lt;worldbody&gt;\n    &lt;light diffuse=\".5 .5 .5\" pos=\"0 0 3\" dir=\"0 0 -1\"/&gt;\n        &lt;geom type=\"plane\" size=\"1 1 0.1\" rgba=\".9 0 0 1\"/&gt;\n        &lt;body pos=\"0 0 1\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 .9 0 1\"/&gt;\n        &lt;/body&gt;\n        &lt;body pos=\"0.1 0 1.5\" euler=\"0 90 0\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 0 0.9 1\"/&gt;\n        &lt;/body&gt;\n        &lt;body pos=\"0.1 0 2.0\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"sphere\" size=\".1\" rgba=\"0.9 0.9 0 1\"/&gt;\n        &lt;/body&gt;\n    &lt;/worldbody&gt;\n&lt;/mujoco&gt;"
-  },
-  {
-    "objectID": "mujoco.html#actuated-example",
-    "href": "mujoco.html#actuated-example",
-    "title": "MuJoCo and XML",
-    "section": "Actuated Example",
-    "text": "Actuated Example"
-  },
-  {
-    "objectID": "mujoco.html#actuated-example-1",
-    "href": "mujoco.html#actuated-example-1",
-    "title": "MuJoCo and XML",
-    "section": "Actuated Example",
-    "text": "Actuated Example\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\nmodel = mujoco.MjModel.from_xml_path('../models/simple_pendulum_act.xml')\n\n\ndt: float = 0.002\nmodel.opt.timestep = dt\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch_passive(model, data,\n        show_left_ui=False,\n        show_right_ui=False,\n      )\ntry:\n    while viewer.is_running():\n        step_start = time.time()\n        # Step the simulation\n        data.ctrl[0] = -100*data.qpos[0] - 20*data.qvel[0]\n        print(data.qpos[0])\n        mujoco.mj_step(model, data)\n        # Update the viewer\n        viewer.sync()\n        # Add a small delay to control frame rate\n        time_until_next_step = dt - (time.time() - step_start)\n        if time_until_next_step &gt; 0:\n            time.sleep(time_until_next_step)\nexcept KeyboardInterrupt:\n    print(\"Viewer closed by user\")\nfinally:\n    viewer.close()\n\ncode/mujoco_load_xml_control.py"
-  },
-  {
-    "objectID": "mujoco.html#extras",
-    "href": "mujoco.html#extras",
-    "title": "MuJoCo and XML",
-    "section": "Extras",
-    "text": "Extras\nModels\nMuJoCo menagerie\nSimulation\nMuJoCo Playground MJ Control"
   },
   {
     "objectID": "overview.html#syllabus-1",
@@ -348,22 +530,85 @@
     "text": "DREAM On Jetson Nanos\n\n  \n\n\n\n\n\nImplementation by Varun Hariprasad"
   },
   {
-    "objectID": "extras.html",
-    "href": "extras.html",
-    "title": "Resources",
+    "objectID": "mujoco.html#basic-example",
+    "href": "mujoco.html#basic-example",
+    "title": "MuJoCo and XML",
+    "section": "Basic Example",
+    "text": "Basic Example\n\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\n\n\n\n\n\n\n\n\n\n\nRun python3 code/basic_mujoco.py"
+  },
+  {
+    "objectID": "mujoco.html#basic-example-1",
+    "href": "mujoco.html#basic-example-1",
+    "title": "MuJoCo and XML",
+    "section": "Basic Example",
+    "text": "Basic Example\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)"
+  },
+  {
+    "objectID": "mujoco.html#basic-example-with-loading",
+    "href": "mujoco.html#basic-example-with-loading",
+    "title": "MuJoCo and XML",
+    "section": "Basic Example with Loading",
+    "text": "Basic Example with Loading\n\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\ncode/basic_mujoco.py\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\nmodel = mujoco.MjModel.from_xml_path('../models/simple_pendulum_act.xml')\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\ncode/mujoco_load_xml.py"
+  },
+  {
+    "objectID": "mujoco.html#interactive",
+    "href": "mujoco.html#interactive",
+    "title": "MuJoCo and XML",
+    "section": "Interactive",
+    "text": "Interactive\n\npython3 -m mujoco.viewer \n\nand then drag and drop xml files from models/"
+  },
+  {
+    "objectID": "mujoco.html#block-example",
+    "href": "mujoco.html#block-example",
+    "title": "MuJoCo and XML",
+    "section": "Block Example",
+    "text": "Block Example\n&lt;mujoco&gt;\n&lt;option gravity=\"0 0 -9.81\"/&gt;\n    &lt;worldbody&gt;\n    &lt;light diffuse=\".5 .5 .5\" pos=\"0 0 3\" dir=\"0 0 -1\"/&gt;\n        &lt;geom type=\"plane\" size=\"1 1 0.1\" rgba=\".9 0 0 1\"/&gt;\n        &lt;body pos=\"0 0 1\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 .9 0 1\"/&gt;\n        &lt;/body&gt;\n    &lt;/worldbody&gt;\n&lt;/mujoco&gt;"
+  },
+  {
+    "objectID": "mujoco.html#blocks-example",
+    "href": "mujoco.html#blocks-example",
+    "title": "MuJoCo and XML",
+    "section": "Blocks Example",
+    "text": "Blocks Example\n\n\n&lt;mujoco&gt;\n&lt;option gravity=\"0 0 -9.81\"/&gt;\n    &lt;worldbody&gt;\n    &lt;light diffuse=\".5 .5 .5\" pos=\"0 0 3\" dir=\"0 0 -1\"/&gt;\n        &lt;geom type=\"plane\" size=\"1 1 0.1\" rgba=\".9 0 0 1\"/&gt;\n        &lt;body pos=\"0 0 1\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 .9 0 1\"/&gt;\n        &lt;/body&gt;\n        &lt;body pos=\"0.1 0 1.5\" euler=\"0 90 0\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 0 0.9 1\"/&gt;\n        &lt;/body&gt;\n        &lt;body pos=\"0.1 0 2.0\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"sphere\" size=\".1\" rgba=\"0.9 0.9 0 1\"/&gt;\n        &lt;/body&gt;\n    &lt;/worldbody&gt;\n&lt;/mujoco&gt;"
+  },
+  {
+    "objectID": "mujoco.html#actuated-example",
+    "href": "mujoco.html#actuated-example",
+    "title": "MuJoCo and XML",
+    "section": "Actuated Example",
+    "text": "Actuated Example"
+  },
+  {
+    "objectID": "mujoco.html#actuated-example-1",
+    "href": "mujoco.html#actuated-example-1",
+    "title": "MuJoCo and XML",
+    "section": "Actuated Example",
+    "text": "Actuated Example\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\nmodel = mujoco.MjModel.from_xml_path('../models/simple_pendulum_act.xml')\n\n\ndt: float = 0.002\nmodel.opt.timestep = dt\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch_passive(model, data,\n        show_left_ui=False,\n        show_right_ui=False,\n      )\ntry:\n    while viewer.is_running():\n        step_start = time.time()\n        # Step the simulation\n        data.ctrl[0] = -100*data.qpos[0] - 20*data.qvel[0]\n        print(data.qpos[0])\n        mujoco.mj_step(model, data)\n        # Update the viewer\n        viewer.sync()\n        # Add a small delay to control frame rate\n        time_until_next_step = dt - (time.time() - step_start)\n        if time_until_next_step &gt; 0:\n            time.sleep(time_until_next_step)\nexcept KeyboardInterrupt:\n    print(\"Viewer closed by user\")\nfinally:\n    viewer.close()\n\ncode/mujoco_load_xml_control.py"
+  },
+  {
+    "objectID": "mujoco.html#extras",
+    "href": "mujoco.html#extras",
+    "title": "MuJoCo and XML",
+    "section": "Extras",
+    "text": "Extras\nModels\nMuJoCo menagerie\nSimulation\nMuJoCo Playground MJ Control"
+  },
+  {
+    "objectID": "papers.html",
+    "href": "papers.html",
+    "title": "Papers",
     "section": "",
-    "text": "Topic\nOther\n\n\n\n\nRobotics ’23\nUK Course\n\n\nOptimization\nUK Course\n\n\nConvex Optimization\nOG Source\n\n\nDeep Learning\nUK Course\n\n\nList of Robotics Courses\nLink\n\n\nLinear Algebra\nGilbert Strang’s lectures\n\n\nODEs\nODE Slides ODE Models, Mechanical Sys, Electrical Sys,\n\n\nServo Motors\nmynotes, PID, PMDC Motors, Gears, DC Motor Control\n\n\nControl Systems\nLaplace Transforms, Transfer Functions, Stability\n\n\nLinear Systems\nLinearization, LTI Systems\n\n\nProbability\nCS188 Lec11, mynotes\n\n\nAI as Search\nBerekeley CS 188 Lec1\n\n\nMarkov decision processes (MDPs)\nCS188 Lec 7, CS188 Lec 8\n\n\nReinforcement Learning\nSergey Levine’s course, mynotes\n\n\nDifferential Geometry\nmynotes",
+    "text": "Description\nTitle\nSource\nPreprint\n\n\n\n\nPID Control\nOn the PID tracking control of robot manipulators\nSCL\n\n\n\nGravity Compensation\nGravity compensation in robotics\nT&F\n\n\n\nControl\nExperimental evaluation of feedforward and computed torque control\nIEEE\n\n\n\nForce Control\nCompliance and Force Control for Computer Controlled Manipulators\nIEEE\n\n\n\nPDW\nPassive Dynamic Walking\nlink\n\n\n\nHybrid Zero Dynamics\nHybrid zero dynamics of planar biped walkers\nIEEE\n\n\n\nUnderactuation\nThe swing up control problem for the Acrobot\nIEEE\n\n\n\nUnderactuation\nPartial feedback linearization of underactuated mechanical systems\nIEEE\n\n\n\nPush recovery\nCapture Point: A Step toward Humanoid Push Recovery\nIEEE\n\n\n\nQuadrotor Diff Flatness\nA prototype of an autonomous controller for a quadrotor UAV\nIEEE\n\n\n\nQuadrotor\nTrajectory generation and control for precise aggressive maneuvers with quadrotors\nIJRR\n\n\n\nDifferential Drive Robots\nMinimum Wheel-Rotation Paths for Differential-Drive Mobile Robots\nIJRR\n\n\n\nMedical\nNonholonomic Modeling of Needle Steering\nIJRR\n\n\n\nConsensus-based Methods\nConsensus and Cooperation in Networked Multi-Agent Systems\nIEEE\n\n\n\nFormation Control\nModeling and control of formations of nonholonomic mobile robots\nIEEE\n\n\n\nSubsumption (Brooks)\nA robust layered control system for a mobile robot\nIEEE\n\n\n\nExoskeletons\nBiomechanical design of the Berkeley lower extremity exoskeleton (BLEEX)\nIEEE\n\n\n\nFiltering Body Pose\nDesign, Implementation, and Experimental Results of a Quaternion-Based Kalman Filter for Human Body Motion Tracking\nIEEE\n\n\n\nSnake Robot\nDesign of a modular snake robot\nIEEE",
     "crumbs": [
       "Home",
-      "Resources"
+      "Papers"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Robot Modeling Control",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "This course covers methods for planning and executing the movement of mobile robots (navigation), robot arms (manipulation) and legs (locomotion).\nCourse github: poonawalalab/robotics-course"
+    "text": "This website is associated with course ME/AER 676 Robot Modeling and Control offered at the University of Kentucky. Course created by Hasan A. Poonawala."
   },
   {
     "objectID": "introduction.html",
