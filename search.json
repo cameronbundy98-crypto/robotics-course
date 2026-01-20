@@ -29,39 +29,67 @@
     "text": "Optimization Theory and Practice\n\n\nNonlinear Least Squares\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  Nonlinear Least Squares  Necessary and Sufficient Conditions  Overview of Algorithms"
   },
   {
-    "objectID": "nonlin_lsq.html#example-curve-fitting",
-    "href": "nonlin_lsq.html#example-curve-fitting",
+    "objectID": "nonlin_lsq.html#forward-problems",
+    "href": "nonlin_lsq.html#forward-problems",
     "title": "Robot Modeling Control",
-    "section": "Example: Curve Fitting",
-    "text": "Example: Curve Fitting\nSuppose we have data in the form of pairs {xi,yi}i∈{1,…,m}.\\{x_{i},y_{i}\\}_ {i \\in \\{1,\\dots,m\\}}.\nWe believe that the model is of the form ϕ(x;θ)=θ1+θ2e(θ3−x)2θ4+θ5cos(θ6x).\\phi(x; \\theta) = \\theta_{1} + \\theta_{2} e^{\\frac{(\\theta_{3}-x )^2}{\\theta_{4}}} + \\theta_{5} \\cos(\\theta_{6} x).\nA standard approach is to find the values of θj\\theta_{j}, j∈{1,…,6}j \\in \\{1,\\dots,6\\} by solving minθ∈ℝ6∑i=1mri2(θ)\\min_{\\theta \\in \\mathbb R^6} \\sum_{i=1}^{m} r_{i}^{2}(\\theta) where ri(θ)=yi−ϕ(xi;θ)r_{i}(\\theta) = y_{i} - \\phi(x_{i}; \\theta)\nThis is a nonlinear least-square problem."
+    "section": "Forward Problems",
+    "text": "Forward Problems\nWe are often trying to work with a model that turns input x∈ℝnx \\in \\mathbb{R}^{n} into output y∈ℝmy\\in \\mathbb{R}^{m}:\ny←ϕθ(x), y \\gets \\phi_{\\theta}(x),\nwhere θ∈ℝp\\theta \\in \\mathbb{R}^p are the parameters of the model ϕθ\\phi_{\\theta}.\n\nExample: Given joint angles qq, where is the robot arm’s ‘hand’? (Forward Kinematics)"
+  },
+  {
+    "objectID": "nonlin_lsq.html#inverse-problems",
+    "href": "nonlin_lsq.html#inverse-problems",
+    "title": "Robot Modeling Control",
+    "section": "Inverse Problems",
+    "text": "Inverse Problems\nThe inverse problem is to find xx given yy and parameters θ\\theta\nx← solution of y=ϕθ(x), x \\gets \\text{ solution of } y = \\phi_{\\theta}(x),\nwhere θ∈ℝp\\theta \\in \\mathbb{R}^p are the parameters of the model ϕθ\\phi_{\\theta}.\n\nExample: Given where we want the robot’s arm to be, what values should we set the joint angles qq to? (Inverse Kinematics)"
   },
   {
     "objectID": "nonlin_lsq.html#nonlinear-least-squares-1",
     "href": "nonlin_lsq.html#nonlinear-least-squares-1",
     "title": "Robot Modeling Control",
     "section": "Nonlinear Least Squares",
-    "text": "Nonlinear Least Squares\nResidual (or error): ri(θ)=ei(θ)=yi−ϕ(xi;θ)r_{i}(\\theta) = e_{i}(\\theta) = y_{i} - \\phi(x_{i}; \\theta) Loss: Mean Square Error:\nL(θ)=1m∑i=1mri2(θ)=1m∑i=1mri(θ)Tri(θ)=e(θ)Te(θ)\\begin{aligned}\nL(\\theta) &= \\frac{1}{m} \\sum_{i=1}^{m} r_{i}^{2}(\\theta) = \\frac{1}{m} \\sum_{i=1}^{m}  r_{i}(\\theta)^T r_{i}(\\theta)\\\\\n &= e(\\theta)^T e(\\theta)\\\\\n\\end{aligned}\n\n⟹∇θL(θ)=−2eT(θ)J(θ)⟹∇θ2L(θ)=−2JT(θ)J(θ)−2∑ei(θ)Hi(θ)\\begin{aligned}\n\\implies \\nabla_\\theta L(\\theta) &= -2 e^T(\\theta) J(\\theta)\\\\\n\\implies \\nabla_\\theta^2 L(\\theta) &= -2 J^T(\\theta) J(\\theta)- 2 \\sum e_i(\\theta) H_i(\\theta)\n\\end{aligned}\nWhere J(θ)J(\\theta) is the Jacobian ∇θϕ(x;θ)\\nabla_\\theta \\phi(x;\\theta)\nHi(θ)H_i(\\theta) is the Hessian ∇θ2ϕ(xi;θ)\\nabla_\\theta^2 \\phi(x_i;\\theta)"
+    "text": "Nonlinear Least Squares\nResidual (or error): r(x)=e(x)=y−ϕθ(x)r(x) = e(x) = y - \\phi_{\\theta}(x) Loss: Squared Error:\nL(x)=eT(x)e(x)\\begin{aligned}\nL(x) &= e^T(x) e(x)\n\\end{aligned}\n\n⟹∇xL(x)=−2eT(x)J(x)⟹∇x2L(x)=−2JT(x)J(x)−2∑ei(x)Hi(x)\\begin{aligned}\n\\implies \\nabla_x L(x) &= -2 e^T(x) J(x)\\\\\n\\implies \\nabla_x^2 L(x) &= -2 J^T(x) J(x)- 2 \\sum e_i(x) H_i(x)\n\\end{aligned}\nWhere J(x)J(x) is the Jacobian ∇xϕθ(x)\\nabla_x \\phi_{\\theta}(x)\nHi(x)H_i(x) is the Hessian ∇x2ϕθ(x)\\nabla_x^2 \\phi_{\\theta}(x)"
   },
   {
     "objectID": "nonlin_lsq.html#nonlinear-least-squares-2",
     "href": "nonlin_lsq.html#nonlinear-least-squares-2",
     "title": "Robot Modeling Control",
     "section": "Nonlinear Least Squares",
-    "text": "Nonlinear Least Squares\nResidual (or error): ri(θ)=ei(θ)=yi−ϕ(xi;θ)r_{i}(\\theta) = e_{i}(\\theta) = y_{i} - \\phi(x_{i}; \\theta) Loss: Mean Square Error:\nL(θ)=1m∑i=1mri2(θ)=1m∑i=1mri(θ)Tri(θ)=e(θ)Te(θ)\\begin{aligned}\nL(\\theta) &= \\frac{1}{m} \\sum_{i=1}^{m} r_{i}^{2}(\\theta) = \\frac{1}{m} \\sum_{i=1}^{m}  r_{i}(\\theta)^T r_{i}(\\theta)\\\\\n &= e(\\theta)^T e(\\theta)\n\\end{aligned}\n\n⟹dL(θ)dt=e(θ)T∂e(θ)∂θθ̇(t)=−e(θ)TJ(θ)θ̇(t)\\begin{aligned}\n\\implies \\frac{ \\mathrm{ d} L(\\theta)}{\\mathrm{ d} t} &= e(\\theta)^T \\frac{ \\partial e(\\theta)}{\\partial \\theta} \\dot \\theta(t)  = -e(\\theta)^T J(\\theta) \\dot \\theta(t)\n\\end{aligned}\n\n\nChoosing θ̇(t)\\dot \\theta(t) produces some dL(θ(t))dt\\frac{ \\mathrm{ d} L(\\theta(t))}{\\mathrm{ d} t}. What values should we want for these?"
+    "text": "Nonlinear Least Squares\nResidual (or error): r(x)=e(x)=y−ϕθ(x)r(x) = e(x) = y - \\phi_{\\theta}(x) Loss: Squared Error:\nL(x)=eT(x)e(x)\\begin{aligned}\nL(x) &= e^T(x) e(x)\n\\end{aligned}\n\n⟹dL(x)dt=eT(x)∂e(x)∂xẋ(t)=−eT(x)J(x)ẋ(t)\\begin{aligned}\n\\implies \\frac{ \\mathrm{ d} L(x)}{\\mathrm{ d} t} &= e^T(x) \\frac{ \\partial e(x)}{\\partial x} \\dot x(t)  = -e^T(x) J(x) \\dot x(t)\n\\end{aligned}\n\n\nChoosing ẋ(t)\\dot x(t) produces some dL(x(t))dt\\frac{ \\mathrm{ d} L(x(t))}{\\mathrm{ d} t}. What values should we want for these?"
   },
   {
     "objectID": "nonlin_lsq.html#nonlinear-least-squares-3",
     "href": "nonlin_lsq.html#nonlinear-least-squares-3",
     "title": "Robot Modeling Control",
     "section": "Nonlinear Least Squares",
-    "text": "Nonlinear Least Squares\nWe want dL(θ(t))dt&lt;0\\frac{ \\mathrm{ d} L(\\theta(t))}{\\mathrm{ d} t} &lt; 0 so as to minimize L(θ(t))L(\\theta(t)) as t→∞t \\to \\infty\nWe can achieve that if dL(θ)dt=−e(θ)TBe(θ)\\frac{ \\mathrm{ d} L(\\theta)}{\\mathrm{ d} t} =  - e(\\theta)^T B e(\\theta)\n⟹\\implies solve J(θ)θ̇=Be(θ)J(\\theta) \\dot \\theta = B e(\\theta) for θ̇\\dot \\theta where B=BT≻0B = B^T \\succ 0\nOptions:\n\nSteepest descent: θ̇(t)=J(θ)Te(θ)\\dot \\theta(t) =   J(\\theta)^T e(\\theta)\nGauss-Newton direction: θ̇(t)=J+e(θ)\\dot \\theta(t) = J^{+} e(\\theta)1\nLevenberg–Marquardt direction: θ̇(t)=Jdamped+e(θ)\\dot \\theta(t) = J^{+}_{\\text{damped}} e(\\theta)\n\nJ+J^{+} is the Moore Penrose Pseudoinverse^T"
+    "text": "Nonlinear Least Squares\nWe want dL(x(t))dt&lt;0\\frac{ \\mathrm{ d} L(x(t))}{\\mathrm{ d} t} &lt; 0 so as to minimize L(x(t))L(x(t)) as t→∞t \\to \\infty\nWe can achieve that if dL(x)dt=−eT(x)Be(x)\\frac{ \\mathrm{ d} L(x)}{\\mathrm{ d} t} =  - e^T(x) B e(x)\n⟹\\implies solve J(x)ẋ=Be(x)J(x) \\dot x = B e(x) for ẋ\\dot x where B=BT≻0B = B^T \\succ 0\nOptions:\n\nSteepest descent: ẋ(t)=JT(x)e(x)\\dot x(t) =   J^T(x) e(x)\nGauss-Newton direction: ẋ(t)=J+e(x)\\dot x(t) = J^{+} e(x)1\nLevenberg–Marquardt direction: ẋ(t)=Jdamped+e(x)\\dot x(t) = J^{+}_{\\text{damped}} e(x)\n\nJ+J^{+} is the Moore Penrose Pseudoinverse^T"
   },
   {
     "objectID": "nonlin_lsq.html#dimensions",
     "href": "nonlin_lsq.html#dimensions",
     "title": "Robot Modeling Control",
     "section": "Dimensions",
-    "text": "Dimensions\nθ∈ℝp\\theta \\in \\mathbb{R}^p and yi,ϕ(xi;θ),ei∈ℝy_i, \\phi(x_i;\\theta),e_i \\in \\mathbb R,\n⟹e∈ℝm\\implies e \\in \\mathbb R^m ⟹J(θ)∈ℝ(m×p)\\implies J(\\theta) \\in \\mathbb R^(m \\times p), ⟹eTJ(θ)∈ℝ(1×p)\\implies e^T J(\\theta) \\in \\mathbb R^(1 \\times p)\n∇θL(θ)∈ℝ(1×p)\\nabla_\\theta L(\\theta) \\in \\mathbb{R}^(1 \\times p), ∇θ2L(θ)∈ℝ(p×p)\\nabla_\\theta^{2} L(\\theta) \\in \\mathbb{R}^(p \\times p)\nAssume J(θ)=JJ(\\theta) = J has rank min(m,p)\\min(m,p)\nIf m&lt;pm &lt; p then J+=JT(JJT)−1∈ℝ(p×m)J^{+} = J^T ( J J^T )^{-1}   \\in \\mathbb{R}^(p \\times m)\nIf m&gt;pm &gt; p then J+=(JTJ)−1JT∈ℝ(p×m)J^{+} = ( J^T J )^{-1}  J^T  \\in \\mathbb{R}^(p \\times m)\nCompute J+J^{+} using a singular value decomposition of J(θ)J(\\theta)"
+    "text": "Dimensions\nx∈ℝnx \\in \\mathbb{R}^n and ϕθ(x)∈ℝm\\phi_{\\theta}(x) \\in \\mathbb R^{m},\n⟹J(x)∈ℝ(m×n)\\implies J(x) \\in \\mathbb R^(m \\times n), ⟹eTJ(x)∈ℝ(1×n)\\implies e^T J(x) \\in \\mathbb R^(1 \\times n)\n∇xL(x)∈ℝ(1×n)\\nabla_x L(x) \\in \\mathbb{R}^(1 \\times n), ∇x2L(x)∈ℝ(n×n)\\nabla_x^{2} L(x) \\in \\mathbb{R}^(n \\times n)\nAssume J(x)=JJ(x) = J has rank min(m,n)\\min(m,n)\nIf m&lt;nm &lt; n then J+=JT(JJT)m×m−1∈ℝ(n×m)J^{+} = J^T ( J J^T )_{m \\times m}^{-1}   \\in \\mathbb{R}^(n \\times m)\nIf m&gt;nm &gt; n then J+=(JTJ)n×n−1JT∈ℝ(n×m)J^{+} = ( J^T J )_{n \\times n}^{-1}  J^T  \\in \\mathbb{R}^(n \\times m)\nCompute J+J^{+} using a singular value decomposition of J(x)J(x)"
+  },
+  {
+    "objectID": "nonlin_lsq.html#aside-supervised-machine-learning",
+    "href": "nonlin_lsq.html#aside-supervised-machine-learning",
+    "title": "Robot Modeling Control",
+    "section": "Aside: Supervised Machine Learning",
+    "text": "Aside: Supervised Machine Learning\nSuppose we have data in the form of pairs {xi,yi}i∈{1,…,m}.\\{x_{i},y_{i}\\}_ {i \\in \\{1,\\dots,m\\}}.\nWe believe that the model is of the form ϕθ(x;θ)=θ1+θ2e(θ3−x)2θ4+θ5cos(θ6x).\\phi_{\\theta}(x; \\theta) = \\theta_{1} + \\theta_{2} e^{\\frac{(\\theta_{3}-x )^2}{\\theta_{4}}} + \\theta_{5} \\cos(\\theta_{6} x).\nA standard approach is to find the values of θj\\theta_{j}, j∈{1,…,6}j \\in \\{1,\\dots,6\\} by solving minθ∈ℝ6∑i=1mri2(θ)\\min_{\\theta \\in \\mathbb R^6} \\sum_{i=1}^{m} r_{i}^{2}(\\theta) where ri(θ)=yi−ϕθ(xi)r_{i}(\\theta) = y_{i} - \\phi_{\\theta}(x_i)\nThis is a nonlinear least-square problem.\nHowever, xix_i are parameters and we are searching for θ\\theta; opposite of previous slides"
+  },
+  {
+    "objectID": "nonlin_lsq.html#nonlinear-least-squares-4",
+    "href": "nonlin_lsq.html#nonlinear-least-squares-4",
+    "title": "Robot Modeling Control",
+    "section": "Nonlinear Least Squares",
+    "text": "Nonlinear Least Squares\nResidual (or error): ri(θ)=ei(θ)=yi−ϕ(xi;θ)r_{i}(\\theta) = e_{i}(\\theta) = y_{i} - \\phi(x_{i};\\theta) Loss: Mean Square Error:\nL(θ)=1m∑i=1mri2(θ)=1m∑i=1mriT(θ)ri(θ)=eT(θ)e(θ)\\begin{aligned}\nL(\\theta) &= \\frac{1}{m} \\sum_{i=1}^{m} r_{i}^{2}(\\theta) = \\frac{1}{m} \\sum_{i=1}^{m}  r_{i}^T(\\theta) r_{i}(\\theta)\\\\\n &= e^T(\\theta) e(\\theta)\\\\\n\\end{aligned}\n⟹∇θL(θ)=−2eT(θ)J(θ)⟹∇θ2L(θ)=−2JT(θ)J(θ)−2∑ei(θ)Hi(θ)\\begin{aligned}\n\\implies \\nabla_\\theta L(\\theta) &= -2 e^T(\\theta) J(\\theta)\\\\\n\\implies \\nabla_\\theta^2 L(\\theta) &= -2 J^T(\\theta) J(\\theta)- 2 \\sum e_i(\\theta) H_i(\\theta)\n\\end{aligned}\nWhere J(θ)J(\\theta) is the Jacobian ∇θϕθ(x)\\nabla_\\theta \\phi_{\\theta}(x)\nHi(θ)H_i(\\theta) is the Hessian ∇θ2ϕθ(xi;θ)\\nabla_\\theta^2 \\phi_{\\theta}(x_i;\\theta)"
+  },
+  {
+    "objectID": "nonlin_lsq.html#dimensions-1",
+    "href": "nonlin_lsq.html#dimensions-1",
+    "title": "Robot Modeling Control",
+    "section": "Dimensions",
+    "text": "Dimensions\nθ∈ℝp\\theta \\in \\mathbb{R}^p and yi,ϕθ(xi;θ),ei∈ℝy_i, \\phi_{\\theta}(x_i;\\theta),e_i \\in \\mathbb R,\n⟹e∈ℝm\\implies e \\in \\mathbb R^m ⟹J(θ)∈ℝ(m×p)\\implies J(\\theta) \\in \\mathbb R^(m \\times p), ⟹eTJ(θ)∈ℝ(1×p)\\implies e^T J(\\theta) \\in \\mathbb R^(1 \\times p)\n∇θL(θ)∈ℝ(1×p)\\nabla_\\theta L(\\theta) \\in \\mathbb{R}^(1 \\times p), ∇θ2L(θ)∈ℝ(p×p)\\nabla_\\theta^{2} L(\\theta) \\in \\mathbb{R}^(p \\times p)\nAssume J(θ)=JJ(\\theta) = J has rank min(m,p)\\min(m,p)\nIf m&lt;pm &lt; p then J+=JT(JJT)−1∈ℝ(p×m)J^{+} = J^T ( J J^T )^{-1}   \\in \\mathbb{R}^(p \\times m)\nIf m&gt;pm &gt; p then J+=(JTJ)−1JT∈ℝ(p×m)J^{+} = ( J^T J )^{-1}  J^T  \\in \\mathbb{R}^(p \\times m)\nCompute J+J^{+} using a singular value decomposition of J(θ)J(\\theta)"
   },
   {
     "objectID": "nonlin_lsq.html#solutions",
