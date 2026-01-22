@@ -98,6 +98,13 @@
     "text": "2D LiDAR Sensor\n\n\n\nRotating mirror/sensor emits laser pulses\nScans across a horizontal or vertical plane\nReturns points in polar coordinates (ri,ϕi)(r_i, \\phi_i)\nCorresponds to nearest reflective object along direction ϕi\\phi_i\n\n\n\n\n\nA relatively inexpensive 2D LiDAR"
   },
   {
+    "objectID": "scanmatch.html#d-lidar-sensor-1",
+    "href": "scanmatch.html#d-lidar-sensor-1",
+    "title": "Robot Modeling Control",
+    "section": "2D LiDAR Sensor",
+    "text": "2D LiDAR Sensor\n\nDepiction of LiDAR scan"
+  },
+  {
     "objectID": "scanmatch.html#lidar-data-format",
     "href": "scanmatch.html#lidar-data-format",
     "title": "Robot Modeling Control",
@@ -280,6 +287,20 @@
     "text": "Numerical Gradient Check\nVerify your Jacobian by comparing to finite differences:\n\ndef numerical_gradient(f, x, eps=1e-5):\n    \"\"\"Compute gradient numerically using central differences.\"\"\"\n    grad = np.zeros_like(x)\n    for i in range(len(x)):\n        x_plus = x.copy(); x_plus[i] += eps\n        x_minus = x.copy(); x_minus[i] -= eps\n        grad[i] = (f(x_plus) - f(x_minus)) / (2 * eps)\n    return grad\n\n# Example: cost function for alignment\ndef alignment_cost(params, source, target_matched):\n    theta, tx, ty = params\n    R = rotation_matrix(theta)\n    transformed = R @ source + np.array([[tx], [ty]])\n    return np.sum((transformed - target_matched)**2)\n\n# Test\nparams = np.array([0.1, 0.2, 0.3])\ngrad = numerical_gradient(lambda p: alignment_cost(p, source[:,:5], target[:,:5]), params)\nprint(f\"Numerical gradient: {grad.round(4)}\")\n\nNumerical gradient: [-14.9754   1.2598  -7.2557]"
   },
   {
+    "objectID": "scanmatch.html#project-goal",
+    "href": "scanmatch.html#project-goal",
+    "title": "Robot Modeling Control",
+    "section": "Project Goal",
+    "text": "Project Goal\n\n\n\n\n\n\nGoal\n\n\nThe goal of the assignment is to generate an image depicting a map of the environment in which a sequence of 2D LiDAR scans were recorded.\n\n\n\nYour team must create code that\n\nsaves the map in a .png file,\nsave the poses associated with every scan in the provided list of scans, assuming the first scan is at (0,0,0)(0,0,0), in a .npz file."
+  },
+  {
+    "objectID": "scanmatch.html#example",
+    "href": "scanmatch.html#example",
+    "title": "Robot Modeling Control",
+    "section": "Example",
+    "text": "Example"
+  },
+  {
     "objectID": "scanmatch.html#robot-pose",
     "href": "scanmatch.html#robot-pose",
     "title": "Robot Modeling Control",
@@ -291,63 +312,35 @@
     "href": "scanmatch.html#coordinate-transformation",
     "title": "Robot Modeling Control",
     "section": "Coordinate Transformation",
-    "text": "Coordinate Transformation\nGiven scan points {(xj,yj)}\\left\\{(x_j, y_j)\\right\\} in the robot frame at pose (Xi,Yi,θi)(X_i, Y_i, \\theta_i) in the current frame FF:\n\n\n\nxF=Xi+xjcosθi−yjsinθiyF=Yi+xjsinθi+yjcosθi\n\\begin{aligned}\nx_{F} &= X_i + x_j \\cos \\theta_i - y_j \\sin \\theta_i \\\\\ny_{F} &= Y_i + x_j \\sin \\theta_i + y_j \\cos \\theta_i\n\\end{aligned}\n\n\n\n\n\nThis transformation transforms all points in from the robot frame to the frame FF"
+    "text": "Coordinate Transformation\nGiven scan points {(xj,yj)}\\left\\{(x_j, y_j)\\right\\} in the robot frame at pose (ΔXi,ΔYi,Δθi)(\\Delta X_i, \\Delta Y_i, \\Delta \\theta_i) relative to the current frame FF:\n\n\n\nxF=ΔXi+xjcosΔθi−yjsinΔθiyF=ΔYi+xjsinΔθi+yjcosΔθi\n\\begin{aligned}\nx_{F} &= \\Delta X_i + x_j \\cos \\Delta \\theta_i - y_j \\sin \\Delta \\theta_i \\\\\ny_{F} &= \\Delta Y_i + x_j \\sin \\Delta \\theta_i + y_j \\cos \\Delta \\theta_i\n\\end{aligned}\n\n\n\n\n\nRelative pose transforms all points in the robot frame to the frame FF"
   },
   {
     "objectID": "scanmatch.html#scan-matching-as-optimization",
     "href": "scanmatch.html#scan-matching-as-optimization",
     "title": "Robot Modeling Control",
     "section": "Scan Matching as Optimization",
-    "text": "Scan Matching as Optimization\nTo match two scans:\n\nTreat one scan as the reference frame\nFind (Xi,Yi,θi)(X_i, Y_i, \\theta_i) that transforms the second scan to align with the reference\n\n\n\n\nGoal: Find the transformation that provides the best alignment"
-  },
-  {
-    "objectID": "scanmatch.html#project-goal",
-    "href": "scanmatch.html#project-goal",
-    "title": "Robot Modeling Control",
-    "section": "Project Goal",
-    "text": "Project Goal\nEstimate the sequence of poses {(Xi,Yi,θi)}\\{(X_i, Y_i, \\theta_i)\\} from a sequence of scans\n\nThree components needed:\n\nEvaluation function: Scalar measure of alignment quality\nOptimization algorithm: Minimize the evaluation function\nPath integration: Convert relative transformations to global trajectory"
+    "text": "Scan Matching as Optimization\nTo match two scans:\n\nTreat one scan as the reference frame\nFind (ΔXi,ΔYi,Δθi)(\\Delta X_i, \\Delta Y_i, \\Delta \\theta_i) that transforms the second scan to align with the reference\n\n\n\n\nGoal: Find the transformation that provides the best alignment"
   },
   {
     "objectID": "scanmatch.html#instructions",
     "href": "scanmatch.html#instructions",
     "title": "Robot Modeling Control",
     "section": "Instructions",
-    "text": "Instructions\n\nTeams of up to two individuals\nInput: 2D laser scans in sims_N_scans.npz or .mat\nOutput: Sequence of poses (Xi,Yi,θi)(X_i, Y_i, \\theta_i)\n\n2D plot of path (Xi,Yi)(X_i, Y_i)\nLines indicating orientation θi\\theta_i"
+    "text": "Instructions\n\nTeams of up to two individuals\nInput: 2D laser scans in sims_N_scans.npz or .mat\nOutput:\n\nSequence of poses (Xi,Yi,θi)(X_i, Y_i, \\theta_i) (.npz file)\nEstimated map of the environment in which scans were taken (.png file)"
   },
   {
-    "objectID": "scanmatch.html#evaluation-function",
-    "href": "scanmatch.html#evaluation-function",
+    "objectID": "scanmatch.html#evaluation-criteria",
+    "href": "scanmatch.html#evaluation-criteria",
     "title": "Robot Modeling Control",
-    "section": "Evaluation Function",
-    "text": "Evaluation Function\nHow “good” is a candidate transformation (X,Y,θ)(X, Y, \\theta)?\n\nCommon approach: Sum of squared distances between transformed points and reference L(X,Y,θ)=∑jdj2\nL(X, Y, \\theta) = \\sum_j d_j^2\n\n\n\nChallenge: The same physical point is mostly not observed in both scans"
+    "section": "Evaluation Criteria",
+    "text": "Evaluation Criteria\nThe evaluation is based on\n\nSum of squared errors between true and estimated relative poses between temporally successive poses.\nRelative error in the final position and orientation relative to ground truth."
   },
   {
-    "objectID": "scanmatch.html#optimization-methods",
-    "href": "scanmatch.html#optimization-methods",
+    "objectID": "scanmatch.html#hints",
+    "href": "scanmatch.html#hints",
     "title": "Robot Modeling Control",
-    "section": "Optimization Methods",
-    "text": "Optimization Methods\nGiven two scans and an evaluation function:\n\nUse optimization algorithms to find (X,Y,θ)(X, Y, \\theta) that minimizes the cost\nMethods from nonlinear least squares apply here\n\n\nPopular methods:\n\nIterative Closest Point (ICP) algorithm\nNormal Distribution Transform (NDT)"
-  },
-  {
-    "objectID": "scanmatch.html#path-integration",
-    "href": "scanmatch.html#path-integration",
-    "title": "Robot Modeling Control",
-    "section": "Path Integration",
-    "text": "Path Integration\nScan matching gives relative transformations between consecutive scans\n\nTo get the full trajectory:\n\nChain the relative transformations\nAccumulate poses in the world frame"
-  },
-  {
-    "objectID": "scanmatch.html#report-requirements",
-    "href": "scanmatch.html#report-requirements",
-    "title": "Robot Modeling Control",
-    "section": "Report Requirements",
-    "text": "Report Requirements\nThe evaluation is based on a report containing:\n\nDescription of all evaluation functions and algorithms considered\nDiscussion of changes made along the way and why\nWhether changes had the expected impact or not\nPerformance summary:\n\nAverage run time per iteration\nNumber of iterations per scan match\nAverage error in scan match\nAverage error in pose\n\nDiscussion of potential improvements"
-  },
-  {
-    "objectID": "scanmatch.html#expectations",
-    "href": "scanmatch.html#expectations",
-    "title": "Robot Modeling Control",
-    "section": "Expectations",
-    "text": "Expectations\n\n\n\n\n\n\nWarning\n\n\nIt is not expected that you will obtain highly accurate predictions of the robot’s motion\n\n\n\n\nEmphasis is on connecting theory and practice:\n\nTry simple things first\nUse results (and surprises) to inform choices\nAn approach that produces accurate predictions without explainable choices is not success"
+    "section": "Hints",
+    "text": "Hints\n\nYou can use scan matching to get an estimate of where the robot was at different times\n\nChain the relative transformations\nAccumulate poses in the world frame\n\nYou can then use pose graph optimization to correct the drift over time using long-range connections, by defining a suitable set of edges\nTwo popular methods for scan matching involve the Iterative Closes Point algorithm, and the Normal Distribution Transform\n\nCopying from existing implementations of these algorithms that produce highly accurate predictions is not success"
   },
   {
     "objectID": "scanmatch.html#testing-strategy",
@@ -357,18 +350,11 @@
     "text": "Testing Strategy\nTest on synthetic ideal data where you know the answer:\n\nPure translation test: (x′i,y′i)=(xi+Δx*,yi)(x'_i, y'_i) = (x_i + \\Delta x^*, y_i)\n\n\nPure rotation test: (x′i,y′i)=(xicosθ*−yisinθ*,xisinθ*+yicosθ*)(x'_i, y'_i) = (x_i \\cos \\theta^* - y_i \\sin \\theta^*, x_i \\sin \\theta^* + y_i \\cos \\theta^*)\n\n\nFor synthetic data: same point appears in both scans, so use direct point-to-point error"
   },
   {
-    "objectID": "scanmatch.html#practical-tips",
-    "href": "scanmatch.html#practical-tips",
-    "title": "Robot Modeling Control",
-    "section": "Practical Tips",
-    "text": "Practical Tips\n\nLog all decisions and save plots as you go\nCreate reusable visualization tools early\nDon’t only copy existing ICP/NDT implementations\n\nUnderstanding the choices matters more than accuracy\n\n\n\n\n\n\n\n\nNote\n\n\nA well-documented journey with modest results beats an unexplained accurate solution"
-  },
-  {
     "objectID": "scanmatch.html#summary",
     "href": "scanmatch.html#summary",
     "title": "Robot Modeling Control",
     "section": "Summary",
-    "text": "Summary\n\nRigid transformations: R(θ)R(\\theta) and SE(2) describe 2D motion\nPoint cloud alignment: Minimize sum of squared residuals\nICP algorithm: Iterate between correspondence and transformation\nLocal minima: ICP needs good initialization\nPath integration: Chain relative poses into trajectory"
+    "text": "Summary\n\nRigid transformations: R(θ)R(\\theta) and SE(2) describe 2D motion\nPoint cloud alignment: Minimize sum of squared residuals\nICP algorithm: Iterate between correspondence and transformation\nLocal minima: ICP needs good initialization"
   },
   {
     "objectID": "index.html",

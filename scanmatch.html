@@ -250,6 +250,10 @@
 </div>
 </div></div>
 </section>
+<section id="d-lidar-sensor-1" class="slide level2">
+<h2>2D LiDAR Sensor</h2>
+
+<img data-src="assets/images/rangescan.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Depiction of LiDAR scan</p></section>
 <section id="lidar-data-format" class="slide level2">
 <h2>LiDAR Data Format</h2>
 <p>Points returned in polar coordinates <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>r</mi><mi>i</mi></msub><mo>,</mo><msub><mi>ϕ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(r_i, \phi_i)</annotation></semantics></math></p>
@@ -348,7 +352,7 @@ y' &amp;= r\cos\alpha\sin\theta + r\sin\alpha\cos\theta = x\sin\theta + y\cos\th
 </section>
 <section id="visualizing-2d-rotation" class="slide level2 smaller">
 <h2>Visualizing 2D Rotation</h2>
-<div id="a68af3e4" class="cell" data-execution_count="1">
+<div id="beb4bef8" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -423,7 +427,7 @@ T = \begin{bmatrix} R &amp; \mathbf{t} \\ \mathbf{0} &amp; 1 \end{bmatrix} \in S
 </section>
 <section id="composing-transformations" class="slide level2">
 <h2>Composing Transformations</h2>
-<div id="c8b1f98e" class="cell" data-execution_count="2">
+<div id="697be579" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> make_se2(theta, tx, ty):</span>
@@ -564,7 +568,7 @@ c(i) = \arg\min_j \| p'_i - q_j \|
 </section>
 <section id="icp-implementation" class="slide level2">
 <h2>ICP Implementation</h2>
-<div id="338f2e65" class="cell" data-execution_count="3">
+<div id="86b3ddef" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a></a></span>
 <span id="cb5-3"><a></a><span class="kw">def</span> nearest_neighbors(source, target):</span>
@@ -597,7 +601,7 @@ c(i) = \arg\min_j \| p'_i - q_j \|
 </section>
 <section id="icp-full-algorithm" class="slide level2">
 <h2>ICP: Full Algorithm</h2>
-<div id="f8933938" class="cell" data-execution_count="4">
+<div id="bdf1b5a5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">def</span> icp(source, target, max_iters<span class="op">=</span><span class="dv">50</span>, tol<span class="op">=</span><span class="fl">1e-6</span>):</span>
 <span id="cb6-2"><a></a>    <span class="co">"""</span></span>
 <span id="cb6-3"><a></a><span class="co">    Iterative Closest Point algorithm.</span></span>
@@ -637,7 +641,7 @@ c(i) = \arg\min_j \| p'_i - q_j \|
 </section>
 <section id="icp-demo-synthetic-data" class="slide level2">
 <h2>ICP Demo: Synthetic Data</h2>
-<div id="6634e547" class="cell" data-execution_count="5">
+<div id="b64621d6" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>np.random.seed(<span class="dv">42</span>)</span>
@@ -692,7 +696,7 @@ True translation: [0.5 0.3], Estimated: [0.505 0.35 ]</code></pre>
 <img data-src="scanmatch_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="icp-animation" class="slide level2">
 <h2>ICP Animation</h2>
-<div id="3c67419a" class="cell" data-execution_count="6">
+<div id="51ad7183" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Show ICP iterations step by step</span></span>
@@ -749,7 +753,7 @@ True translation: [0.5 0.3], Estimated: [0.505 0.35 ]</code></pre>
 </section>
 <section id="local-minima-the-main-failure-mode" class="slide level2">
 <h2>Local Minima: The Main Failure Mode</h2>
-<div id="4d3e473e" class="cell" data-execution_count="7">
+<div id="eef3f256" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>np.random.seed(<span class="dv">123</span>)</span>
@@ -804,7 +808,7 @@ True translation: [0.5 0.3], Estimated: [0.505 0.35 ]</code></pre>
 <img data-src="scanmatch_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="partial-overlap-problem" class="slide level2">
 <h2>Partial Overlap Problem</h2>
-<div id="76699920" class="cell" data-execution_count="8">
+<div id="0e8de587" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>np.random.seed(<span class="dv">456</span>)</span>
@@ -921,7 +925,7 @@ True translation: [0.5 0.3], Estimated: [0.505 0.35 ]</code></pre>
 <section id="numerical-gradient-check" class="slide level2">
 <h2>Numerical Gradient Check</h2>
 <p>Verify your Jacobian by comparing to finite differences:</p>
-<div id="2b876ab3" class="cell" data-execution_count="9">
+<div id="8232cc68" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="kw">def</span> numerical_gradient(f, x, eps<span class="op">=</span><span class="fl">1e-5</span>):</span>
 <span id="cb12-2"><a></a>    <span class="co">"""Compute gradient numerically using central differences."""</span></span>
 <span id="cb12-3"><a></a>    grad <span class="op">=</span> np.zeros_like(x)</span>
@@ -948,9 +952,39 @@ True translation: [0.5 0.3], Estimated: [0.505 0.35 ]</code></pre>
 </div>
 </section></section>
 <section>
-<section id="modeling-for-assignment-1" class="title-slide slide level1 center">
-<h1>Modeling for Assignment 1</h1>
+<section id="assignment-1" class="title-slide slide level1 center">
+<h1>Assignment 1</h1>
 
+</section>
+<section id="project-goal" class="slide level2">
+<h2>Project Goal</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Goal</strong></p>
+</div>
+<div class="callout-content">
+<p>The goal of the assignment is to generate an image depicting a map of the environment in which a sequence of 2D LiDAR scans were recorded.</p>
+</div>
+</div>
+</div>
+<p>Your team must create code that</p>
+<ul>
+<li>saves the map in a <code>.png</code> file,</li>
+<li>save the poses associated with every scan in the provided list of scans, assuming the first scan is at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(0,0,0)</annotation></semantics></math>, in a <code>.npz</code> file.</li>
+</ul>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p><img data-src="assets/videos/slam-animation.gif"></p>
+</div><div class="column" style="width:49%;">
+<p><img data-src="assets/images/lidarbot.jpg"></p>
+</div></div>
 </section>
 <section id="robot-pose" class="slide level2">
 <h2>Robot Pose</h2>
@@ -966,21 +1000,21 @@ True translation: [0.5 0.3], Estimated: [0.505 0.35 ]</code></pre>
 </section>
 <section id="coordinate-transformation" class="slide level2">
 <h2>Coordinate Transformation</h2>
-<p>Given scan points <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">{</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>j</mi></msub><mo>,</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\left\{(x_j, y_j)\right\}</annotation></semantics></math> in the robot frame at pose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><msub><mi>Y</mi><mi>i</mi></msub><mo>,</mo><msub><mi>θ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X_i, Y_i, \theta_i)</annotation></semantics></math> in the current frame <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>:</p>
+<p>Given scan points <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">{</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>j</mi></msub><mo>,</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\left\{(x_j, y_j)\right\}</annotation></semantics></math> in the robot frame at pose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>Δ</mi><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><mi>Δ</mi><msub><mi>Y</mi><mi>i</mi></msub><mo>,</mo><mi>Δ</mi><msub><mi>θ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\Delta X_i, \Delta Y_i, \Delta \theta_i)</annotation></semantics></math> <strong>relative</strong> to the current frame <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>:</p>
 <div class="callout callout-tip no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>x</mi><mi>F</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><msub><mi>X</mi><mi>i</mi></msub><mo>+</mo><msub><mi>x</mi><mi>j</mi></msub><mo>cos</mo><msub><mi>θ</mi><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>j</mi></msub><mo>sin</mo><msub><mi>θ</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>y</mi><mi>F</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><msub><mi>Y</mi><mi>i</mi></msub><mo>+</mo><msub><mi>x</mi><mi>j</mi></msub><mo>sin</mo><msub><mi>θ</mi><mi>i</mi></msub><mo>+</mo><msub><mi>y</mi><mi>j</mi></msub><mo>cos</mo><msub><mi>θ</mi><mi>i</mi></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>x</mi><mi>F</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mi>Δ</mi><msub><mi>X</mi><mi>i</mi></msub><mo>+</mo><msub><mi>x</mi><mi>j</mi></msub><mo>cos</mo><mi>Δ</mi><msub><mi>θ</mi><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>j</mi></msub><mo>sin</mo><mi>Δ</mi><msub><mi>θ</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>y</mi><mi>F</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mi>Δ</mi><msub><mi>Y</mi><mi>i</mi></msub><mo>+</mo><msub><mi>x</mi><mi>j</mi></msub><mo>sin</mo><mi>Δ</mi><msub><mi>θ</mi><mi>i</mi></msub><mo>+</mo><msub><mi>y</mi><mi>j</mi></msub><mo>cos</mo><mi>Δ</mi><msub><mi>θ</mi><mi>i</mi></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">
 \begin{aligned}
-x_{F} &amp;= X_i + x_j \cos \theta_i - y_j \sin \theta_i \\
-y_{F} &amp;= Y_i + x_j \sin \theta_i + y_j \cos \theta_i
+x_{F} &amp;= \Delta X_i + x_j \cos \Delta \theta_i - y_j \sin \Delta \theta_i \\
+y_{F} &amp;= \Delta Y_i + x_j \sin \Delta \theta_i + y_j \cos \Delta \theta_i
 \end{aligned}
 </annotation></semantics></math></p>
 </div>
 </div>
 </div>
 <div class="fragment" data-fragment-index="0">
-<p>This transformation transforms all points in from the robot frame to the frame <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math></p>
+<p>Relative pose transforms all points in the robot frame to the frame <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math></p>
 </div>
 </section>
 <section id="scan-matching-as-optimization" class="slide level2">
@@ -988,7 +1022,7 @@ y_{F} &amp;= Y_i + x_j \sin \theta_i + y_j \cos \theta_i
 <p>To match two scans:</p>
 <ol type="1">
 <li>Treat one scan as the <strong>reference frame</strong></li>
-<li>Find <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><msub><mi>Y</mi><mi>i</mi></msub><mo>,</mo><msub><mi>θ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X_i, Y_i, \theta_i)</annotation></semantics></math> that transforms the second scan to align with the reference</li>
+<li>Find <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>Δ</mi><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><mi>Δ</mi><msub><mi>Y</mi><mi>i</mi></msub><mo>,</mo><mi>Δ</mi><msub><mi>θ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\Delta X_i, \Delta Y_i, \Delta \theta_i)</annotation></semantics></math> that transforms the second scan to align with the reference</li>
 </ol>
 <div class="callout callout-important no-icon callout-style-simple">
 <div class="callout-body">
@@ -997,124 +1031,41 @@ y_{F} &amp;= Y_i + x_j \sin \theta_i + y_j \cos \theta_i
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="midterm-project-1" class="title-slide slide level1 center">
-<h1>Midterm Project 1</h1>
-
-</section>
-<section id="project-goal" class="slide level2">
-<h2>Project Goal</h2>
-<p>Estimate the sequence of poses <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><msub><mi>Y</mi><mi>i</mi></msub><mo>,</mo><msub><mi>θ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{(X_i, Y_i, \theta_i)\}</annotation></semantics></math> from a sequence of scans</p>
-<div class="fragment" data-fragment-index="0">
-<p><strong>Three components needed:</strong></p>
-<ol type="1">
-<li><strong>Evaluation function</strong>: Scalar measure of alignment quality</li>
-<li><strong>Optimization algorithm</strong>: Minimize the evaluation function</li>
-<li><strong>Path integration</strong>: Convert relative transformations to global trajectory</li>
-</ol>
-</div>
 </section>
 <section id="instructions" class="slide level2">
 <h2>Instructions</h2>
 <ul>
 <li>Teams of up to <strong>two individuals</strong></li>
 <li>Input: 2D laser scans in <code>sims_N_scans.npz</code> or <code>.mat</code></li>
-<li>Output: Sequence of poses <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><msub><mi>Y</mi><mi>i</mi></msub><mo>,</mo><msub><mi>θ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X_i, Y_i, \theta_i)</annotation></semantics></math>
+<li>Output:
 <ul>
-<li>2D plot of path <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><msub><mi>Y</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X_i, Y_i)</annotation></semantics></math></li>
-<li>Lines indicating orientation <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>θ</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\theta_i</annotation></semantics></math></li>
+<li>Sequence of poses <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><msub><mi>Y</mi><mi>i</mi></msub><mo>,</mo><msub><mi>θ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X_i, Y_i, \theta_i)</annotation></semantics></math> (<code>.npz</code> file)</li>
+<li>Estimated map of the environment in which scans were taken (<code>.png</code> file)</li>
 </ul></li>
 </ul>
 </section>
-<section id="evaluation-function" class="slide level2">
-<h2>Evaluation Function</h2>
-<p>How “good” is a candidate transformation <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo>,</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X, Y, \theta)</annotation></semantics></math>?</p>
-<div class="fragment" data-fragment-index="0">
-<p>Common approach: Sum of squared distances between transformed points and reference <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo>,</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>∑</mo><mi>j</mi></munder><msubsup><mi>d</mi><mi>j</mi><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">
-L(X, Y, \theta) = \sum_j d_j^2
-</annotation></semantics></math></p>
-</div>
-<div class="fragment" data-fragment-index="1">
-<p><strong>Challenge</strong>: The same physical point is mostly <em>not</em> observed in both scans</p>
-</div>
-</section>
-<section id="optimization-methods" class="slide level2">
-<h2>Optimization Methods</h2>
-<p>Given two scans and an evaluation function:</p>
+<section id="evaluation-criteria" class="slide level2">
+<h2>Evaluation Criteria</h2>
+<p>The evaluation is based on</p>
 <ul>
-<li>Use optimization algorithms to find <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo>,</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X, Y, \theta)</annotation></semantics></math> that minimizes the cost</li>
-<li>Methods from nonlinear least squares apply here</li>
+<li>Sum of squared errors between true and estimated relative poses between temporally successive poses.</li>
+<li>Relative error in the final position and orientation relative to ground truth.</li>
 </ul>
-<div class="fragment" data-fragment-index="0">
-<p><strong>Popular methods:</strong></p>
-<ul>
-<li>Iterative Closest Point (ICP) algorithm</li>
-<li>Normal Distribution Transform (NDT)</li>
-</ul>
-</div>
 </section>
-<section id="path-integration" class="slide level2">
-<h2>Path Integration</h2>
-<p>Scan matching gives <strong>relative</strong> transformations between consecutive scans</p>
-<div class="fragment" data-fragment-index="0">
-<p>To get the full trajectory:</p>
+<section id="hints" class="slide level2">
+<h2>Hints</h2>
+<ul>
+<li>You can use scan matching to get an estimate of where the robot was at different times
 <ul>
 <li>Chain the relative transformations</li>
 <li>Accumulate poses in the world frame</li>
-</ul>
-</div>
-</section></section>
-<section>
-<section id="evaluation-criteria" class="title-slide slide level1 center">
-<h1>Evaluation Criteria</h1>
-
-</section>
-<section id="report-requirements" class="slide level2 smaller">
-<h2>Report Requirements</h2>
-<p>The evaluation is based on a report containing:</p>
-<ol type="1">
-<li>Description of all evaluation functions and algorithms considered</li>
-<li>Discussion of changes made along the way and <strong>why</strong></li>
-<li>Whether changes had the expected impact or not</li>
-<li>Performance summary:
-<ul>
-<li>Average run time per iteration</li>
-<li>Number of iterations per scan match</li>
-<li>Average error in scan match</li>
-<li>Average error in pose</li>
 </ul></li>
-<li>Discussion of potential improvements</li>
-</ol>
-</section></section>
-<section>
-<section id="hints" class="title-slide slide level1 center">
-<h1>Hints</h1>
-
-</section>
-<section id="expectations" class="slide level2">
-<h2>Expectations</h2>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Warning</strong></p>
-</div>
-<div class="callout-content">
-<p>It is <strong>not expected</strong> that you will obtain highly accurate predictions of the robot’s motion</p>
-</div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="0">
-<p><strong>Emphasis is on connecting theory and practice:</strong></p>
+<li>You can then use pose graph optimization to correct the drift over time using long-range connections, by defining a suitable set of edges</li>
+<li>Two popular methods for scan matching involve the Iterative Closes Point algorithm, and the Normal Distribution Transform
 <ul>
-<li>Try simple things first</li>
-<li>Use results (and surprises) to inform choices</li>
-<li>An approach that produces accurate predictions without explainable choices is not success</li>
+<li>Copying from existing implementations of these algorithms that produce highly accurate predictions is not success</li>
+</ul></li>
 </ul>
-</div>
 </section>
 <section id="testing-strategy" class="slide level2">
 <h2>Testing Strategy</h2>
@@ -1129,30 +1080,6 @@ L(X, Y, \theta) = \sum_j d_j^2
 <p>For synthetic data: same point appears in both scans, so use direct point-to-point error</p>
 </div>
 </section>
-<section id="practical-tips" class="slide level2">
-<h2>Practical Tips</h2>
-<ul>
-<li>Log all decisions and save plots as you go</li>
-<li>Create reusable visualization tools early</li>
-<li>Don’t only copy existing ICP/NDT implementations
-<ul>
-<li>Understanding the choices matters more than accuracy</li>
-</ul></li>
-</ul>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>A well-documented journey with modest results beats an unexplained accurate solution</p>
-</div>
-</div>
-</div>
-</section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ol type="1">
@@ -1160,7 +1087,6 @@ L(X, Y, \theta) = \sum_j d_j^2
 <li><strong>Point cloud alignment</strong>: Minimize sum of squared residuals</li>
 <li><strong>ICP algorithm</strong>: Iterate between correspondence and transformation</li>
 <li><strong>Local minima</strong>: ICP needs good initialization</li>
-<li><strong>Path integration</strong>: Chain relative poses into trajectory</li>
 </ol>
 
 
