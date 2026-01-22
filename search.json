@@ -103,7 +103,7 @@
     "href": "nonlin_lsq.html#summary",
     "title": "Robot Modeling Control",
     "section": "Summary",
-    "text": "Summary\n\n\n\n\n\n\n\n\n\nCondition\nWhat we know\nWhat it tells us\nNotes\n\n\n\n\n1st Ord Necessary\nx⋆x^\\star is LM1, ff differentiable\n∇f(x⋆)=0\\nabla f(x^{\\star})=0\nProof justifies steepest descent\n\n\n2nd Ord Necessary\nx⋆x^\\star is LM, ff and ∇2f\\nabla^2 f exist, are continuous on 𝒩\\mathcal N\n∇f(x⋆)=0\\nabla f(x^{\\star})=0 and ∇2f(x⋆)\\nabla^2 f(x^{\\star}) is PSD\n\n\n\n2nd Ord Sufficient\n∇f(x⋆)=0\\nabla f(x^{\\star})=0 and ∇2f(x⋆)\\nabla^2 f(x^{\\star}) is PD\nx⋆x^\\star is strict LM\nLeads to algorithms for finding LMs\n\n\n1st Ord Sufficient\nff is convex, x⋆x^\\star is LM\nx⋆x^\\star is GM2\n\n\n\n1st Ord Sufficient\nff is convex, differentiable, ∇f(x⋆)=0\\nabla f(x^{\\star})=0\nx⋆x^\\star is GM\nLeads to effective algorithms for finding global minima\n\n\n\n♯\\sharp is the left pseudo-inverse: A♯=(ATA)−1ATA^\\sharp = (A^T A)^{-1} A^TGlobal Minimizer"
+    "text": "Summary\n\n\n\n\n\n\n\n\n\nCondition\nWhat we know\nWhat it tells us\nNotes\n\n\n\n\n1st Ord Necessary\nx⋆x^\\star is LM1, ff differentiable\n∇f(x⋆)=0\\nabla f(x^{\\star})=0\nProof justifies steepest descent\n\n\n2nd Ord Necessary\nx⋆x^\\star is LM, ff and ∇2f\\nabla^2 f exist, are continuous on 𝒩\\mathcal N\n∇f(x⋆)=0\\nabla f(x^{\\star})=0 and ∇2f(x⋆)\\nabla^2 f(x^{\\star}) is PSD\n\n\n\n2nd Ord Sufficient\n∇f(x⋆)=0\\nabla f(x^{\\star})=0 and ∇2f(x⋆)\\nabla^2 f(x^{\\star}) is PD\nx⋆x^\\star is strict LM\nLeads to algorithms for finding LMs\n\n\n1st Ord Sufficient\nff is convex, x⋆x^\\star is LM\nx⋆x^\\star is GM2\n\n\n\n1st Ord Sufficient\nff is convex, differentiable, ∇f(x⋆)=0\\nabla f(x^{\\star})=0\nx⋆x^\\star is GM\nLeads to effective algorithms for finding global minima\n\n\n\nLocal MinimizerGlobal Minimizer"
   },
   {
     "objectID": "nonlin_lsq.html#overview-of-algorithms",
@@ -692,5 +692,1111 @@
       "Home",
       "Python"
     ]
+  },
+  {
+    "objectID": "scanmatch.html#overview",
+    "href": "scanmatch.html#overview",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Overview",
+    "text": "Overview\n\nCourse: ME/AER 647 - Spring 2025\nTeam: [Your Team Name]\nProject Goal: Estimate robot trajectory from 2D laser scans using scan matching"
+  },
+  {
+    "objectID": "scanmatch.html#team-structure",
+    "href": "scanmatch.html#team-structure",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Team Structure",
+    "text": "Team Structure\n\nWork in teams of up to two individuals\nMust generate pose sequence for robot motion\nInput: 2D laser scans in sims_N_scans.ext (.npz or .mat)"
+  },
+  {
+    "objectID": "scanmatch.html#expected-output",
+    "href": "scanmatch.html#expected-output",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Expected Output",
+    "text": "Expected Output\n\n2D plot of robot path \\((X_i, Y_i)\\)\nLine indicating orientation \\(\\theta_i\\)\nComplete trajectory estimation"
+  },
+  {
+    "objectID": "scanmatch.html#what-is-lidar",
+    "href": "scanmatch.html#what-is-lidar",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "What is LiDAR?",
+    "text": "What is LiDAR?\n\n2D LiDAR sensor uses rotating mirror or sensor\nEmits laser pulses across fixed angle\nRotates to scan horizontal/vertical plane"
+  },
+  {
+    "objectID": "scanmatch.html#scan-data-format",
+    "href": "scanmatch.html#scan-data-format",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Scan Data Format",
+    "text": "Scan Data Format\n\nPoints returned in polar coordinates: \\((r_i, \\phi_i)\\)\nConverted to Cartesian: \\(x_i = r_i \\cos \\phi_i\\), \\(y_i = r_i \\sin \\phi_i\\)\nData provided in Cartesian coordinates (meters)\n\nwidth: 50%\nsrc: rplidar.jpg\ncaption: A relatively inexpensive 2D LiDAR (example)"
+  },
+  {
+    "objectID": "scanmatch.html#core-concept",
+    "href": "scanmatch.html#core-concept",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Core Concept",
+    "text": "Core Concept\n\nAlign consecutive scans to estimate robot motion\nPoints corresponding to same physical object should overlap\n“Walls” in scans should lie on top of each other when properly aligned"
+  },
+  {
+    "objectID": "scanmatch.html#visual-example",
+    "href": "scanmatch.html#visual-example",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Visual Example",
+    "text": "Visual Example\nwidth: 80%\nsrc: scanmatch.png\ncaption: Scan matching - left (unaligned), right (aligned)"
+  },
+  {
+    "objectID": "scanmatch.html#pose-representation",
+    "href": "scanmatch.html#pose-representation",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Pose Representation",
+    "text": "Pose Representation\nRobot pose in world frame: \\((X_i, Y_i, \\theta_i)\\)"
+  },
+  {
+    "objectID": "scanmatch.html#transformation-equations",
+    "href": "scanmatch.html#transformation-equations",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Transformation Equations",
+    "text": "Transformation Equations\nGiven scan points in robot frame \\((x_j, y_j)\\): \\[\n\\begin{aligned}\nx_{world} &= X_i + x_j \\cos \\theta_i - y_j \\sin \\theta_i \\\\\ny_{world} &= Y_i + x_j \\sin \\theta_i + y_j \\cos \\theta_i\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "scanmatch.html#key-insight",
+    "href": "scanmatch.html#key-insight",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Key Insight",
+    "text": "Key Insight\n\nFind transformation \\((\\Delta X, \\Delta Y, \\Delta \\theta)\\)\nMinimize alignment error between scans\nConvert relative to absolute poses"
+  },
+  {
+    "objectID": "scanmatch.html#goal",
+    "href": "scanmatch.html#goal",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Goal",
+    "text": "Goal\nEstimate sequence of poses \\(\\{X_i, Y_i, \\theta_i\\}\\) from scan sequence"
+  },
+  {
+    "objectID": "scanmatch.html#approach-requirements",
+    "href": "scanmatch.html#approach-requirements",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Approach Requirements",
+    "text": "Approach Requirements\n\nEvaluation Function: Scalar measure of alignment quality\nOptimization Algorithm: Minimize evaluation function\nPath Integration: Convert relative transformations to global path"
+  },
+  {
+    "objectID": "scanmatch.html#inputoutput",
+    "href": "scanmatch.html#inputoutput",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Input/Output",
+    "text": "Input/Output\n\nInput: Sequence of laser scans\nOutput: 2D trajectory plot with orientation indicators"
+  },
+  {
+    "objectID": "scanmatch.html#step-1-evaluation-function-design",
+    "href": "scanmatch.html#step-1-evaluation-function-design",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Step 1: Evaluation Function Design",
+    "text": "Step 1: Evaluation Function Design\n\nDefine cost function for scan alignment\nHandle point-to-point or point-to-line matching\nWeighted sum of distances"
+  },
+  {
+    "objectID": "scanmatch.html#step-2-optimization-strategy",
+    "href": "scanmatch.html#step-2-optimization-strategy",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Step 2: Optimization Strategy",
+    "text": "Step 2: Optimization Strategy\n\nGradient-based optimization\nGrid search for initial guess\nIterative refinement"
+  },
+  {
+    "objectID": "scanmatch.html#step-3-pose-integration",
+    "href": "scanmatch.html#step-3-pose-integration",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Step 3: Pose Integration",
+    "text": "Step 3: Pose Integration\n\nAccumulate relative transformations\nConvert to absolute coordinates\nHandle pose covariance"
+  },
+  {
+    "objectID": "scanmatch.html#point-to-point-distance",
+    "href": "scanmatch.html#point-to-point-distance",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Point-to-Point Distance",
+    "text": "Point-to-Point Distance\n\\[\nE = \\sum_{i=1}^{n} \\| p_i^{ref} - T(p_i^{scan}) \\|^2\n\\]"
+  },
+  {
+    "objectID": "scanmatch.html#point-to-line-distance",
+    "href": "scanmatch.html#point-to-line-distance",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Point-to-Line Distance",
+    "text": "Point-to-Line Distance\n\nFor each point, find closest line segment\nUse perpendicular distance"
+  },
+  {
+    "objectID": "scanmatch.html#robust-cost-functions",
+    "href": "scanmatch.html#robust-cost-functions",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Robust Cost Functions",
+    "text": "Robust Cost Functions\n\nHuber loss for outliers\nCauchy loss for heavy tails\nAdaptive weighting"
+  },
+  {
+    "objectID": "scanmatch.html#gradient-based-methods",
+    "href": "scanmatch.html#gradient-based-methods",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Gradient-Based Methods",
+    "text": "Gradient-Based Methods\n\nGradient Descent: Simple but slow\nL-BFGS: Quasi-Newton, efficient for smooth functions\nGauss-Newton: Special case for least squares"
+  },
+  {
+    "objectID": "scanmatch.html#alternative-approaches",
+    "href": "scanmatch.html#alternative-approaches",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Alternative Approaches",
+    "text": "Alternative Approaches\n\nParticle Swarm Optimization: Global search\nGenetic Algorithm: Evolutionary approach\nSimulated Annealing: Probabilistic optimization"
+  },
+  {
+    "objectID": "scanmatch.html#phase-1-basic-scan-matcher",
+    "href": "scanmatch.html#phase-1-basic-scan-matcher",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Phase 1: Basic Scan Matcher",
+    "text": "Phase 1: Basic Scan Matcher\n\nSimple point-to-point matching\nGradient descent optimization\nLinear transformation only"
+  },
+  {
+    "objectID": "scanmatch.html#phase-2-enhanced-matching",
+    "href": "scanmatch.html#phase-2-enhanced-matching",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Phase 2: Enhanced Matching",
+    "text": "Phase 2: Enhanced Matching\n\nPoint-to-line distance metrics\nRobust cost functions\nBetter initialization"
+  },
+  {
+    "objectID": "scanmatch.html#phase-3-full-integration",
+    "href": "scanmatch.html#phase-3-full-integration",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Phase 3: Full Integration",
+    "text": "Phase 3: Full Integration\n\nComplete pose estimation pipeline\nError analysis and reporting\nPerformance benchmarking"
+  },
+  {
+    "objectID": "scanmatch.html#test-case-1-pure-translation",
+    "href": "scanmatch.html#test-case-1-pure-translation",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Test Case 1: Pure Translation",
+    "text": "Test Case 1: Pure Translation\nCreate second scan by adding translation: \\[\n(x'_i, y'_i) = (x_i + \\Delta x^*, y_i)\n\\]"
+  },
+  {
+    "objectID": "scanmatch.html#test-case-2-pure-rotation",
+    "href": "scanmatch.html#test-case-2-pure-rotation",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Test Case 2: Pure Rotation",
+    "text": "Test Case 2: Pure Rotation\n\\[\n(x'_i, y'_i) = (x_i \\cos \\theta^* - y_i \\sin \\theta^*, x_i \\sin \\theta^* + y_i \\cos \\theta^*)\n\\]"
+  },
+  {
+    "objectID": "scanmatch.html#test-case-3-combined-motion",
+    "href": "scanmatch.html#test-case-3-combined-motion",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Test Case 3: Combined Motion",
+    "text": "Test Case 3: Combined Motion\n\\[\n(x'_i, y'_i) = (x_i \\cos \\theta^* - y_i \\sin \\theta^* + \\Delta x^*, x_i \\sin \\theta^* + y_i \\cos \\theta^* + \\Delta y^*)\n\\]"
+  },
+  {
+    "objectID": "scanmatch.html#quantitative-measures",
+    "href": "scanmatch.html#quantitative-measures",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Quantitative Measures",
+    "text": "Quantitative Measures\n\nAverage Run Time: Per scan pair\nIterations per Match: Convergence behavior\nAlignment Error: Root mean square distance\nPose Error: Distance from ground truth"
+  },
+  {
+    "objectID": "scanmatch.html#qualitative-assessment",
+    "href": "scanmatch.html#qualitative-assessment",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Qualitative Assessment",
+    "text": "Qualitative Assessment\n\nVisual inspection of matches\nRobustness to noise\nHandling of occlusions\nComputational efficiency"
+  },
+  {
+    "objectID": "scanmatch.html#challenge-1-local-minima",
+    "href": "scanmatch.html#challenge-1-local-minima",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Challenge 1: Local Minima",
+    "text": "Challenge 1: Local Minima\nSolution: Multiple random initializations - Grid search for coarse estimate - Multi-start optimization"
+  },
+  {
+    "objectID": "scanmatch.html#challenge-2-outliers",
+    "href": "scanmatch.html#challenge-2-outliers",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Challenge 2: Outliers",
+    "text": "Challenge 2: Outliers\nSolution: Robust cost functions - Huber loss function - RANSAC-based approach"
+  },
+  {
+    "objectID": "scanmatch.html#challenge-3-computational-complexity",
+    "href": "scanmatch.html#challenge-3-computational-complexity",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Challenge 3: Computational Complexity",
+    "text": "Challenge 3: Computational Complexity\nSolution: Efficient data structures - KD-trees for nearest neighbor search - Spatial indexing - Parallel processing"
+  },
+  {
+    "objectID": "scanmatch.html#core-libraries",
+    "href": "scanmatch.html#core-libraries",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Core Libraries",
+    "text": "Core Libraries\n\nNumPy/SciPy: Mathematical operations\nOpenCV: Computer vision functions\nScikit-learn: Machine learning components\nMatplotlib: Visualization"
+  },
+  {
+    "objectID": "scanmatch.html#optimization-framework",
+    "href": "scanmatch.html#optimization-framework",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Optimization Framework",
+    "text": "Optimization Framework\n\nSciPy.optimize: Built-in optimizers\nPyTorch: Automatic differentiation\nCustom implementations: Specialized functions"
+  },
+  {
+    "objectID": "scanmatch.html#quality-metrics",
+    "href": "scanmatch.html#quality-metrics",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Quality Metrics",
+    "text": "Quality Metrics\n\nAccuracy: Mean alignment error &lt; 5cm\nSpeed: &lt; 100ms per scan pair\nRobustness: Handle 30% noise\nCompleteness: Full trajectory reconstruction"
+  },
+  {
+    "objectID": "scanmatch.html#visualization",
+    "href": "scanmatch.html#visualization",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Visualization",
+    "text": "Visualization\n\nReal-time matching visualization\nError propagation analysis\nConvergence plots\nPerformance comparison charts"
+  },
+  {
+    "objectID": "scanmatch.html#week-1-2-foundation",
+    "href": "scanmatch.html#week-1-2-foundation",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Week 1-2: Foundation",
+    "text": "Week 1-2: Foundation\n\nBasic scan loading and visualization\nSimple point-to-point matching\nInitial optimization framework"
+  },
+  {
+    "objectID": "scanmatch.html#week-3-4-enhancement",
+    "href": "scanmatch.html#week-3-4-enhancement",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Week 3-4: Enhancement",
+    "text": "Week 3-4: Enhancement\n\nRobust cost functions\nBetter initialization methods\nError analysis"
+  },
+  {
+    "objectID": "scanmatch.html#week-5-6-integration",
+    "href": "scanmatch.html#week-5-6-integration",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Week 5-6: Integration",
+    "text": "Week 5-6: Integration\n\nComplete pipeline\nPerformance optimization\nFinal documentation"
+  },
+  {
+    "objectID": "scanmatch.html#technical-content-40",
+    "href": "scanmatch.html#technical-content-40",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Technical Content (40%)",
+    "text": "Technical Content (40%)\n\nAlgorithm correctness\nImplementation quality\nPerformance metrics"
+  },
+  {
+    "objectID": "scanmatch.html#documentation-30",
+    "href": "scanmatch.html#documentation-30",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Documentation (30%)",
+    "text": "Documentation (30%)\n\nCode comments\nMethodology explanation\nResults interpretation"
+  },
+  {
+    "objectID": "scanmatch.html#presentation-20",
+    "href": "scanmatch.html#presentation-20",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Presentation (20%)",
+    "text": "Presentation (20%)\n\nClarity of results\nVisual quality\nProfessional presentation"
+  },
+  {
+    "objectID": "scanmatch.html#innovation-10",
+    "href": "scanmatch.html#innovation-10",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Innovation (10%)",
+    "text": "Innovation (10%)\n\nNovel approaches\nCreative solutions\nAdvanced techniques"
+  },
+  {
+    "objectID": "scanmatch.html#key-topics-for-discussion",
+    "href": "scanmatch.html#key-topics-for-discussion",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Key Topics for Discussion",
+    "text": "Key Topics for Discussion\n\nChoice of optimization algorithm\nHandling of real-world noise\nScalability considerations\nComparison with standard methods"
+  },
+  {
+    "objectID": "scanmatch.html#next-steps",
+    "href": "scanmatch.html#next-steps",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Next Steps",
+    "text": "Next Steps\n\nFinalize implementation approach\nBegin prototype development\nPlan testing methodology"
+  },
+  {
+    "objectID": "scanmatch.html#core-papers",
+    "href": "scanmatch.html#core-papers",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Core Papers",
+    "text": "Core Papers\n\nHorn’s “Closed-form solution of absolute orientation using unit quaternions”\nBesl & McKay “A Method for Registration of 3-D Shapes”\nZhang “A flexible new technique for camera calibration”"
+  },
+  {
+    "objectID": "scanmatch.html#software-resources",
+    "href": "scanmatch.html#software-resources",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Software Resources",
+    "text": "Software Resources\n\nOpenCV documentation\nSciPy optimization library\nROS scan matching packages"
+  },
+  {
+    "objectID": "scanmatch.html#course-materials",
+    "href": "scanmatch.html#course-materials",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Course Materials",
+    "text": "Course Materials\n\nLecture notes on SLAM\nPrevious project examples\nAssignment guidelines"
+  },
+  {
+    "objectID": "scanmatch.html#questions",
+    "href": "scanmatch.html#questions",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Questions?",
+    "text": "Questions?"
+  },
+  {
+    "objectID": "scanmatch.html#discussion-points",
+    "href": "scanmatch.html#discussion-points",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Discussion Points?",
+    "text": "Discussion Points?"
+  },
+  {
+    "objectID": "scanmatch.html#collaboration-opportunities",
+    "href": "scanmatch.html#collaboration-opportunities",
+    "title": "Midterm Project 1: Scan Matching",
+    "section": "Collaboration Opportunities?",
+    "text": "Collaboration Opportunities?\nContact Information\n\n[Your Name]\n[Your Email]\n[Project GitHub Repository]"
+  },
+  {
+    "objectID": "icp.html#what-is-icp",
+    "href": "icp.html#what-is-icp",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "What is ICP?",
+    "text": "What is ICP?\nThe Iterative Closest Point (ICP) algorithm is a fundamental technique for aligning 2D point clouds, particularly in LiDAR-based localization and mapping."
+  },
+  {
+    "objectID": "icp.html#why-2d-lidar-scan-matching",
+    "href": "icp.html#why-2d-lidar-scan-matching",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Why 2D LiDAR Scan Matching?",
+    "text": "Why 2D LiDAR Scan Matching?\n\nRobot Navigation: Aligning sensor data with map data\nSLAM: Simultaneous Localization and Mapping\nAutonomous Driving: Precise vehicle positioning\nIndustrial Robotics: Object positioning and manipulation"
+  },
+  {
+    "objectID": "icp.html#the-challenge",
+    "href": "icp.html#the-challenge",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "The Challenge",
+    "text": "The Challenge\nGiven two 2D point clouds: - Source cloud: Current LiDAR scan - Target cloud: Reference map or previous scan\nGoal: Find the optimal transformation (rotation + translation) to align source to target."
+  },
+  {
+    "objectID": "icp.html#mathematical-formulation",
+    "href": "icp.html#mathematical-formulation",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Mathematical Formulation",
+    "text": "Mathematical Formulation\nWe want to minimize the distance between corresponding points:\n\\[\n\\min_{T} \\sum_{i=1}^{n} \\| T(p_i) - q_i \\|^2\n\\]\nWhere: - \\(p_i\\) = points in source cloud - \\(q_i\\) = corresponding points in target cloud - \\(T\\) = transformation matrix"
+  },
+  {
+    "objectID": "icp.html#step-by-step-process",
+    "href": "icp.html#step-by-step-process",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Step-by-Step Process",
+    "text": "Step-by-Step Process\n\nInitialization: Start with an initial guess of transformation\nCorrespondence: Find closest points between source and target\nTransformation: Compute optimal transformation from correspondences\nIteration: Apply transformation and repeat until convergence"
+  },
+  {
+    "objectID": "icp.html#key-components",
+    "href": "icp.html#key-components",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Key Components",
+    "text": "Key Components\n\nPoint-to-point distance: Direct distance between corresponding points\nPoint-to-plane distance: Distance to tangent plane (more robust)\nError metric: Sum of squared distances\nOptimization: Least squares solution for transformation"
+  },
+  {
+    "objectID": "icp.html#algorithm-steps",
+    "href": "icp.html#algorithm-steps",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Algorithm Steps",
+    "text": "Algorithm Steps\n\nInitialize: Set \\(T^{(0)} = I\\) (identity transformation)\nIterate until convergence:\n\nFind correspondences: For each point in source, find closest point in target\nCompute transformation: Solve for optimal \\(T^{(k+1)}\\)\nUpdate: \\(T^{(k+1)} = T^{(k)} \\cdot T^{(k+1)}\\)\nCheck convergence: If \\(\\|T^{(k+1)} - T^{(k)}\\| &lt; \\epsilon\\), stop"
+  },
+  {
+    "objectID": "icp.html#finding-correspondences",
+    "href": "icp.html#finding-correspondences",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Finding Correspondences",
+    "text": "Finding Correspondences\n# Pseudocode for correspondence finding\nfor each point p_i in source:\n    find q_i = argmin_{q_j in target} ||p_i - q_j||^2"
+  },
+  {
+    "objectID": "icp.html#transformation-computation",
+    "href": "icp.html#transformation-computation",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Transformation Computation",
+    "text": "Transformation Computation\nFor point-to-point ICP:\n\\[\nT = \\begin{bmatrix}\n\\cos\\theta & -\\sin\\theta & t_x \\\\\n\\sin\\theta & \\cos\\theta & t_y \\\\\n0 & 0 & 1\n\\end{bmatrix}\n\\]\nWhere: - \\(\\theta\\) = rotation angle - \\(t_x, t_y\\) = translation components"
+  },
+  {
+    "objectID": "icp.html#practical-challenges",
+    "href": "icp.html#practical-challenges",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Practical Challenges",
+    "text": "Practical Challenges\n\nInitial alignment: Poor initial guess leads to local minima\nNoise: Sensor noise affects correspondence finding\nOutliers: Misaligned points can corrupt the solution\nComputational complexity: Large point clouds require optimization"
+  },
+  {
+    "objectID": "icp.html#optimization-techniques",
+    "href": "icp.html#optimization-techniques",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Optimization Techniques",
+    "text": "Optimization Techniques\n\nKD-tree: Efficient nearest neighbor search\nSampling: Use subset of points for computation\nRobust statistics: Handle outliers with RANSAC\nMulti-resolution: Start with coarse alignment"
+  },
+  {
+    "objectID": "icp.html#typical-results",
+    "href": "icp.html#typical-results",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Typical Results",
+    "text": "Typical Results\ngraph LR\n    A[Source Scan] --&gt; B{ICP}\n    B --&gt; C[Aligned Scan]\n    C --&gt; D[Target Map]"
+  },
+  {
+    "objectID": "icp.html#convergence-behavior",
+    "href": "icp.html#convergence-behavior",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Convergence Behavior",
+    "text": "Convergence Behavior\n\nFast initial convergence: Large alignment errors\nSlow final convergence: Fine alignment adjustments\nStable solution: When transformation changes little between iterations"
+  },
+  {
+    "objectID": "icp.html#robotics",
+    "href": "icp.html#robotics",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Robotics",
+    "text": "Robotics\n\nSLAM systems: Real-time localization\nAutonomous navigation: Path planning and obstacle avoidance\nWarehouse automation: Precise robot positioning"
+  },
+  {
+    "objectID": "icp.html#mapping",
+    "href": "icp.html#mapping",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Mapping",
+    "text": "Mapping\n\nMobile mapping: Building accurate 2D maps\nLidar mapping: High-precision geospatial data\nUrban navigation: GPS-denied environments"
+  },
+  {
+    "objectID": "icp.html#common-issues",
+    "href": "icp.html#common-issues",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Common Issues",
+    "text": "Common Issues\n\nLocal minima: Algorithm may get stuck in suboptimal alignment\nConvergence speed: Can be slow for large point clouds\nNoise sensitivity: Performance degrades with high noise\nFeatureless environments: Lack of distinctive points"
+  },
+  {
+    "objectID": "icp.html#solutions",
+    "href": "icp.html#solutions",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Solutions",
+    "text": "Solutions\n\nMultiple initializations: Try different starting poses\nHierarchical approach: Multi-scale alignment\nFeature extraction: Use distinctive points for matching\nSensor fusion: Combine with other sensors (IMU, odometry)"
+  },
+  {
+    "objectID": "icp.html#summary",
+    "href": "icp.html#summary",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Summary",
+    "text": "Summary\nThe ICP algorithm provides an effective method for 2D LiDAR scan matching through iterative optimization. It’s widely used in robotics and mapping applications due to its simplicity and effectiveness."
+  },
+  {
+    "objectID": "icp.html#key-takeaways",
+    "href": "icp.html#key-takeaways",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nICP is a fundamental technique for point cloud registration\nRequires good initial alignment for optimal results\nCan be extended with robust statistics and multi-resolution approaches\nEssential for modern autonomous systems requiring precise localization"
+  },
+  {
+    "objectID": "icp.html#future-directions",
+    "href": "icp.html#future-directions",
+    "title": "ICP Algorithm for 2D LiDAR Scan Matching",
+    "section": "Future Directions",
+    "text": "Future Directions\n\nDeep learning integration: Neural networks for correspondence finding\nReal-time optimization: Hardware acceleration for faster processing\n3D extensions: Generalization to 3D point clouds\nSensor fusion: Integration with other sensor modalities"
+  },
+  {
+    "objectID": "scanmatch.html#midterm-project-1",
+    "href": "scanmatch.html#midterm-project-1",
+    "title": "Robot Modeling Control",
+    "section": "Midterm Project 1",
+    "text": "Midterm Project 1\n\nScan Matching\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  2D LiDAR Scans  Scan Matching  Pose Estimation"
+  },
+  {
+    "objectID": "scanmatch.html#instructions",
+    "href": "scanmatch.html#instructions",
+    "title": "Robot Modeling Control",
+    "section": "Instructions",
+    "text": "Instructions\n\nTeams of up to two individuals\nInput: 2D laser scans in sims_N_scans.npz or .mat\nOutput: Sequence of poses (Xi,Yi,θi)(X_i, Y_i, \\theta_i)\n\n2D plot of path (Xi,Yi)(X_i, Y_i)\nLines indicating orientation θi\\theta_i"
+  },
+  {
+    "objectID": "scanmatch.html#d-lidar-sensor",
+    "href": "scanmatch.html#d-lidar-sensor",
+    "title": "Robot Modeling Control",
+    "section": "2D LiDAR Sensor",
+    "text": "2D LiDAR Sensor\n\n\n\nRotating mirror/sensor emits laser pulses\nScans across a horizontal or vertical plane\nReturns points in polar coordinates (ri,ϕi)(r_i, \\phi_i)\nCorresponds to nearest reflective object along direction ϕi\\phi_i\n\n\n\n\n\nA relatively inexpensive 2D LiDAR"
+  },
+  {
+    "objectID": "scanmatch.html#lidar-data-format",
+    "href": "scanmatch.html#lidar-data-format",
+    "title": "Robot Modeling Control",
+    "section": "LiDAR Data Format",
+    "text": "LiDAR Data Format\nPoints returned in polar coordinates (ri,ϕi)(r_i, \\phi_i)\nConverted to Cartesian coordinates: xi=ricosϕiyi=risinϕi\n\\begin{aligned}\nx_i &= r_i \\cos \\phi_i \\\\\ny_i &= r_i \\sin \\phi_i\n\\end{aligned}\n\n\n\n\n\n\n\nNote\n\n\nData provided in Cartesian coordinates with units in meters"
+  },
+  {
+    "objectID": "scanmatch.html#scan-matching-core-idea",
+    "href": "scanmatch.html#scan-matching-core-idea",
+    "title": "Robot Modeling Control",
+    "section": "Scan Matching: Core Idea",
+    "text": "Scan Matching: Core Idea\nWhen a robot moves, the LiDAR captures distances from different positions\n\nKey insight: If motion is small, we can estimate it by aligning consecutive scans\n\n\n\nPoints corresponding to the same physical object should overlap\n“Walls” in nearby scans should lie on top of each other"
+  },
+  {
+    "objectID": "scanmatch.html#scan-matching-visualization",
+    "href": "scanmatch.html#scan-matching-visualization",
+    "title": "Robot Modeling Control",
+    "section": "Scan Matching: Visualization",
+    "text": "Scan Matching: Visualization\n\n\nBefore alignment\nTwo scans in their respective robot frames\n\nAfter alignment\nCorrectly transformed scans overlap\n\n\nScan matching - unaligned (left) vs aligned (right)"
+  },
+  {
+    "objectID": "scanmatch.html#robot-pose",
+    "href": "scanmatch.html#robot-pose",
+    "title": "Robot Modeling Control",
+    "section": "Robot Pose",
+    "text": "Robot Pose\nThe pose of the robot in a world frame is described by three numbers:\n(Xi,Yi,θi)(X_i, Y_i, \\theta_i)\n\n(Xi,Yi)(X_i, Y_i): Position of robot (origin of robot frame) in world frame\nθi\\theta_i: Orientation angle (direction where ϕ=0\\phi = 0 points)\n\n\nWhen robot frame coincides with world frame: pose is (0,0,0)(0, 0, 0)"
+  },
+  {
+    "objectID": "scanmatch.html#coordinate-transformation",
+    "href": "scanmatch.html#coordinate-transformation",
+    "title": "Robot Modeling Control",
+    "section": "Coordinate Transformation",
+    "text": "Coordinate Transformation\nGiven scan points {(xj,yj)}\\left\\{(x_j, y_j)\\right\\} in the robot frame at pose (Xi,Yi,θi)(X_i, Y_i, \\theta_i) in the current frame FF:\n\n\n\nxF=Xi+xjcosθi−yjsinθiyF=Yi+xjsinθi+yjcosθi\n\\begin{aligned}\nx_{F} &= X_i + x_j \\cos \\theta_i - y_j \\sin \\theta_i \\\\\ny_{F} &= Y_i + x_j \\sin \\theta_i + y_j \\cos \\theta_i\n\\end{aligned}\n\n\n\n\n\nThis transformation transforms all points in from the robot frame to the frame FF"
+  },
+  {
+    "objectID": "scanmatch.html#scan-matching-as-optimization",
+    "href": "scanmatch.html#scan-matching-as-optimization",
+    "title": "Robot Modeling Control",
+    "section": "Scan Matching as Optimization",
+    "text": "Scan Matching as Optimization\nTo match two scans:\n\nTreat one scan as the reference frame\nFind (Xi,Yi,θi)(X_i, Y_i, \\theta_i) that transforms the second scan to align with the reference\n\n\n\n\nGoal: Find the transformation that provides the best alignment"
+  },
+  {
+    "objectID": "scanmatch.html#project-goal",
+    "href": "scanmatch.html#project-goal",
+    "title": "Robot Modeling Control",
+    "section": "Project Goal",
+    "text": "Project Goal\nEstimate the sequence of poses {(Xi,Yi,θi)}\\{(X_i, Y_i, \\theta_i)\\} from a sequence of scans\n\nThree components needed:\n\nEvaluation function: Scalar measure of alignment quality\nOptimization algorithm: Minimize the evaluation function\nPath integration: Convert relative transformations to global trajectory"
+  },
+  {
+    "objectID": "scanmatch.html#evaluation-function",
+    "href": "scanmatch.html#evaluation-function",
+    "title": "Robot Modeling Control",
+    "section": "Evaluation Function",
+    "text": "Evaluation Function\nHow “good” is a candidate transformation (X,Y,θ)(X, Y, \\theta)?\n\nCommon approach: Sum of squared distances between transformed points and reference L(X,Y,θ)=∑jdj2\nL(X, Y, \\theta) = \\sum_j d_j^2\n\n\n\nChallenge: The same physical point is mostly not observed in both scans"
+  },
+  {
+    "objectID": "scanmatch.html#optimization",
+    "href": "scanmatch.html#optimization",
+    "title": "Robot Modeling Control",
+    "section": "Optimization",
+    "text": "Optimization\nGiven two scans and an evaluation function:\n\nUse optimization algorithms to find (X,Y,θ)(X, Y, \\theta) that minimizes the cost\nMethods from nonlinear least squares apply here\n\n\nPopular methods:\n\nIterative Closest Point (ICP) algorithm\nNormal Distribution Transform (NDT)"
+  },
+  {
+    "objectID": "scanmatch.html#path-integration",
+    "href": "scanmatch.html#path-integration",
+    "title": "Robot Modeling Control",
+    "section": "Path Integration",
+    "text": "Path Integration\nScan matching gives relative transformations between consecutive scans\n\nTo get the full trajectory:\n\nChain the relative transformations\nAccumulate poses in the world frame"
+  },
+  {
+    "objectID": "scanmatch.html#report-requirements",
+    "href": "scanmatch.html#report-requirements",
+    "title": "Robot Modeling Control",
+    "section": "Report Requirements",
+    "text": "Report Requirements\nThe evaluation is based on a report containing:\n\nDescription of all evaluation functions and algorithms considered\nDiscussion of changes made along the way and why\nWhether changes had the expected impact or not\nPerformance summary:\n\nAverage run time per iteration\nNumber of iterations per scan match\nAverage error in scan match\nAverage error in pose\n\nDiscussion of potential improvements"
+  },
+  {
+    "objectID": "scanmatch.html#expectations",
+    "href": "scanmatch.html#expectations",
+    "title": "Robot Modeling Control",
+    "section": "Expectations",
+    "text": "Expectations\n\n\n\n\n\n\nWarning\n\n\nIt is not expected that you will obtain highly accurate predictions of the robot’s motion\n\n\n\n\nEmphasis is on connecting theory and practice:\n\nTry simple things first\nUse results (and surprises) to inform choices\nAn approach that produces accurate predictions without explainable choices is not success"
+  },
+  {
+    "objectID": "scanmatch.html#testing-strategy",
+    "href": "scanmatch.html#testing-strategy",
+    "title": "Robot Modeling Control",
+    "section": "Testing Strategy",
+    "text": "Testing Strategy\nTest on synthetic ideal data where you know the answer:\n\nPure translation test: (x′i,y′i)=(xi+Δx*,yi)(x'_i, y'_i) = (x_i + \\Delta x^*, y_i)\n\n\nPure rotation test: (x′i,y′i)=(xicosθ*−yisinθ*,xisinθ*+yicosθ*)(x'_i, y'_i) = (x_i \\cos \\theta^* - y_i \\sin \\theta^*, x_i \\sin \\theta^* + y_i \\cos \\theta^*)\n\n\nFor synthetic data: same point appears in both scans, so use direct point-to-point error"
+  },
+  {
+    "objectID": "scanmatch.html#practical-tips",
+    "href": "scanmatch.html#practical-tips",
+    "title": "Robot Modeling Control",
+    "section": "Practical Tips",
+    "text": "Practical Tips\n\nLog all decisions and save plots as you go\nCreate reusable visualization tools early\nDon’t only copy existing ICP/NDT implementations\n\nUnderstanding the choices matters more than accuracy\n\n\n\n\n\n\n\n\nNote\n\n\nA well-documented journey with modest results beats an unexplained accurate solution"
+  },
+  {
+    "objectID": "scanmatch.html#summary",
+    "href": "scanmatch.html#summary",
+    "title": "Robot Modeling Control",
+    "section": "Summary",
+    "text": "Summary\n\nRigid transformations: R(θ)R(\\theta) and SE(2) describe 2D motion\nPoint cloud alignment: Minimize sum of squared residuals\nICP algorithm: Iterate between correspondence and transformation\nLocal minima: ICP needs good initialization\nPath integration: Chain relative poses into trajectory"
+  },
+  {
+    "objectID": "scanmatch.html#scan-matching",
+    "href": "scanmatch.html#scan-matching",
+    "title": "Robot Modeling Control",
+    "section": "Scan Matching",
+    "text": "Scan Matching\n\nICP and NDT\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  2D Rigid Transformations  ICP Algorithm  Point Cloud Alignment"
+  },
+  {
+    "objectID": "scanmatch.html#lesson-overview",
+    "href": "scanmatch.html#lesson-overview",
+    "title": "Robot Modeling Control",
+    "section": "Lesson Overview",
+    "text": "Lesson Overview\n\nMathematical Foundations: 2D rigid transformations and SE(2)\nAlgorithm Walkthrough: Iterative Closest Point (ICP)\nPractical Intuition: Convergence, local minima, debugging\nAssignment: Scan matching for pose estimation and SLAM\n\n\nConnection: This applies nonlinear least squares to a real robotics problem"
+  },
+  {
+    "objectID": "scanmatch.html#d-rotation-matrix",
+    "href": "scanmatch.html#d-rotation-matrix",
+    "title": "Robot Modeling Control",
+    "section": "2D Rotation Matrix",
+    "text": "2D Rotation Matrix\nA rotation by angle θ\\theta in 2D is represented by:\nR(θ)=[cosθ−sinθsinθcosθ]\nR(\\theta) = \\begin{bmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{bmatrix}\n\n\nProperties:\n\nR(θ)T=R(−θ)=R(θ)−1R(\\theta)^T = R(-\\theta) = R(\\theta)^{-1} (orthogonal)\ndet(R(θ))=1\\det(R(\\theta)) = 1 (preserves orientation)\nR(θ1)R(θ2)=R(θ1+θ2)R(\\theta_1) R(\\theta_2) = R(\\theta_1 + \\theta_2) (composition)"
+  },
+  {
+    "objectID": "scanmatch.html#rotation-derivation",
+    "href": "scanmatch.html#rotation-derivation",
+    "title": "Robot Modeling Control",
+    "section": "Rotation Derivation",
+    "text": "Rotation Derivation\nHow does R(θ)R(\\theta) arise? Consider rotating point (x,y)(x, y):\n\n\nOriginal point in polar form: x=rcosαy=rsinα\n\\begin{aligned}\nx &= r\\cos\\alpha \\\\\ny &= r\\sin\\alpha\n\\end{aligned}\n\n\nAfter rotation by θ\\theta: x′=rcos(α+θ)y′=rsin(α+θ)\n\\begin{aligned}\nx' &= r\\cos(\\alpha + \\theta) \\\\\ny' &= r\\sin(\\alpha + \\theta)\n\\end{aligned}\n\n\n\nExpanding using angle addition formulas: x′=rcosαcosθ−rsinαsinθ=xcosθ−ysinθy′=rcosαsinθ+rsinαcosθ=xsinθ+ycosθ\n\\begin{aligned}\nx' &= r\\cos\\alpha\\cos\\theta - r\\sin\\alpha\\sin\\theta = x\\cos\\theta - y\\sin\\theta \\\\\ny' &= r\\cos\\alpha\\sin\\theta + r\\sin\\alpha\\cos\\theta = x\\sin\\theta + y\\cos\\theta\n\\end{aligned}"
+  },
+  {
+    "objectID": "scanmatch.html#visualizing-2d-rotation",
+    "href": "scanmatch.html#visualizing-2d-rotation",
+    "title": "Robot Modeling Control",
+    "section": "Visualizing 2D Rotation",
+    "text": "Visualizing 2D Rotation\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\ndef rotation_matrix(theta):\n    \"\"\"2D rotation matrix for angle theta (radians).\"\"\"\n    c, s = np.cos(theta), np.sin(theta)\n    return np.array([[c, -s], [s, c]])\n\n# Create a simple shape (house)\nhouse = np.array([[0, 1, 1, 0.5, 0, 0], [0, 0, 1, 1.5, 1, 0]])\n\nfig, axes = plt.subplots(1, 3, figsize=(10, 3))\nangles = [0, np.pi/4, np.pi/2]\ntitles = [r'$\\theta = 0$', r'$\\theta = \\pi/4$', r'$\\theta = \\pi/2$']\n\nfor ax, theta, title in zip(axes, angles, titles):\n    R = rotation_matrix(theta)\n    rotated = R @ house\n    ax.plot(house[0], house[1], 'b--', alpha=0.5, label='Original')\n    ax.fill(house[0], house[1], alpha=0.2)\n    ax.plot(rotated[0], rotated[1], 'r-', linewidth=2, label='Rotated')\n    ax.fill(rotated[0], rotated[1], alpha=0.3, color='red')\n    ax.set_xlim(-2, 2); ax.set_ylim(-1, 2.5)\n    ax.set_aspect('equal'); ax.grid(True, alpha=0.3)\n    ax.set_title(title); ax.legend(fontsize=8)\n\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "scanmatch.html#homogeneous-coordinates",
+    "href": "scanmatch.html#homogeneous-coordinates",
+    "title": "Robot Modeling Control",
+    "section": "Homogeneous Coordinates",
+    "text": "Homogeneous Coordinates\nTo compose transformations easily, use homogeneous coordinates:\n[x′y′1]=[cosθ−sinθtxsinθcosθty001][xy1]\n\\begin{bmatrix} x' \\\\ y' \\\\ 1 \\end{bmatrix} = \\begin{bmatrix} \\cos\\theta & -\\sin\\theta & t_x \\\\ \\sin\\theta & \\cos\\theta & t_y \\\\ 0 & 0 & 1 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\\\ 1 \\end{bmatrix}\n\n\nThis 3×33 \\times 3 matrix is an element of SE(2) — the Special Euclidean group in 2D"
+  },
+  {
+    "objectID": "scanmatch.html#se2-the-group-of-2d-rigid-motions",
+    "href": "scanmatch.html#se2-the-group-of-2d-rigid-motions",
+    "title": "Robot Modeling Control",
+    "section": "SE(2): The Group of 2D Rigid Motions",
+    "text": "SE(2): The Group of 2D Rigid Motions\nT=[R𝐭𝟎1]∈SE(2)\nT = \\begin{bmatrix} R & \\mathbf{t} \\\\ \\mathbf{0} & 1 \\end{bmatrix} \\in SE(2)\n\n\nWhy a group?\n\nClosure: T1T2∈SE(2)T_1 T_2 \\in SE(2) (composing motions gives a motion)\nIdentity: I3×3I_{3\\times 3} (no motion)\nInverse: T−1=[RT−RT𝐭𝟎1]T^{-1} = \\begin{bmatrix} R^T & -R^T\\mathbf{t} \\\\ \\mathbf{0} & 1 \\end{bmatrix} (undo motion)"
+  },
+  {
+    "objectID": "scanmatch.html#composing-transformations",
+    "href": "scanmatch.html#composing-transformations",
+    "title": "Robot Modeling Control",
+    "section": "Composing Transformations",
+    "text": "Composing Transformations\n\n\nCode\ndef make_se2(theta, tx, ty):\n    \"\"\"Create SE(2) transformation matrix.\"\"\"\n    c, s = np.cos(theta), np.sin(theta)\n    return np.array([[c, -s, tx], [s, c, ty], [0, 0, 1]])\n\ndef transform_points(T, points):\n    \"\"\"Apply SE(2) transformation to 2D points.\"\"\"\n    ones = np.ones((1, points.shape[1]))\n    homog = np.vstack([points, ones])\n    result = T @ homog\n    return result[:2]\n\n# Original points (triangle)\ntriangle = np.array([[0, 0.5, 0.5, 0], [0, 0, 1.0, 0]])\n\n# Two transformations\nT1 = make_se2(np.pi/6, 1.5, 0.5)  # Rotate 30°, translate\nT2 = make_se2(np.pi/4, 0.0, 0.0)  # Rotate 45°, translate\n\nfig, ax = plt.subplots(figsize=(8, 5))\nax.fill(triangle[0], triangle[1], alpha=0.3, label='Original')\n\np1 = transform_points(T1, triangle)\nax.fill(p1[0], p1[1], alpha=0.3, label=r'After $T_1$')\n\np2 = transform_points(T2 @ T1, triangle)\nax.fill(p2[0], p2[1], alpha=0.3, label=r'After $T_2 \\circ T_1$')\n\np3 = transform_points(T1 @ T2, triangle)\nax.fill(p3[0], p3[1], alpha=0.3, label=r'After $T_1 \\circ T_2$')\n\nax.set_xlim(-1, 4); ax.set_ylim(-1, 3.5)\nax.set_aspect('equal'); ax.grid(True, alpha=0.3)\nax.legend(); ax.set_title('Composition of SE(2) Transformations')\nplt.tight_layout()\nplt.show()\n\n\n\nT1 = make_se2(np.pi/6, 1.5, 0.5)  # Rotate 30°, translate\nT2 = make_se2(np.pi/4, 0.5, 1.0)  # Rotate 45°, translate"
+  },
+  {
+    "objectID": "scanmatch.html#point-cloud-alignment-problem",
+    "href": "scanmatch.html#point-cloud-alignment-problem",
+    "title": "Robot Modeling Control",
+    "section": "Point Cloud Alignment Problem",
+    "text": "Point Cloud Alignment Problem\nGiven: Two point sets 𝒫={pi}\\mathcal{P} = \\{p_i\\} and 𝒬={qi}\\mathcal{Q} = \\{q_i\\}\nFind: Transformation (R,𝐭)(R, \\mathbf{t}) such that Rpi+𝐭≈qiR p_i + \\mathbf{t} \\approx q_i\n\nAs optimization: minR,𝐭∑i∥Rpi+𝐭−qi∥2\n\\min_{R, \\mathbf{t}} \\sum_{i} \\| R p_i + \\mathbf{t} - q_i \\|^2\n\n\n\nConnection to least squares: Each term is a residual! ri(R,𝐭)=Rpi+𝐭−qi\nr_i(R, \\mathbf{t}) = R p_i + \\mathbf{t} - q_i"
+  },
+  {
+    "objectID": "scanmatch.html#the-correspondence-problem",
+    "href": "scanmatch.html#the-correspondence-problem",
+    "title": "Robot Modeling Control",
+    "section": "The Correspondence Problem",
+    "text": "The Correspondence Problem\nKey challenge: We usually don’t know which pip_i matches which qjq_j!\n\n\nSame physical point may not be observed in both scans\nPoints have different indices in each scan\nSome points have no match at all\n\n\n\nSolution: Iteratively estimate correspondences and transformation"
+  },
+  {
+    "objectID": "scanmatch.html#iterative-closest-point-icp",
+    "href": "scanmatch.html#iterative-closest-point-icp",
+    "title": "Robot Modeling Control",
+    "section": "Iterative Closest Point (ICP)",
+    "text": "Iterative Closest Point (ICP)\nCore idea: Alternate between:\n\nFinding correspondences: For each point, find its nearest neighbor\nSolving for transformation: Given correspondences, find best (R,𝐭)(R, \\mathbf{t})\n\n\nRepeat until convergence"
+  },
+  {
+    "objectID": "scanmatch.html#icp-algorithm-pseudocode",
+    "href": "scanmatch.html#icp-algorithm-pseudocode",
+    "title": "Robot Modeling Control",
+    "section": "ICP Algorithm: Pseudocode",
+    "text": "ICP Algorithm: Pseudocode\nInput: Source points P, Target points Q, initial guess T₀\nOutput: Transformation T aligning P to Q\n\nT ← T₀\nrepeat:\n    P' ← apply T to P\n\n    # Step 1: Find correspondences\n    for each p' in P':\n        c(p') ← nearest neighbor of p' in Q\n\n    # Step 2: Compute optimal transformation\n    T_new ← solve_alignment(P', correspondences)\n    T ← T_new ∘ T\n\nuntil convergence\nreturn T"
+  },
+  {
+    "objectID": "scanmatch.html#icp-step-1-nearest-neighbor",
+    "href": "scanmatch.html#icp-step-1-nearest-neighbor",
+    "title": "Robot Modeling Control",
+    "section": "ICP Step 1: Nearest Neighbor",
+    "text": "ICP Step 1: Nearest Neighbor\nFor each transformed source point p′ip'_i, find: c(i)=argminj∥p′i−qj∥\nc(i) = \\arg\\min_j \\| p'_i - q_j \\|\n\n\nImplementation:\n\nBrute force: O(nm)O(nm) for nn source, mm target points\nKD-tree: O(nlogm)O(n \\log m) average case"
+  },
+  {
+    "objectID": "scanmatch.html#icp-step-2-solve-for-transformation",
+    "href": "scanmatch.html#icp-step-2-solve-for-transformation",
+    "title": "Robot Modeling Control",
+    "section": "ICP Step 2: Solve for Transformation",
+    "text": "ICP Step 2: Solve for Transformation\nGiven correspondences, minimize: ∑i∥Rpi+𝐭−qc(i)∥2\n\\sum_i \\| R p_i + \\mathbf{t} - q_{c(i)} \\|^2\n\n\nClosed-form solution (Arun et al., 1987):\n\nCompute centroids: p‾=1n∑pi\\bar{p} = \\frac{1}{n}\\sum p_i, q‾=1n∑qc(i)\\bar{q} = \\frac{1}{n}\\sum q_{c(i)}\nCenter the points: p′i=pi−p‾p'_i = p_i - \\bar{p}, q′i=qc(i)−q‾q'_i = q_{c(i)} - \\bar{q}\nCompute H=∑p′iq′iTH = \\sum p'_i q'^T_i\nSVD: H=UΣVTH = U \\Sigma V^T, then R=VUTR = V U^T\nTranslation: 𝐭=q‾−Rp‾\\mathbf{t} = \\bar{q} - R\\bar{p}"
+  },
+  {
+    "objectID": "scanmatch.html#icp-implementation",
+    "href": "scanmatch.html#icp-implementation",
+    "title": "Robot Modeling Control",
+    "section": "ICP Implementation",
+    "text": "ICP Implementation\n\nimport numpy as np\n\ndef nearest_neighbors(source, target):\n    \"\"\"Find nearest neighbor in target for each source point.\"\"\"\n    indices = []\n    for p in source.T:\n        dists = np.linalg.norm(target.T - p, axis=1)\n        indices.append(np.argmin(dists))\n    return np.array(indices)\n\ndef compute_transformation(source, target_matched):\n    \"\"\"Compute optimal R, t using SVD.\"\"\"\n    # Centroids\n    centroid_s = source.mean(axis=1, keepdims=True)\n    centroid_t = target_matched.mean(axis=1, keepdims=True)\n    # Center points\n    s_centered = source - centroid_s\n    t_centered = target_matched - centroid_t\n    # SVD\n    H = s_centered @ t_centered.T\n    U, _, Vt = np.linalg.svd(H)\n    R = Vt.T @ U.T\n    # Ensure proper rotation (det = 1)\n    if np.linalg.det(R) &lt; 0:\n        Vt[-1, :] *= -1\n        R = Vt.T @ U.T\n    t = centroid_t - R @ centroid_s\n    return R, t.flatten()"
+  },
+  {
+    "objectID": "scanmatch.html#icp-full-algorithm",
+    "href": "scanmatch.html#icp-full-algorithm",
+    "title": "Robot Modeling Control",
+    "section": "ICP: Full Algorithm",
+    "text": "ICP: Full Algorithm\n\ndef icp(source, target, max_iters=50, tol=1e-6):\n    \"\"\"\n    Iterative Closest Point algorithm.\n    source, target: 2×N arrays of 2D points\n    Returns: R (2×2), t (2,), history of errors\n    \"\"\"\n    R_total = np.eye(2)\n    t_total = np.zeros(2)\n    errors = []\n\n    current = source.copy()\n    for _ in range(max_iters):\n        # Step 1: Find correspondences\n        indices = nearest_neighbors(current, target)\n        matched = target[:, indices]\n\n        # Compute error\n        error = np.mean(np.linalg.norm(current - matched, axis=0))\n        errors.append(error)\n\n        # Step 2: Compute transformation\n        R, t = compute_transformation(current, matched)\n\n        # Apply transformation\n        current = R @ current + t.reshape(2, 1)\n\n        # Accumulate\n        R_total = R @ R_total\n        t_total = R @ t_total + t\n\n        # Check convergence\n        if len(errors) &gt; 1 and abs(errors[-2] - errors[-1]) &lt; tol:\n            break\n\n    return R_total, t_total, errors"
+  },
+  {
+    "objectID": "scanmatch.html#icp-demo-synthetic-data",
+    "href": "scanmatch.html#icp-demo-synthetic-data",
+    "title": "Robot Modeling Control",
+    "section": "ICP Demo: Synthetic Data",
+    "text": "ICP Demo: Synthetic Data\n\n\nCode\nnp.random.seed(42)\n\n# Generate source points (arc shape)\ntheta_pts = np.linspace(0, np.pi, 30)\nsource = np.vstack([2*np.cos(theta_pts), 2*np.sin(theta_pts)])\nsource += 0.05 * np.random.randn(*source.shape)  # Add noise\n\n# Create target by applying known transformation\ntrue_theta = np.pi / 6  # 30 degrees\ntrue_t = np.array([0.5, 0.3])\nR_true = rotation_matrix(true_theta)\ntarget = R_true @ source + true_t.reshape(2, 1)\n\n# Run ICP\nR_est, t_est, errors = icp(source, target)\n\n# Visualize\nfig, axes = plt.subplots(1, 3, figsize=(12, 4))\n\n# Before ICP\naxes[0].scatter(source[0], source[1], c='blue', s=30, label='Source')\naxes[0].scatter(target[0], target[1], c='red', s=30, label='Target')\naxes[0].set_title('Before ICP'); axes[0].legend()\naxes[0].set_aspect('equal'); axes[0].grid(True, alpha=0.3)\n\n# After ICP\naligned = R_est @ source + t_est.reshape(2, 1)\naxes[1].scatter(aligned[0], aligned[1], c='blue', s=30, label='Aligned Source')\naxes[1].scatter(target[0], target[1], c='red', s=30, alpha=0.5, label='Target')\naxes[1].set_title('After ICP'); axes[1].legend()\naxes[1].set_aspect('equal'); axes[1].grid(True, alpha=0.3)\n\n# Convergence\naxes[2].plot(errors, 'b-o', markersize=4)\naxes[2].set_xlabel('Iteration'); axes[2].set_ylabel('Mean Error')\naxes[2].set_title('Convergence'); axes[2].grid(True, alpha=0.3)\n\nplt.tight_layout()\nplt.show()\n\nprint(f\"True rotation: {np.degrees(true_theta):.1f}°, Estimated: {np.degrees(np.arctan2(R_est[1,0], R_est[0,0])):.1f}°\")\nprint(f\"True translation: {true_t}, Estimated: {t_est.round(3)}\")\n\n\n\nTrue rotation: 30.0°, Estimated: 16.3°\nTrue translation: [0.5 0.3], Estimated: [0.505 0.35 ]"
+  },
+  {
+    "objectID": "scanmatch.html#icp-animation",
+    "href": "scanmatch.html#icp-animation",
+    "title": "Robot Modeling Control",
+    "section": "ICP Animation",
+    "text": "ICP Animation\n\n\nCode\n# Show ICP iterations step by step\nfig, axes = plt.subplots(2, 3, figsize=(12, 7))\naxes = axes.flatten()\n\n# Run ICP manually to capture intermediate states\ncurrent = source.copy()\nR_acc, t_acc = np.eye(2), np.zeros(2)\n\niterations_to_show = [0, 1, 2, 3, 5, 10]\nstates = [(source.copy(), \"Initial\")]\n\nfor i in range(12):\n    indices = nearest_neighbors(current, target)\n    matched = target[:, indices]\n    R, t = compute_transformation(current, matched)\n    current = R @ current + t.reshape(2, 1)\n    R_acc = R @ R_acc\n    t_acc = R @ t_acc + t\n    if i + 1 in iterations_to_show:\n        states.append((current.copy(), f\"Iter {i+1}\"))\n\nfor ax, (pts, title) in zip(axes, states[:6]):\n    ax.scatter(pts[0], pts[1], c='blue', s=20, label='Source')\n    ax.scatter(target[0], target[1], c='red', s=20, alpha=0.5, label='Target')\n    ax.set_title(title)\n    ax.set_xlim(-1, 4); ax.set_ylim(-1, 3)\n    ax.set_aspect('equal'); ax.grid(True, alpha=0.3)\n\naxes[0].legend(fontsize=8)\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "scanmatch.html#when-icp-works-well",
+    "href": "scanmatch.html#when-icp-works-well",
+    "title": "Robot Modeling Control",
+    "section": "When ICP Works Well",
+    "text": "When ICP Works Well\nICP converges reliably when:\n\nGood initialization: Initial guess is close to true transformation\nSufficient overlap: Most source points have valid matches in target\nLow noise: Point positions are accurate\n\n\nRule of thumb: Initial rotation error &lt; 30-45° for typical data"
+  },
+  {
+    "objectID": "scanmatch.html#local-minima-the-main-failure-mode",
+    "href": "scanmatch.html#local-minima-the-main-failure-mode",
+    "title": "Robot Modeling Control",
+    "section": "Local Minima: The Main Failure Mode",
+    "text": "Local Minima: The Main Failure Mode\n\n\nCode\nnp.random.seed(123)\n\n# Create an L-shaped point cloud\nL_shape = np.hstack([\n    np.vstack([np.linspace(0, 2, 20), np.zeros(20)]),\n    np.vstack([np.zeros(15), np.linspace(0.1, 1.5, 15)])\n])\n\n# Large rotation (90 degrees)\ntrue_theta_large = np.pi / 2\nR_large = rotation_matrix(true_theta_large)\ntarget_large = R_large @ L_shape + np.array([[0.5], [0.5]])\n\n# Run ICP with NO initialization\nR_bad, t_bad, errors_bad = icp(L_shape, target_large)\naligned_bad = R_bad @ L_shape + t_bad.reshape(2, 1)\n\nfig, axes = plt.subplots(1, 3, figsize=(12, 4))\n\n# Problem setup\naxes[0].scatter(L_shape[0], L_shape[1], c='blue', s=30, label='Source')\naxes[0].scatter(target_large[0], target_large[1], c='red', s=30, label='Target')\naxes[0].set_title('Large Rotation (90°)'); axes[0].legend()\naxes[0].set_aspect('equal'); axes[0].grid(True, alpha=0.3)\n\n# ICP result (likely wrong)\naxes[1].scatter(aligned_bad[0], aligned_bad[1], c='blue', s=30, label='Aligned (wrong!)')\naxes[1].scatter(target_large[0], target_large[1], c='red', s=30, alpha=0.5, label='Target')\naxes[1].set_title('ICP Result: Local Minimum')\naxes[1].set_aspect('equal'); axes[1].grid(True, alpha=0.3)\n\n# With good initialization\nR_init = rotation_matrix(np.pi/2 * 0.8)  # Start closer\nsource_init = R_init @ L_shape\nR_good, t_good, errors_good = icp(source_init, target_large)\nR_final = R_good @ R_init\naligned_good = R_final @ L_shape + t_good.reshape(2, 1)\n\naxes[2].scatter(aligned_good[0], aligned_good[1], c='blue', s=30, label='Aligned (correct)')\naxes[2].scatter(target_large[0], target_large[1], c='red', s=30, alpha=0.5, label='Target')\naxes[2].set_title('With Better Initialization')\naxes[2].set_aspect('equal'); axes[2].grid(True, alpha=0.3)\naxes[2].legend()\n\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "scanmatch.html#partial-overlap-problem",
+    "href": "scanmatch.html#partial-overlap-problem",
+    "title": "Robot Modeling Control",
+    "section": "Partial Overlap Problem",
+    "text": "Partial Overlap Problem\n\n\nCode\nnp.random.seed(456)\n\n# Create a longer line\nline = np.vstack([np.linspace(0, 4, 50), 0.1*np.random.randn(50)])\n\n# Target is shifted version with partial overlap\nshift = 1.5\ntarget_partial = line[:, 15:45].copy()  # Only middle portion\ntarget_partial[0] += shift\n\n# Source is different portion\nsource_partial = line[:, 5:35].copy()\n\n# Run ICP\nR_p, t_p, err_p = icp(source_partial, target_partial)\naligned_p = R_p @ source_partial + t_p.reshape(2, 1)\n\nfig, axes = plt.subplots(1, 2, figsize=(10, 4))\n\naxes[0].scatter(source_partial[0], source_partial[1], c='blue', s=20, label='Source')\naxes[0].scatter(target_partial[0], target_partial[1], c='red', s=20, label='Target')\naxes[0].axvline(x=1.5, color='gray', linestyle='--', alpha=0.5)\naxes[0].axvline(x=3.5, color='gray', linestyle='--', alpha=0.5)\naxes[0].set_title('Partial Overlap (gray = overlap region)')\naxes[0].legend(); axes[0].set_aspect('equal'); axes[0].grid(True, alpha=0.3)\n\naxes[1].scatter(aligned_p[0], aligned_p[1], c='blue', s=20, label='Aligned')\naxes[1].scatter(target_partial[0], target_partial[1], c='red', s=20, alpha=0.5, label='Target')\naxes[1].set_title(f'ICP Result (true shift={shift}, estimated={t_p[0]:.2f})')\naxes[1].legend(); axes[1].set_aspect('equal'); axes[1].grid(True, alpha=0.3)\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\nWarning\n\n\nPartial overlap causes ICP to underestimate translation!"
+  },
+  {
+    "objectID": "scanmatch.html#what-can-go-wrong-summary",
+    "href": "scanmatch.html#what-can-go-wrong-summary",
+    "title": "Robot Modeling Control",
+    "section": "What Can Go Wrong: Summary",
+    "text": "What Can Go Wrong: Summary\n\n\n\n\n\n\n\n\nProblem\nSymptom\nMitigation\n\n\n\n\nLarge rotation\nConverges to wrong pose\nBetter initialization\n\n\nPartial overlap\nUnderestimated translation\nOutlier rejection\n\n\nNoise/outliers\nSlow convergence, bias\nRobust cost functions\n\n\nSymmetric geometry\nMultiple valid solutions\nAdditional constraints"
+  },
+  {
+    "objectID": "scanmatch.html#debugging-strategies",
+    "href": "scanmatch.html#debugging-strategies",
+    "title": "Robot Modeling Control",
+    "section": "Debugging Strategies",
+    "text": "Debugging Strategies\n1. Test on synthetic data first\n\nCreate target from known transformation of source\nYou know the ground truth!\n\n\n2. Visualize intermediate results\n\nPlot correspondences at each iteration\nCheck if matches make geometric sense\n\n\n\n3. Monitor convergence\n\nError should decrease monotonically\nSudden jumps indicate problems"
+  },
+  {
+    "objectID": "scanmatch.html#numerical-gradient-check",
+    "href": "scanmatch.html#numerical-gradient-check",
+    "title": "Robot Modeling Control",
+    "section": "Numerical Gradient Check",
+    "text": "Numerical Gradient Check\nVerify your Jacobian by comparing to finite differences:\n\ndef numerical_gradient(f, x, eps=1e-5):\n    \"\"\"Compute gradient numerically using central differences.\"\"\"\n    grad = np.zeros_like(x)\n    for i in range(len(x)):\n        x_plus = x.copy(); x_plus[i] += eps\n        x_minus = x.copy(); x_minus[i] -= eps\n        grad[i] = (f(x_plus) - f(x_minus)) / (2 * eps)\n    return grad\n\n# Example: cost function for alignment\ndef alignment_cost(params, source, target_matched):\n    theta, tx, ty = params\n    R = rotation_matrix(theta)\n    transformed = R @ source + np.array([[tx], [ty]])\n    return np.sum((transformed - target_matched)**2)\n\n# Test\nparams = np.array([0.1, 0.2, 0.3])\ngrad = numerical_gradient(lambda p: alignment_cost(p, source[:,:5], target[:,:5]), params)\nprint(f\"Numerical gradient: {grad.round(4)}\")\n\nNumerical gradient: [-14.9754   1.2598  -7.2557]"
+  },
+  {
+    "objectID": "scanmatch.html#optimization-methods",
+    "href": "scanmatch.html#optimization-methods",
+    "title": "Robot Modeling Control",
+    "section": "Optimization Methods",
+    "text": "Optimization Methods\nGiven two scans and an evaluation function:\n\nUse optimization algorithms to find (X,Y,θ)(X, Y, \\theta) that minimizes the cost\nMethods from nonlinear least squares apply here\n\n\nPopular methods:\n\nIterative Closest Point (ICP) algorithm\nNormal Distribution Transform (NDT)"
+  },
+  {
+    "objectID": "ndt.html#normal-distribution-transform",
+    "href": "ndt.html#normal-distribution-transform",
+    "title": "Robot Modeling Control",
+    "section": "Normal Distribution Transform",
+    "text": "Normal Distribution Transform\n\nA Grid-Based Approach to Scan Matching\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  NDT Representation  Gaussian Modeling  Optimization-Based Alignment"
+  },
+  {
+    "objectID": "ndt.html#lesson-overview",
+    "href": "ndt.html#lesson-overview",
+    "title": "Robot Modeling Control",
+    "section": "Lesson Overview",
+    "text": "Lesson Overview\n\nMotivation: Why an alternative to ICP?\nNDT Representation: Discretizing space into Gaussian cells\nAlignment Algorithm: Optimization over continuous transformation\nComparison: NDT vs ICP trade-offs\n\n\nKey insight: Represent the target as a distribution, not discrete points"
+  },
+  {
+    "objectID": "ndt.html#limitations-of-icp",
+    "href": "ndt.html#limitations-of-icp",
+    "title": "Robot Modeling Control",
+    "section": "Limitations of ICP",
+    "text": "Limitations of ICP\nRecall ICP alternates between:\n\nFinding nearest neighbors (discrete correspondences)\nSolving for transformation\n\n\nProblems:\n\nNearest neighbor is expensive: O(nm)O(nm) or O(nlogm)O(n \\log m)\nCorrespondences change discontinuously\nCost function is not smooth"
+  },
+  {
+    "objectID": "ndt.html#the-ndt-idea",
+    "href": "ndt.html#the-ndt-idea",
+    "title": "Robot Modeling Control",
+    "section": "The NDT Idea",
+    "text": "The NDT Idea\nInstead of point-to-point matching:\n\nConvert the target point cloud into a probability density\n\n\n\nDivide space into cells (grid)\nFit a Gaussian distribution to points in each cell\nMeasure how well transformed source points fit the Gaussians\n\n\n\nResult: Locally smooth cost function amenable to gradient-based optimization"
+  },
+  {
+    "objectID": "ndt.html#step-1-discretize-space",
+    "href": "ndt.html#step-1-discretize-space",
+    "title": "Robot Modeling Control",
+    "section": "Step 1: Discretize Space",
+    "text": "Step 1: Discretize Space\nOverlay a regular grid on the target point cloud:\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom matplotlib.patches import Rectangle\n\nnp.random.seed(42)\n\n# Generate target points (room-like environment)\nwall1 = np.vstack([np.linspace(0, 4, 30), np.zeros(30)])\nwall2 = np.vstack([np.zeros(25), np.linspace(0, 3, 25)])\nwall3 = np.vstack([np.linspace(0, 4, 30), 3*np.ones(30)])\nwall4 = np.vstack([4*np.ones(25), np.linspace(0, 3, 25)])\n\ntarget = np.hstack([wall1, wall2, wall3, wall4])\ntarget += 0.05 * np.random.randn(*target.shape)\n\nfig, ax = plt.subplots(figsize=(8, 6))\nax.scatter(target[0], target[1], c='red', s=20, alpha=0.7, label='Target points')\n\n# Draw grid\ncell_size = 0.5\nfor x in np.arange(-0.5, 4.5, cell_size):\n    ax.axvline(x, color='gray', alpha=0.3, linewidth=0.5)\nfor y in np.arange(-0.5, 3.5, cell_size):\n    ax.axhline(y, color='gray', alpha=0.3, linewidth=0.5)\n\nax.set_xlim(-0.7, 4.7); ax.set_ylim(-0.7, 3.7)\nax.set_aspect('equal'); ax.set_title(f'Grid Discretization (cell size = {cell_size}m)')\nax.legend()\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "ndt.html#visualizing-the-ndt",
+    "href": "ndt.html#visualizing-the-ndt",
+    "title": "Robot Modeling Control",
+    "section": "Visualizing the NDT",
+    "text": "Visualizing the NDT\n\n\nCode\nfrom matplotlib.patches import Ellipse\n\ndef compute_ndt(points, cell_size, x_range, y_range):\n    \"\"\"Compute NDT representation of point cloud.\"\"\"\n    cells = {}\n\n    for i in range(points.shape[1]):\n        x, y = points[:, i]\n        # Determine cell indices\n        cx = int(np.floor((x - x_range[0]) / cell_size))\n        cy = int(np.floor((y - y_range[0]) / cell_size))\n        key = (cx, cy)\n\n        if key not in cells:\n            cells[key] = []\n        cells[key].append(points[:, i])\n\n    # Compute statistics for each cell\n    ndt = {}\n    for key, pts in cells.items():\n        pts = np.array(pts).T  # 2 x n\n        if pts.shape[1] &gt;= 3:  # Need at least 3 points for covariance\n            mean = pts.mean(axis=1)\n            centered = pts - mean.reshape(2, 1)\n            cov = (centered @ centered.T) / (pts.shape[1] - 1)\n            # Add small regularization for numerical stability\n            cov += 0.001 * np.eye(2)\n            ndt[key] = {'mean': mean, 'cov': cov, 'n_points': pts.shape[1]}\n\n    return ndt\n\ndef draw_ellipse(ax, mean, cov, n_std=2, **kwargs):\n    \"\"\"Draw covariance ellipse.\"\"\"\n    eigenvalues, eigenvectors = np.linalg.eigh(cov)\n    angle = np.degrees(np.arctan2(eigenvectors[1, 0], eigenvectors[0, 0]))\n    width, height = 2 * n_std * np.sqrt(eigenvalues)\n    ellipse = Ellipse(mean, width, height, angle=angle, **kwargs)\n    ax.add_patch(ellipse)\n\n# Compute NDT\ncell_size = 0.5\nndt = compute_ndt(target, cell_size, (-0.5, 4.5), (-0.5, 3.5))\n\nfig, axes = plt.subplots(1, 2, figsize=(12, 5))\n\n# Left: Points with grid\naxes[0].scatter(target[0], target[1], c='red', s=20, alpha=0.7)\nfor x in np.arange(-0.5, 4.5, cell_size):\n    axes[0].axvline(x, color='gray', alpha=0.3, linewidth=0.5)\nfor y in np.arange(-0.5, 3.5, cell_size):\n    axes[0].axhline(y, color='gray', alpha=0.3, linewidth=0.5)\naxes[0].set_title('Target Point Cloud')\naxes[0].set_aspect('equal')\n\n# Right: NDT representation\nfor key, cell in ndt.items():\n    draw_ellipse(axes[1], cell['mean'], cell['cov'], n_std=2,\n                 fill=True, alpha=0.3, color='blue', edgecolor='blue')\n    axes[1].plot(cell['mean'][0], cell['mean'][1], 'b.', markersize=5)\n\naxes[1].set_xlim(-0.7, 4.7); axes[1].set_ylim(-0.7, 3.7)\naxes[1].set_title('NDT Representation (2σ ellipses)')\naxes[1].set_aspect('equal')\n\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "ndt.html#the-gaussian-model",
+    "href": "ndt.html#the-gaussian-model",
+    "title": "Robot Modeling Control",
+    "section": "The Gaussian Model",
+    "text": "The Gaussian Model\nEach cell’s Gaussian defines a probability density:\np(x|μk,Σk)=12π|Σk|1/2exp(−12(x−μk)TΣk−1(x−μk))\np(x | \\mu_k, \\Sigma_k) = \\frac{1}{2\\pi|\\Sigma_k|^{1/2}} \\exp\\left( -\\frac{1}{2}(x - \\mu_k)^T \\Sigma_k^{-1} (x - \\mu_k) \\right)\n\n\nInterpretation: High probability where points are dense, low where sparse\n\n\nA transformed source point “scores” high if it lands near a cell’s mean"
+  },
+  {
+    "objectID": "ndt.html#the-ndt-cost-function",
+    "href": "ndt.html#the-ndt-cost-function",
+    "title": "Robot Modeling Control",
+    "section": "The NDT Cost Function",
+    "text": "The NDT Cost Function\nGiven transformation parameters T=(θ,tx,ty)T = (\\theta, t_x, t_y):\nL(T)=−∑i=1nlogp(T(pi))\nL(T) = -\\sum_{i=1}^{n} \\log p\\left( T(p_i) \\right)\n\n\nEquivalently (dropping constants): L(T)=∑i=1n(T(pi)−μk(i))TΣk(i)−1(T(pi)−μk(i))\nL(T) = \\sum_{i=1}^{n} (T(p_i) - \\mu_{k(i)})^T \\Sigma_{k(i)}^{-1} (T(p_i) - \\mu_{k(i)})\n\nwhere k(i)k(i) is the cell containing transformed point T(pi)T(p_i)"
+  },
+  {
+    "objectID": "ndt.html#cost-function-properties",
+    "href": "ndt.html#cost-function-properties",
+    "title": "Robot Modeling Control",
+    "section": "Cost Function Properties",
+    "text": "Cost Function Properties\nSmooth within each cell: Quadratic in transformation parameters\n\nDiscontinuous at cell boundaries: Cell assignment changes\n\n\nSolution:\n\nUse larger cells (smoother but less precise)\nOr use overlapping grids\nOr use soft cell assignment"
+  },
+  {
+    "objectID": "ndt.html#ndt-algorithm-pseudocode",
+    "href": "ndt.html#ndt-algorithm-pseudocode",
+    "title": "Robot Modeling Control",
+    "section": "NDT Algorithm: Pseudocode",
+    "text": "NDT Algorithm: Pseudocode\nInput: Source points P, NDT of target (cells with μ, Σ)\nOutput: Transformation T = (θ, tx, ty)\n\nInitialize T = (0, 0, 0)\nrepeat:\n    # Transform source points\n    P' = apply T to P\n\n    # Compute cost and gradient\n    L = 0, ∇L = 0\n    for each p' in P':\n        cell = find_cell(p')\n        if cell is occupied:\n            L += Mahalanobis_distance(p', μ_cell, Σ_cell)\n            ∇L += gradient_contribution(p', μ_cell, Σ_cell)\n\n    # Update transformation (gradient descent or Newton)\n    T = T - α * ∇L  (or Newton step)\n\nuntil convergence\nreturn T"
+  },
+  {
+    "objectID": "ndt.html#computing-the-gradient",
+    "href": "ndt.html#computing-the-gradient",
+    "title": "Robot Modeling Control",
+    "section": "Computing the Gradient",
+    "text": "Computing the Gradient\nFor a single point pp transformed to p′=R(θ)p+tp' = R(\\theta)p + t:\n∂L∂θ,∂L∂tx,∂L∂ty\n\\frac{\\partial L}{\\partial \\theta}, \\quad \\frac{\\partial L}{\\partial t_x}, \\quad \\frac{\\partial L}{\\partial t_y}\n\n\nChain rule: Need derivatives of:\n\nMahalanobis distance w.r.t. p′p'\nTransformed point p′p' w.r.t. parameters (θ,tx,ty)(\\theta, t_x, t_y)"
+  },
+  {
+    "objectID": "ndt.html#gradient-derivation",
+    "href": "ndt.html#gradient-derivation",
+    "title": "Robot Modeling Control",
+    "section": "Gradient Derivation",
+    "text": "Gradient Derivation\nLet d=p′−μd = p' - \\mu and cost term c=dTΣ−1dc = d^T \\Sigma^{-1} d\n\nGradient w.r.t. p′p': ∂c∂p′=2Σ−1d\n\\frac{\\partial c}{\\partial p'} = 2 \\Sigma^{-1} d\n\n\n\nJacobian of transformation: ∂p′∂(θ,tx,ty)=[−xsinθ−ycosθ10xcosθ−ysinθ01]T\n\\frac{\\partial p'}{\\partial (\\theta, t_x, t_y)} = \\begin{bmatrix} -x\\sin\\theta - y\\cos\\theta & 1 & 0 \\\\ x\\cos\\theta - y\\sin\\theta & 0 & 1 \\end{bmatrix}^T"
+  },
+  {
+    "objectID": "ndt.html#ndt-implementation",
+    "href": "ndt.html#ndt-implementation",
+    "title": "Robot Modeling Control",
+    "section": "NDT Implementation",
+    "text": "NDT Implementation\n\ndef rotation_matrix(theta):\n    c, s = np.cos(theta), np.sin(theta)\n    return np.array([[c, -s], [s, c]])\n\ndef transform_points(theta, t, points):\n    \"\"\"Apply transformation to points (2 x N).\"\"\"\n    R = rotation_matrix(theta)\n    return R @ points + t.reshape(2, 1)\n\ndef ndt_cost_and_gradient(params, source, ndt, cell_size, x_range, y_range):\n    \"\"\"Compute NDT cost and gradient.\"\"\"\n    theta, tx, ty = params\n    t = np.array([tx, ty])\n\n    # Transform source\n    transformed = transform_points(theta, t, source)\n\n    cost = 0.0\n    grad = np.zeros(3)  # [d/dtheta, d/dtx, d/dty]\n\n    for i in range(source.shape[1]):\n        p = source[:, i]\n        p_trans = transformed[:, i]\n\n        # Find cell\n        cx = int(np.floor((p_trans[0] - x_range[0]) / cell_size))\n        cy = int(np.floor((p_trans[1] - y_range[0]) / cell_size))\n        key = (cx, cy)\n\n        if key in ndt:\n            mu = ndt[key]['mean']\n            cov_inv = np.linalg.inv(ndt[key]['cov'])\n\n            d = p_trans - mu\n            cost += d @ cov_inv @ d\n\n            # Gradient\n            grad_p = 2 * cov_inv @ d\n\n            # Jacobian of transformation\n            c, s = np.cos(theta), np.sin(theta)\n            dp_dtheta = np.array([-p[0]*s - p[1]*c, p[0]*c - p[1]*s])\n\n            grad[0] += grad_p @ dp_dtheta\n            grad[1] += grad_p[0]\n            grad[2] += grad_p[1]\n\n    return cost, grad"
+  },
+  {
+    "objectID": "ndt.html#ndt-optimization",
+    "href": "ndt.html#ndt-optimization",
+    "title": "Robot Modeling Control",
+    "section": "NDT Optimization",
+    "text": "NDT Optimization\n\ndef ndt_align(source, ndt, cell_size, x_range, y_range,\n              max_iters=100, lr=0.01, tol=1e-6):\n    \"\"\"Align source to target using NDT.\"\"\"\n    params = np.array([0.0, 0.0, 0.0])  # theta, tx, ty\n    costs = []\n\n    for _ in range(max_iters):\n        cost, grad = ndt_cost_and_gradient(\n            params, source, ndt, cell_size, x_range, y_range)\n        costs.append(cost)\n\n        # Gradient descent with adaptive step size\n        step = lr * grad / (np.linalg.norm(grad) + 1e-8)\n        params = params - step\n\n        if len(costs) &gt; 1 and abs(costs[-2] - costs[-1]) &lt; tol:\n            break\n\n    return params, costs"
+  },
+  {
+    "objectID": "ndt.html#ndt-demo",
+    "href": "ndt.html#ndt-demo",
+    "title": "Robot Modeling Control",
+    "section": "NDT Demo",
+    "text": "NDT Demo\n\n\nCode\nnp.random.seed(42)\n\n# Create source (subset of target, transformed)\nsource_base = target[:, ::3].copy()  # Subsample\ntrue_theta = np.pi / 8\ntrue_t = np.array([0.3, 0.2])\nsource = rotation_matrix(-true_theta) @ (source_base - true_t.reshape(2, 1))\n\n# Run NDT alignment\nparams_est, costs = ndt_align(source, ndt, cell_size, (-0.5, 4.5), (-0.5, 3.5),\n                              max_iters=200, lr=0.05)\n\n# Apply estimated transformation\naligned = transform_points(params_est[0], params_est[1:], source)\n\nfig, axes = plt.subplots(1, 3, figsize=(12, 4))\n\n# Before\naxes[0].scatter(source[0], source[1], c='blue', s=30, label='Source')\nfor key, cell in ndt.items():\n    draw_ellipse(axes[0], cell['mean'], cell['cov'], n_std=1.5,\n                 fill=True, alpha=0.2, color='red', edgecolor='red')\naxes[0].set_title('Before NDT'); axes[0].legend()\naxes[0].set_xlim(-1, 5); axes[0].set_ylim(-1, 4); axes[0].set_aspect('equal')\n\n# After\naxes[1].scatter(aligned[0], aligned[1], c='blue', s=30, label='Aligned')\nfor key, cell in ndt.items():\n    draw_ellipse(axes[1], cell['mean'], cell['cov'], n_std=1.5,\n                 fill=True, alpha=0.2, color='red', edgecolor='red')\naxes[1].set_title('After NDT'); axes[1].legend()\naxes[1].set_xlim(-1, 5); axes[1].set_ylim(-1, 4); axes[1].set_aspect('equal')\n\n# Convergence\naxes[2].plot(costs, 'g-o', markersize=3)\naxes[2].set_xlabel('Iteration'); axes[2].set_ylabel('Cost')\naxes[2].set_title('Convergence'); axes[2].grid(True, alpha=0.3)\n\nplt.tight_layout()\nplt.show()\n\nprint(f\"True: θ={np.degrees(true_theta):.1f}°, t={true_t}\")\nprint(f\"Est:  θ={np.degrees(params_est[0]):.1f}°, t={params_est[1:].round(3)}\")\n\n\n\nTrue: θ=22.5°, t=[0.3 0.2]\nEst:  θ=21.0°, t=[0.281 0.189]"
+  },
+  {
+    "objectID": "ndt.html#side-by-side-comparison",
+    "href": "ndt.html#side-by-side-comparison",
+    "title": "Robot Modeling Control",
+    "section": "Side-by-Side Comparison",
+    "text": "Side-by-Side Comparison\n\n\n\n\n\n\n\n\nAspect\nICP\nNDT\n\n\n\n\nTarget representation\nPoint cloud\nGaussian grid\n\n\nCorrespondence\nExplicit (nearest neighbor)\nImplicit (cell lookup)\n\n\nCost function\nSum of distances\nLog-likelihood\n\n\nSmoothness\nDiscontinuous\nSmooth within cells\n\n\nComputation\nO(nlogm)O(n \\log m) per iteration\nO(n)O(n) per iteration"
+  },
+  {
+    "objectID": "ndt.html#when-to-use-each",
+    "href": "ndt.html#when-to-use-each",
+    "title": "Robot Modeling Control",
+    "section": "When to Use Each",
+    "text": "When to Use Each\nUse ICP when:\n\nHigh accuracy needed\nGood initialization available\nComputational resources available\n\n\nUse NDT when:\n\nFast alignment needed\nLarge point clouds\nCoarse-to-fine strategy"
+  },
+  {
+    "objectID": "ndt.html#cell-size-trade-off",
+    "href": "ndt.html#cell-size-trade-off",
+    "title": "Robot Modeling Control",
+    "section": "Cell Size Trade-off",
+    "text": "Cell Size Trade-off\n\n\nCode\nfig, axes = plt.subplots(1, 3, figsize=(12, 4))\ncell_sizes = [0.25, 0.5, 1.0]\n\nfor ax, cs in zip(axes, cell_sizes):\n    ndt_temp = compute_ndt(target, cs, (-0.5, 4.5), (-0.5, 3.5))\n\n    for key, cell in ndt_temp.items():\n        draw_ellipse(ax, cell['mean'], cell['cov'], n_std=1.5,\n                     fill=True, alpha=0.3, color='blue', edgecolor='blue')\n\n    ax.set_xlim(-0.7, 4.7); ax.set_ylim(-0.7, 3.7)\n    ax.set_aspect('equal')\n    ax.set_title(f'Cell size = {cs}m ({len(ndt_temp)} cells)')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\nSmall cells: More accurate, but more discontinuities\nLarge cells: Smoother, but less precise"
+  },
+  {
+    "objectID": "ndt.html#multi-resolution-ndt",
+    "href": "ndt.html#multi-resolution-ndt",
+    "title": "Robot Modeling Control",
+    "section": "Multi-Resolution NDT",
+    "text": "Multi-Resolution NDT\nStrategy: Start coarse, refine progressively\n\n\nLarge cells → rough alignment\nMedium cells → better alignment\nSmall cells → fine alignment\n\n\n\nEach stage initializes from previous result"
+  },
+  {
+    "objectID": "ndt.html#handling-outliers",
+    "href": "ndt.html#handling-outliers",
+    "title": "Robot Modeling Control",
+    "section": "Handling Outliers",
+    "text": "Handling Outliers\nBoth ICP and NDT are sensitive to outliers\n\nNDT approach: Points in empty cells contribute zero to cost\n\nActs as implicit outlier rejection\nPoints without nearby target structure are ignored\n\n\n\nAdditional strategies:\n\nThreshold Mahalanobis distance\nUse robust cost functions (Huber, Cauchy)"
+  },
+  {
+    "objectID": "ndt.html#practical-considerations",
+    "href": "ndt.html#practical-considerations",
+    "title": "Robot Modeling Control",
+    "section": "Practical Considerations",
+    "text": "Practical Considerations\nGrid alignment matters:\n\nAxis-aligned grids can miss diagonal features\nSolution: Use multiple rotated grids or octrees\n\n\nNumerical stability:\n\nCovariance matrices can be singular (collinear points)\nAdd small regularization: Σ←Σ+ϵI\\Sigma \\leftarrow \\Sigma + \\epsilon I\n\n\n\nBoundary effects:\n\nPoints near cell boundaries experience discontinuities\nSolution: Overlapping grids or interpolation"
+  },
+  {
+    "objectID": "ndt.html#summary",
+    "href": "ndt.html#summary",
+    "title": "Robot Modeling Control",
+    "section": "Summary",
+    "text": "Summary\n\nNDT representation: Grid of Gaussians captures local structure\nSmooth cost function: Enables gradient-based optimization\nFast alignment: O(n)O(n) per iteration vs O(nlogm)O(n \\log m) for ICP\nCell size trade-off: Smoothness vs precision\nMulti-resolution: Coarse-to-fine for robustness\n\n\nNDT is particularly useful for real-time applications with large point clouds"
+  },
+  {
+    "objectID": "ndt.html#references",
+    "href": "ndt.html#references",
+    "title": "Robot Modeling Control",
+    "section": "References",
+    "text": "References\n\nBiber, P., & Strasser, W. (2003). The normal distributions transform: A new approach to laser scan matching. IROS.\nMagnusson, M. (2009). The three-dimensional normal-distributions transform. PhD thesis.\nSegal, A., Haehnel, D., & Thrun, S. (2009). Generalized-ICP. RSS.\n\n\nFor the assignment: You may implement either ICP, NDT, or compare both!"
+  },
+  {
+    "objectID": "scanmatch.html#scan-matching-1",
+    "href": "scanmatch.html#scan-matching-1",
+    "title": "2D Rigid Transformation",
+    "section": "Scan Matching",
+    "text": "Scan Matching\n\nICP and NDT\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  2D Rigid Transformations  ICP Algorithm  Point Cloud Alignment"
+  },
+  {
+    "objectID": "scanmatch.html#d-rigid-transformation",
+    "href": "scanmatch.html#d-rigid-transformation",
+    "title": "Robot Modeling Control",
+    "section": "2D Rigid Transformation",
+    "text": "2D Rigid Transformation\nA rigid transformation combines rotation and translation:\n𝐩′=R(θ)𝐩+𝐭\n\\mathbf{p}' = R(\\theta)\\mathbf{p} + \\mathbf{t}\n\nwhere 𝐩=[xy]\\mathbf{p} = \\begin{bmatrix} x \\\\ y \\end{bmatrix} and 𝐭=[txty]\\mathbf{t} = \\begin{bmatrix} t_x \\\\ t_y \\end{bmatrix}\n\nExpanded form: [x′y′]=[cosθ−sinθsinθcosθ][xy]+[txty]\n\\begin{bmatrix} x' \\\\ y' \\end{bmatrix} = \\begin{bmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} + \\begin{bmatrix} t_x \\\\ t_y \\end{bmatrix}"
+  },
+  {
+    "objectID": "ndt.html#step-2-compute-cell-statistics",
+    "href": "ndt.html#step-2-compute-cell-statistics",
+    "title": "Robot Modeling Control",
+    "section": "Step 2: Compute Cell Statistics",
+    "text": "Step 2: Compute Cell Statistics\nFor each cell kk containing points {p1,p2,…,pn}\\{p_1, p_2, \\ldots, p_n\\}:\n\nMean (centroid): μk=1n∑i=1npi\n\\mu_k = \\frac{1}{n} \\sum_{i=1}^{n} p_i\n\n\n\nCovariance matrix: Σk=1n−1∑i=1n(pi−μk)(pi−μk)T\n\\Sigma_k = \\frac{1}{n-1} \\sum_{i=1}^{n} (p_i - \\mu_k)(p_i - \\mu_k)^T\n\n\n\nEach occupied cell now has a 2D Gaussian: 𝒩(μk,Σk)\\mathcal{N}(\\mu_k, \\Sigma_k)"
+  },
+  {
+    "objectID": "slam.html#simultaneous-localization-and-mapping",
+    "href": "slam.html#simultaneous-localization-and-mapping",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Simultaneous Localization and Mapping",
+    "text": "Simultaneous Localization and Mapping\n\nSLAM Fundamentals\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  SLAM Problem Formulation  Kalman Filter for SLAM  Extended Kalman Filter"
+  },
+  {
+    "objectID": "slam.html#the-localization-problem",
+    "href": "slam.html#the-localization-problem",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "The Localization Problem",
+    "text": "The Localization Problem\nA robot is typically unable to measure its position.\n\nInstead, it can measure its position in relation to objects in the world.\n\n\n\n\n\n\n\n\nThe Fundamental Challenge\n\n\nCan’t use Kalman Filter directly to estimate location when we don’t have a map of objects in the world.\n\n\n\n\n\nWithout a map, we don’t know what to expect as measurement in a state (no sensor model)."
+  },
+  {
+    "objectID": "slam.html#motivation-for-slam",
+    "href": "slam.html#motivation-for-slam",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Motivation for SLAM",
+    "text": "Motivation for SLAM\n\n\n\n\n\n\nSupplementary Material\n\n\nSee additional slides on SLAM motivation and applications (instructor materials)\n\n\n\n\nKey insight: If we don’t have a map, we need to build one while simultaneously figuring out where we are."
+  },
+  {
+    "objectID": "slam.html#slam-the-core-idea",
+    "href": "slam.html#slam-the-core-idea",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "SLAM: The Core Idea",
+    "text": "SLAM: The Core Idea\nSLAM tries to simultaneously make sense of:\n\nWhere we think we are (localization)\nWhat we think we should be seeing (mapping)\n\n\nBasic idea: Make the map a part of the state.\n\n\nWe can build measurement and motion models for this expanded state."
+  },
+  {
+    "objectID": "slam.html#state-definition",
+    "href": "slam.html#state-definition",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "State Definition",
+    "text": "State Definition\nThe robot at (xr,yr)(x_r, y_r) measures the location of landmarks li=(lix,liy)l_i = (l_{ix}, l_{iy}) in its frame of reference, which is aligned with the world axis.\n\nState vector: x=[xryrl1xl1yl2xl2y⋮lnlxlnly]\nx = \\begin{bmatrix} x_r \\\\ y_r \\\\ l_{1x} \\\\ l_{1y} \\\\ l_{2x} \\\\ l_{2y} \\\\ \\vdots \\\\ l_{n_l x} \\\\ l_{n_l y} \\end{bmatrix}\n\nwhere there are nln_l landmarks."
+  },
+  {
+    "objectID": "slam.html#motion-model",
+    "href": "slam.html#motion-model",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Motion Model",
+    "text": "Motion Model\nThe landmarks are assumed stationary, with robot moving according to: [xryr]t+1=[xryr]t+ut+vt\n\\begin{bmatrix} x_r \\\\ y_r \\end{bmatrix}_{t+1} = \\begin{bmatrix} x_r \\\\ y_r \\end{bmatrix}_{t} + u_t + v_t\n\n\nSystem matrices:\nAA is (2+2nl)×(2+2nl)(2 + 2n_l) \\times (2 + 2n_l), the only non-zero elements being: A1,1=1,A2,2=1A_{1,1} = 1, \\quad A_{2,2} = 1\n\n\nBB is (2+2nl)×2(2 + 2n_l) \\times 2, the only non-zero elements being: B1,1=1,B2,2=1B_{1,1} = 1, \\quad B_{2,2} = 1"
+  },
+  {
+    "objectID": "slam.html#measurement-model",
+    "href": "slam.html#measurement-model",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Measurement Model",
+    "text": "Measurement Model\nIf the robot sees all landmarks in its frame, its measurement is: y=[l1x−xrl1y−yrl2x−xrl2y−yr⋮]\ny = \\begin{bmatrix} l_{1x} - x_r \\\\ l_{1y} - y_r \\\\ l_{2x} - x_r \\\\ l_{2y} - y_r \\\\ \\vdots \\end{bmatrix}"
+  },
+  {
+    "objectID": "slam.html#measurement-matrix",
+    "href": "slam.html#measurement-matrix",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Measurement Matrix",
+    "text": "Measurement Matrix\nCC is 2nl×(2+2nl)2n_l \\times (2 + 2n_l):\nC=[−101000…000−10100…00−100010…000−10001…00⋮⋮⋮−100000…100−10000…01]\nC = \\begin{bmatrix}\n-1 & 0 & 1 & 0 & 0 & 0 & \\dots & 0 & 0 \\\\\n0 & -1 & 0 & 1 & 0 & 0 & \\dots & 0 & 0 \\\\\n-1 & 0 & 0 & 0 & 1 & 0 & \\dots & 0 & 0 \\\\\n0 & -1 & 0 & 0 & 0 & 1 & \\dots & 0 & 0 \\\\\n\\vdots & \\vdots & & & & & \\vdots & & \\\\\n-1 & 0 & 0 & 0 & 0 & 0 & \\dots & 1 & 0 \\\\\n0 & -1 & 0 & 0 & 0 & 0 & \\dots & 0 & 1\n\\end{bmatrix}"
+  },
+  {
+    "objectID": "slam.html#performance-analysis",
+    "href": "slam.html#performance-analysis",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Performance Analysis",
+    "text": "Performance Analysis\nPerformance when robot always sees all landmarks:\n\n\nThe estimated mean position of each landmark is quite close to the actual landmark position, relative to other landmarks\n\n\n\n\nThe uncertainty in the landmark position is identical to the uncertainty in initial position, in the long run\n\nThe robot can treat the landmark as lying within the 3σ3\\sigma ellipse of the landmark mean\nTo avoid collision with high probability, the 3σ3\\sigma ellipse corresponding to its position should lie outside the landmark’s ellipse\n\n\n\n\n\nThe difference between the robot’s true and estimated location depends on sensor accuracy"
+  },
+  {
+    "objectID": "slam.html#nonlinear-systems",
+    "href": "slam.html#nonlinear-systems",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Nonlinear Systems",
+    "text": "Nonlinear Systems\nFor linear systems with Gaussian additive noise, the Kalman filter provides the least uncertain estimate.\n\nWhen the system is nonlinear: xt+1=f(xt,ut)+vtyt=h(xt)+wt\n\\begin{aligned}\nx_{t+1} &= f(x_t, u_t) + v_t \\\\\ny_t &= h(x_t) + w_t\n\\end{aligned}"
+  },
+  {
+    "objectID": "slam.html#linearization-approach",
+    "href": "slam.html#linearization-approach",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Linearization Approach",
+    "text": "Linearization Approach\nUse linearization:\nAt=∂f∂x|x=μt,Bt=∂f∂u|u=ut,Ct=∂h∂x|x=μtpred\nA_t = \\left. \\frac{\\partial f}{\\partial x} \\right|_{x = \\mu_t}, \\quad\nB_t = \\left. \\frac{\\partial f}{\\partial u} \\right|_{u = u_t}, \\quad\nC_t = \\left. \\frac{\\partial h}{\\partial x} \\right|_{x = \\mu_t^{pred}}\n\n\nA blind application of Kalman filter updates using AtA_t, BtB_t, and CtC_t is not guaranteed to work but often does well in practice."
+  },
+  {
+    "objectID": "slam.html#motion-model-1",
+    "href": "slam.html#motion-model-1",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Motion Model",
+    "text": "Motion Model\nThe inputs are the speed ss of the robot along its current heading direction, and the angular velocity ω\\omega: ut=[stωt]\nu_t = \\begin{bmatrix} s_t \\\\ \\omega_t \\end{bmatrix}\n\n\nThe motion model is now nonlinear: [xryrθr]t+1=[xryrθr]t+[stcosθrstsinθrωt]+vt=f(xt,ut)\n\\begin{bmatrix} x_r \\\\ y_r \\\\ \\theta_r \\end{bmatrix}_{t+1} = \\begin{bmatrix} x_r \\\\ y_r \\\\ \\theta_r \\end{bmatrix}_{t} + \\begin{bmatrix} s_t \\cos \\theta_r \\\\ s_t \\sin \\theta_r \\\\ \\omega_t \\end{bmatrix} + v_t = f(x_t, u_t)"
+  },
+  {
+    "objectID": "slam.html#linearized-motion-model",
+    "href": "slam.html#linearized-motion-model",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Linearized Motion Model",
+    "text": "Linearized Motion Model\nWe linearize to get part of the AA and BB matrices:\n[xryrθr]t+1=[10−sinθrst01cosθrst001][xryrθr]t+[cosθr0sinθr001]ut+vt\n\\begin{bmatrix} x_r \\\\ y_r \\\\ \\theta_r \\end{bmatrix}_{t+1} = \\begin{bmatrix} 1 & 0 & -\\sin \\theta_r \\, s_t \\\\ 0 & 1 & \\cos \\theta_r \\, s_t \\\\ 0 & 0 & 1 \\end{bmatrix} \\begin{bmatrix} x_r \\\\ y_r \\\\ \\theta_r \\end{bmatrix}_{t} + \\begin{bmatrix} \\cos \\theta_r & 0 \\\\ \\sin \\theta_r & 0 \\\\ 0 & 1 \\end{bmatrix} u_t + v_t"
+  },
+  {
+    "objectID": "slam.html#measurement-model-1",
+    "href": "slam.html#measurement-model-1",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Measurement Model",
+    "text": "Measurement Model\nThe position of a landmark lil_i in the robot’s frame becomes:\nyi=[cosθr−sinθrsinθrcosθr][lix−xrliy−yr]\ny_i = \\begin{bmatrix} \\cos \\theta_r & -\\sin \\theta_r \\\\ \\sin \\theta_r & \\cos \\theta_r \\end{bmatrix} \\begin{bmatrix} l_{ix} - x_r \\\\ l_{iy} - y_r \\end{bmatrix}\n\n\nThe full measurement yy corresponds to stacking the yiy_is."
+  },
+  {
+    "objectID": "slam.html#nonlinear-measurement",
+    "href": "slam.html#nonlinear-measurement",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Nonlinear Measurement",
+    "text": "Nonlinear Measurement\nThe measurement model is nonlinear: y=h(x)≠Cxy = h(x) \\neq Cx for any matrix CC.\n\nAs mentioned earlier, we linearize: C=∂h∂x|x=μtpred\nC = \\left. \\frac{\\partial h}{\\partial x} \\right|_{x = \\mu_t^{pred}}"
+  },
+  {
+    "objectID": "slam.html#limited-sensing",
+    "href": "slam.html#limited-sensing",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Limited Sensing",
+    "text": "Limited Sensing\nWe’ve assumed that we can see all landmarks at once.\n\nIn practice, we can only see nearby landmarks.\n\n\n\n\n\n\n\n\nData Association Problem\n\n\nThis limitation creates a data association problem when landmarks look similar to each other. For example, the entry to an office cubicle."
+  },
+  {
+    "objectID": "slam.html#advanced-topics",
+    "href": "slam.html#advanced-topics",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Advanced Topics",
+    "text": "Advanced Topics\n\n\n\n\n\n\nSupplementary Material\n\n\nSee additional slides covering:\n\nLoop closure detection\nGraph-based SLAM\nParticle filter approaches\nModern SLAM systems"
+  },
+  {
+    "objectID": "slam.html#summary",
+    "href": "slam.html#summary",
+    "title": "Simultaneous Localization and Mapping",
+    "section": "Summary",
+    "text": "Summary\n\nSLAM Problem: Simultaneously estimate robot location AND map\nState Augmentation: Include landmark positions in state vector\nLinear Case: Non-rotating robot with aligned frame\nEKF Extension: Linearize nonlinear motion/measurement models\nRotating Robot: Full SE(2) motion requires Jacobians\nPractical Challenges: Limited sensing, data association"
   }
 ]
