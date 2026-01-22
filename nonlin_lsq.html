@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-bbe7401fe57d4b791b917637bb662036.css">
   <link rel="stylesheet" href="styles.css">
@@ -393,7 +458,7 @@ L(\theta) &amp;= \frac{1}{m} \sum_{i=1}^{m} r_{i}^{2}(\theta) = \frac{1}{m} \sum
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="centered-content">
-<div id="54c4ef07" class="cell" data-execution_count="1">
+<div id="c3f9b50e" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -405,7 +470,7 @@ L(\theta) &amp;= \frac{1}{m} \sum_{i=1}^{m} r_{i}^{2}(\theta) = \frac{1}{m} \sum
 </div>
 <!-- ends centered content -->
 </div><!-- ends centered content --><div class="column" style="width:39%;">
-<div id="3f523436" class="cell" data-execution_count="2">
+<div id="cfe61969" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -532,7 +597,7 @@ plt.show()</code></pre>
 </div>
 </div>
 <div class="centered-content">
-<div id="864771ba" class="cell" data-execution_count="3">
+<div id="d3ddf8b9" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -542,8 +607,6 @@ plt.show()</code></pre>
 </div>
 </div>
 </div>
-<!-- ends centered content -->
-<!-- Wish there was an easy overlay option -->
 </section>
 <section>
 <section id="step-size-selection" class="title-slide slide level1 center">
@@ -611,7 +674,7 @@ plt.show()</code></pre>
 <p>If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>k</mi></msub><mo>=</mo><msup><mi>x</mi><mo>⋆</mo></msup><mo>+</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x_k = x^{\star} + y</annotation></semantics></math>, then <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msup><mi>x</mi><mo>⋆</mo></msup><mo>−</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x_{k+1} = x^{\star} -y</annotation></semantics></math></p>
 </div><div class="column" style="width:60%;">
 <div class="centered-content">
-<div id="ed1e3c5b" class="cell" data-execution_count="4">
+<div id="2db0eeec" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -633,7 +696,7 @@ plt.show()</code></pre>
 </div>
 </div>
 <div class="centered-content">
-<div id="00aefc06" class="cell" data-execution_count="5">
+<div id="4df04ce2" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -654,7 +717,7 @@ plt.show()</code></pre>
 </div>
 </div>
 <div class="centered-content">
-<div id="5158514a" class="cell" data-execution_count="6">
+<div id="028d1fed" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -768,7 +831,7 @@ x_4 &amp;= x_3 - \frac{f'(x_3)}{f''(x_3)} = x_3 - \frac{1.17 \times 10^{-9}}{1.6
 <section id="newtons-revenge" class="slide level2">
 <h2>Newton’s Revenge</h2>
 <div class="centered-content">
-<div id="9ddc16c8" class="cell" data-execution_count="8">
+<div id="1a71f91c" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -836,13 +899,257 @@ f(\bm{x}_k), </annotation></semantics></math> where <math display="inline" xmlns
 <section id="newtons-revenge-avenged" class="slide level2">
 <h2>Newton’s Revenge Avenged</h2>
 <div class="centered-content">
-<div id="30af7d2a" class="cell" data-execution_count="9">
+<div id="e5984c37" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
 <p><img data-src="nonlin_lsq_files/figure-revealjs/cell-10-output-1.png"></p>
 </figure>
 </div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="nonlinear-least-squares-localization-example" class="title-slide slide level1 center">
+<h1>Nonlinear Least Squares: Localization Example</h1>
+
+</section>
+<section id="problem-definition" class="slide level2 smaller">
+<h2>Problem Definition</h2>
+<p><strong>Range-Based Localization:</strong> Find position <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">x = (x_1, x_2)</annotation></semantics></math> given noisy range measurements to known beacons.</p>
+
+<img data-src="nonlin_lsq_files/figure-revealjs/cell-11-output-1.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="problem-definition-1" class="slide level2 smaller">
+<h2>Problem Definition</h2>
+<p><strong>Range-Based Localization:</strong> Find position <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">x = (x_1, x_2)</annotation></semantics></math> given noisy range measurements to known beacons.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Given:</strong></p>
+<ul>
+<li>Beacon positions <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mn>1</mn></msub><mo>,</mo><msub><mi>b</mi><mn>2</mn></msub><mo>,</mo><msub><mi>b</mi><mn>3</mn></msub><mo>,</mo><msub><mi>b</mi><mn>4</mn></msub><mo>∈</mo><msup><mi>ℝ</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">b_1, b_2, b_3, b_4 \in \mathbb{R}^2</annotation></semantics></math></li>
+<li>Measured distances <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mn>1</mn></msub><mo>,</mo><msub><mi>d</mi><mn>2</mn></msub><mo>,</mo><msub><mi>d</mi><mn>3</mn></msub><mo>,</mo><msub><mi>d</mi><mn>4</mn></msub></mrow><annotation encoding="application/x-tex">d_1, d_2, d_3, d_4</annotation></semantics></math></li>
+</ul>
+<p><strong>Residuals:</strong> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>e</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo stretchy="false" form="postfix">∥</mo><mi>x</mi><mo>−</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">∥</mo><mo>−</mo><msub><mi>d</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">e_i(x) = \|x - b_i\| - d_i</annotation></semantics></math></p>
+<p><strong>Objective:</strong> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>min</mo><mi>x</mi></munder><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>4</mn></munderover><msub><mi>e</mi><mi>i</mi></msub><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>=</mo><munder><mo>min</mo><mi>x</mi></munder><mo stretchy="false" form="postfix">∥</mo><mi>e</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><msup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\min_x \sum_{i=1}^4 e_i(x)^2 = \min_x \|e(x)\|^2</annotation></semantics></math></p>
+</div><div class="column" style="width:50%;">
+<p><strong>Jacobian:</strong> Row <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>J</mi><mi>i</mi></msub><mo>=</mo><mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>T</mi></msup><mrow><mo stretchy="false" form="postfix">∥</mo><mi>x</mi><mo>−</mo><msub><mi>b</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">∥</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">J_i = \frac{(x - b_i)^T}{\|x - b_i\|}</annotation></semantics></math></p>
+<p>This is a unit vector pointing from beacon <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> toward <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>.</p>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>This is a common robotics problem: GPS, UWB localization, acoustic positioning</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="algorithm-comparison" class="slide level2 smaller">
+<h2>Algorithm Comparison</h2>
+<p>Three methods to solve <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>min</mo><mi>x</mi></msub><mo stretchy="false" form="postfix">∥</mo><mi>e</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><msup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\min_x \|e(x)\|^2</annotation></semantics></math>:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 40%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Update Rule</th>
+<th>Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Gradient Descent</strong></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>α</mi><msup><mi>J</mi><mi>T</mi></msup><mi>e</mi></mrow><annotation encoding="application/x-tex">x_{k+1} = x_k - \alpha J^T e</annotation></semantics></math></td>
+<td>Steepest descent on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><mi>e</mi><msup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\|e\|^2</annotation></semantics></math></td>
+</tr>
+<tr class="even">
+<td><strong>Gauss-Newton</strong></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>J</mi><mi>T</mi></msup><mi>J</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>J</mi><mi>T</mi></msup><mi>e</mi></mrow><annotation encoding="application/x-tex">x_{k+1} = x_k - (J^T J)^{-1} J^T e</annotation></semantics></math></td>
+<td>Newton with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>≈</mo><msup><mi>J</mi><mi>T</mi></msup><mi>J</mi></mrow><annotation encoding="application/x-tex">H \approx J^T J</annotation></semantics></math></td>
+</tr>
+<tr class="odd">
+<td><strong>Levenberg-Marquardt</strong></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>J</mi><mi>T</mi></msup><mi>J</mi><mo>+</mo><mi>λ</mi><mi>I</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>J</mi><mi>T</mi></msup><mi>e</mi></mrow><annotation encoding="application/x-tex">x_{k+1} = x_k - (J^T J + \lambda I)^{-1} J^T e</annotation></semantics></math></td>
+<td>Damped Gauss-Newton</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment" data-fragment-index="1">
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li>GN approximates Hessian as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>J</mi><mi>T</mi></msup><mi>J</mi></mrow><annotation encoding="application/x-tex">J^T J</annotation></semantics></math>, ignoring second-order residual terms <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∑</mo><msub><mi>e</mi><mi>i</mi></msub><msub><mi>H</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\sum e_i H_i</annotation></semantics></math></li>
+<li>LM blends GD (large <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>) and GN (small <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>) via damping parameter</li>
+<li>Adaptive <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>: increase when step rejected, decrease when accepted</li>
+</ul>
+</div>
+</section>
+<section id="code-localization-example" class="slide level2 smaller">
+<h2>Code: Localization Example</h2>
+<div id="282dcda3" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Show setup code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a><span class="co"># Generate noisy measurements</span></span>
+<span id="cb2-6"><a></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb2-7"><a></a>noise_std <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb2-8"><a></a>true_distances <span class="op">=</span> np.linalg.norm(beacons <span class="op">-</span> true_pos, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-9"><a></a>measured_distances <span class="op">=</span> true_distances <span class="op">+</span> np.random.randn(<span class="dv">4</span>) <span class="op">*</span> noise_std</span>
+<span id="cb2-10"><a></a></span>
+<span id="cb2-11"><a></a><span class="kw">def</span> residuals(x):</span>
+<span id="cb2-12"><a></a>    <span class="co">"""Compute residual vector e(x) = ||x - b_i|| - d_i"""</span></span>
+<span id="cb2-13"><a></a>    <span class="cf">return</span> np.linalg.norm(beacons <span class="op">-</span> x, axis<span class="op">=</span><span class="dv">1</span>) <span class="op">-</span> measured_distances</span>
+<span id="cb2-14"><a></a></span>
+<span id="cb2-15"><a></a><span class="kw">def</span> jacobian(x):</span>
+<span id="cb2-16"><a></a>    <span class="co">"""Compute Jacobian matrix J(x) where J_i = (x - b_i)^T / ||x - b_i||"""</span></span>
+<span id="cb2-17"><a></a>    J <span class="op">=</span> np.zeros((<span class="dv">4</span>, <span class="dv">2</span>))</span>
+<span id="cb2-18"><a></a>    <span class="cf">for</span> i, b <span class="kw">in</span> <span class="bu">enumerate</span>(beacons):</span>
+<span id="cb2-19"><a></a>        diff <span class="op">=</span> x <span class="op">-</span> b</span>
+<span id="cb2-20"><a></a>        norm <span class="op">=</span> np.linalg.norm(diff)</span>
+<span id="cb2-21"><a></a>        <span class="cf">if</span> norm <span class="op">&gt;</span> <span class="fl">1e-10</span>:</span>
+<span id="cb2-22"><a></a>            J[i] <span class="op">=</span> diff <span class="op">/</span> norm</span>
+<span id="cb2-23"><a></a>    <span class="cf">return</span> J</span>
+<span id="cb2-24"><a></a></span>
+<span id="cb2-25"><a></a><span class="kw">def</span> cost(x):</span>
+<span id="cb2-26"><a></a>    <span class="co">"""Compute sum of squared residuals"""</span></span>
+<span id="cb2-27"><a></a>    e <span class="op">=</span> residuals(x)</span>
+<span id="cb2-28"><a></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(e<span class="op">**</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="gradient-descent-for-nls" class="slide level2 smaller">
+<h2>Gradient Descent for NLS</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Update:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><mi>α</mi><msup><mi>J</mi><mi>T</mi></msup><mi>e</mi></mrow><annotation encoding="application/x-tex">x_{k+1} = x_k - \alpha J^T e</annotation></semantics></math></p>
+<ul>
+<li>Direction <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msup><mi>J</mi><mi>T</mi></msup><mi>e</mi></mrow><annotation encoding="application/x-tex">-J^T e</annotation></semantics></math> is gradient of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false" form="postfix">∥</mo><mi>e</mi><msup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\frac{1}{2}\|e\|^2</annotation></semantics></math></li>
+<li>Requires step size <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> selection</li>
+<li>Slow but reliable convergence</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div id="904ef913" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="nonlin_lsq_files/figure-revealjs/cell-14-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="gauss-newton-method" class="slide level2 smaller">
+<h2>Gauss-Newton Method</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Update:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>J</mi><mi>T</mi></msup><mi>J</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>J</mi><mi>T</mi></msup><mi>e</mi></mrow><annotation encoding="application/x-tex">x_{k+1} = x_k - (J^T J)^{-1} J^T e</annotation></semantics></math></p>
+<ul>
+<li>Solves linear system <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>J</mi><mi>T</mi></msup><mi>J</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>p</mi><mo>=</mo><mi>−</mi><msup><mi>J</mi><mi>T</mi></msup><mi>e</mi></mrow><annotation encoding="application/x-tex">(J^T J) p = -J^T e</annotation></semantics></math></li>
+<li>No step size needed (full step)</li>
+<li>Fast quadratic convergence near solution</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div id="8f638406" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="nonlin_lsq_files/figure-revealjs/cell-16-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="levenberg-marquardt-method" class="slide level2 smaller">
+<h2>Levenberg-Marquardt Method</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Update:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>k</mi></msub><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>J</mi><mi>T</mi></msup><mi>J</mi><mo>+</mo><mi>λ</mi><mi>I</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msup><msup><mi>J</mi><mi>T</mi></msup><mi>e</mi></mrow><annotation encoding="application/x-tex">x_{k+1} = x_k - (J^T J + \lambda I)^{-1} J^T e</annotation></semantics></math></p>
+<ul>
+<li>Adaptive <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>: blend GD and GN</li>
+<li>Large <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>→</mo></mrow><annotation encoding="application/x-tex">\lambda \to</annotation></semantics></math> gradient descent (robust)</li>
+<li>Small <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>→</mo></mrow><annotation encoding="application/x-tex">\lambda \to</annotation></semantics></math> Gauss-Newton (fast)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div id="f0e05c38" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="nonlin_lsq_files/figure-revealjs/cell-18-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="visualization-iterate-paths" class="slide level2 smaller">
+<h2>Visualization: Iterate Paths</h2>
+
+<img data-src="nonlin_lsq_files/figure-revealjs/cell-19-output-1.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="results-discussion" class="slide level2 smaller">
+<h2>Results Discussion</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Observations:</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Iterations</th>
+<th>Convergence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gradient Descent</td>
+<td>Many (~50)</td>
+<td>Linear rate</td>
+</tr>
+<tr class="even">
+<td>Gauss-Newton</td>
+<td>Few (~5)</td>
+<td>Quadratic near solution</td>
+</tr>
+<tr class="odd">
+<td>Levenberg-Marquardt</td>
+<td>Few (~5)</td>
+<td>Adaptive, robust</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:50%;">
+<p><strong>Key Takeaways:</strong></p>
+<ol type="1">
+<li><strong>GD</strong>: Slow but reliable, many iterations</li>
+<li><strong>GN</strong>: Fast quadratic convergence, may fail far from solution</li>
+<li><strong>LM</strong>: Best of both worlds
+<ul>
+<li>Large <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>→</mo></mrow><annotation encoding="application/x-tex">\lambda \to</annotation></semantics></math> GD-like (robust)</li>
+<li>Small <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>→</mo></mrow><annotation encoding="application/x-tex">\lambda \to</annotation></semantics></math> GN-like (fast)</li>
+</ul></li>
+</ol>
+</div></div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>When to use which?</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>GD</strong>: When Jacobian is expensive or problem is poorly conditioned</li>
+<li><strong>GN</strong>: Well-posed problems with good initial guess</li>
+<li><strong>LM</strong>: Default choice for most NLS problems</li>
+</ul>
 </div>
 </div>
 </div>
