@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Topics",
     "section": "",
-    "text": "Date\nTopic\nSlides\nNotes\nModern Robotics Chapter\nRMC Book1\n\n\n\n\nJan 13\nCourse Overview; Motion Tasks\nOverview\n\n1\n1\n\n\nJan 15\nMuJoCo Setup\nMuJoCo\nwebpage\n\n\n\n\nJan 20\nNonlinear Least squares\nslides\n\n\n\n\n\nJan 22\nScan Matching\nscan match, NDT\n\n\n\n\n\nJan 27\nOdometry\n\n\n\n\n\n\nJan 29\nPose Graph Optimization",
+    "text": "Date\nTopic\nSlides\nNotes\nModern Robotics Chapter\nRMC Book1\n\n\n\n\nJan 13\nCourse Overview; Motion Tasks\nOverview\n\n1\n1\n\n\nJan 15\nMuJoCo Setup\nMuJoCo\nwebpage\n\n\n\n\nJan 20\nNonlinear Least squares\nslides\n\n\n\n\n\nJan 22\nScan Matching\nscan match, NDT\n\n\n\n\n\nJan 27\nOdometry\nodometry\n\n\n\n\n\nJan 29\nPose Graph Optimization",
     "crumbs": [
       "Home",
       "Topics"
