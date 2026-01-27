@@ -304,7 +304,7 @@ T^{-1} = T_{A}^{B} = \begin{bmatrix} R^T &amp; -R^T \mathbf{t} \\ \mathbf{0}^T &
 \]</span></p>
 </div>
 </section>
-<section id="extrinsic-calibration" class="slide level2">
+<section id="extrinsic-calibration" class="slide level2 smaller">
 <h2>Extrinsic Calibration</h2>
 <p>The transformation between rigidly mounted sensors is <strong>constant</strong>:</p>
 <ul>
@@ -336,7 +336,7 @@ T^{-1} = T_{A}^{B} = \begin{bmatrix} R^T &amp; -R^T \mathbf{t} \\ \mathbf{0}^T &
 </section>
 <section id="example-lidar-point-to-world-frame" class="slide level2">
 <h2>Example: LiDAR Point to World Frame</h2>
-<div id="24ff777d" class="cell" data-execution_count="2">
+<div id="0532bd00" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a></a></span>
 <span id="cb1-3"><a></a><span class="kw">def</span> make_se2(theta, tx, ty):</span>
@@ -363,7 +363,7 @@ T^{-1} = T_{A}^{B} = \begin{bmatrix} R^T &amp; -R^T \mathbf{t} \\ \mathbf{0}^T &
 </section>
 <section id="visualizing-the-transform-chain" class="slide level2">
 <h2>Visualizing the Transform Chain</h2>
-<div id="14b6c4d0" class="cell" data-execution_count="3">
+<div id="b01fd19e" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
@@ -477,11 +477,11 @@ p^{A} &amp;= R\ p^{B} + d
 <h2>Example: Coordinate Transform vs Rigid Motion</h2>
 
 <img data-src="assets/images/trans-v-rigid-3.png" style="width:100.0%" class="r-stretch"><ul>
-<li><strong>Top row:</strong> Coordinate transform <span class="math inline">\(\left(R_B^A\right)^{-1}\)</span> - fixed points in moving frame</li>
-<li><strong>Bottom row:</strong> Rigid motion <span class="math inline">\(R_B^A\)</span> - moving points in fixed frame</li>
+<li><strong>Top row:</strong> Coordinate transform <span class="math inline">\(\left(R_B^A\right)^{-1}\)</span> - fixed points in <span class="math inline">\(A\)</span> seen by moving frame <span class="math inline">\(B\)</span></li>
+<li><strong>Bottom row:</strong> Rigid motion <span class="math inline">\(R_B^A\)</span> - fixed points in moving frame <span class="math inline">\(B\)</span> seen by fixed frame <span class="math inline">\(A\)</span></li>
 </ul>
 </section>
-<section id="special-euclidean-group-mathrmse3" class="slide level2">
+<section id="special-euclidean-group-mathrmse3" class="slide level2 smaller">
 <h2>Special Euclidean Group <span class="math inline">\(\mathrm{SE}(3)\)</span></h2>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
@@ -493,16 +493,22 @@ p^{A} &amp;= R\ p^{B} + d
 </div>
 <div class="callout-content">
 <p>Coordinates of points in 3D Euclidean space = <span class="math inline">\(p^A \in \mathbb{R}^3\)</span></p>
-<p>Coordinates of cartesian frames in 3D Euclidean space = <span class="math inline">\((d,R) \in \mathbb{R}^3 \times \mathrm{SO}(3)\)</span></p>
+<p>Coordinates of cartesian frames in 3D Euclidean space = <span class="math inline">\((d,R) \in \mathrm{SE}(3) = \mathbb{R}^3 \times \mathrm{SO}(3)\)</span></p>
 </div>
 </div>
 </div>
 <p><strong>Points : Euclidean Space :: Cartesian Frames : Special Euclidean Group</strong></p>
-<p>Affine Space : Euclidean Space :: <span class="math inline">\(G\)</span>-Torsor : Special Euclidean Group</p>
-<p><span class="math inline">\(G\)</span>-Torsor: A group <span class="math inline">\(G\)</span> with an action that maps a group element to another group element</p>
-<p>Again, no coordinate frame is unique.</p>
-<p>For a <span class="math inline">\(G\)</span>-Torsor, we don’t define origin+basis (not a vector space).</p>
-<p>Instead, we define an identity element (it’s a group): the reference coordinate frame.</p>
+<ul>
+<li><p><span class="math inline">\(G\)</span>-Torsor: A group <span class="math inline">\(G\)</span> with an action that maps a group element to another group element</p></li>
+<li><p>No coordinate frame is unique.</p></li>
+<li><p>For <span class="math inline">\(\mathrm{SE}(3)\)</span>, a <span class="math inline">\(G\)</span>-Torsor, we don’t define origin+basis (not a vector space).</p></li>
+<li><p>Instead, we define an identity element (it’s a group): the reference coordinate frame.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="odometry-sneak-peek" class="title-slide slide level1 center">
+<h1>Odometry: Sneak Peek</h1>
+
 </section>
 <section id="the-odometry-problem" class="slide level2">
 <h2>The Odometry Problem</h2>
@@ -550,7 +556,7 @@ T_{ B_{k+1}}^{W} = T_{ B_k}^{W} \cdot T_{ B_{k+1}}^{B_k}
 </section>
 <section id="drift-in-lidar-odometry" class="slide level2">
 <h2>Drift in LiDAR Odometry</h2>
-<div id="0b6f72de" class="cell" data-execution_count="4">
+<div id="e90a6903" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>np.random.seed(<span class="dv">42</span>)</span>
@@ -606,7 +612,7 @@ T_{ B_{k+1}}^{W} = T_{ B_k}^{W} \cdot T_{ B_{k+1}}^{B_k}
 <span id="cb4-51"><a></a>ax.annotate(<span class="st">''</span>, xy<span class="op">=</span>(noisy_poses[<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>], noisy_poses[<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>]),</span>
 <span id="cb4-52"><a></a>            xytext<span class="op">=</span>(true_poses[<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>], true_poses[<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>]),</span>
 <span id="cb4-53"><a></a>            arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'&lt;-&gt;'</span>, color<span class="op">=</span><span class="st">'purple'</span>, lw<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb4-54"><a></a>ax.text(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">6.5</span>, <span class="st">'Accumulated</span><span class="ch">\n</span><span class="st">Error'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">'purple'</span>)</span>
+<span id="cb4-54"><a></a><span class="co">#ax.text(-0.5, 6.5, 'Accumulated\nError', fontsize=11, color='purple')</span></span>
 <span id="cb4-55"><a></a></span>
 <span id="cb4-56"><a></a>ax.set_xlabel(<span class="st">'x (m)'</span>)</span>
 <span id="cb4-57"><a></a>ax.set_ylabel(<span class="st">'y (m)'</span>)</span>
@@ -665,19 +671,16 @@ T_{ B_{k+1}}^{W} = T_{ B_k}^{W} \cdot T_{ B_{k+1}}^{B_k}
 <p><strong>Gyroscope</strong> (simpler case): <span class="math display">\[
 \omega^{meas} = \omega^{true} + b_\omega + n_\omega
 \]</span></p>
-<div class="fragment">
 <p><strong>Accelerometer</strong> (includes gravity): <span class="math display">\[
 a^{meas} = R^T(a^{true} - g) + b_a + n_a
 \]</span></p>
-</div>
-<div class="fragment">
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(b\)</span>: slowly varying bias</li>
-<li><span class="math inline">\(n\)</span>: white noise</li>
+<li><span class="math inline">\(b_{(\cdot)}\)</span>: slowly varying bias</li>
+<li><span class="math inline">\(n_{(\cdot)}\)</span>: white noise</li>
 <li><span class="math inline">\(g\)</span>: gravity vector (≈ 9.81 m/s² pointing down)</li>
+<li><span class="math inline">\(R\)</span>: Orientation of IMU-fixed frame relative to ground</li>
 </ul>
-</div>
 </section>
 <section id="dead-reckoning-with-imu" class="slide level2">
 <h2>Dead Reckoning with IMU</h2>
@@ -728,7 +731,7 @@ y(t) &amp;= y_0 + \int_0^t v_y(\tau) \, d\tau
 </section>
 <section id="the-double-integration-problem" class="slide level2">
 <h2>The Double Integration Problem</h2>
-<div id="2ecefc38" class="cell" data-execution_count="5">
+<div id="72073c5c" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>np.random.seed(<span class="dv">123</span>)</span>
@@ -779,7 +782,7 @@ y(t) &amp;= y_0 + \int_0^t v_y(\tau) \, d\tau
 <span id="cb5-46"><a></a>axes[<span class="dv">2</span>].plot(<span class="dv">0</span>, <span class="dv">0</span>, <span class="st">'go'</span>, markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'True position'</span>)</span>
 <span id="cb5-47"><a></a>axes[<span class="dv">2</span>].set_xlabel(<span class="st">'x (m)'</span>)</span>
 <span id="cb5-48"><a></a>axes[<span class="dv">2</span>].set_ylabel(<span class="st">'y (m)'</span>)</span>
-<span id="cb5-49"><a></a>axes[<span class="dv">2</span>].set_title(<span class="st">'Trajectory (robot is stationary!)'</span>)</span>
+<span id="cb5-49"><a></a>axes[<span class="dv">2</span>].set_title(<span class="st">'Estimated Trajectory (robot is stationary!)'</span>)</span>
 <span id="cb5-50"><a></a>axes[<span class="dv">2</span>].legend()</span>
 <span id="cb5-51"><a></a>axes[<span class="dv">2</span>].grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
 <span id="cb5-52"><a></a>axes[<span class="dv">2</span>].set_aspect(<span class="st">'equal'</span>)</span>
@@ -874,14 +877,10 @@ Bias: [0.01  0.005] m/s² → Position drift ≈ 0.5 * bias * t² = 0.50 m</code
 <p><strong>Linear velocity</strong> (at robot center): <span class="math display">\[
 v = \frac{v_R + v_L}{2}
 \]</span></p>
-<div class="fragment">
 <p><strong>Angular velocity</strong>: <span class="math display">\[
 \omega = \frac{v_R - v_L}{L}
 \]</span></p>
-</div>
-<div class="fragment">
 <p>From encoder ticks: <span class="math inline">\(v = r \cdot \dot{\phi}\)</span> where <span class="math inline">\(\dot{\phi}\)</span> is wheel angular velocity</p>
-</div>
 </section>
 <section id="wheel-odometry-integration" class="slide level2">
 <h2>Wheel Odometry Integration</h2>
@@ -911,7 +910,7 @@ y_{k+1} &amp;= y_k + v_k \sin(\theta_k) \cdot \Delta t \\
 </section>
 <section id="wheel-odometry-implementation" class="slide level2">
 <h2>Wheel Odometry Implementation</h2>
-<div id="e76fd02a" class="cell" data-execution_count="7">
+<div id="687e1064" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="kw">def</span> wheel_odometry(v_left, v_right, L, dt, x0<span class="op">=</span><span class="dv">0</span>, y0<span class="op">=</span><span class="dv">0</span>, theta0<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb7-2"><a></a>    <span class="co">"""</span></span>
 <span id="cb7-3"><a></a><span class="co">    Compute odometry from wheel velocities.</span></span>
@@ -1051,7 +1050,7 @@ T_{B_{k+1}, init}^{B_k} = \hat{T}_{B_{k+1}, IMU}^{B_k}
 <div class="fragment">
 <p><strong>De-skewing</strong>: Use IMU to estimate pose at each point’s timestamp, then transform all points to a common frame</p>
 </div>
-<div id="c3cc8d2c" class="cell" data-execution_count="10">
+<div id="43946cff" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>np.random.seed(<span class="dv">789</span>)</span>
@@ -1111,7 +1110,7 @@ T_{B_{k+1}, init}^{B_k} = \hat{T}_{B_{k+1}, IMU}^{B_k}
 <li>Simple to implement, effective in practice</li>
 </ul>
 </div>
-<div id="3a78b2c6" class="cell" data-execution_count="11">
+<div id="f85b49bf" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="kw">def</span> complementary_filter(theta_scan, theta_prev, omega_gyro, dt, alpha<span class="op">=</span><span class="fl">0.98</span>):</span>
