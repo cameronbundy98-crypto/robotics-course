@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Topics",
     "section": "",
-    "text": "Date\nTopic\nSlides\nNotes\nModern Robotics Chapter\nRMC Book1\n\n\n\n\nJan 13\nCourse Overview; Motion Tasks\nOverview\n\n1\n1\n\n\nJan 15\nMuJoCo Setup\nMuJoCo\nwebpage\n\n\n\n\nJan 20\nNonlinear Least squares\nslides\n\n\n\n\n\nJan 22\nScan Matching\nscan match, NDT\n\n\n\n\n\nJan 27\nOdometry\nodometry\n\n\n\n\n\nJan 29\nPose Graph Optimization\npose graph",
+    "text": "Date\nTopic\nSlides\nNotes\nModern Robotics Chapter\nRMC Book1\n\n\n\n\nJan 13\nCourse Overview; Motion Tasks\nOverview\n\n1\n1\n\n\nJan 15\nMuJoCo Setup\nMuJoCo\nwebpage\n\n\n\n\nJan 20\nNonlinear Least squares\nslides\n\n\n\n\n\nJan 22\nScan Matching\nscan match, NDT\n\n\n\n\n\n-\nFrames and Coordinates\nEuclidean Space\nCh 1\n3.1\n2.1\n\n\nJan 27\nOdometry\nodometry\n\n\n\n\n\n-\nHomogenous Coordinates\nHomogenous Transformations\nCh 1.5\n3.3.1\n2.2-2.6\n\n\nJan 29\nPose Graph Optimization\npose graph\n\n\n\n\n\n-\nExtended Kalman Filter SLAM\nEKF Slam",
     "crumbs": [
       "Home",
       "Topics"
@@ -1010,6 +1010,20 @@
     "title": "Robot Modeling Control",
     "section": "Lesson Overview",
     "text": "Lesson Overview\n\nProblem: Odometry drift accumulates over time\nSolution: Add loop closure constraints and optimize\nFormulation: Pose graph as nonlinear least squares\nImplementation: Gauss-Newton on sparse graphs"
+  },
+  {
+    "objectID": "posegraph.html#paper-loam",
+    "href": "posegraph.html#paper-loam",
+    "title": "Robot Modeling Control",
+    "section": "Paper: LOAM",
+    "text": "Paper: LOAM"
+  },
+  {
+    "objectID": "posegraph.html#paper-fast-lio2",
+    "href": "posegraph.html#paper-fast-lio2",
+    "title": "Robot Modeling Control",
+    "section": "Paper: Fast-LIO2",
+    "text": "Paper: Fast-LIO2\n\nhttps://www.youtube.com/watch?v=uVcBa6NXAbk"
   },
   {
     "objectID": "posegraph.html#recall-odometry-drift",

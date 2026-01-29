@@ -223,6 +223,15 @@
 <li><strong>Implementation</strong>: Gauss-Newton on sparse graphs</li>
 </ol>
 </section>
+<section id="paper-loam" class="slide level2">
+<h2>Paper: LOAM</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/8ezyhTAEyHs" width="1067" height="600" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="paper-fast-lio2" class="slide level2">
+<h2>Paper: Fast-LIO2</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/2OvjGnxszf8" width="1067" height="600" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<p>https://www.youtube.com/watch?v=uVcBa6NXAbk</p>
+</section>
 <section>
 <section id="part-1-the-drift-problem" class="title-slide slide level1 center">
 <h1>Part 1: The Drift Problem</h1>
@@ -358,7 +367,7 @@ e_{ij} = \hat{T}_{ij} \ominus \tilde{T}_{ij}
 <section id="se2-residual-computation" class="slide level2 smaller">
 <h2>SE(2) Residual Computation</h2>
 <p>In 2D, the residual has three components:</p>
-<div id="e41aad15" class="cell" data-execution_count="3">
+<div id="78cc5995" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="kw">def</span> pose_to_matrix(x, y, theta):</span>
 <span id="cb1-2"><a></a>    <span class="co">"""Convert pose (x, y, theta) to SE(2) matrix."""</span></span>
 <span id="cb1-3"><a></a>    c, s <span class="op">=</span> np.cos(theta), np.sin(theta)</span>
@@ -462,7 +471,7 @@ B_{ij} = \frac{\partial e_{ij}}{\partial x_j} \in \mathbb{R}^{3 \times 3}
 <section id="jacobian-for-se2-edge" class="slide level2 smaller">
 <h2>Jacobian for SE(2) Edge</h2>
 <p>For residual <span class="math inline">\(e_{ij}\)</span> with poses <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_j\)</span>:</p>
-<div id="f3d9df39" class="cell" data-execution_count="5">
+<div id="40817c9b" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> compute_jacobians(xi, xj, z_ij):</span>
 <span id="cb2-2"><a></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a></a><span class="co">    Compute Jacobians of residual w.r.t. poses xi and xj.</span></span>
@@ -504,7 +513,7 @@ H \, \Delta \mathbf{x} = -\mathbf{b}
 </section>
 <section id="building-the-linear-system" class="slide level2">
 <h2>Building the Linear System</h2>
-<div id="7b9d9082" class="cell" data-execution_count="6">
+<div id="2fb25736" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="kw">def</span> build_linear_system(poses, edges, measurements):</span>
 <span id="cb3-2"><a></a>    <span class="co">"""</span></span>
 <span id="cb3-3"><a></a><span class="co">    Build H and b for Gauss-Newton.</span></span>
@@ -555,7 +564,7 @@ H \, \Delta \mathbf{x} = -\mathbf{b}
 </section>
 <section id="full-optimization-loop" class="slide level2">
 <h2>Full Optimization Loop</h2>
-<div id="74821d49" class="cell" data-execution_count="7">
+<div id="3888372a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">def</span> optimize_pose_graph(initial_poses, edges, measurements,</span>
 <span id="cb4-2"><a></a>                        n_iter<span class="op">=</span><span class="dv">10</span>, fix_first<span class="op">=</span><span class="va">True</span>):</span>
 <span id="cb4-3"><a></a>    <span class="co">"""</span></span>
@@ -586,7 +595,7 @@ H \, \Delta \mathbf{x} = -\mathbf{b}
 </section>
 <section id="example-square-loop" class="slide level2 smaller">
 <h2>Example: Square Loop</h2>
-<div id="3983d4ee" class="cell" data-execution_count="8">
+<div id="8b62c5ed" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>np.random.seed(<span class="dv">123</span>)</span>
@@ -678,7 +687,7 @@ H \, \Delta \mathbf{x} = -\mathbf{b}
 <img data-src="posegraph_files/figure-revealjs/cell-9-output-1.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="convergence" class="slide level2">
 <h2>Convergence</h2>
-<div id="5e05a2c2" class="cell" data-execution_count="9">
+<div id="0f0fced0" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># Track cost over iterations</span></span>
