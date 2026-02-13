@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Topics",
     "section": "",
-    "text": "Date\nTopic\nSlides\nNotes\nModern Robotics Chapter\nRMC Book1\n\n\n\n\nJan 13\nCourse Overview; Motion Tasks\nOverview\n\n1\n1\n\n\nJan 15\nMuJoCo Setup\nMuJoCo\nwebpage\n\n\n\n\nJan 20\nNonlinear Least squares\nslides\n\n\n\n\n\nJan 22\nScan Matching\nscan match, NDT\n\n\n\n\n\n-\nFrames and Coordinates\nEuclidean Space\nCh 1\n3.1\n2.1\n\n\nJan 27\nOdometry\nodometry\n\n\n\n\n\n-\nHomogenous Coordinates\nHomogenous Transformations\nCh 1.5\n3.3.1\n2.2-2.6\n\n\nJan 29\nPose Graph Optimization\npose graph\n\n\n\n\n\n-\nExtended Kalman Filter SLAM\nEKF Slam\n\n\n\n\n\nFeb 03\nMap Representations\n\nOneNote\n\n\n\n\nFeb 05\nMotion Planning Overview\nOverview, Search\n\n\n\n\n\nFeb 10\nMotion Planning RRT*\nMP1, MP2",
+    "text": "Date\nTopic\nSlides\nNotes\nModern Robotics Chapter\nRMC Book1\n\n\n\n\nJan 13\nCourse Overview; Motion Tasks\nOverview\n\n1\n1\n\n\nJan 15\nMuJoCo Setup\nMuJoCo\nwebpage\n\n\n\n\nJan 20\nNonlinear Least squares\nslides\n\n\n\n\n\nJan 22\nScan Matching\nscan match, NDT\n\n\n\n\n\n-\nFrames and Coordinates\nEuclidean Space\nCh 1\n3.1\n2.1\n\n\nJan 27\nOdometry\nodometry\n\n\n\n\n\n-\nHomogenous Coordinates\nHomogenous Transformations\nCh 1.5\n3.3.1\n2.2-2.6\n\n\nJan 29\nPose Graph Optimization\npose graph\n\n\n\n\n\n-\nExtended Kalman Filter SLAM\nEKF Slam\n\n\n\n\n\nFeb 03\nMap Representations\n\nOneNote\n\n\n\n\nFeb 05\nMotion Planning Overview\nOverview, Search\nOneNote\n10.3\n5\n\n\nFeb 10\nSearch-based Motion Planning\nSearch\nOneNote\n10.3\n\n\n\nFeb 12\nMotion Planning RRT, Polynomial Blends\nMP1, MP2\nOneNote\n10.3\n5",
     "crumbs": [
       "Home",
       "Topics"
