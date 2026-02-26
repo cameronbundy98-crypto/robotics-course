@@ -159,7 +159,7 @@
 <p><strong>iLQR / LQR:</strong> solve once offline for a fixed initial state <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mn>0</mn></msub><annotation encoding="application/x-tex">x_0</annotation></semantics></math>.</p>
 <div class="fragment" data-fragment-index="1">
 <p><strong>What if the real state drifts from the plan?</strong> Disturbances, model mismatch, new information.</p>
-<p>The feedback gain <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mi>k</mi></msub><annotation encoding="application/x-tex">K_k</annotation></semantics></math> handles small deviations — but what about large ones, or problems with constraints?</p>
+<p>The feedback gain <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mi>k</mi></msub><annotation encoding="application/x-tex">K_k</annotation></semantics></math> handles small deviations — but what about large ones, or problems with constraints (other than dynamics)?</p>
 </div>
 <div class="fragment" data-fragment-index="2">
 <p><strong>Model Predictive Control (MPC):</strong> re-solve the finite-horizon optimal control problem at <em>every</em> timestep, from the <em>current</em> measured state.</p>
@@ -217,7 +217,7 @@ t=2:      [●━━━━━━━━━━━━━━━━━━━━●]  
 <div class="callout callout-tip no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p><strong>MPC earns its keep when:</strong></p>
+<p><strong>MPC is used when</strong></p>
 <ol type="1">
 <li><strong>Constraints</strong> on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> or <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> must be enforced</li>
 <li><strong>Time-varying reference</strong> (track a trajectory, not just regulate to origin)</li>
@@ -293,12 +293,10 @@ warm-start at t+1:  ū₁, ū₂, ..., ū_{T-1}, ū_{T-1}   (shifted + hold last
 </tr>
 </tbody>
 </table>
-<div class="fragment">
 <div class="callout callout-warning no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
 <p>Ignoring an active constraint (e.g., clipping the control post-hoc) invalidates the optimality of the LQR/iLQR solution. The optimal unconstrained <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>u</mi><mo>*</mo></msup><annotation encoding="application/x-tex">u^*</annotation></semantics></math> can violate limits by large margins.</p>
-</div>
 </div>
 </div>
 </div>
@@ -400,30 +398,36 @@ optimizer: reaches goal cheaply ...  |  then blows up</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="why-this-gives-stability" class="slide level2 smaller">
-<h2>Why This Gives Stability</h2>
-<p><strong>Claim:</strong> With terminal cost <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mi>f</mi></msub><annotation encoding="application/x-tex">V_f</annotation></semantics></math> satisfying <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mi>f</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mi>x</mi><mo>+</mo><mi>B</mi><mi>K</mi><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≤</mo><msub><mi>V</mi><mi>f</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>c</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>K</mi><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">V_f(Ax + BKx) \leq V_f(x) - c(x, Kx)</annotation></semantics></math> for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>∈</mo><msub><mi>𝒳</mi><mi>f</mi></msub></mrow><annotation encoding="application/x-tex">x \in \mathcal{X}_f</annotation></semantics></math>, the MPC value function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>J</mi><mo>*</mo></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">J^*(x_t)</annotation></semantics></math> is a <strong>Lyapunov function</strong>.</p>
-<div class="fragment" data-fragment-index="1">
-<p><strong>Key inequality</strong> (shifting argument):</p>
-<p>At time <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>: optimal cost is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>J</mi><mo>*</mo></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>c</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo>,</mo><msubsup><mi>u</mi><mn>0</mn><mo>*</mo></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>⋯</mi><mo>+</mo><msub><mi>V</mi><mi>f</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>x</mi><mi>T</mi><mo>*</mo></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">J^*(x_t) = c(x_t, u_0^*) + \cdots + V_f(x_T^*)</annotation></semantics></math></p>
-<p>At time <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t{+}1</annotation></semantics></math>: use the <em>suboptimal</em> shifted sequence <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>u</mi><mn>1</mn><mo>*</mo></msubsup><mo>,</mo><mi>…</mi><mo>,</mo><msubsup><mi>u</mi><mrow><mi>T</mi><mo>−</mo><mn>1</mn></mrow><mo>*</mo></msubsup><mo>,</mo><mi>K</mi><msubsup><mi>x</mi><mi>T</mi><mo>*</mo></msubsup></mrow><annotation encoding="application/x-tex">u_1^*, \dots, u_{T-1}^*, K x_T^*</annotation></semantics></math>. Its cost is at most:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>J</mi><mo>*</mo></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>≤</mo><msup><mi>J</mi><mo>*</mo></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>c</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo>,</mo><msubsup><mi>u</mi><mn>0</mn><mo>*</mo></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">J^*(x_{t+1}) \leq J^*(x_t) - c(x_t, u_0^*)</annotation></semantics></math></p>
-</div>
-<div class="fragment" data-fragment-index="2">
-<p>Since <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo>,</mo><msubsup><mi>u</mi><mi>t</mi><mo>*</mo></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c(x_t, u_t^*) \geq 0</annotation></semantics></math> with equality only at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>t</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x_t = 0</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>J</mi><mo>*</mo></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>≤</mo><msup><mi>J</mi><mo>*</mo></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>c</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo>,</mo><msubsup><mi>u</mi><mn>0</mn><mo>*</mo></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>&lt;</mo><msup><mi>J</mi><mo>*</mo></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">for </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>x</mi><mi>t</mi></msub><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">J^*(x_{t+1}) \leq J^*(x_t) - c(x_t, u_0^*) &lt; J^*(x_t) \quad \text{for } x_t \neq 0</annotation></semantics></math></p>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>J</mi><mo>*</mo></msup><annotation encoding="application/x-tex">J^*</annotation></semantics></math> decreases at each timestep → <strong>asymptotic stability</strong> of the origin.</p>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-note no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p>This is the standard Lyapunov stability proof for MPC. It requires: (1) terminal cost condition, (2) terminal constraint ensures the shifted sequence is feasible.</p>
-</div>
-</div>
-</div>
-</div>
+<!--
+## Why This Gives Stability {.smaller}
+
+**Claim:** With terminal cost $V_f$ satisfying $V_f(Ax + BKx) \leq V_f(x) - c(x, Kx)$ for $x \in \mathcal{X}_f$, the MPC value function $J^*(x_t)$ is a **Lyapunov function**.
+
+::: {.fragment fragment-index=1}
+**Key inequality** (shifting argument):
+
+At time $t$: optimal cost is $J^*(x_t) = c(x_t, u_0^*) + \cdots + V_f(x_T^*)$
+
+At time $t{+}1$: use the *suboptimal* shifted sequence $u_1^*, \dots, u_{T-1}^*, K x_T^*$.
+Its cost is at most:
+
+$$J^*(x_{t+1}) \leq J^*(x_t) - c(x_t, u_0^*)$$
+:::
+
+::: {.fragment fragment-index=2}
+Since $c(x_t, u_t^*) \geq 0$ with equality only at $x_t = 0$:
+
+$$J^*(x_{t+1}) \leq J^*(x_t) - c(x_t, u_0^*) < J^*(x_t) \quad \text{for } x_t \neq 0$$
+
+$J^*$ decreases at each timestep → **asymptotic stability** of the origin.
+:::
+
+::: {.fragment fragment-index=3}
+::: {.callout-note appearance="minimal"}
+This is the standard Lyapunov stability proof for MPC. It requires: (1) terminal cost condition, (2) terminal constraint ensures the shifted sequence is feasible.
+:::
+:::
+-->
 </section></section>
 <section>
 <section id="practical-mpc" class="title-slide slide level1 center">
@@ -501,7 +505,6 @@ optimizer: reaches goal cheaply ...  |  then blows up</code></pre>
 </section>
 <section id="lqr-ilqr-mpc" class="slide level2 smaller">
 <h2>LQR → iLQR → MPC</h2>
-<div class="fragment" data-fragment-index="1">
 <table class="caption-top">
 <colgroup>
 <col style="width: 14%">
@@ -550,20 +553,18 @@ optimizer: reaches goal cheaply ...  |  then blows up</code></pre>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="fragment" data-fragment-index="2">
+</section>
+<section id="mpc" class="slide level2 smaller">
+<h2>MPC</h2>
 <p><strong>The receding horizon principle:</strong></p>
 <ul>
 <li>Re-solve from the current state → robust to disturbances and model error</li>
 <li>Apply only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>u</mi><mn>0</mn><mo>*</mo></msubsup><annotation encoding="application/x-tex">u_0^*</annotation></semantics></math> → plan adapts at every step</li>
 <li>Discard and recompute → no commitment to a fixed trajectory</li>
 </ul>
-</div>
-<div class="fragment" data-fragment-index="3">
 <p><strong>Stability requires design effort:</strong></p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mtext mathvariant="normal">Terminal cost </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>V</mi><mi>f</mi></msub><mo>=</mo><msup><mi>x</mi><mi>T</mi></msup><msub><mi>P</mi><mi>∞</mi></msub><mi>x</mi><mspace width="1.0em"></mspace><mo>+</mo><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">Terminal constraint </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>x</mi><mi>T</mi></msub><mo>∈</mo><msub><mi>𝒳</mi><mi>f</mi></msub></mrow><annotation encoding="application/x-tex">\text{Terminal cost } V_f = x^T P_\infty x \quad + \quad \text{Terminal constraint } x_T \in \mathcal{X}_f</annotation></semantics></math></p>
 <p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⟹</mo><annotation encoding="application/x-tex">\implies</annotation></semantics></math> MPC value function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>J</mi><mo>*</mo></msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">J^*(x_t)</annotation></semantics></math> is a Lyapunov function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⟹</mo><annotation encoding="application/x-tex">\implies</annotation></semantics></math> asymptotic stability</p>
-</div>
 
 
 </section></section>

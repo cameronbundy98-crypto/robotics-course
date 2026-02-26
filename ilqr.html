@@ -375,7 +375,7 @@ Near convergence, linearization error $\to 0$ and the two approaches become equi
 
 ## Demo: Nonlinear vs. Linearized 
 
-::: {#291f010c .cell execution_count=1}
+::: {#080797d1 .cell execution_count=1}
 
 ::: {.cell-output .cell-output-stdout}
 ```
@@ -458,24 +458,25 @@ Three-panel figure:
 </div>
 </div>
 </div>
-</section>
-<section id="exercise-optimality-at-convergence" class="slide level2 smaller">
-<h2>Exercise: Optimality at Convergence</h2>
-<p>At convergence, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>=</mo><mi>−</mi><msubsup><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k_{t} = -\hat{Q}_{uu}^{-1} \hat{q}_u \to 0</annotation></semantics></math>, which means:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>=</mo><msub><mi>r</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>𝐯</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>0</mn><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">for all </mtext><mspace width="0.333em"></mspace></mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">\hat{q}_u = r_t + B_{t}^T \mathbf{v}_{t+1} = 0 \quad \text{for all } t</annotation></semantics></math></p>
-<div class="fragment" data-fragment-index="1">
-<p><strong>Question:</strong> Write out what this says in terms of the original cost and dynamics. What classical optimality condition does it correspond to?</p>
-</div>
-<div class="fragment" data-fragment-index="2">
-<p><strong>Answer:</strong> This is the discrete-time <strong>Pontryagin Maximum Principle</strong> stationarity condition:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><msub><mi>c</mi><mi>t</mi></msub></mrow><mrow><mi>∂</mi><msub><mi>u</mi><mi>t</mi></msub></mrow></mfrac><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>λ</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>0</mn><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>λ</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>𝐯</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\frac{\partial c_{t}}{\partial u_{t}} + B_{t}^T \lambda_{t+1} = 0, \qquad \lambda_{t+1} = \mathbf{v}_{t+1}</annotation></semantics></math></p>
-<p>where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>λ</mi><mi>t</mi></msub><annotation encoding="application/x-tex">\lambda_{t}</annotation></semantics></math> is the <strong>costate</strong> (adjoint variable). iLQR converges precisely when the KKT conditions are satisfied.</p>
-</div>
-</section></section>
-<section>
-<section id="full-algorithm" class="title-slide slide level1 center">
-<h1>Full Algorithm</h1>
+<!--
+## Exercise: Optimality at Convergence {.smaller}
 
+At convergence, $k_{t} = -\hat{Q}_{uu}^{-1} \hat{q}_u \to 0$, which means:
+
+$$\hat{q}_u = r_t + B_{t}^T \mathbf{v}_{t+1} = 0 \quad \text{for all } t$$
+
+::: {.fragment fragment-index=1}
+**Question:** Write out what this says in terms of the original cost and dynamics.  What classical optimality condition does it correspond to?
+:::
+
+::: {.fragment fragment-index=2}
+**Answer:** This is the discrete-time **Pontryagin Maximum Principle** stationarity condition:
+
+$$\frac{\partial c_{t}}{\partial u_{t}} + B_{t}^T \lambda_{t+1} = 0, \qquad \lambda_{t+1} = \mathbf{v}_{t+1}$$
+
+where $\lambda_{t}$ is the **costate** (adjoint variable). iLQR converges precisely when the KKT conditions are satisfied.
+:::
+-->
 </section>
 <section id="ilqr-complete-algorithm" class="slide level2 smaller">
 <h2>iLQR: Complete Algorithm</h2>
@@ -520,8 +521,8 @@ Three-panel figure:
 <tbody>
 <tr class="odd">
 <td>Dynamics</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>t</mi></msub><msub><mi>x</mi><mi>t</mi></msub><mo>+</mo><msub><mi>B</mi><mi>t</mi></msub><msub><mi>u</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">A_{t} x_{t} + B_{t} u_{t}</annotation></semantics></math></td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>A</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub><mo>+</mo><msub><mi>B</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>u</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\bar{x}_{t+1} + A_{t} \delta x_{t} + B_{t} \delta u_{t}</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>A</mi><mi>t</mi></msub><msub><mi>x</mi><mi>t</mi></msub><mo>+</mo><msub><mi>B</mi><mi>t</mi></msub><msub><mi>u</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">x_{t+1} = A_{t} x_{t} + B_{t} u_{t}</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><msub><mi>x</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>A</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub><mo>+</mo><msub><mi>B</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>u</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\delta {x}_{t+1} = A_{t} \delta x_{t} + B_{t} \delta u_{t}</annotation></semantics></math></td>
 </tr>
 <tr class="even">
 <td>Cost</td>
@@ -559,37 +560,32 @@ Three-panel figure:
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="convergence" class="title-slide slide level1 center">
-<h1>Convergence</h1>
-
 </section>
 <section id="demo-iterates" class="slide level2">
 <h2>Demo: Iterates</h2>
 
-<img data-src="ilqr_files/figure-revealjs/cell-3-output-1.png" class="r-stretch"><p>&nbsp;</p>
-</section>
-<section id="demo-iterates-1" class="slide level2 smaller">
-<h2>Demo: Iterates</h2>
-<p>Pendulum swing-up from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>θ</mi><mn>0</mn></msub><mo>=</mo><mn>3.0</mn></mrow><annotation encoding="application/x-tex">\theta_0 = 3.0</annotation></semantics></math> rad, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>200</mn></mrow><annotation encoding="application/x-tex">T = 200</annotation></semantics></math> steps. Snapshots at iterations 0, 1, 2, 4, 8, 15, 25, 50, 100 (darker = later).</p>
-<div class="fragment" data-fragment-index="1">
-<p><strong>Phase portrait (left):</strong> successive iterates sweep from the initial open-loop trajectory toward the swing-up.</p>
-<p><strong>Cost vs.&nbsp;iteration (right, log scale):</strong></p>
-<ul>
-<li>Early iterations: large cost drops (big <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>t</mi></msub><annotation encoding="application/x-tex">k_{t}</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\alpha = 1</annotation></semantics></math> accepted)</li>
-<li>Later iterations: smaller refinements, curve steepens → superlinear convergence near optimum</li>
-</ul>
-</div>
-<div class="fragment" data-fragment-index="2">
-<div class="callout callout-warning no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><strong>Discussion:</strong> Even at iteration 0 the trajectory stays bounded. Why? The <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mi>t</mi></msub><annotation encoding="application/x-tex">K_{t}</annotation></semantics></math> feedback keeps each rollout near the nominal — without it, early iterates would be far more erratic.</p>
-</div>
-</div>
-</div>
-</div>
+<img data-src="ilqr_files/figure-revealjs/cell-3-output-1.png" class="r-stretch"><p>Pendulum swing-up from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>θ</mi><mn>0</mn></msub><mo>=</mo><mn>3.0</mn></mrow><annotation encoding="application/x-tex">\theta_0 = 3.0</annotation></semantics></math> rad, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>200</mn></mrow><annotation encoding="application/x-tex">T = 200</annotation></semantics></math> steps. Snapshots at iterations 0, 1, 2, 4, 8, 15, 25, 50, 100 (darker = later).</p>
+<!--
+## Demo: Iterates {.smaller}
+
+
+
+
+::: {.fragment fragment-index=1}
+**Phase portrait (left):** successive iterates sweep from the initial open-loop trajectory toward the swing-up.
+
+**Cost vs. iteration (right, log scale):**
+
+- Early iterations: large cost drops (big $k_{t}$, $\alpha = 1$ accepted)
+- Later iterations: smaller refinements, curve steepens → superlinear convergence near optimum
+:::
+
+::: {.fragment fragment-index=2}
+::: {.callout-warning appearance="minimal"}
+**Discussion:** Even at iteration 0 the trajectory stays bounded. Why? The $K_{t}$ feedback keeps each rollout near the nominal — without it, early iterates would be far more erratic.
+:::
+:::
+-->
 </section></section>
 <section>
 <section id="extensions" class="title-slide slide level1 center">
@@ -638,19 +634,14 @@ Three-panel figure:
 </tr>
 </tbody>
 </table>
-</section></section>
-<section>
-<section id="summary" class="title-slide slide level1 center">
-<h1>Summary</h1>
-
 </section>
-<section id="summary-1" class="slide level2 smaller">
+<section id="summary" class="slide level2 smaller">
 <h2>Summary</h2>
 <p><strong>Forward pass update:</strong> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>u</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>=</mo><msub><mover><mi>u</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo>+</mo><mi>α</mi><mspace width="0.167em"></mspace><msub><mi>k</mi><mi>t</mi></msub><mo>+</mo><msub><mi>K</mi><mi>t</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>−</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>,</mo><msub><mover><mi>u</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{u}_{t} = \bar{u}_{t} + \alpha\, k_{t} + K_{t}(\hat{x}_{t} - \bar{x}_{t}), \qquad \hat{x}_{t+1} = f(\hat{x}_{t}, \hat{u}_{t})</annotation></semantics></math></p>
 <div class="fragment" data-fragment-index="1">
 <ul>
 <li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> scales only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>t</mi></msub><annotation encoding="application/x-tex">k_{t}</annotation></semantics></math> — the Newton search direction in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math></li>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">K_{t} \delta x_{t}</annotation></semantics></math> corrects for nonlinear drift; it is not a search direction unless dynamics are linear</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">K_{t} \delta x_{t}</annotation></semantics></math> corrects for nonlinear drift</li>
 <li>Using nonlinear dynamics keeps the trajectory <strong>feasible</strong> at every iteration</li>
 </ul>
 </div>
@@ -659,36 +650,17 @@ Three-panel figure:
 <p><strong>Convergence ↔︎ optimality:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\hat{q}_u = 0</annotation></semantics></math> is the discrete-time PMP stationarity condition</p>
 <p><strong>DDP vs.&nbsp;iLQR:</strong> dynamics Hessian terms improve convergence rate but are rarely worth the cost</p>
 </div>
-</section>
-<section id="summary-2" class="slide level2 smaller">
-<h2>Summary</h2>
-<p><strong>Computational complexity per iteration:</strong></p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Step</th>
-<th>Cost</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Backward pass</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝒪</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>T</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo>+</mo><msup><mi>m</mi><mn>3</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{O}(T(n^3 + m^3))</annotation></semantics></math> — matrix inversions dominate</td>
-</tr>
-<tr class="even">
-<td>Forward pass (per line-search trial)</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝒪</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>T</mi><mo>⋅</mo><mrow><mtext mathvariant="normal">cost of </mtext><mspace width="0.333em"></mspace></mrow><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{O}(T \cdot \text{cost of } f)</annotation></semantics></math></td>
-</tr>
-<tr class="odd">
-<td>Iterations to convergence</td>
-<td>Typically 10–100 for smooth problems</td>
-</tr>
-</tbody>
-</table>
+<!--
+## Summary {.smaller}
+
+**Computational complexity per iteration:**
+
+| Step | Cost |
+|------|------|
+| Backward pass | $\mathcal{O}(T(n^3 + m^3))$ — matrix inversions dominate |
+| Forward pass (per line-search trial) | $\mathcal{O}(T \cdot \text{cost of } f)$ |
+| Iterations to convergence | Typically 10–100 for smooth problems |
+-->
 
 
 </section></section>
