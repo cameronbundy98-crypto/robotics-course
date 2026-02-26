@@ -237,15 +237,15 @@
 <section id="backward-pass-q-function" class="slide level2 smaller">
 <h2>Backward Pass: Q-function</h2>
 <p>The Q-function for the deviation problem:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>Q</mi><mo accent="true">̃</mo></mover><mi>t</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>δ</mi><mi>x</mi><mo>,</mo><mi>δ</mi><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≈</mo><mtext mathvariant="normal">const</mtext><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>Q</mi><mi>x</mi></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>Q</mi><mi>u</mi></msub></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mspace width="-0.167em"></mspace><mi>T</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>x</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>u</mi></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>x</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>u</mi></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mspace width="-0.167em"></mspace><mi>T</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>Q</mi><mrow><mi>x</mi><mi>x</mi></mrow></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>Q</mi><mrow><mi>x</mi><mi>u</mi></mrow></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>Q</mi><mrow><mi>u</mi><mi>x</mi></mrow></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow></msub></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>x</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>u</mi></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\tilde{Q}_{t}(\delta x, \delta u) \approx \text{const} + \begin{bmatrix}Q_x \\ Q_u\end{bmatrix}^{\!T} \begin{bmatrix}\delta x \\ \delta u\end{bmatrix} + \frac{1}{2}\begin{bmatrix}\delta x \\ \delta u\end{bmatrix}^{\!T} \begin{bmatrix}Q_{xx} &amp; Q_{xu} \\ Q_{ux} &amp; Q_{uu}\end{bmatrix}\begin{bmatrix}\delta x \\ \delta u\end{bmatrix}</annotation></semantics></math></p>
-<p>Backward recursion (initialize <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mo>,</mo><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>c</mi><mrow><mi>T</mi><mo>,</mo><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">V_{T,x} = c_{T,x}</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>c</mi><mrow><mi>T</mi><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">V_{T,xx} = c_{T,xx}</annotation></semantics></math>):</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>x</mi></msub><mo>=</mo><msub><mi>q</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>A</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi></mrow></msub><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>Q</mi><mi>u</mi></msub><mo>=</mo><msub><mi>r</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">Q_x = q_t + A_{t}^T V_{t+1,x}, \qquad Q_u = r_t + B_{t}^T V_{t+1,x}</annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>c</mi><mrow><mi>t</mi><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><mo>+</mo><msubsup><mi>A</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><msub><mi>A</mi><mi>t</mi></msub><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow></msub><mo>=</mo><msub><mi>c</mi><mrow><mi>t</mi><mo>,</mo><mi>u</mi><mi>u</mi></mrow></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><msub><mi>B</mi><mi>t</mi></msub><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>Q</mi><mrow><mi>u</mi><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>c</mi><mrow><mi>t</mi><mo>,</mo><mi>u</mi><mi>x</mi></mrow></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><msub><mi>A</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">Q_{xx} = c_{t,xx} + A_{t}^T V_{t+1,xx} A_{t}, \quad Q_{uu} = c_{t,uu} + B_{t}^T V_{t+1,xx} B_{t}, \quad Q_{ux} = c_{t,ux} + B_{t}^T V_{t+1,xx} A_{t}</annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>=</mo><msubsup><mi>Q</mi><mi>t</mi><mrow><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi></mrow></msubsup><mo>+</mo><msubsup><mi>A</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><msub><mi>A</mi><mi>t</mi></msub><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow></msub><mo>=</mo><msub><mi>R</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><msub><mi>B</mi><mi>t</mi></msub><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>Q</mi><mrow><mi>u</mi><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>S</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><msub><mi>A</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">Q_{xx} = Q_t^{cost} + A_{t}^T V_{t+1,xx} A_{t}, \quad Q_{uu} = R_t + B_{t}^T V_{t+1,xx} B_{t}, \quad Q_{ux} = S_t + B_{t}^T V_{t+1,xx} A_{t}</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>Q</mi><mo accent="true">̃</mo></mover><mi>t</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>δ</mi><mi>x</mi><mo>,</mo><mi>δ</mi><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≈</mo><mtext mathvariant="normal">const</mtext><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>x</mi></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mspace width="-0.167em"></mspace><mi>T</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>x</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>u</mi></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>x</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>u</mi></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mspace width="-0.167em"></mspace><mi>T</mi></mrow></msup><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>x</mi></mrow></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>u</mi></mrow></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>x</mi></mrow></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow></msub></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>x</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>δ</mi><mi>u</mi></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\tilde{Q}_{t}(\delta x, \delta u) \approx \text{const} + \begin{bmatrix}\hat{q}_x \\ \hat{q}_u\end{bmatrix}^{\!T} \begin{bmatrix}\delta x \\ \delta u\end{bmatrix} + \frac{1}{2}\begin{bmatrix}\delta x \\ \delta u\end{bmatrix}^{\!T} \begin{bmatrix}\hat{Q}_{xx} &amp; \hat{Q}_{xu} \\ \hat{Q}_{ux} &amp; \hat{Q}_{uu}\end{bmatrix}\begin{bmatrix}\delta x \\ \delta u\end{bmatrix}</annotation></semantics></math></p>
+<p>Backward recursion (initialize <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐯</mi><mi>T</mi></msub><mo>=</mo><msub><mi>𝐜</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{v}_{T} = \mathbf{c}_{T}</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐕</mi><mi>T</mi></msub><mo>=</mo><msub><mi>𝐂</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{V}_{T} = \mathbf{C}_{T}</annotation></semantics></math>):</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>x</mi></msub><mo>=</mo><msub><mi>q</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>A</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>𝐯</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>,</mo><mspace width="2.0em"></mspace><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>=</mo><msub><mi>r</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>𝐯</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\hat{q}_x = q_t + A_{t}^T \mathbf{v}_{t+1}, \qquad \hat{q}_u = r_t + B_{t}^T \mathbf{v}_{t+1}</annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>=</mo><msubsup><mi>Q</mi><mi>t</mi><mrow><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi></mrow></msubsup><mo>+</mo><msubsup><mi>A</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>𝐕</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><msub><mi>A</mi><mi>t</mi></msub><mo>,</mo><mspace width="1.0em"></mspace><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow></msub><mo>=</mo><msub><mi>R</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>𝐕</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><msub><mi>B</mi><mi>t</mi></msub><mo>,</mo><mspace width="1.0em"></mspace><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>S</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>𝐕</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><msub><mi>A</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\hat{Q}_{xx} = Q_t^{cost} + A_{t}^T \mathbf{V}_{t+1} A_{t}, \quad \hat{Q}_{uu} = R_t + B_{t}^T \mathbf{V}_{t+1} B_{t}, \quad \hat{Q}_{ux} = S_t + B_{t}^T \mathbf{V}_{t+1} A_{t}</annotation></semantics></math></p>
 </section>
 <section id="backward-pass-optimal-gains" class="slide level2 smaller">
 <h2>Backward Pass: Optimal Gains</h2>
-<p>Minimize <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>Q</mi><mo accent="true">̃</mo></mover><mi>t</mi></msub><annotation encoding="application/x-tex">\tilde{Q}_{t}</annotation></semantics></math> over <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mi>u</mi></mrow><annotation encoding="application/x-tex">\delta u</annotation></semantics></math> (holding <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\delta x</annotation></semantics></math> fixed): <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><msub><mover><mi>Q</mi><mo accent="true">̃</mo></mover><mi>t</mi></msub></mrow><mrow><mi>∂</mi><mspace width="0.167em"></mspace><mi>δ</mi><mi>u</mi></mrow></mfrac><mo>=</mo><msub><mi>Q</mi><mi>u</mi></msub><mo>+</mo><msub><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow></msub><mspace width="0.167em"></mspace><mi>δ</mi><mi>u</mi><mo>+</mo><msub><mi>Q</mi><mrow><mi>u</mi><mi>x</mi></mrow></msub><mspace width="0.167em"></mspace><mi>δ</mi><mi>x</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\frac{\partial \tilde{Q}_{t}}{\partial \,\delta u} = Q_u + Q_{uu}\,\delta u + Q_{ux}\,\delta x = 0</annotation></semantics></math></p>
+<p>Minimize <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>Q</mi><mo accent="true">̃</mo></mover><mi>t</mi></msub><annotation encoding="application/x-tex">\tilde{Q}_{t}</annotation></semantics></math> over <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mi>u</mi></mrow><annotation encoding="application/x-tex">\delta u</annotation></semantics></math> (holding <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\delta x</annotation></semantics></math> fixed): <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><msub><mover><mi>Q</mi><mo accent="true">̃</mo></mover><mi>t</mi></msub></mrow><mrow><mi>∂</mi><mspace width="0.167em"></mspace><mi>δ</mi><mi>u</mi></mrow></mfrac><mo>=</mo><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>+</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow></msub><mspace width="0.167em"></mspace><mi>δ</mi><mi>u</mi><mo>+</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>x</mi></mrow></msub><mspace width="0.167em"></mspace><mi>δ</mi><mi>x</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\frac{\partial \tilde{Q}_{t}}{\partial \,\delta u} = \hat{q}_u + \hat{Q}_{uu}\,\delta u + \hat{Q}_{ux}\,\delta x = 0</annotation></semantics></math></p>
 <div class="fragment" data-fragment-index="1">
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟹</mo><mi>δ</mi><msubsup><mi>u</mi><mi>t</mi><mo>*</mo></msubsup><mo>=</mo><munder><munder><mrow><mi>−</mi><msubsup><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi>Q</mi><mi>u</mi></msub></mrow><mo accent="true">⏟</mo></munder><msub><mi>k</mi><mi>t</mi></msub></munder><mo>+</mo><munder><munder><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><msubsup><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi>Q</mi><mrow><mi>u</mi><mi>x</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo accent="true">⏟</mo></munder><msub><mi>K</mi><mi>t</mi></msub></munder><mspace width="0.167em"></mspace><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\implies \delta u_{t}^* = \underbrace{-Q_{uu}^{-1} Q_u}_{k_{t}} + \underbrace{(-Q_{uu}^{-1} Q_{ux})}_{K_{t}}\,\delta x_{t}</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⟹</mo><mi>δ</mi><msubsup><mi>u</mi><mi>t</mi><mo>*</mo></msubsup><mo>=</mo><munder><munder><mrow><mi>−</mi><msubsup><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub></mrow><mo accent="true">⏟</mo></munder><msub><mi>k</mi><mi>t</mi></msub></munder><mo>+</mo><munder><munder><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><msubsup><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>x</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo accent="true">⏟</mo></munder><msub><mi>K</mi><mi>t</mi></msub></munder><mspace width="0.167em"></mspace><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\implies \delta u_{t}^* = \underbrace{-\hat{Q}_{uu}^{-1} \hat{q}_u}_{k_{t}} + \underbrace{(-\hat{Q}_{uu}^{-1} \hat{Q}_{ux})}_{K_{t}}\,\delta x_{t}</annotation></semantics></math></p>
 </div>
 <div class="fragment" data-fragment-index="2">
 <table class="caption-top">
@@ -264,23 +264,23 @@
 <tbody>
 <tr class="odd">
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>∈</mo><msup><mi>ℝ</mi><mi>m</mi></msup></mrow><annotation encoding="application/x-tex">k_{t} \in \mathbb{R}^m</annotation></semantics></math></td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msubsup><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi>Q</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">-Q_{uu}^{-1} Q_u</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msubsup><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">-\hat{Q}_{uu}^{-1} \hat{q}_u</annotation></semantics></math></td>
 <td><strong>Feedforward</strong> — optimization step</td>
 </tr>
 <tr class="even">
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>t</mi></msub><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>m</mi><mo>×</mo><mi>n</mi></mrow></msup></mrow><annotation encoding="application/x-tex">K_{t} \in \mathbb{R}^{m \times n}</annotation></semantics></math></td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msubsup><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi>Q</mi><mrow><mi>u</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">-Q_{uu}^{-1} Q_{ux}</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msubsup><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">-\hat{Q}_{uu}^{-1} \hat{Q}_{ux}</annotation></semantics></math></td>
 <td><strong>Feedback</strong> — state-dependent correction</td>
 </tr>
 </tbody>
 </table>
-<p>Value function updated as: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>t</mi><mo>,</mo><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>Q</mi><mi>x</mi></msub><mo>+</mo><msub><mi>Q</mi><mrow><mi>x</mi><mi>u</mi></mrow></msub><msub><mi>k</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">V_{t,x} = Q_x + Q_{xu} k_{t}</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="1.0em"></mspace><msub><mi>V</mi><mrow><mi>t</mi><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>Q</mi><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>+</mo><msub><mi>Q</mi><mrow><mi>x</mi><mi>u</mi></mrow></msub><msub><mi>K</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\quad V_{t,xx} = Q_{xx} + Q_{xu} K_{t}</annotation></semantics></math></p>
+<p>Value function updated as: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐯</mi><mi>t</mi></msub><mo>=</mo><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>x</mi></msub><mo>+</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>u</mi></mrow></msub><msub><mi>k</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{v}_{t} = \hat{q}_x + \hat{Q}_{xu} k_{t}</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="1.0em"></mspace><msub><mi>𝐕</mi><mi>t</mi></msub><mo>=</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>+</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>u</mi></mrow></msub><msub><mi>K</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\quad \mathbf{V}_{t} = \hat{Q}_{xx} + \hat{Q}_{xu} K_{t}</annotation></semantics></math></p>
 </div>
 <div class="fragment" data-fragment-index="3">
 <div class="callout callout-note no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p>At the optimum <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>u</mi></msub><mo>=</mo><msub><mi>r</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi></mrow></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Q_u = r_t + B_{t}^T V_{t+1,x} = 0</annotation></semantics></math>, so <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k_{t} = 0</annotation></semantics></math> — identical to LQR.</p>
+<p>At the optimum <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>=</mo><msub><mi>r</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>𝐯</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\hat{q}_u = r_t + B_{t}^T \mathbf{v}_{t+1} = 0</annotation></semantics></math>, so <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k_{t} = 0</annotation></semantics></math> — identical to LQR.</p>
 </div>
 </div>
 </div>
@@ -291,9 +291,9 @@
 <h1>Forward Pass</h1>
 
 </section>
-<section id="the-forward-pass-update" class="slide level2 smaller">
+<section id="the-forward-pass-update" class="slide level2">
 <h2>The Forward Pass Update</h2>
-<p>Starting from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mn>0</mn></msub><mo>=</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\hat{x}_0 = \bar{x}_0</annotation></semantics></math>, for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>T</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t = 0, 1, \dots, T-1</annotation></semantics></math>:</p>
+<p>Starting from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mn>0</mn></msub><mo>=</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\hat{x}_0 = \bar{x}_0</annotation></semantics></math><sup>1</sup>, for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>T</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t = 0, 1, \dots, T-1</annotation></semantics></math>:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><menclose notation="box"><mrow><msub><mover><mi>u</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>=</mo><msub><mover><mi>u</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo>+</mo><mi>α</mi><mspace width="0.167em"></mspace><msub><mi>k</mi><mi>t</mi></msub><mo>+</mo><msub><mi>K</mi><mi>t</mi></msub><munder><munder><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>−</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo accent="true">⏟</mo></munder><mrow><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow></munder></mrow></menclose><annotation encoding="application/x-tex">\boxed{\hat{u}_{t} = \bar{u}_{t} + \alpha\, k_{t} + K_{t}\underbrace{(\hat{x}_{t} - \bar{x}_{t})}_{\delta x_{t}}}</annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>f</mi><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>,</mo><mspace width="0.278em"></mspace><msub><mover><mi>u</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="2.0em"></mspace><mo>←</mo><mtext mathvariant="normal">true nonlinear dynamics</mtext></mrow><annotation encoding="application/x-tex">\hat{x}_{t+1} = f\!\left(\hat{x}_{t},\; \hat{u}_{t}\right) \qquad \leftarrow \text{true nonlinear dynamics}</annotation></semantics></math></p>
 <p><br></p>
 <div class="callout callout-warning no-icon callout-style-simple">
@@ -303,168 +303,113 @@
 </div>
 </div>
 </div>
-</section>
-<section id="why-alpha-scales-only-k_t" class="slide level2 smaller">
-<h2>Why <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> Scales Only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>t</mi></msub><annotation encoding="application/x-tex">k_{t}</annotation></semantics></math></h2>
-<p>Both <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>t</mi></msub><annotation encoding="application/x-tex">k_{t}</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">K_{t} \delta x_{t}</annotation></semantics></math> arise from minimizing <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>Q</mi><mo accent="true">̃</mo></mover><mi>t</mi></msub><annotation encoding="application/x-tex">\tilde{Q}_{t}</annotation></semantics></math> — both are part of the optimal solution to the linearized sub-problem. The distinction is <strong>open-loop vs.&nbsp;closed-loop</strong>:</p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 47%">
-<col style="width: 26%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Term</th>
-<th>Character</th>
-<th>Role</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>=</mo><mi>−</mi><msubsup><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi>Q</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">k_{t} = -Q_{uu}^{-1} Q_u</annotation></semantics></math></td>
-<td><strong>Open-loop</strong> (feedforward)</td>
-<td>Depends only on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>; the search direction</td>
-</tr>
-<tr class="even">
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">K_{t} \delta x_{t}</annotation></semantics></math></td>
-<td><strong>Closed-loop</strong> (feedback)</td>
-<td>Reacts to whatever <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\delta x_{t}</annotation></semantics></math> the nonlinear rollout produces</td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-note no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><strong>Connection to LQR:</strong> In LQR the full optimal policy is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>u</mi><mi>t</mi><mo>*</mo></msubsup><mo>=</mo><mi>−</mi><msub><mi>K</mi><mi>t</mi></msub><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">u_t^* = -K_t x_t</annotation></semantics></math> — the feedback gain IS the solution, not a correction. iLQR adds the feedforward <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>t</mi></msub><annotation encoding="application/x-tex">k_t</annotation></semantics></math> only because <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>u</mi></msub><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Q_u \neq 0</annotation></semantics></math> off the optimum; at convergence <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k_t \to 0</annotation></semantics></math> and only the feedback remains.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="why-alpha-scales-only-k_t-1" class="slide level2 smaller">
-<h2>Why <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> Scales Only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>t</mi></msub><annotation encoding="application/x-tex">k_{t}</annotation></semantics></math></h2>
-<div class="fragment" data-fragment-index="1">
-<p><strong>Why <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> does not multiply <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">K_{t} \delta x_{t}</annotation></semantics></math>:</strong></p>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> is a step size along the open-loop search direction <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>t</mi></msub><annotation encoding="application/x-tex">k_{t}</annotation></semantics></math>. The closed-loop term <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">K_{t} \delta x_{t}</annotation></semantics></math> should always be applied at full strength — <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\delta x_{t}</annotation></semantics></math> is determined by the nonlinear dynamics, not by how aggressively we step. Scaling it by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> would under-correct for nonlinear drift without any line-search benefit.</p>
-</div>
-<div class="fragment" data-fragment-index="2">
-<p><strong>Special case — linearized forward pass:</strong> if <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\delta x_{t}</annotation></semantics></math> propagates through <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub><mo>+</mo><msub><mi>B</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>u</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">A_{t} \delta x_{t} + B_{t} \delta u_{t}</annotation></semantics></math>, then <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\delta x_{t}</annotation></semantics></math> is also a Newton direction and one <em>could</em> scale the full pair <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>k</mi><mi>t</mi></msub><mo>+</mo><msub><mi>K</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\alpha(k_{t} + K_{t} \delta x_{t})</annotation></semantics></math>. The nonlinear pass breaks this symmetry, leaving <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>t</mi></msub><annotation encoding="application/x-tex">k_{t}</annotation></semantics></math> as the only clean search direction.</p>
-</div>
-</section>
-<section id="thought-experiment" class="slide level2 smaller">
-<h2>Thought Experiment</h2>
-<p>Forward pass: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>u</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>=</mo><msub><mover><mi>u</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo>+</mo><mi>α</mi><mspace width="0.167em"></mspace><msub><mi>k</mi><mi>t</mi></msub><mo>+</mo><msub><mi>K</mi><mi>t</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>−</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{u}_{t} = \bar{u}_{t} + \alpha\, k_{t} + K_{t}(\hat{x}_{t} - \bar{x}_{t})</annotation></semantics></math></p>
-<div class="fragment" data-fragment-index="1">
-<p><strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\alpha = 0</annotation></semantics></math>:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="1.0em"></mspace><msub><mover><mi>u</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>=</mo><msub><mover><mi>u</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo>+</mo><msub><mi>K</mi><mi>t</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>−</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\quad \hat{u}_{t} = \bar{u}_{t} + K_{t}(\hat{x}_{t} - \bar{x}_{t})</annotation></semantics></math></p>
-<ul>
-<li>Feedforward <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>t</mi></msub><annotation encoding="application/x-tex">k_{t}</annotation></semantics></math> is switched off — <strong>no optimization progress</strong></li>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mi>t</mi></msub><annotation encoding="application/x-tex">K_{t}</annotation></semantics></math> corrects for nonlinear drift, keeping the trajectory near nominal</li>
-<li>Cost stays approximately the same</li>
-</ul>
-</div>
-<div class="fragment" data-fragment-index="2">
-<p><strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\alpha = 1</annotation></semantics></math>:</strong> Full Newton step on the open-loop component.</p>
-<ul>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">K_{t} \delta x_{t}</annotation></semantics></math> is applied at full strength throughout — its magnitude is set by the nonlinear dynamics, not by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></li>
-</ul>
-</div>
-<div class="fragment" data-fragment-index="3">
-<p><strong>At <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t = 0</annotation></semantics></math>:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mn>0</mn></msub><mo>=</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\hat{x}_0 = \bar{x}_0</annotation></semantics></math> always, so <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><msub><mi>x</mi><mn>0</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\delta x_0 = 0</annotation></semantics></math>.</p>
-<ul>
-<li>The feedback plays <strong>no role at the first step</strong> regardless of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></li>
-<li>Only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><msub><mi>k</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\alpha k_0</annotation></semantics></math> changes the control there</li>
-<li>Feedback activates only as deviations accumulate along the horizon</li>
-</ul>
-</div>
-</section></section>
-<section>
-<section id="nonlinear-vs.-linearized" class="title-slide slide level1 center">
-<h1>Nonlinear vs.&nbsp;Linearized</h1>
+<!--
+## Why $\alpha$ Scales Only $k_{t}$ {.smaller}
 
-</section>
-<section id="two-choices-for-the-forward-pass" class="slide level2 smaller">
-<h2>Two Choices for the Forward Pass</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>Nonlinear (standard iLQR)</strong></th>
-<th><strong>Linearized</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>State propagation</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>,</mo><msub><mover><mi>u</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{x}_{t+1} = f(\hat{x}_{t}, \hat{u}_{t})</annotation></semantics></math></td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><msub><mi>x</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>A</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub><mo>+</mo><msub><mi>B</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>u</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\delta x_{t+1} = A_{t} \delta x_{t} + B_{t} \delta u_{t}</annotation></semantics></math></td>
-</tr>
-<tr class="even">
-<td>Trajectory feasible?</td>
-<td><strong>Yes</strong> — on true dynamics</td>
-<td>No — satisfies only linear model</td>
-</tr>
-<tr class="odd">
-<td>Is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\delta x_{t}</annotation></semantics></math> a Newton direction?</td>
-<td>No — nonlinear residuals corrupt it</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> appropriately scales</td>
-<td>Only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>t</mi></msub><annotation encoding="application/x-tex">k_{t}</annotation></semantics></math></td>
-<td>Full <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>k</mi><mi>t</mi></msub><mo>+</mo><msub><mi>K</mi><mi>t</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\alpha(k_{t} + K_{t} \delta x_{t})</annotation></semantics></math></td>
-</tr>
-<tr class="odd">
-<td>Best suited for</td>
-<td>Highly nonlinear systems</td>
-<td>Near-optimal, mildly nonlinear</td>
-</tr>
-</tbody>
-</table>
-<div class="fragment">
-<div class="callout callout-note no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p>Near convergence, linearization error <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\to 0</annotation></semantics></math> and the two approaches become equivalent. The difference matters most in the early iterations.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="demo-nonlinear-vs.-linearized" class="slide level2">
-<h2>Demo: Nonlinear vs.&nbsp;Linearized</h2>
-<div id="db6e5f3a" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Final true costs:  nonlinear=1266.6992  linear=1266.3377</code></pre>
-</div>
+Both $k_{t}$ and $K_{t} \delta x_{t}$ arise from minimizing $\tilde{Q}_{t}$ — both are part of the optimal solution to the linearized sub-problem. The distinction is **open-loop vs. closed-loop**:
 
-</div>
-<img data-src="ilqr_files/figure-revealjs/cell-2-output-2.png" class="r-stretch"><p>&nbsp;</p>
-</section>
-<section id="demo-nonlinear-vs.-linearized-1" class="slide level2 smaller">
-<h2>Demo: Nonlinear vs.&nbsp;Linearized</h2>
-<p>Pendulum swing-up: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>θ</mi><mn>0</mn></msub><mo>=</mo><mn>2.5</mn></mrow><annotation encoding="application/x-tex">\theta_0 = 2.5</annotation></semantics></math> rad, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">T = 100</annotation></semantics></math>, zero-control initialization.</p>
-<p>Three-panel figure:</p>
-<ul>
-<li><strong>Left (blue):</strong> Nonlinear iLQR iterates — actual trajectories converge to swing-up</li>
-<li><strong>Center (red):</strong> Linearized iterates — actual trajectories (rolled out with true <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>) diverge or stagnate</li>
-<li><strong>Right:</strong> True cost vs.&nbsp;iteration for both methods on a log scale</li>
-</ul>
-<div class="fragment">
-<div class="callout callout-warning no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><strong>What to observe:</strong> The linearized method produces controls that look optimal in the linear model, but the true (nonlinear) trajectory they generate is far from the goal. The nonlinear pass wins decisively on this problem.</p>
-</div>
-</div>
-</div>
-</div>
-</section></section>
+| Term | Character | Role |
+|------|-----------|------|
+| $k_{t} = -\hat{Q}_{uu}^{-1} \hat{q}_u$ | **Open-loop** (feedforward) | Depends only on $t$; the search direction |
+| $K_{t} \delta x_{t}$ | **Closed-loop** (feedback) | Reacts to whatever $\delta x_{t}$ the nonlinear rollout produces |
+
+::: {.callout-note appearance="minimal"}
+**Connection to LQR:** In LQR the full optimal policy is $u_t^* = -K_t x_t$ — the feedback gain IS the solution, not a correction. iLQR adds the feedforward $k_t$ only because $\hat{q}_u \neq 0$ off the optimum; at convergence $k_t \to 0$ and only the feedback remains.
+:::
+
+## Why $\alpha$ Scales Only $k_{t}$ {.smaller}
+::: {.fragment fragment-index=1}
+**Why $\alpha$ does not multiply $K_{t} \delta x_{t}$:**
+
+$\alpha$ is a step size along the open-loop search direction $k_{t}$. The closed-loop term $K_{t} \delta x_{t}$ should always be applied at full strength — $\delta x_{t}$ is determined by the nonlinear dynamics, not by how aggressively we step. Scaling it by $\alpha$ would under-correct for nonlinear drift without any line-search benefit.
+:::
+
+::: {.fragment fragment-index=2}
+**Special case — linearized forward pass:** if $\delta x_{t}$ propagates through $A_{t} \delta x_{t} + B_{t} \delta u_{t}$, then $\delta x_{t}$ is also a Newton direction and one *could* scale the full pair $\alpha(k_{t} + K_{t} \delta x_{t})$. The nonlinear pass breaks this symmetry, leaving $k_{t}$ as the only clean search direction.
+:::
+
+## Thought Experiment {.smaller}
+
+Forward pass: $\hat{u}_{t} = \bar{u}_{t} + \alpha\, k_{t} + K_{t}(\hat{x}_{t} - \bar{x}_{t})$
+
+::: {.fragment fragment-index=1}
+**$\alpha = 0$:** $\quad \hat{u}_{t} = \bar{u}_{t} + K_{t}(\hat{x}_{t} - \bar{x}_{t})$
+
+- Feedforward $k_{t}$ is switched off — **no optimization progress**
+- $K_{t}$ corrects for nonlinear drift, keeping the trajectory near nominal
+- Cost stays approximately the same
+:::
+
+::: {.fragment fragment-index=2}
+**$\alpha = 1$:** Full Newton step on the open-loop component.
+
+- $K_{t} \delta x_{t}$ is applied at full strength throughout — its magnitude is set by the nonlinear dynamics, not by $\alpha$
+:::
+
+::: {.fragment fragment-index=3}
+**At $t = 0$:** $\hat{x}_0 = \bar{x}_0$ always, so $\delta x_0 = 0$.
+
+- The feedback plays **no role at the first step** regardless of $\alpha$
+- Only $\alpha k_0$ changes the control there
+- Feedback activates only as deviations accumulate along the horizon
+:::
+
+# Nonlinear vs. Linearized
+
+## Two Choices for the Forward Pass {.smaller}
+
+|  | **Nonlinear (standard iLQR)** | **Linearized** |
+|---|---|---|
+| State propagation | $\hat{x}_{t+1} = f(\hat{x}_{t}, \hat{u}_{t})$ | $\delta x_{t+1} = A_{t} \delta x_{t} + B_{t} \delta u_{t}$ |
+| Trajectory feasible? | **Yes** — on true dynamics | No — satisfies only linear model |
+| Is $\delta x_{t}$ a Newton direction? | No — nonlinear residuals corrupt it | Yes |
+| $\alpha$ appropriately scales | Only $k_{t}$ | Full $\alpha(k_{t} + K_{t} \delta x_{t})$ |
+| Best suited for | Highly nonlinear systems | Near-optimal, mildly nonlinear |
+
+::: {.fragment}
+::: {.callout-note appearance="minimal"}
+Near convergence, linearization error $\to 0$ and the two approaches become equivalent. The difference matters most in the early iterations.
+:::
+:::
+
+
+## Demo: Nonlinear vs. Linearized 
+
+::: {#291f010c .cell execution_count=1}
+
+::: {.cell-output .cell-output-stdout}
+```
+
+Final true costs:  nonlinear=1266.6992  linear=1266.3377
+```
+:::
+
+::: {.cell-output .cell-output-display}
+![](ilqr_files/figure-revealjs/cell-2-output-2.png){}
+:::
+:::
+
+
+\ 
+
+## Demo: Nonlinear vs. Linearized {.smaller}
+
+
+Pendulum swing-up: $\theta_0 = 2.5$ rad, $T = 100$, zero-control initialization.
+
+Three-panel figure:
+
+- **Left (blue):** Nonlinear iLQR iterates — actual trajectories converge to swing-up
+- **Center (red):** Linearized iterates — actual trajectories (rolled out with true $f$) diverge or stagnate
+- **Right:** True cost vs. iteration for both methods on a log scale
+
+::: {.fragment}
+::: {.callout-warning appearance="minimal"}
+**What to observe:** The linearized method produces controls that look optimal in the linear model, but the true (nonlinear) trajectory they generate is far from the goal. The nonlinear pass wins decisively on this problem.
+:::
+:::
+-->
+<aside><ol class="aside-footnotes"><li id="fn1"><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>x</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{x}</annotation></semantics></math> is the updated nominal value (originally <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>x</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar{x}</annotation></semantics></math>) of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math></p></li></ol></aside></section></section>
 <section>
 <section id="line-search" class="title-slide slide level1 center">
 <h1>Line Search</h1>
@@ -484,21 +429,21 @@ Final true costs:  nonlinear=1266.6992  linear=1266.3377</code></pre>
 </ol>
 </div>
 <div class="fragment" data-fragment-index="2">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>alpha <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb2-2"><a></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>):</span>
-<span id="cb2-3"><a></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(T):</span>
-<span id="cb2-4"><a></a>        delta_u <span class="op">=</span> K[t] <span class="op">@</span> (x_new[t] <span class="op">-</span> x_nom[t]) <span class="op">+</span> alpha <span class="op">*</span> k_ff[t]</span>
-<span id="cb2-5"><a></a>        u_new[t] <span class="op">=</span> u_nom[t] <span class="op">+</span> delta_u</span>
-<span id="cb2-6"><a></a>        x_new[t<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> f(x_new[t], u_new[t])   <span class="co"># nonlinear step</span></span>
-<span id="cb2-7"><a></a>    <span class="cf">if</span> new_cost <span class="op">&lt;</span> current_cost:</span>
-<span id="cb2-8"><a></a>        <span class="cf">break</span></span>
-<span id="cb2-9"><a></a>    alpha <span class="op">*=</span> <span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>alpha <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb1-2"><a></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>):</span>
+<span id="cb1-3"><a></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(T):</span>
+<span id="cb1-4"><a></a>        delta_u <span class="op">=</span> K[t] <span class="op">@</span> (x_new[t] <span class="op">-</span> x_nom[t]) <span class="op">+</span> alpha <span class="op">*</span> k_ff[t]</span>
+<span id="cb1-5"><a></a>        u_new[t] <span class="op">=</span> u_nom[t] <span class="op">+</span> delta_u</span>
+<span id="cb1-6"><a></a>        x_new[t<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> f(x_new[t], u_new[t])   <span class="co"># nonlinear step</span></span>
+<span id="cb1-7"><a></a>    <span class="cf">if</span> new_cost <span class="op">&lt;</span> current_cost:</span>
+<span id="cb1-8"><a></a>        <span class="cf">break</span></span>
+<span id="cb1-9"><a></a>    alpha <span class="op">*=</span> <span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="predicted-cost-improvement" class="slide level2 smaller">
 <h2>Predicted Cost Improvement</h2>
 <p>The backward pass implicitly computes the predicted improvement:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>J</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>T</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>Q</mi><mi>u</mi><mi>T</mi></msubsup><msub><mi>k</mi><mi>t</mi></msub><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msubsup><mi>k</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow></msub><msub><mi>k</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>−</mi><mfrac><mn>1</mn><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>T</mi><mo>−</mo><mn>1</mn></mrow></munderover><msubsup><mi>k</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow></msub><msub><mi>k</mi><mi>t</mi></msub><mspace width="0.278em"></mspace><mo>≤</mo><mspace width="0.278em"></mspace><mn>0</mn></mrow><annotation encoding="application/x-tex">\Delta J = \sum_{k=0}^{T-1}\left(Q_u^T k_{t} + \frac{1}{2} k_{t}^T Q_{uu} k_{t}\right) = -\frac{1}{2}\sum_{k=0}^{T-1} k_{t}^T Q_{uu} k_{t} \;\leq\; 0</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>J</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>T</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi><mi>T</mi></msubsup><msub><mi>k</mi><mi>t</mi></msub><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msubsup><mi>k</mi><mi>t</mi><mi>T</mi></msubsup><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow></msub><msub><mi>k</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>−</mi><mfrac><mn>1</mn><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>T</mi><mo>−</mo><mn>1</mn></mrow></munderover><msubsup><mi>k</mi><mi>t</mi><mi>T</mi></msubsup><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow></msub><msub><mi>k</mi><mi>t</mi></msub><mspace width="0.278em"></mspace><mo>≤</mo><mspace width="0.278em"></mspace><mn>0</mn></mrow><annotation encoding="application/x-tex">\Delta J = \sum_{k=0}^{T-1}\left(\hat{q}_u^T k_{t} + \frac{1}{2} k_{t}^T \hat{Q}_{uu} k_{t}\right) = -\frac{1}{2}\sum_{k=0}^{T-1} k_{t}^T \hat{Q}_{uu} k_{t} \;\leq\; 0</annotation></semantics></math></p>
 <div class="fragment" data-fragment-index="1">
 <p>This motivates a stronger <strong>Armijo condition</strong>:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>u</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mo>&lt;</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>u</mi><mo accent="true">‾</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>γ</mi><mspace width="0.167em"></mspace><mi>α</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">|</mo><mi>Δ</mi><mi>J</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mi>γ</mi><mo>∈</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">J(\hat{u}) &lt; J(\bar{u}) - \gamma\,\alpha\,|\Delta J|, \qquad \gamma \in (0,1)</annotation></semantics></math></p>
@@ -508,7 +453,7 @@ Final true costs:  nonlinear=1266.6992  linear=1266.3377</code></pre>
 <div class="callout callout-note no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<p><strong>At convergence:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k_{t} \to 0</annotation></semantics></math> (because <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>u</mi></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Q_u \to 0</annotation></semantics></math>), so <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>J</mi><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Delta J \to 0</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\alpha = 1</annotation></semantics></math> is accepted immediately on the first try — the line search costs nothing.</p>
+<p><strong>At convergence:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k_{t} \to 0</annotation></semantics></math> (because <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\hat{q}_u \to 0</annotation></semantics></math>), so <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>J</mi><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Delta J \to 0</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\alpha = 1</annotation></semantics></math> is accepted immediately on the first try — the line search costs nothing.</p>
 </div>
 </div>
 </div>
@@ -516,14 +461,14 @@ Final true costs:  nonlinear=1266.6992  linear=1266.3377</code></pre>
 </section>
 <section id="exercise-optimality-at-convergence" class="slide level2 smaller">
 <h2>Exercise: Optimality at Convergence</h2>
-<p>At convergence, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>=</mo><mi>−</mi><msubsup><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi>Q</mi><mi>u</mi></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k_{t} = -Q_{uu}^{-1} Q_u \to 0</annotation></semantics></math>, which means:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>u</mi></msub><mo>=</mo><msub><mi>r</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi></mrow></msub><mo>=</mo><mn>0</mn><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">for all </mtext><mspace width="0.333em"></mspace></mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">Q_u = r_t + B_{t}^T V_{t+1,x} = 0 \quad \text{for all } t</annotation></semantics></math></p>
+<p>At convergence, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>=</mo><mi>−</mi><msubsup><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k_{t} = -\hat{Q}_{uu}^{-1} \hat{q}_u \to 0</annotation></semantics></math>, which means:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>=</mo><msub><mi>r</mi><mi>t</mi></msub><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>𝐯</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>0</mn><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">for all </mtext><mspace width="0.333em"></mspace></mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">\hat{q}_u = r_t + B_{t}^T \mathbf{v}_{t+1} = 0 \quad \text{for all } t</annotation></semantics></math></p>
 <div class="fragment" data-fragment-index="1">
 <p><strong>Question:</strong> Write out what this says in terms of the original cost and dynamics. What classical optimality condition does it correspond to?</p>
 </div>
 <div class="fragment" data-fragment-index="2">
 <p><strong>Answer:</strong> This is the discrete-time <strong>Pontryagin Maximum Principle</strong> stationarity condition:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><msub><mi>c</mi><mi>t</mi></msub></mrow><mrow><mi>∂</mi><msub><mi>u</mi><mi>t</mi></msub></mrow></mfrac><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>λ</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>0</mn><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>λ</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\frac{\partial c_{t}}{\partial u_{t}} + B_{t}^T \lambda_{t+1} = 0, \qquad \lambda_{t+1} = V_{t+1,x}</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><msub><mi>c</mi><mi>t</mi></msub></mrow><mrow><mi>∂</mi><msub><mi>u</mi><mi>t</mi></msub></mrow></mfrac><mo>+</mo><msubsup><mi>B</mi><mi>t</mi><mi>T</mi></msubsup><msub><mi>λ</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>0</mn><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>λ</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>𝐯</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\frac{\partial c_{t}}{\partial u_{t}} + B_{t}^T \lambda_{t+1} = 0, \qquad \lambda_{t+1} = \mathbf{v}_{t+1}</annotation></semantics></math></p>
 <p>where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>λ</mi><mi>t</mi></msub><annotation encoding="application/x-tex">\lambda_{t}</annotation></semantics></math> is the <strong>costate</strong> (adjoint variable). iLQR converges precisely when the KKT conditions are satisfied.</p>
 </div>
 </section></section>
@@ -543,12 +488,12 @@ Final true costs:  nonlinear=1266.6992  linear=1266.3377</code></pre>
 <p><strong>Input:</strong> initial controls <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>u</mi><mo accent="true">‾</mo></mover><mrow><mn>0</mn><mo>:</mo><mi>T</mi><mo>−</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">\bar{u}_{0:T-1}</annotation></semantics></math>, dynamics <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>t</mi></msub><annotation encoding="application/x-tex">f_{t}</annotation></semantics></math>, costs <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mi>t</mi></msub><annotation encoding="application/x-tex">c_{t}</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mi>T</mi></msub><annotation encoding="application/x-tex">c_{T}</annotation></semantics></math></p>
 <p><strong>1. Rollout:</strong> simulate <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>f</mi><mi>t</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo>,</mo><msub><mover><mi>u</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\bar{x}_{t+1} = f_{t}(\bar{x}_{t}, \bar{u}_{t})</annotation></semantics></math> to obtain the nominal trajectory.</p>
 <p><strong>2. Repeat until convergence:</strong></p>
-<p><strong>2a. Backward pass</strong> — init <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mo>,</mo><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>c</mi><mrow><mi>T</mi><mo>,</mo><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">V_{T,x} = c_{T,x}</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>c</mi><mrow><mi>T</mi><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">V_{T,xx} = c_{T,xx}</annotation></semantics></math>; for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mi>T</mi><mo>−</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t = T-1, \dots, 0</annotation></semantics></math>:</p>
+<p><strong>2a. Backward pass</strong> — init <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐯</mi><mi>T</mi></msub><mo>=</mo><msub><mi>𝐜</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{v}_{T} = \mathbf{c}_{T}</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐕</mi><mi>T</mi></msub><mo>=</mo><msub><mi>𝐂</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{V}_{T} = \mathbf{C}_{T}</annotation></semantics></math>; for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mi>T</mi><mo>−</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t = T-1, \dots, 0</annotation></semantics></math>:</p>
 <ul>
 <li>Compute Jacobians <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>t</mi></msub><mo>,</mo><msub><mi>B</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">A_{t}, B_{t}</annotation></semantics></math> and cost derivatives at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo>,</mo><msub><mover><mi>u</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\bar{x}_{t}, \bar{u}_{t})</annotation></semantics></math></li>
-<li>Compute <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>x</mi></msub><mo>,</mo><msub><mi>Q</mi><mi>u</mi></msub><mo>,</mo><msub><mi>Q</mi><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>,</mo><msub><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow></msub><mo>,</mo><msub><mi>Q</mi><mrow><mi>u</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">Q_x, Q_u, Q_{xx}, Q_{uu}, Q_{ux}</annotation></semantics></math> via the recursion</li>
-<li>Gains: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>=</mo><mi>−</mi><msubsup><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi>Q</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">k_{t} = -Q_{uu}^{-1} Q_u</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="1.0em"></mspace><msub><mi>K</mi><mi>t</mi></msub><mo>=</mo><mi>−</mi><msubsup><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi>Q</mi><mrow><mi>u</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\quad K_{t} = -Q_{uu}^{-1} Q_{ux}</annotation></semantics></math></li>
-<li>Update: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>t</mi><mo>,</mo><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>Q</mi><mi>x</mi></msub><mo>+</mo><msub><mi>Q</mi><mrow><mi>x</mi><mi>u</mi></mrow></msub><msub><mi>k</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">V_{t,x} = Q_x + Q_{xu} k_{t}</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="1.0em"></mspace><msub><mi>V</mi><mrow><mi>t</mi><mo>,</mo><mi>x</mi><mi>x</mi></mrow></msub><mo>=</mo><msub><mi>Q</mi><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>+</mo><msub><mi>Q</mi><mrow><mi>x</mi><mi>u</mi></mrow></msub><msub><mi>K</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\quad V_{t,xx} = Q_{xx} + Q_{xu} K_{t}</annotation></semantics></math></li>
+<li>Compute <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>x</mi></msub><mo>,</mo><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>,</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>,</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow></msub><mo>,</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\hat{q}_x, \hat{q}_u, \hat{Q}_{xx}, \hat{Q}_{uu}, \hat{Q}_{ux}</annotation></semantics></math> via the recursion</li>
+<li>Gains: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>=</mo><mi>−</mi><msubsup><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">k_{t} = -\hat{Q}_{uu}^{-1} \hat{q}_u</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="1.0em"></mspace><msub><mi>K</mi><mi>t</mi></msub><mo>=</mo><mi>−</mi><msubsup><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\quad K_{t} = -\hat{Q}_{uu}^{-1} \hat{Q}_{ux}</annotation></semantics></math></li>
+<li>Update: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐯</mi><mi>t</mi></msub><mo>=</mo><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>x</mi></msub><mo>+</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>u</mi></mrow></msub><msub><mi>k</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{v}_{t} = \hat{q}_x + \hat{Q}_{xu} k_{t}</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="1.0em"></mspace><msub><mi>𝐕</mi><mi>t</mi></msub><mo>=</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>+</mo><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>u</mi></mrow></msub><msub><mi>K</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\quad \mathbf{V}_{t} = \hat{Q}_{xx} + \hat{Q}_{xu} K_{t}</annotation></semantics></math></li>
 </ul>
 <p><strong>2b. Forward pass</strong> — from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mn>0</mn></msub><mo>=</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\hat{x}_0 = \bar{x}_0</annotation></semantics></math>, simulate with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>u</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>=</mo><msub><mover><mi>u</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo>+</mo><mi>α</mi><msub><mi>k</mi><mi>t</mi></msub><mo>+</mo><msub><mi>K</mi><mi>t</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mi>t</mi></msub><mo>−</mo><msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{u}_{t} = \bar{u}_{t} + \alpha k_{t} + K_{t}(\hat{x}_{t} - \bar{x}_{t})</annotation></semantics></math></p>
 <p><strong>2c. Line search</strong> — if <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>u</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mo>&lt;</mo><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>u</mi><mo accent="true">‾</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">J(\hat{u}) &lt; J(\bar{u})</annotation></semantics></math>: accept; else <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>←</mo><mi>α</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\alpha \leftarrow \alpha/2</annotation></semantics></math>, repeat 2b</p>
@@ -584,7 +529,7 @@ Final true costs:  nonlinear=1266.6992  linear=1266.3377</code></pre>
 <td>Quadratic in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>δ</mi><mi>x</mi><mo>,</mo><mi>δ</mi><mi>u</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\delta x, \delta u)</annotation></semantics></math>; linear terms nonzero</td>
 </tr>
 <tr class="odd">
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow></msub><annotation encoding="application/x-tex">Q_{uu}</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow></msub><annotation encoding="application/x-tex">\hat{Q}_{uu}</annotation></semantics></math></td>
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>+</mo><msup><mi>B</mi><mi>T</mi></msup><mi>P</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">R + B^T P B</annotation></semantics></math></td>
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mrow><mi>u</mi><mi>u</mi></mrow></msub><mo>+</mo><msup><mi>B</mi><mi>T</mi></msup><msub><mi>V</mi><mrow><mi>x</mi><mi>x</mi></mrow></msub><mi>B</mi></mrow><annotation encoding="application/x-tex">c_{uu} + B^T V_{xx} B</annotation></semantics></math></td>
 </tr>
@@ -595,8 +540,8 @@ Final true costs:  nonlinear=1266.6992  linear=1266.3377</code></pre>
 </tr>
 <tr class="odd">
 <td>Feedforward</td>
-<td>None (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>u</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Q_u = 0</annotation></semantics></math> at optimum)</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mi>−</mi><msubsup><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi>Q</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">k = -Q_{uu}^{-1} Q_u</annotation></semantics></math> (drives improvement)</td>
+<td>None (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\hat{q}_u = 0</annotation></semantics></math> at optimum)</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mi>−</mi><msubsup><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">k = -\hat{Q}_{uu}^{-1} \hat{q}_u</annotation></semantics></math> (drives improvement)</td>
 </tr>
 <tr class="even">
 <td>Hessian recursion</td>
@@ -655,10 +600,10 @@ Final true costs:  nonlinear=1266.6992  linear=1266.3377</code></pre>
 <h2>Beyond iLQR</h2>
 <p><strong>Differential Dynamic Programming (DDP):</strong></p>
 <p>iLQR uses only first-order Jacobians of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>t</mi></msub><annotation encoding="application/x-tex">f_{t}</annotation></semantics></math>. DDP adds second-order terms:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>+</mo><mo>=</mo><munder><mo>∑</mo><mi>i</mi></munder><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><msubsup><mi>f</mi><mrow><mi>t</mi><mo>,</mo><mi>x</mi><mi>x</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>Q</mi><mrow><mi>u</mi><mi>u</mi></mrow></msub><mo>+</mo><mo>=</mo><mi>⋯</mi><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>Q</mi><mrow><mi>u</mi><mi>x</mi></mrow></msub><mo>+</mo><mo>=</mo><mi>⋯</mi></mrow><annotation encoding="application/x-tex">Q_{xx} \mathrel{+}= \sum_i (V_{t+1,x})^{(i)} f_{t,xx}^{(i)}, \quad Q_{uu} \mathrel{+}= \cdots, \quad Q_{ux} \mathrel{+}= \cdots</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>+</mo><mo>=</mo><munder><mo>∑</mo><mi>i</mi></munder><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐯</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><msubsup><mi>f</mi><mrow><mi>t</mi><mo>,</mo><mi>x</mi><mi>x</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>,</mo><mspace width="1.0em"></mspace><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>u</mi></mrow></msub><mo>+</mo><mo>=</mo><mi>⋯</mi><mo>,</mo><mspace width="1.0em"></mspace><msub><mover><mi>Q</mi><mo accent="true">̂</mo></mover><mrow><mi>u</mi><mi>x</mi></mrow></msub><mo>+</mo><mo>=</mo><mi>⋯</mi></mrow><annotation encoding="application/x-tex">\hat{Q}_{xx} \mathrel{+}= \sum_i (\mathbf{v}_{t+1})^{(i)} f_{t,xx}^{(i)}, \quad \hat{Q}_{uu} \mathrel{+}= \cdots, \quad \hat{Q}_{ux} \mathrel{+}= \cdots</annotation></semantics></math></p>
 <div class="fragment" data-fragment-index="1">
 <ul>
-<li>Terms scale as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝒪</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="false" form="postfix">∥</mo><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi></mrow></msub><mo stretchy="false" form="postfix">∥</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{O}(\|V_{t+1,x}\|)</annotation></semantics></math> — vanish near the optimum where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn><mo>,</mo><mi>x</mi></mrow></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">V_{t+1,x} \to 0</annotation></semantics></math></li>
+<li>Terms scale as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝒪</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="false" form="postfix">∥</mo><msub><mi>𝐯</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false" form="postfix">∥</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{O}(\|\mathbf{v}_{t+1}\|)</annotation></semantics></math> — vanish near the optimum where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐯</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathbf{v}_{t+1} \to 0</annotation></semantics></math></li>
 <li>Better convergence rate far from the optimum; expensive and rarely used in practice</li>
 <li>iLQR is sometimes called <strong>Gauss-Newton DDP</strong></li>
 </ul>
@@ -711,7 +656,7 @@ Final true costs:  nonlinear=1266.6992  linear=1266.3377</code></pre>
 </div>
 <div class="fragment" data-fragment-index="2">
 <p><strong>Line search:</strong> halve <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> until <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math> decreases; <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>t</mi></msub><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k_{t} \to 0</annotation></semantics></math> signals convergence</p>
-<p><strong>Convergence ↔︎ optimality:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>u</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Q_u = 0</annotation></semantics></math> is the discrete-time PMP stationarity condition</p>
+<p><strong>Convergence ↔︎ optimality:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>q</mi><mo accent="true">̂</mo></mover><mi>u</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\hat{q}_u = 0</annotation></semantics></math> is the discrete-time PMP stationarity condition</p>
 <p><strong>DDP vs.&nbsp;iLQR:</strong> dynamics Hessian terms improve convergence rate but are rarely worth the cost</p>
 </div>
 </section>
@@ -747,6 +692,7 @@ Final true costs:  nonlinear=1266.6992  linear=1266.3377</code></pre>
 
 
 </section></section>
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

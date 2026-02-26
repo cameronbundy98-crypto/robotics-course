@@ -18,42 +18,49 @@
     "href": "lqr.html#system-and-cost",
     "title": "Robot Modeling Control",
     "section": "System and Cost",
-    "text": "System and Cost\nAt each time tt, the dynamics and cost are:\n𝐱t+1=At[𝐱t𝐮t]+𝐚t\\mathbf{x}_{t+1} = A_t \\begin{bmatrix}\\mathbf{x}_t \\\\ \\mathbf{u}_t\\end{bmatrix} + \\mathbf{a}_t\nct(𝐱t,𝐮t)=12[𝐱t𝐮t]T𝐂t[𝐱t𝐮t]+[𝐱t𝐮t]T𝐜tc_t(\\mathbf{x}_t, \\mathbf{u}_t) = \\frac{1}{2}\\begin{bmatrix}\\mathbf{x}_t \\\\ \\mathbf{u}_t\\end{bmatrix}^{\\!T} \\mathbf{C}_t \\begin{bmatrix}\\mathbf{x}_t \\\\ \\mathbf{u}_t\\end{bmatrix} + \\begin{bmatrix}\\mathbf{x}_t \\\\ \\mathbf{u}_t\\end{bmatrix}^{\\!T} \\mathbf{c}_t\nTotal cost over the finite horizon:\nJ=∑t=0Tct(𝐱t,𝐮t)J = \\sum_{t=0}^{T} c_t(\\mathbf{x}_t, \\mathbf{u}_t)\n\n\n\nThe terminal cost cT(𝐱T,𝐮T)c_T(\\mathbf{x}_T, \\mathbf{u}_T) is included in the sum. A typical choice is cT=12𝐱TT𝐂𝐱𝐱,T𝐱Tc_T = \\frac{1}{2}\\mathbf{x}_T^T \\mathbf{C}_{\\mathbf{x}\\mathbf{x},T} \\mathbf{x}_T (no control at final step)."
+    "text": "System and Cost\nAt each time tt, the dynamics and cost are:\n𝐱t+1=𝐀t[𝐱t𝐮t]+𝐚t\\mathbf{x}_{t+1} = \\mathbf{A}_{t} \\begin{bmatrix}\\mathbf{x}_t \\\\ \\mathbf{u}_t\\end{bmatrix} + \\mathbf{a}_t\nct(𝐱t,𝐮t)=12[𝐱t𝐮t]T𝐂t[𝐱t𝐮t]+[𝐱t𝐮t]T𝐜tc_t(\\mathbf{x}_t, \\mathbf{u}_t) = \\frac{1}{2}\\begin{bmatrix}\\mathbf{x}_t \\\\ \\mathbf{u}_t\\end{bmatrix}^{\\!T} \\mathbf{C}_t \\begin{bmatrix}\\mathbf{x}_t \\\\ \\mathbf{u}_t\\end{bmatrix} + \\begin{bmatrix}\\mathbf{x}_t \\\\ \\mathbf{u}_t\\end{bmatrix}^{\\!T} \\mathbf{c}_t\nTotal cost over the finite horizon:\nJ=∑t=0Tct(𝐱t,𝐮t)J = \\sum_{t=0}^{T} c_t(\\mathbf{x}_t, \\mathbf{u}_t)\n\n\n\nThe terminal cost cT(𝐱T,𝐮T)c_T(\\mathbf{x}_T, \\mathbf{u}_T) is included in the sum. A typical choice is cT=12𝐱TT𝐂𝐱𝐱,T𝐱Tc_T = \\frac{1}{2}\\mathbf{x}_T^T \\mathbf{C}_{\\mathbf{x}\\mathbf{x},T} \\mathbf{x}_T (no control at final step)."
   },
   {
     "objectID": "lqr.html#double-integrator-applying-the-notation",
     "href": "lqr.html#double-integrator-applying-the-notation",
     "title": "Robot Modeling Control",
     "section": "Double Integrator: Applying the Notation",
-    "text": "Double Integrator: Applying the Notation\nA unit-mass particle: p̈=u\\ddot{p} = u. State 𝐱t=[pt,vt]T\\mathbf{x}_t = [p_t,\\, v_t]^T, control 𝐮t=[at]\\mathbf{u}_t = [a_t].\nDiscrete dynamics (timestep Δt\\Delta t):\nAt=[1ΔtΔt2201Δt],𝐚t=𝟎A_t = \\begin{bmatrix}1 & \\Delta t & \\tfrac{\\Delta t^2}{2} \\\\ 0 & 1 & \\Delta t\\end{bmatrix}, \\quad \\mathbf{a}_t = \\mathbf{0}\nQuadratic cost with no cross terms and 𝐜t=𝟎\\mathbf{c}_t = \\mathbf{0}:\n𝐂t=[qp000qv000r],𝐂T=[qf00qf]\\mathbf{C}_t = \\begin{bmatrix} q_p & 0 & 0 \\\\ 0 & q_v & 0 \\\\ 0 & 0 & r \\end{bmatrix}, \\quad \\mathbf{C}_T = \\begin{bmatrix} q_f & 0 \\\\ 0 & q_f \\end{bmatrix}\n\n\n\nAtA_t maps the augmented state [𝐱t;𝐮t][\\mathbf{x}_t;\\, \\mathbf{u}_t] to 𝐱t+1\\mathbf{x}_{t+1}. The columns correspond to [pt,vt,at][p_t,\\, v_t,\\, a_t]."
+    "text": "Double Integrator: Applying the Notation\nA unit-mass particle: p̈=u\\ddot{p} = u. State 𝐱t=[pt,vt]T\\mathbf{x}_t = [p_t,\\, v_t]^T, control 𝐮t=[at]\\mathbf{u}_t = [a_t].\nDiscrete dynamics (timestep Δt\\Delta t):\n𝐀t=[1ΔtΔt2201Δt],𝐚t=𝟎\\mathbf{A}_{t} = \\begin{bmatrix}1 & \\Delta t & \\tfrac{\\Delta t^2}{2} \\\\ 0 & 1 & \\Delta t\\end{bmatrix}, \\quad \\mathbf{a}_t = \\mathbf{0}\nQuadratic cost with no cross terms and 𝐜t=𝟎\\mathbf{c}_t = \\mathbf{0}:\n𝐂t=[qp000qv000r],𝐂T=[qf00qf]\\mathbf{C}_t = \\begin{bmatrix} q_p & 0 & 0 \\\\ 0 & q_v & 0 \\\\ 0 & 0 & r \\end{bmatrix}, \\quad \\mathbf{C}_T = \\begin{bmatrix} q_f & 0 \\\\ 0 & q_f \\end{bmatrix}\n\n\n\n𝐀t\\mathbf{A}_{t} maps the augmented state [𝐱t;𝐮t][\\mathbf{x}_t;\\, \\mathbf{u}_t] to 𝐱t+1\\mathbf{x}_{t+1}. The columns correspond to [pt,vt,at][p_t,\\, v_t,\\, a_t]."
   },
   {
     "objectID": "lqr.html#the-q-function",
     "href": "lqr.html#the-q-function",
     "title": "Robot Modeling Control",
     "section": "The Q-Function",
-    "text": "The Q-Function\nDefine the action-value function (Q-function) at time tt:\n𝐐t(𝐱t,𝐮t)=ct(𝐱t,𝐮t)+Vt+1*(At[𝐱t𝐮t]+𝐚t)\\mathbf{Q}_t(\\mathbf{x}_t, \\mathbf{u}_t) = c_t(\\mathbf{x}_t,\\mathbf{u}_t) + V_{t+1}^*\\!\\left(A_t\\begin{bmatrix}\\mathbf{x}_t\\\\\\mathbf{u}_t\\end{bmatrix} + \\mathbf{a}_t\\right)\nSince Vt+1*(𝐱)=12𝐱T𝐕t+1𝐱+𝐱T𝐯t+1V_{t+1}^*(\\mathbf{x}) = \\frac{1}{2}\\mathbf{x}^T \\mathbf{V}_{t+1} \\mathbf{x} + \\mathbf{x}^T \\mathbf{v}_{t+1} is quadratic, 𝐐t\\mathbf{Q}_t is also quadratic:\n𝐐t(𝐱t,𝐮t)=const+12[𝐱t𝐮t]T𝐐̂t[𝐱t𝐮t]+[𝐱t𝐮t]T𝐪̂t\\mathbf{Q}_t(\\mathbf{x}_t,\\mathbf{u}_t) = \\mathrm{const} + \\frac{1}{2}\\begin{bmatrix}\\mathbf{x}_t\\\\\\mathbf{u}_t\\end{bmatrix}^{\\!T}\\hat{\\mathbf{Q}}_t\\begin{bmatrix}\\mathbf{x}_t\\\\\\mathbf{u}_t\\end{bmatrix} + \\begin{bmatrix}\\mathbf{x}_t\\\\\\mathbf{u}_t\\end{bmatrix}^{\\!T}\\hat{\\mathbf{q}}_t\nwhere\n𝐐̂t=𝐂t+AtT𝐕t+1At,𝐪̂t=𝐜t+AtT𝐕t+1𝐚t+AtT𝐯t+1\\hat{\\mathbf{Q}}_t = \\mathbf{C}_t + A_t^T \\mathbf{V}_{t+1} A_t, \\qquad \\hat{\\mathbf{q}}_t = \\mathbf{c}_t + A_t^T \\mathbf{V}_{t+1} \\mathbf{a}_t + A_t^T \\mathbf{v}_{t+1}"
+    "text": "The Q-Function\nDefine the action-value function (Q-function) at time tt:\n𝐐t(𝐱t,𝐮t)=ct(𝐱t,𝐮t)+Vt+1*(𝐀t[𝐱t𝐮t]+𝐚t)\\mathbf{Q}_t(\\mathbf{x}_t, \\mathbf{u}_t) = c_t(\\mathbf{x}_t,\\mathbf{u}_t) + V_{t+1}^*\\!\\left(\\mathbf{A}_{t}\\begin{bmatrix}\\mathbf{x}_t\\\\\\mathbf{u}_t\\end{bmatrix} + \\mathbf{a}_t\\right)\nSince Vt+1*(𝐱)=12𝐱T𝐕t+1𝐱+𝐱T𝐯t+1V_{t+1}^*(\\mathbf{x}) = \\frac{1}{2}\\mathbf{x}^T \\mathbf{V}_{t+1} \\mathbf{x} + \\mathbf{x}^T \\mathbf{v}_{t+1} is quadratic, 𝐐t\\mathbf{Q}_t is also quadratic:\n𝐐t(𝐱t,𝐮t)=const+12[𝐱t𝐮t]T𝐐̂t[𝐱t𝐮t]+[𝐱t𝐮t]T𝐪̂t\\mathbf{Q}_t(\\mathbf{x}_t,\\mathbf{u}_t) = \\mathrm{const} + \\frac{1}{2}\\begin{bmatrix}\\mathbf{x}_t\\\\\\mathbf{u}_t\\end{bmatrix}^{\\!T}\\hat{\\mathbf{Q}}_t\\begin{bmatrix}\\mathbf{x}_t\\\\\\mathbf{u}_t\\end{bmatrix} + \\begin{bmatrix}\\mathbf{x}_t\\\\\\mathbf{u}_t\\end{bmatrix}^{\\!T}\\hat{\\mathbf{q}}_t\nwhere\n𝐐̂t=𝐂t+𝐀tT𝐕t+1𝐀t,𝐪̂t=𝐜t+𝐀tT𝐕t+1𝐚t+𝐀tT𝐯t+1\\hat{\\mathbf{Q}}_t = \\mathbf{C}_t + \\mathbf{A}_{t}^T \\mathbf{V}_{t+1} \\mathbf{A}_{t}, \\qquad \\hat{\\mathbf{q}}_t = \\mathbf{c}_t + \\mathbf{A}_{t}^T \\mathbf{V}_{t+1} \\mathbf{a}_t + \\mathbf{A}_{t}^T \\mathbf{v}_{t+1}"
+  },
+  {
+    "objectID": "lqr.html#the-q-function-1",
+    "href": "lqr.html#the-q-function-1",
+    "title": "Robot Modeling Control",
+    "section": "The Q-Function",
+    "text": "The Q-Function\n𝐐̂t=𝐂t+𝐀tT𝐕t+1𝐀t=[QtcostStTStRt]+[AtTBtT]𝐕t+1[AtBt]=[QtcostStTStRt]+[AtT𝐕t+1AtAtT𝐕t+1BtBtT𝐕t+1AtBtT𝐕t+1Bt]=[Qtcost+AtT𝐕t+1AtStT+AtT𝐕t+1BtSt+BtT𝐕t+1AtRt+BtT𝐕t+1Bt]=[𝐐̂𝐱𝐱𝐐̂𝐱𝐮𝐐̂𝐮𝐱𝐐̂𝐮𝐮]𝐪̂t=[qtrt]+[AtT𝐕t+1𝐚tBtT𝐕t+1𝐚t]+[AtT𝐯t+1BtT𝐯t+1]=[𝐪̂𝐱𝐪̂𝐮]\n\\begin{aligned}\n\\hat{\\mathbf{Q}}_t  &= \\mathbf{C}_t + \\mathbf{A}_{t}^T \\mathbf{V}_{t+1} \\mathbf{A}_{t}\\\\\n&= \\begin{bmatrix} Q_t^{cost} & S_t^{\\!T}  \\\\ S_t& R_t \\end{bmatrix} + \\begin{bmatrix}  A_t^{\\!T}  \\\\ B_t^{\\!T}\\end{bmatrix} \\mathbf{V}_{t+1} \\begin{bmatrix}  A_t  & B_t\\end{bmatrix}\\\\\n&= \\begin{bmatrix} Q_t^{cost} & S_t^{\\!T}  \\\\ S_t& R_t \\end{bmatrix} + \\begin{bmatrix}  A_t^{\\!T} \\mathbf{V}_{t+1} A_t &  A_t^{\\!T} \\mathbf{V}_{t+1} B_t\\\\ B_t^{\\!T} \\mathbf{V}_{t+1} A_t &  B_t^{\\!T} \\mathbf{V}_{t+1} B_t\\end{bmatrix} \\\\\n&=  \\begin{bmatrix} Q_t^{cost} + A_t^{\\!T} \\mathbf{V}_{t+1} A_t & S_t^{\\!T} + A_t^{\\!T} \\mathbf{V}_{t+1} B_t\\\\ S_t + B_t^{\\!T} \\mathbf{V}_{t+1} A_t & R_t+  B_t^{\\!T} \\mathbf{V}_{t+1} B_t\\end{bmatrix} = \\begin{bmatrix} \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{x}} & \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}} \\\\ \\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{x}} & \\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}} \\end{bmatrix}\\\\\n\\qquad \\hat{\\mathbf{q}}_t &= \\begin{bmatrix}  q_t  \\\\ r_t\\end{bmatrix} + \\begin{bmatrix}  A_t^{\\!T} \\mathbf{V}_{t+1} \\mathbf{a}_t \\\\ B_t^{\\!T}\\mathbf{V}_{t+1} \\mathbf{a}_t\\end{bmatrix}  +  \\begin{bmatrix}  A_t^{\\!T} \\mathbf{v}_{t+1}  \\\\ B_t^{\\!T}\\mathbf{v}_{t+1} \\end{bmatrix} = \\begin{bmatrix} \\hat{\\mathbf{q}}_{\\mathbf{x}} \\\\ \\hat{\\mathbf{q}}_{\\mathbf{u}} \\end{bmatrix}\n\\end{aligned}"
   },
   {
     "objectID": "lqr.html#optimal-control-at-each-step",
     "href": "lqr.html#optimal-control-at-each-step",
     "title": "Robot Modeling Control",
     "section": "Optimal Control at Each Step",
-    "text": "Optimal Control at Each Step\nMinimize 𝐐t\\mathbf{Q}_t over 𝐮t\\mathbf{u}_t. Partition the Q-function matrix:\n𝐐̂t=[𝐐̂𝐱𝐱𝐐̂𝐱𝐮𝐐̂𝐮𝐱𝐐̂𝐮𝐮],𝐪̂t=[𝐪̂𝐱𝐪̂𝐮]\\hat{\\mathbf{Q}}_t = \\begin{bmatrix} \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{x}} & \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}} \\\\ \\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{x}} & \\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}} \\end{bmatrix}, \\qquad \\hat{\\mathbf{q}}_t = \\begin{bmatrix} \\hat{\\mathbf{q}}_{\\mathbf{x}} \\\\ \\hat{\\mathbf{q}}_{\\mathbf{u}} \\end{bmatrix}\nSetting ∇𝐮t𝐐t=0\\nabla_{\\mathbf{u}_t} \\mathbf{Q}_t = 0:\n𝐮t*=𝐊t𝐱t+𝐤t\\boxed{\\mathbf{u}_t^* = \\mathbf{K}_t \\mathbf{x}_t + \\mathbf{k}_t}\n𝐊t=−𝐐̂𝐮𝐮−1𝐐̂𝐮𝐱,𝐤t=−𝐐̂𝐮𝐮−1𝐪̂𝐮\\mathbf{K}_t = -\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{x}}, \\qquad \\mathbf{k}_t = -\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\hat{\\mathbf{q}}_{\\mathbf{u}}\n\n\n\nThe optimal policy is affine in state: 𝐮t*=𝐊t𝐱t+𝐤t\\mathbf{u}_t^* = \\mathbf{K}_t \\mathbf{x}_t + \\mathbf{k}_t. When 𝐜t=0\\mathbf{c}_t = 0 and 𝐚t=0\\mathbf{a}_t = 0, then 𝐤t=0\\mathbf{k}_t = 0 (linear policy)."
+    "text": "Optimal Control at Each Step\nMinimize 𝐐t\\mathbf{Q}_t over 𝐮t\\mathbf{u}_t. Partition the Q-function matrix:\n𝐐̂t=[𝐐̂𝐱𝐱𝐐̂𝐱𝐮𝐐̂𝐮𝐱𝐐̂𝐮𝐮],𝐪̂t=[𝐪̂𝐱𝐪̂𝐮]\\hat{\\mathbf{Q}}_t = \\begin{bmatrix} \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{x}} & \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}} \\\\ \\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{x}} & \\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}} \\end{bmatrix}, \\qquad \\hat{\\mathbf{q}}_t = \\begin{bmatrix} \\hat{\\mathbf{q}}_{\\mathbf{x}} \\\\ \\hat{\\mathbf{q}}_{\\mathbf{u}} \\end{bmatrix}\nSetting ∇𝐮t𝐐t=0\\nabla_{\\mathbf{u}_t} \\mathbf{Q}_t = 0:\n𝐮t*=𝐊t𝐱t+𝐤t\\boxed{\\mathbf{u}_t^* = \\mathbf{K}_t \\mathbf{x}_t + \\mathbf{k}_t}\n𝐊t=−𝐐̂𝐮𝐮−1𝐐̂𝐮𝐱=−(Rt+BtT𝐕t+1Bt)−1(St+BtT𝐕t+1At)𝐤t=−𝐐̂𝐮𝐮−1𝐪̂𝐮=(Rt+BtT𝐕t+1Bt)−1(rt+BtT𝐕t+1𝐚t+BtT𝐯t+1)\n\\begin{aligned}\n\\mathbf{K}_t &= -\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{x}} = -\\left( R_t+  B_t^{\\!T} \\mathbf{V}_{t+1} B_t  \\right)^{-1}  ( S_t + B_t^{\\!T} \\mathbf{V}_{t+1} A_t )\\\\\n\\mathbf{k}_t &= -\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\hat{\\mathbf{q}}_{\\mathbf{u}} = \\left( R_t+  B_t^{\\!T} \\mathbf{V}_{t+1} B_t \\right)^{-1}  (r_t + B_t^{\\!T}\\mathbf{V}_{t+1} \\mathbf{a}_t+ B_t^{\\!T}\\mathbf{v}_{t+1})\n\\end{aligned}\n\n\n\n\nThe optimal policy is affine in state: 𝐮t*=𝐊t𝐱t+𝐤t\\mathbf{u}_t^* = \\mathbf{K}_t \\mathbf{x}_t + \\mathbf{k}_t. When 𝐜t=0\\mathbf{c}_t = 0 and 𝐚t=0\\mathbf{a}_t = 0, then 𝐤t=0\\mathbf{k}_t = 0 (linear policy)."
   },
   {
     "objectID": "lqr.html#value-function-update",
     "href": "lqr.html#value-function-update",
     "title": "Robot Modeling Control",
     "section": "Value Function Update",
-    "text": "Value Function Update\nSubstituting 𝐮t*\\mathbf{u}_t^* back into 𝐐t\\mathbf{Q}_t gives the value function:\nVt*(𝐱t)=12𝐱tT𝐕t𝐱t+𝐱tT𝐯t+constV_t^*(\\mathbf{x}_t) = \\frac{1}{2}\\mathbf{x}_t^T \\mathbf{V}_t \\mathbf{x}_t + \\mathbf{x}_t^T \\mathbf{v}_t + \\mathrm{const}\nwhere\n𝐕t=𝐐̂𝐱𝐱+𝐐̂𝐱𝐮𝐊t\\mathbf{V}_t = \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{x}} + \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}}\\mathbf{K}_t\n𝐯t=𝐪̂𝐱+𝐐̂𝐱𝐮𝐤t\\mathbf{v}_t = \\hat{\\mathbf{q}}_{\\mathbf{x}} + \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}}\\mathbf{k}_t\nThis is again quadratic — so the structure repeats at t−1,t−2,…,0t-1, t-2, \\dots, 0."
+    "text": "Value Function Update\nSubstituting 𝐮t*\\mathbf{u}_t^* back into 𝐐t\\mathbf{Q}_t gives the value function:\nVt*(𝐱t)=12𝐱tT𝐕t𝐱t+𝐱tT𝐯t+constV_t^*(\\mathbf{x}_t) = \\frac{1}{2}\\mathbf{x}_t^T \\mathbf{V}_t \\mathbf{x}_t + \\mathbf{x}_t^T \\mathbf{v}_t + \\mathrm{const}\nwhere\n𝐕t=𝐐̂𝐱𝐱+𝐐̂𝐱𝐮𝐊t=𝐐̂𝐱𝐱−𝐐̂𝐱𝐮𝐐̂𝐮𝐮−1𝐐̂𝐮𝐱\\mathbf{V}_t = \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{x}} + \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}}\\mathbf{K}_t = \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{x}} - \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}} \\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{x}}\n𝐯t=𝐪̂𝐱+𝐐̂𝐱𝐮𝐤t=𝐪̂𝐱−𝐐̂𝐱𝐮𝐐̂𝐮𝐮−1𝐪̂𝐮\\mathbf{v}_t = \\hat{\\mathbf{q}}_{\\mathbf{x}} + \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}}\\mathbf{k}_t  = \\hat{\\mathbf{q}}_{\\mathbf{x}} - \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}}\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\hat{\\mathbf{q}}_{\\mathbf{u}}\nThe cost-to-go at time tt is again quadratic (in 𝐱t\\mathbf{x}_t) — so the structure repeats at t−1,t−2,…,0t-1, t-2, \\dots, 0."
   },
   {
     "objectID": "lqr.html#algorithm",
     "href": "lqr.html#algorithm",
     "title": "Robot Modeling Control",
     "section": "Algorithm",
-    "text": "Algorithm\n\n\n\nFinite Horizon LQR\n\n\nInputs: AtA_t, 𝐚t\\mathbf{a}_t, 𝐂t\\mathbf{C}_t, 𝐜t\\mathbf{c}_t for t=0…Tt=0\\dots T\nBackward pass — initialize 𝐕T=𝐂𝐱𝐱,T\\mathbf{V}_T = \\mathbf{C}_{\\mathbf{x}\\mathbf{x},T}, 𝐯T=𝐜𝐱,T\\mathbf{v}_T = \\mathbf{c}_{\\mathbf{x},T}; for t=T−1,…,0t = T-1,\\dots,0:\n\n𝐐̂t=𝐂t+AtT𝐕t+1At\\hat{\\mathbf{Q}}_t = \\mathbf{C}_t + A_t^T \\mathbf{V}_{t+1} A_t\n𝐪̂t=𝐜t+AtT(𝐕t+1𝐚t+𝐯t+1)\\hat{\\mathbf{q}}_t = \\mathbf{c}_t + A_t^T(\\mathbf{V}_{t+1}\\mathbf{a}_t + \\mathbf{v}_{t+1})\n𝐊t=−𝐐̂𝐮𝐮−1𝐐̂𝐮𝐱\\mathbf{K}_t = -\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{x}}, 𝐤t=−𝐐̂𝐮𝐮−1𝐪̂𝐮\\quad\\mathbf{k}_t = -\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\hat{\\mathbf{q}}_{\\mathbf{u}}\n𝐕t=𝐐̂𝐱𝐱+𝐐̂𝐱𝐮𝐊t\\mathbf{V}_t = \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{x}} + \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}}\\mathbf{K}_t, 𝐯t=𝐪̂𝐱+𝐐̂𝐱𝐮𝐤t\\quad\\mathbf{v}_t = \\hat{\\mathbf{q}}_{\\mathbf{x}} + \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}}\\mathbf{k}_t\n\nForward pass — given 𝐱0\\mathbf{x}_0, for t=0,…,T−1t = 0,\\dots,T-1:\n\n𝐮t*=𝐊t𝐱t+𝐤t\\mathbf{u}_t^* = \\mathbf{K}_t\\mathbf{x}_t + \\mathbf{k}_t\n𝐱t+1=At[𝐱t;𝐮t*]+𝐚t\\mathbf{x}_{t+1} = A_t[\\mathbf{x}_t;\\,\\mathbf{u}_t^*] + \\mathbf{a}_t"
+    "text": "Algorithm\n\n\n\nFinite Horizon LQR\n\n\nInputs: 𝐀t\\mathbf{A}_{t}, 𝐚t\\mathbf{a}_t, 𝐂t\\mathbf{C}_t, 𝐜t\\mathbf{c}_t for t=0…Tt=0\\dots T\nBackward pass — initialize 𝐕T=𝐂𝐱𝐱,T\\mathbf{V}_T = \\mathbf{C}_{\\mathbf{x}\\mathbf{x},T}, 𝐯T=𝐜𝐱,T\\mathbf{v}_T = \\mathbf{c}_{\\mathbf{x},T}; for t=T−1,…,0t = T-1,\\dots,0:\n\n𝐐̂t=𝐂t+𝐀tT𝐕t+1𝐀t\\hat{\\mathbf{Q}}_t = \\mathbf{C}_t + \\mathbf{A}_{t}^T \\mathbf{V}_{t+1} \\mathbf{A}_{t}\n𝐪̂t=𝐜t+𝐀tT(𝐕t+1𝐚t+𝐯t+1)\\hat{\\mathbf{q}}_t = \\mathbf{c}_t + \\mathbf{A}_{t}^T(\\mathbf{V}_{t+1}\\mathbf{a}_t + \\mathbf{v}_{t+1})\n𝐊t=−𝐐̂𝐮𝐮−1𝐐̂𝐮𝐱\\mathbf{K}_t = -\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{x}}, 𝐤t=−𝐐̂𝐮𝐮−1𝐪̂𝐮\\quad\\mathbf{k}_t = -\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\hat{\\mathbf{q}}_{\\mathbf{u}}\n𝐕t=𝐐̂𝐱𝐱+𝐐̂𝐱𝐮𝐊t\\mathbf{V}_t = \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{x}} + \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}}\\mathbf{K}_t, 𝐯t=𝐪̂𝐱+𝐐̂𝐱𝐮𝐤t\\quad\\mathbf{v}_t = \\hat{\\mathbf{q}}_{\\mathbf{x}} + \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}}\\mathbf{k}_t\n\nForward pass — given 𝐱0\\mathbf{x}_0, for t=0,…,T−1t = 0,\\dots,T-1:\n\n𝐮t*=𝐊t𝐱t+𝐤t\\mathbf{u}_t^* = \\mathbf{K}_t\\mathbf{x}_t + \\mathbf{k}_t\n𝐱t+1=𝐀t[𝐱t;𝐮t*]+𝐚t\\mathbf{x}_{t+1} = \\mathbf{A}_{t}[\\mathbf{x}_t;\\,\\mathbf{u}_t^*] + \\mathbf{a}_t"
   },
   {
     "objectID": "lqr.html#double-integrator-lqr-control",
@@ -67,7 +74,7 @@
     "href": "lqr.html#key-points",
     "title": "Robot Modeling Control",
     "section": "Key Points",
-    "text": "Key Points\n\n\n\n\n\n\n\nSymbol\nMeaning\n\n\n\n\nAtA_t, 𝐚t\\mathbf{a}_t\nAugmented dynamics (maps [𝐱t;𝐮t][\\mathbf{x}_t;\\mathbf{u}_t] to 𝐱t+1\\mathbf{x}_{t+1})\n\n\n𝐂t\\mathbf{C}_t, 𝐜t\\mathbf{c}_t\nQuadratic and linear cost parameters\n\n\n𝐐t(𝐱t,𝐮t)\\mathbf{Q}_t(\\mathbf{x}_t,\\mathbf{u}_t)\nQ-function (action-value function)\n\n\n𝐐̂t\\hat{\\mathbf{Q}}_t, 𝐪̂t\\hat{\\mathbf{q}}_t\nMatrix/vector of Q-function\n\n\n𝐕t\\mathbf{V}_t, 𝐯t\\mathbf{v}_t\nMatrix/vector of value function Vt*V_t^*\n\n\n𝐊t\\mathbf{K}_t, 𝐤t\\mathbf{k}_t\nFeedback gain and feedforward term\n\n\n\nConnection to RL: 𝐐t\\mathbf{Q}_t is the Q-function; Vt*V_t^* is the value function. The backward pass is exactly policy evaluation + improvement for LQ systems.\nNext step: iLQR — linearize nonlinear dynamics at each iteration and re-run LQR."
+    "text": "Key Points\n\n\n\n\n\n\n\nSymbol\nMeaning\n\n\n\n\n𝐀t\\mathbf{A}_{t}, 𝐚t\\mathbf{a}_t\nAugmented dynamics (maps [𝐱t;𝐮t][\\mathbf{x}_t;\\mathbf{u}_t] to 𝐱t+1\\mathbf{x}_{t+1})\n\n\n𝐂t\\mathbf{C}_t, 𝐜t\\mathbf{c}_t\nQuadratic and linear cost parameters\n\n\n𝐐t(𝐱t,𝐮t)\\mathbf{Q}_t(\\mathbf{x}_t,\\mathbf{u}_t)\nQ-function (action-value function)\n\n\n𝐐̂t\\hat{\\mathbf{Q}}_t, 𝐪̂t\\hat{\\mathbf{q}}_t\nMatrix/vector of Q-function\n\n\n𝐕t\\mathbf{V}_t, 𝐯t\\mathbf{v}_t\nMatrix/vector of value function Vt*V_t^*\n\n\n𝐊t\\mathbf{K}_t, 𝐤t\\mathbf{k}_t\nFeedback gain and feedforward term\n\n\n\nConnection to RL: 𝐐t\\mathbf{Q}_t is the Q-function; Vt*V_t^* is the value function.\nNext step: iLQR — linearize nonlinear dynamics at each iteration and re-run LQR."
   },
   {
     "objectID": "matrix_review.html",
@@ -861,550 +868,256 @@
     "text": "Summary\n\nRigid transformations: R(θ)R(\\theta) and SE(2) describe 2D motion\nPoint cloud alignment: Minimize sum of squared residuals\nICP algorithm: Iterate between correspondence and transformation\nLocal minima: ICP needs good initialization"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Robot Modeling Control",
+    "objectID": "schur_complement.html",
+    "href": "schur_complement.html",
+    "title": "Block Systems and the Schur Complement",
     "section": "",
-    "text": "This course covers methods for planning and executing the movement of mobile robots (navigation), robot arms (manipulation) and legs (locomotion).\nCourse github: poonawalalab/robotics-course"
+    "text": "The LQR backward pass computes the value function matrix \\(\\mathbf{V}_t\\) from the Q-function matrix \\(\\hat{\\mathbf{Q}}_t\\) using the formula\n\\[\\mathbf{V}_t = \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{x}} - \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}}\\,\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{u}}^{-1}\\,\\hat{\\mathbf{Q}}_{\\mathbf{u}\\mathbf{x}}.\\]\nThis expression is an instance of the Schur complement, a quantity that appears naturally when you eliminate one block of variables from a block-structured linear system. This page builds that algebraic machinery from scratch: scalar \\(2\\times 2\\) systems first, then block matrices, then the LQR connection.\nWork through each exercise before expanding the solution.",
+    "crumbs": [
+      "Home",
+      "Block Systems & Schur Complement"
+    ]
   },
   {
-    "objectID": "test_shinylive.html#interactive-demo-mass-spring-damper",
-    "href": "test_shinylive.html#interactive-demo-mass-spring-damper",
+    "objectID": "schur_complement.html#part-1-scalar-22-systems",
+    "href": "schur_complement.html#part-1-scalar-22-systems",
+    "title": "Block Systems and the Schur Complement",
+    "section": "Part 1: Scalar 2×2 Systems",
+    "text": "Part 1: Scalar 2×2 Systems\nConsider the linear system\n\\[\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}\\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} p \\\\ q \\end{bmatrix},\\]\nwhere \\(a, b, c, d\\) are scalars and \\(a \\neq 0\\).\n\n\nExercise 1 — Eliminate \\(x\\), identify the Schur complement\n(a) From the first equation \\(ax + by = p\\), write \\(x\\) as a function of \\(y\\), \\(a\\), \\(b\\), and \\(p\\).\n(b) Substitute your expression for \\(x\\) into the second equation \\(cx + dy = q\\). Simplify to obtain a single equation of the form \\(S \\cdot y = r\\). Write \\(S\\) and \\(r\\) explicitly in terms of \\(a, b, c, d, p, q\\).\n(c) Solve the concrete system\n\\[\\begin{bmatrix} 2 & 1 \\\\ 4 & 3 \\end{bmatrix}\\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 5 \\\\ 11 \\end{bmatrix}\\]\nby elimination: compute \\(S\\), solve for \\(y\\), then back-substitute to find \\(x\\). Check your answer by substituting back into both equations.\n\n\n\n\n\n\nSolution — Exercise 1\n\n\n\n\n\n(a) Solving \\(ax + by = p\\) for \\(x\\): \\[x = a^{-1}(p - by).\\]\n(b) Substitute into \\(cx + dy = q\\): \\[c \\cdot a^{-1}(p - by) + dy = q\\] \\[ca^{-1}p - ca^{-1}by + dy = q\\] \\[(d - ca^{-1}b)\\,y = q - ca^{-1}p.\\]\nSo\n\\[\\boxed{S = d - ca^{-1}b}, \\qquad r = q - ca^{-1}p.\\]\n\n\n\n\n\n\nSchur complement of \\(a\\). The scalar \\(S = d - ca^{-1}b\\) is called the Schur complement of the \\((1,1)\\) entry \\(a\\) in the \\(2\\times 2\\) matrix. It is what remains of \\(d\\) after the “influence” of \\(a\\) is eliminated. The determinant of the full matrix equals \\(aS\\).\n\n\n\n(c) With \\(a=2\\), \\(b=1\\), \\(c=4\\), \\(d=3\\), \\(p=5\\), \\(q=11\\):\n\\[S = 3 - 4 \\cdot \\tfrac{1}{2} \\cdot 1 = 3 - 2 = 1.\\] \\[r = 11 - 4 \\cdot \\tfrac{5}{2} = 11 - 10 = 1.\\] \\[y = S^{-1}r = 1, \\qquad x = a^{-1}(p - by) = \\tfrac{5-1}{2} = 2.\\]\nCheck: \\(2(2) + 1(1) = 5\\) ✓, \\(4(2) + 3(1) = 11\\) ✓.\n\n\n\n\n\n\nExercise 2 — Eliminate \\(y\\) instead\nNow reverse the order: use the second equation to express \\(y\\) in terms of \\(x\\), then substitute into the first equation. Assume \\(d \\neq 0\\).\n(a) From the second equation, write \\(y\\) as a function of \\(x\\), \\(c\\), \\(d\\), and \\(q\\).\n(b) Substitute into the first equation \\(ax + by = p\\) and simplify to \\(\\tilde{S}\\cdot x = \\tilde{r}\\). Write \\(\\tilde{S}\\) (the Schur complement of \\(d\\)) and \\(\\tilde{r}\\) explicitly.\n(c) Apply this approach to the same concrete system from Exercise 1(c) and verify you get \\(x = 2\\), \\(y = 1\\).\n\n\n\n\n\n\nSolution — Exercise 2\n\n\n\n\n\n(a) From \\(cx + dy = q\\): \\[y = d^{-1}(q - cx).\\]\n(b) Substitute into \\(ax + by = p\\): \\[ax + b\\,d^{-1}(q - cx) = p\\] \\[(a - bd^{-1}c)\\,x = p - bd^{-1}q.\\]\nSo\n\\[\\boxed{\\tilde{S} = a - bd^{-1}c}, \\qquad \\tilde{r} = p - bd^{-1}q.\\]\nThis is the Schur complement of \\(d\\).\n(c) With \\(d=3\\), \\(b=1\\), \\(c=4\\): \\(\\tilde{S} = 2 - 1\\cdot\\tfrac{4}{3} = \\tfrac{2}{3}\\), \\(\\tilde{r} = 5 - 1\\cdot\\tfrac{11}{3} = \\tfrac{4}{3}\\).\n\\(x = \\tilde{S}^{-1}\\tilde{r} = \\tfrac{4/3}{2/3} = 2\\). Then \\(y = d^{-1}(q - cx) = (11 - 8)/3 = 1\\). ✓",
+    "crumbs": [
+      "Home",
+      "Block Systems & Schur Complement"
+    ]
+  },
+  {
+    "objectID": "schur_complement.html#part-2-block-matrix-systems",
+    "href": "schur_complement.html#part-2-block-matrix-systems",
+    "title": "Block Systems and the Schur Complement",
+    "section": "Part 2: Block Matrix Systems",
+    "text": "Part 2: Block Matrix Systems\nNow let \\(A\\), \\(B\\), \\(C\\), \\(D\\) be matrices of compatible sizes, and \\(x\\), \\(y\\), \\(p\\), \\(q\\) be column vectors:\n\\[\\underbrace{\\begin{bmatrix} A & B \\\\ C & D \\end{bmatrix}}_{\\mathcal{M}}\\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} p \\\\ q \\end{bmatrix},\\]\nwhere \\(A\\) is \\(n\\times n\\), \\(D\\) is \\(m\\times m\\), \\(B\\) is \\(n\\times m\\), \\(C\\) is \\(m\\times n\\). The same elimination strategy from Part 1 works — each step now involves matrix inverses and multiplications instead of scalar divisions.\n\n\nExercise 3 — Block elimination, eliminate \\(x\\) first\nAssume \\(A\\) is invertible.\n(a) From the first block row \\(Ax + By = p\\), write \\(x\\) in terms of \\(y\\), \\(A\\), \\(B\\), \\(p\\).\n(b) Substitute into the second block row \\(Cx + Dy = q\\) and simplify. You should obtain \\(S_A\\,y = r_A\\) where \\(S_A\\) is the Schur complement of \\(A\\). Write \\(S_A\\) and \\(r_A\\).\n(c) Write the complete solution \\((x, y)\\).\n(d) In the symmetric case where \\(C = B^T\\), \\(A = A^T \\succ 0\\), \\(D = D^T \\succ 0\\), show that \\(S_A\\) is symmetric.\n\n\n\n\n\n\nSolution — Exercise 3\n\n\n\n\n\n(a) Solving \\(Ax + By = p\\) for \\(x\\): \\[x = A^{-1}(p - By).\\]\n(b) Substitute into \\(Cx + Dy = q\\): \\[CA^{-1}(p - By) + Dy = q\\] \\[CA^{-1}p - CA^{-1}By + Dy = q\\] \\[(D - CA^{-1}B)\\,y = q - CA^{-1}p.\\]\n\\[\\boxed{S_A = D - CA^{-1}B}, \\qquad r_A = q - CA^{-1}p.\\]\n(c) Complete solution: \\[y = S_A^{-1}\\,r_A, \\qquad x = A^{-1}(p - By).\\]\n(d) With \\(C = B^T\\) and \\(A\\) symmetric, \\((A^{-1})^T = (A^T)^{-1} = A^{-1}\\), so \\[S_A^T = D^T - B^T(A^{-1})^T B = D - B^T A^{-1}B = S_A. \\checkmark\\]\n\\(S_A\\) is symmetric.\n\n\n\n\n\n\nExercise 4 — Block elimination, eliminate \\(y\\) first\nAssume \\(D\\) is invertible.\n(a) From the second block row \\(Cx + Dy = q\\), write \\(y\\) in terms of \\(x\\).\n(b) Substitute into the first block row and simplify to \\(S_D\\,x = r_D\\). Write the Schur complement of \\(D\\), \\(S_D\\), and \\(r_D\\).\n(c) Write the complete solution \\((x, y)\\).\n(d) Compare \\(S_D\\) and \\(S_A\\). Does swapping which block you eliminate first change which Schur complement appears?\n\n\n\n\n\n\nSolution — Exercise 4\n\n\n\n\n\n(a) From \\(Cx + Dy = q\\): \\[y = D^{-1}(q - Cx).\\]\n(b) Substitute into \\(Ax + By = p\\): \\[Ax + BD^{-1}(q - Cx) = p\\] \\[(A - BD^{-1}C)\\,x = p - BD^{-1}q.\\]\n\\[\\boxed{S_D = A - BD^{-1}C}, \\qquad r_D = p - BD^{-1}q.\\]\n(c) Complete solution: \\[x = S_D^{-1}\\,r_D, \\qquad y = D^{-1}(q - Cx).\\]\n(d) The two Schur complements are different objects of different sizes: \\(S_A = D - CA^{-1}B\\) is \\(m\\times m\\) (same size as \\(D\\)), while \\(S_D = A - BD^{-1}C\\) is \\(n\\times n\\) (same size as \\(A\\)). Eliminating \\(x\\) first leaves an equation for \\(y\\) involving \\(S_A\\); eliminating \\(y\\) first leaves an equation for \\(x\\) involving \\(S_D\\). Which Schur complement is relevant depends on which variable you want to solve for last.",
+    "crumbs": [
+      "Home",
+      "Block Systems & Schur Complement"
+    ]
+  },
+  {
+    "objectID": "schur_complement.html#part-3-the-schur-complement-in-lqr",
+    "href": "schur_complement.html#part-3-the-schur-complement-in-lqr",
+    "title": "Block Systems and the Schur Complement",
+    "section": "Part 3: The Schur Complement in LQR",
+    "text": "Part 3: The Schur Complement in LQR\nRecall from the LQR slides that at each time step \\(t\\) the Q-function is\n\\[Q_t(x_t, u_t) = \\frac{1}{2}\\begin{bmatrix}x_t \\\\ u_t\\end{bmatrix}^{\\!T} \\hat{\\mathbf{Q}}_t \\begin{bmatrix}x_t \\\\ u_t\\end{bmatrix}, \\qquad \\hat{\\mathbf{Q}}_t = \\begin{bmatrix}\\hat{Q}_{xx} & \\hat{Q}_{xu} \\\\ \\hat{Q}_{ux} & \\hat{Q}_{uu}\\end{bmatrix}.\\]\nWe drop the time subscripts on the blocks for brevity. The matrix \\(\\hat{\\mathbf{Q}}_t\\) is symmetric positive definite, so \\(\\hat{Q}_{uu} \\succ 0\\) and \\(\\hat{Q}_{xu} = \\hat{Q}_{ux}^T\\).\nThe optimal control \\(u_t^*\\) minimizes \\(Q_t\\) over \\(u_t\\) with \\(x_t\\) held fixed.\n\n\nExercise 5 — Expand the Q-function and find the optimal control\n(a) Carry out the block matrix multiplication in \\(Q_t(x_t, u_t)\\). You should obtain three terms:\n\\[Q_t = (\\text{pure } x_t \\text{ term}) + (\\text{cross term}) + (\\text{pure } u_t \\text{ term}).\\]\n(b) Compute \\(\\nabla_{u_t} Q_t\\) (treating \\(x_t\\) as a constant). Set it to zero and write the resulting linear equation.\n(c) This stationarity equation is exactly the second block row of \\(\\hat{\\mathbf{Q}}_t [x_t;\\, u_t] = 0\\). Solve for \\(u_t^*\\), identifying the feedback gain \\(K_t\\).\n\n\n\n\n\n\nCompare to Exercise 4(a) with \\(C = \\hat{Q}_{ux}\\), \\(D = \\hat{Q}_{uu}\\), \\(q = 0\\): the substitution step there gave \\(y = D^{-1}(q - Cx) = -D^{-1}Cx\\). Here \\(u_t\\) plays the role of \\(y\\), so the same substitution directly yields the feedback gain \\(K_t = -D^{-1}C\\).\n\n\n\n\n\n\n\n\n\nSolution — Exercise 5\n\n\n\n\n\n(a) Expanding \\(\\frac{1}{2}[x^T,\\, u^T]\\begin{bmatrix}Q_{xx}&Q_{xu}\\\\Q_{ux}&Q_{uu}\\end{bmatrix}\\begin{bmatrix}x\\\\u\\end{bmatrix}\\) (dropping time subscripts):\n\\[Q_t = \\underbrace{\\frac{1}{2}x^T Q_{xx}\\, x}_{\\text{pure }x} + \\underbrace{x^T Q_{xu}\\, u}_{\\text{cross}} + \\underbrace{\\frac{1}{2}u^T Q_{uu}\\, u}_{\\text{pure }u}.\\]\nThe cross term picks up a coefficient of \\(1\\) (not \\(\\frac{1}{2}\\)) because \\(Q_{xu}\\) and \\(Q_{ux}\\) together contribute \\(x^T Q_{xu} u + u^T Q_{ux} x = 2x^T Q_{xu} u\\), and the prefactor \\(\\frac{1}{2}\\) cancels the 2.\n(b) Differentiating with respect to \\(u\\) (treating \\(x\\) as a constant):\n\\[\\nabla_u Q_t = Q_{ux}\\, x + Q_{uu}\\, u.\\]\nSetting to zero: \\(Q_{uu}\\, u = -Q_{ux}\\, x\\).\n(c) This is the second block row of \\(\\hat{\\mathbf{Q}}_t[x;\\,u]=0\\) (with \\(C = Q_{ux}\\), \\(D = Q_{uu}\\), \\(q=0\\)). Solving for \\(u\\):\n\\[\\boxed{u_t^* = -Q_{uu}^{-1} Q_{ux}\\, x_t = K_t\\, x_t}, \\qquad K_t = -Q_{uu}^{-1} Q_{ux}.\\]\nThis is the LQR feedback gain. Comparing with Exercise 4(a), the substitution gave \\(y = -D^{-1}C\\,x\\) (with \\(q=0\\)). The gain \\(K_t = -D^{-1}C\\big|_{D=\\hat{Q}_{uu},\\, C=\\hat{Q}_{ux}}\\) is that substitution coefficient — the optimal control formula is literally the substitution step of block elimination.\n\n\n\n\n\n\nExercise 6 — The value function is the Schur complement\n\n\n\n\n\n\nTwo steps, one block elimination. Exercise 4 had two steps: (1) use the second block row to write \\(y = -D^{-1}Cx\\), then (2) substitute into the first block row to get \\(S_D\\,x = r_D\\) with \\(S_D = A - BD^{-1}C\\). The LQR backward pass does exactly the same two things: Exercise 5 (step 1) found \\(u^* = K_t x_t\\) from the stationarity condition — this is the substitution, with \\(K_t = -D^{-1}C\\). This exercise (step 2) substitutes \\(u^*\\) back into \\(Q_t\\) — this produces the Schur complement \\(\\mathbf{V}_t = S_D\\).\n\n\n\nThe value function is \\(V_t^*(x_t) = Q_t(x_t,\\, u_t^*(x_t))\\).\n(a) Substitute \\(u_t^* = K_t\\, x_t = -Q_{uu}^{-1}Q_{ux}\\, x_t\\) into each of the three terms from Exercise 5(a). Your result should take the form \\(V_t^*(x_t) = \\frac{1}{2}x_t^T \\mathbf{V}_t\\, x_t\\). Find \\(\\mathbf{V}_t\\).\n(b) Compare \\(\\mathbf{V}_t\\) to the Schur complement \\(S_D\\) from Exercise 4(b), with the identification\n\\[A \\;\\leftrightarrow\\; \\hat{Q}_{xx}, \\quad B \\;\\leftrightarrow\\; \\hat{Q}_{xu}, \\quad C \\;\\leftrightarrow\\; \\hat{Q}_{ux}, \\quad D \\;\\leftrightarrow\\; \\hat{Q}_{uu}.\\]\nWhat is \\(\\mathbf{V}_t\\) in terms of a Schur complement?\n(c) The LQR slides give \\(\\mathbf{V}_t = \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{x}} + \\hat{\\mathbf{Q}}_{\\mathbf{x}\\mathbf{u}} K_t\\). Substitute \\(K_t = -Q_{uu}^{-1}Q_{ux}\\) and confirm this matches the Schur complement.\n\n\n\n\n\n\nSolution — Exercise 6\n\n\n\n\n\n(a) Let \\(u^* = -Q_{uu}^{-1}Q_{ux}\\,x\\) (dropping time subscripts). Evaluate each term:\n\nPure \\(x\\) term: \\(\\frac{1}{2}x^T Q_{xx}\\,x\\) (unchanged).\nCross term: \\(x^T Q_{xu}\\,u^* = x^T Q_{xu}(-Q_{uu}^{-1}Q_{ux}\\,x) = -x^T Q_{xu}Q_{uu}^{-1}Q_{ux}\\,x\\).\nPure \\(u\\) term: \\(\\frac{1}{2}u^{*T}Q_{uu}\\,u^* = \\frac{1}{2}x^T Q_{ux}^T Q_{uu}^{-1} Q_{uu} Q_{uu}^{-1} Q_{ux}\\,x = \\frac{1}{2}x^T Q_{xu}Q_{uu}^{-1}Q_{ux}\\,x\\).\n(Used \\(Q_{xu} = Q_{ux}^T\\) and \\(Q_{uu}^{-T} = Q_{uu}^{-1}\\).)\n\nSumming:\n\\[V_t^* = \\frac{1}{2}x^T Q_{xx}\\,x - x^T Q_{xu}Q_{uu}^{-1}Q_{ux}\\,x + \\frac{1}{2}x^T Q_{xu}Q_{uu}^{-1}Q_{ux}\\,x\\]\n\\[= \\frac{1}{2}x^T\\underbrace{\\bigl(Q_{xx} - Q_{xu}Q_{uu}^{-1}Q_{ux}\\bigr)}_{\\mathbf{V}_t}x.\\]\n(b) With the identification \\(A=Q_{xx}\\), \\(B=Q_{xu}\\), \\(C=Q_{ux}\\), \\(D=Q_{uu}\\):\n\\[S_D = A - BD^{-1}C = Q_{xx} - Q_{xu}Q_{uu}^{-1}Q_{ux} = \\mathbf{V}_t.\\]\n\n\n\n\n\n\nThe value function matrix \\(\\mathbf{V}_t\\) is the Schur complement of \\(\\hat{Q}_{uu}\\) in \\(\\hat{\\mathbf{Q}}_t\\).\nThe LQR backward pass eliminates \\(u_t\\) from the Q-function — using the second block row (the stationarity condition \\(\\nabla_u Q = 0\\)) to express \\(u^*\\) in terms of \\(x_t\\), then substituting back — and this is precisely block elimination producing the Schur complement.\n\n\n\n(c) Substituting \\(K_t = -Q_{uu}^{-1}Q_{ux}\\):\n\\[\\mathbf{V}_t = Q_{xx} + Q_{xu}K_t = Q_{xx} + Q_{xu}(-Q_{uu}^{-1}Q_{ux}) = Q_{xx} - Q_{xu}Q_{uu}^{-1}Q_{ux}. \\checkmark\\]\n\n\n\n\n\n\nExercise 7 — Numerical verification\nUse the scalar double-integrator system with \\(a = b = q = r = 1\\) and terminal cost \\(p_T = 1\\) (so \\(V_T = [1]\\), a \\(1\\times 1\\) matrix here since we treat state and control as scalar).\nAt the last backward step, the Q-function blocks are:\n\\[\\hat{Q}_{xx} = q + a^2 V_T = 1 + 1, \\quad \\hat{Q}_{xu} = a V_T b = 1, \\quad \\hat{Q}_{ux} = 1, \\quad \\hat{Q}_{uu} = r + b^2 V_T = 1 + 1.\\]\n(a) Write the full \\(2\\times 2\\) matrix \\(\\hat{\\mathbf{Q}}\\).\n(b) Compute the Schur complement of \\(\\hat{Q}_{uu}\\) to obtain \\(\\mathbf{V}_{T-1}\\).\n(c) Verify that \\(\\mathbf{V}_{T-1}\\) matches the scalar Riccati recursion\n\\[p_{T-1} = q + \\frac{a^2 p_T}{r + b^2 p_T}\\]\nwith \\(a = b = q = r = 1\\) and \\(p_T = 1\\).\n(d) The feedback gain is \\(K_{T-1} = -\\hat{Q}_{uu}^{-1}\\hat{Q}_{ux}\\). Compute it. Then verify \\(\\mathbf{V}_{T-1} = \\hat{Q}_{xx} + \\hat{Q}_{xu} K_{T-1}\\) (the slide formula).\n\n\n\n\n\n\nSolution — Exercise 7\n\n\n\n\n\n(a) \\[\\hat{\\mathbf{Q}} = \\begin{bmatrix}2 & 1 \\\\ 1 & 2\\end{bmatrix}.\\]\n(b) Schur complement of \\(\\hat{Q}_{uu} = 2\\):\n\\[\\mathbf{V}_{T-1} = \\hat{Q}_{xx} - \\hat{Q}_{xu}\\hat{Q}_{uu}^{-1}\\hat{Q}_{ux} = 2 - 1 \\cdot \\tfrac{1}{2} \\cdot 1 = \\tfrac{3}{2}.\\]\n(c) Scalar Riccati recursion with \\(a = b = q = r = 1\\), \\(p_T = 1\\):\n\\[p_{T-1} = 1 + \\frac{1}{1 + 1} = 1 + \\tfrac{1}{2} = \\tfrac{3}{2}. \\checkmark\\]\nThe Schur complement and the Riccati recursion give the same answer — they are the same algebraic computation.\n(d) Feedback gain:\n\\[K_{T-1} = -\\hat{Q}_{uu}^{-1}\\hat{Q}_{ux} = -\\tfrac{1}{2}\\cdot 1 = -\\tfrac{1}{2}.\\]\nSlide formula:\n\\[\\hat{Q}_{xx} + \\hat{Q}_{xu} K_{T-1} = 2 + 1\\cdot(-\\tfrac{1}{2}) = \\tfrac{3}{2} = \\mathbf{V}_{T-1}. \\checkmark\\]",
+    "crumbs": [
+      "Home",
+      "Block Systems & Schur Complement"
+    ]
+  },
+  {
+    "objectID": "schur_complement.html#summary",
+    "href": "schur_complement.html#summary",
+    "title": "Block Systems and the Schur Complement",
+    "section": "Summary",
+    "text": "Summary\n\n\n\n\n\n\n\nConcept\nFormula\n\n\n\n\nSchur complement of \\(a\\) (scalar, eliminate \\(x\\) first)\n\\(S = d - c a^{-1} b\\)\n\n\nSchur complement of \\(d\\) (scalar, eliminate \\(y\\) first)\n\\(\\tilde{S} = a - b d^{-1} c\\)\n\n\nSchur complement of \\(A\\) (block, eliminate \\(x\\) first)\n\\(S_A = D - CA^{-1}B\\)\n\n\nSchur complement of \\(D\\) (block, eliminate \\(y\\) first)\n\\(S_D = A - BD^{-1}C\\)\n\n\nLQR optimal control = substitution step (second block row, \\(q=0\\))\n\\(u_t^* = K_t x_t\\), \\(\\quad K_t = -\\hat{Q}_{uu}^{-1}\\hat{Q}_{ux} = -D^{-1}C\\big\\vert_{D=\\hat{Q}_{uu},\\,C=\\hat{Q}_{ux}}\\)\n\n\nLQR value function matrix = Schur complement (substitute \\(u^*\\) into Q-function)\n\\(\\mathbf{V}_t = \\hat{Q}_{xx} - \\hat{Q}_{xu}\\hat{Q}_{uu}^{-1}\\hat{Q}_{ux} = S_D\\big\\vert_{D=\\hat{Q}_{uu}}\\)\n\n\n\nKey insight. The LQR backward pass is block Gaussian elimination applied to the Q-function matrix: use the second block row (stationarity \\(\\nabla_u Q = 0\\)) to express \\(u^*\\) in terms of \\(x_t\\), then substitute back to get \\(V_t^*(x_t)\\). The matrix of the resulting quadratic form is the Schur complement of \\(\\hat{Q}_{uu}\\) in \\(\\hat{\\mathbf{Q}}_t\\). This is why the Riccati recursion has the form it does.",
+    "crumbs": [
+      "Home",
+      "Block Systems & Schur Complement"
+    ]
+  },
+  {
+    "objectID": "ilqr.html#iterative-lqr-ilqr",
+    "href": "ilqr.html#iterative-lqr-ilqr",
     "title": "Robot Modeling Control",
-    "section": "Interactive Demo: Mass-Spring-Damper",
-    "text": "Interactive Demo: Mass-Spring-Damper\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 600\n\nfrom shiny import App, render, ui\nimport numpy as np\n\napp_ui = ui.page_fluid(\n    ui.h4(\"Damped Second-Order System Response\"),\n    ui.layout_sidebar(\n        ui.sidebar(\n            ui.input_slider(\"wn\", \"Natural frequency (rad/s)\", min=0.5, max=10.0, value=2.0, step=0.1),\n            ui.input_slider(\"zeta\", \"Damping ratio\", min=0.0, max=2.0, value=0.3, step=0.05),\n            ui.input_slider(\"tf\", \"Simulation time (s)\", min=1.0, max=20.0, value=10.0, step=0.5),\n        ),\n        ui.output_plot(\"response_plot\"),\n    ),\n)\n\ndef server(input, output, session):\n    @render.plot\n    def response_plot():\n        import matplotlib.pyplot as plt\n\n        wn = input.wn()\n        zeta = input.zeta()\n        tf = input.tf()\n        t = np.linspace(0, tf, 500)\n\n        if zeta &lt; 1.0:\n            wd = wn * np.sqrt(1 - zeta**2)\n            y = 1 - np.exp(-zeta * wn * t) * (\n                np.cos(wd * t) + (zeta * wn / wd) * np.sin(wd * t)\n            )\n            label = f\"Underdamped ($\\\\zeta$={zeta:.2f})\"\n        elif zeta == 1.0:\n            y = 1 - (1 + wn * t) * np.exp(-wn * t)\n            label = f\"Critically damped ($\\\\zeta$=1.00)\"\n        else:\n            s1 = -wn * (zeta - np.sqrt(zeta**2 - 1))\n            s2 = -wn * (zeta + np.sqrt(zeta**2 - 1))\n            y = 1 + (s1 * np.exp(s2 * t) - s2 * np.exp(s1 * t)) / (s2 - s1)\n            label = f\"Overdamped ($\\\\zeta$={zeta:.2f})\"\n\n        fig, ax = plt.subplots(figsize=(7, 4))\n        ax.plot(t, y, linewidth=2, label=label)\n        ax.axhline(y=1.0, color=\"gray\", linestyle=\"--\", alpha=0.5)\n        ax.set_xlabel(\"Time (s)\")\n        ax.set_ylabel(\"Step Response\")\n        ax.set_title(f\"$\\\\omega_n$={wn:.1f} rad/s, $\\\\zeta$={zeta:.2f}\")\n        ax.set_ylim(-0.1, 2.0)\n        ax.legend()\n        ax.grid(True, alpha=0.3)\n        fig.tight_layout()\n        return fig\n\napp = App(app_ui, server)"
+    "section": "Iterative LQR (iLQR)",
+    "text": "Iterative LQR (iLQR)\n\nLine Search, Forward Pass, and Full Algorithm\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  Why α\\alpha scales only ktk_{t}  Nonlinear forward pass  Backtracking line search  Full algorithm"
   },
   {
-    "objectID": "lqr_simple.html#finite-horizon-lqr",
-    "href": "lqr_simple.html#finite-horizon-lqr",
+    "objectID": "ilqr.html#the-setup",
+    "href": "ilqr.html#the-setup",
     "title": "Robot Modeling Control",
-    "section": "Finite Horizon LQR",
-    "text": "Finite Horizon LQR\n\nStandard Form for Regulation\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  Double Integrator Model  LQR Cost Function  Backward Riccati Recursion  Interactive Demo"
+    "section": "The Setup",
+    "text": "The Setup\nNominal trajectory x‾0,u‾0,…,x‾T−1,u‾T−1,x‾T,u‾T−1,x‾T\\bar{x}_0, \\bar{u}_0, \\dots, \\bar{x}_{T-1}, \\bar{u}_{T-1}, \\bar{x}_{T}, \\bar{u}_{T-1}, \\bar{x}_{T} satisfies the true nonlinear dynamics.\nDefine deviations: δxt=xt−x‾t\\delta x_{t} = x_{t} - \\bar{x}_{t}, δut=ut−u‾t\\quad \\delta u_{t} = u_{t} - \\bar{u}_{t}.\nLinearized error dynamics around the nominal: δxt+1≈Atδxt+Btδut,At=∂f∂x|x‾t,u‾t,Bt=∂f∂u|x‾t,u‾t\\delta x_{t+1} \\approx A_{t}\\,\\delta x_{t} + B_{t}\\,\\delta u_{t}, \\qquad A_{t} = \\left.\\frac{\\partial f}{\\partial x}\\right|_{\\bar{x}_{t},\\bar{u}_{t}}, \\quad B_{t} = \\left.\\frac{\\partial f}{\\partial u}\\right|_{\\bar{x}_{t},\\bar{u}_{t}}\nQuadratic cost (second-order Taylor expansion of ctc_{t} around nominal):\nct≈c‾t+[qtrt]T[δxδu]+12[δxδu]T[QtcostStTStRt][δxδu]c_{t} \\approx \\bar{c}_{t} + \\begin{bmatrix}q_{t} \\\\ r_{t}\\end{bmatrix}^{\\!T} \\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix} + \\frac{1}{2}\\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix}^{\\!T} \\begin{bmatrix} Q_t^{cost} & S_t^{\\!T} \\\\ S_t & R_t\\end{bmatrix}\\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix}\n\n\n\nUnlike LQR, the linear terms qtq_t and rtr_t are generally nonzero — the nominal is not yet optimal."
   },
   {
-    "objectID": "lqr_simple.html#the-double-integrator",
-    "href": "lqr_simple.html#the-double-integrator",
+    "objectID": "ilqr.html#backward-pass-q-function",
+    "href": "ilqr.html#backward-pass-q-function",
     "title": "Robot Modeling Control",
-    "section": "The Double Integrator",
-    "text": "The Double Integrator\nA particle with unit mass moving in 1D under applied force uu:\np̈=u\\ddot{p} = u\nDefine state x=[p,v]Tx = [p,\\, v]^T. Discrete dynamics with timestep Δt\\Delta t:\nxt+1=[1Δt01]⏟Axt+[Δt22Δt]⏟Butx_{t+1} = \\underbrace{\\begin{bmatrix}1 & \\Delta t \\\\ 0 & 1\\end{bmatrix}}_{A} x_t + \\underbrace{\\begin{bmatrix}\\tfrac{\\Delta t^2}{2} \\\\ \\Delta t\\end{bmatrix}}_{B} u_t\n\n\n\nHere AA and BB are the usual state-transition and input matrices — kept separate, unlike the augmented form in the generalized LQR."
+    "section": "Backward Pass: Q-function",
+    "text": "Backward Pass: Q-function\nThe Q-function for the deviation problem:\nQ̃t(δx,δu)≈const+[q̂xq̂u]T[δxδu]+12[δxδu]T[Q̂xxQ̂xuQ̂uxQ̂uu][δxδu]\\tilde{Q}_{t}(\\delta x, \\delta u) \\approx \\text{const} + \\begin{bmatrix}\\hat{q}_x \\\\ \\hat{q}_u\\end{bmatrix}^{\\!T} \\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix} + \\frac{1}{2}\\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix}^{\\!T} \\begin{bmatrix}\\hat{Q}_{xx} & \\hat{Q}_{xu} \\\\ \\hat{Q}_{ux} & \\hat{Q}_{uu}\\end{bmatrix}\\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix}\nBackward recursion (initialize 𝐯T=𝐜T\\mathbf{v}_{T} = \\mathbf{c}_{T}, 𝐕T=𝐂T\\mathbf{V}_{T} = \\mathbf{C}_{T}):\nq̂x=qt+AtT𝐯t+1,q̂u=rt+BtT𝐯t+1\\hat{q}_x = q_t + A_{t}^T \\mathbf{v}_{t+1}, \\qquad \\hat{q}_u = r_t + B_{t}^T \\mathbf{v}_{t+1} Q̂xx=Qtcost+AtT𝐕t+1At,Q̂uu=Rt+BtT𝐕t+1Bt,Q̂ux=St+BtT𝐕t+1At\\hat{Q}_{xx} = Q_t^{cost} + A_{t}^T \\mathbf{V}_{t+1} A_{t}, \\quad \\hat{Q}_{uu} = R_t + B_{t}^T \\mathbf{V}_{t+1} B_{t}, \\quad \\hat{Q}_{ux} = S_t + B_{t}^T \\mathbf{V}_{t+1} A_{t}"
   },
   {
-    "objectID": "lqr_simple.html#cost-function",
-    "href": "lqr_simple.html#cost-function",
+    "objectID": "ilqr.html#backward-pass-optimal-gains",
+    "href": "ilqr.html#backward-pass-optimal-gains",
     "title": "Robot Modeling Control",
-    "section": "Cost Function",
-    "text": "Cost Function\nMinimize over u0,u1,…,uT−1u_0, u_1, \\dots, u_{T-1}:\nJ=xTTWfxT⏟terminal cost+∑t=0T−1(xtTWxt⏟state cost+utTRut⏟control cost)J = \\underbrace{x_T^T W_f\\, x_T}_{\\text{terminal cost}} + \\sum_{t=0}^{T-1}\\left(\\underbrace{x_t^T W x_t}_{\\text{state cost}} + \\underbrace{u_t^T R\\, u_t}_{\\text{control cost}}\\right)\nsubject to xt+1=Axt+Butx_{t+1} = A x_t + B u_t.\n\n\n\n\n\n\n\n\n\nSymbol\nRole\nRequirement\n\n\n\n\nW∈ℝn×nW \\in \\mathbb{R}^{n\\times n}\nState cost matrix\nW=WT≽0W = W^T \\succeq 0\n\n\nR∈ℝm×mR \\in \\mathbb{R}^{m\\times m}\nControl cost matrix\nR=RT≻0R = R^T \\succ 0\n\n\nWf∈ℝn×nW_f \\in \\mathbb{R}^{n\\times n}\nTerminal cost matrix\nWf=WfT≽0W_f = W_f^T \\succeq 0\n\n\n\n\n\n\nWe write WW (not QQ) for the state cost to avoid conflict with the Q-function 𝐐t(⋅)\\mathbf{Q}_t(\\cdot) used in the generalized formulation."
+    "section": "Backward Pass: Optimal Gains",
+    "text": "Backward Pass: Optimal Gains\nMinimize Q̃t\\tilde{Q}_{t} over δu\\delta u (holding δx\\delta x fixed): ∂Q̃t∂δu=q̂u+Q̂uuδu+Q̂uxδx=0\\frac{\\partial \\tilde{Q}_{t}}{\\partial \\,\\delta u} = \\hat{q}_u + \\hat{Q}_{uu}\\,\\delta u + \\hat{Q}_{ux}\\,\\delta x = 0\n\n⟹δut*=−Q̂uu−1q̂u⏟kt+(−Q̂uu−1Q̂ux)⏟Ktδxt\\implies \\delta u_{t}^* = \\underbrace{-\\hat{Q}_{uu}^{-1} \\hat{q}_u}_{k_{t}} + \\underbrace{(-\\hat{Q}_{uu}^{-1} \\hat{Q}_{ux})}_{K_{t}}\\,\\delta x_{t}\n\n\n\n\n\n\n\n\n\n\nGain\nExpression\nRole\n\n\n\n\nkt∈ℝmk_{t} \\in \\mathbb{R}^m\n−Q̂uu−1q̂u-\\hat{Q}_{uu}^{-1} \\hat{q}_u\nFeedforward — optimization step\n\n\nKt∈ℝm×nK_{t} \\in \\mathbb{R}^{m \\times n}\n−Q̂uu−1Q̂ux-\\hat{Q}_{uu}^{-1} \\hat{Q}_{ux}\nFeedback — state-dependent correction\n\n\n\nValue function updated as: 𝐯t=q̂x+Q̂xukt\\mathbf{v}_{t} = \\hat{q}_x + \\hat{Q}_{xu} k_{t}, 𝐕t=Q̂xx+Q̂xuKt\\quad \\mathbf{V}_{t} = \\hat{Q}_{xx} + \\hat{Q}_{xu} K_{t}\n\n\n\n\n\nAt the optimum q̂u=rt+BtT𝐯t+1=0\\hat{q}_u = r_t + B_{t}^T \\mathbf{v}_{t+1} = 0, so kt=0k_{t} = 0 — identical to LQR."
   },
   {
-    "objectID": "lqr_simple.html#value-function",
-    "href": "lqr_simple.html#value-function",
+    "objectID": "ilqr.html#the-forward-pass-update",
+    "href": "ilqr.html#the-forward-pass-update",
     "title": "Robot Modeling Control",
-    "section": "Value Function",
-    "text": "Value Function\nDefine the cost-to-go from time tt:\nVt(x)=minut,…,uT−1[xTTWfxT+∑s=tT−1(xsTWxs+usTRus)]V_t(x) = \\min_{u_t,\\dots,u_{T-1}} \\left[x_T^T W_f x_T + \\sum_{s=t}^{T-1}(x_s^T W x_s + u_s^T R\\, u_s)\\right]\n\nTerminal condition: VT(x)=xTWfx=xTPTx⟹PT=WfV_T(x) = x^T W_f\\, x = x^T P_T\\, x \\implies P_T = W_f\n\n\nBellman recursion: for t=T−1,…,0t = T-1, \\dots, 0: Vt(x)=minu[xTWx+uTRu+Vt+1(Ax+Bu)]V_t(x) = \\min_u \\left[x^T W x + u^T R u + V_{t+1}(Ax + Bu)\\right]"
+    "section": "The Forward Pass Update",
+    "text": "The Forward Pass Update\nStarting from x̂0=x‾0\\hat{x}_0 = \\bar{x}_01, for t=0,1,…,T−1t = 0, 1, \\dots, T-1:\nût=u‾t+αkt+Kt(x̂t−x‾t)⏟δxt\\boxed{\\hat{u}_{t} = \\bar{u}_{t} + \\alpha\\, k_{t} + K_{t}\\underbrace{(\\hat{x}_{t} - \\bar{x}_{t})}_{\\delta x_{t}}} x̂t+1=f(x̂t,ût)←true nonlinear dynamics\\hat{x}_{t+1} = f\\!\\left(\\hat{x}_{t},\\; \\hat{u}_{t}\\right) \\qquad \\leftarrow \\text{true nonlinear dynamics}\n\n\n\n\nDiscussion: α\\alpha multiplies ktk_{t} but not KtK_{t}. Shouldn’t we scale the entire update δut=α(kt+Ktδxt)\\delta u_{t} = \\alpha(k_{t} + K_{t} \\delta x_{t})?\n\n\n\n\nx̂\\hat{x} is the updated nominal value (originally x‾\\bar{x}) of xx"
   },
   {
-    "objectID": "lqr_simple.html#backward-riccati-recursion",
-    "href": "lqr_simple.html#backward-riccati-recursion",
+    "objectID": "ilqr.html#backtracking-line-search",
+    "href": "ilqr.html#backtracking-line-search",
     "title": "Robot Modeling Control",
-    "section": "Backward Riccati Recursion",
-    "text": "Backward Riccati Recursion\nAssume Vt+1(x)=xTPt+1xV_{t+1}(x) = x^T P_{t+1} x. Expand and minimize over uu:\n∂∂u[xTWx+uTRu+(Ax+Bu)TPt+1(Ax+Bu)]=0\\frac{\\partial}{\\partial u}\\left[x^T W x + u^T R u + (Ax+Bu)^T P_{t+1}(Ax+Bu)\\right] = 0\n\n⟹2Ru+2BTPt+1(Ax+Bu)=0\\implies 2Ru + 2B^T P_{t+1}(Ax + Bu) = 0\n⟹ut*=−(R+BTPt+1B)−1BTPt+1A⏟Ktxt\\implies u_t^* = -\\underbrace{(R + B^T P_{t+1} B)^{-1} B^T P_{t+1} A}_{K_t}\\, x_t\n\n\nSubstituting back: Vt(x)=xTPtxV_t(x) = x^T P_t x where\nPt=W+ATPt+1(A−BKt)\\boxed{P_t = W + A^T P_{t+1}(A - BK_t)} Kt=(R+BTPt+1B)−1BTPt+1A\\boxed{K_t = (R + B^T P_{t+1} B)^{-1} B^T P_{t+1} A}"
+    "section": "Backtracking Line Search",
+    "text": "Backtracking Line Search\nGoal: find α∈(0,1]\\alpha \\in (0, 1] such that the updated trajectory strictly reduces cost.\n\nAlgorithm:\n\nSet α=1\\alpha = 1\nRun nonlinear forward pass with current α\\alpha; evaluate J(û)J(\\hat{u})\nIf J(û)&lt;J(u‾)J(\\hat{u}) &lt; J(\\bar{u}): accept, update x‾←x̂\\bar{x} \\leftarrow \\hat{x}, u‾←û\\bar{u} \\leftarrow \\hat{u}\nElse: α←α/2\\alpha \\leftarrow \\alpha/2, repeat from step 2\nAfter 50 halvings: if α&lt;2×10−6\\alpha &lt; 2\\times 10^{-6}, declare convergence\n\n\n\nalpha = 1.0\nfor _ in range(50):\n    for t in range(T):\n        delta_u = K[t] @ (x_new[t] - x_nom[t]) + alpha * k_ff[t]\n        u_new[t] = u_nom[t] + delta_u\n        x_new[t+1] = f(x_new[t], u_new[t])   # nonlinear step\n    if new_cost &lt; current_cost:\n        break\n    alpha *= 0.5"
   },
   {
-    "objectID": "lqr_simple.html#algorithm",
-    "href": "lqr_simple.html#algorithm",
+    "objectID": "ilqr.html#predicted-cost-improvement",
+    "href": "ilqr.html#predicted-cost-improvement",
     "title": "Robot Modeling Control",
-    "section": "Algorithm",
-    "text": "Algorithm\n\n\n\nFinite Horizon LQR (Standard Form)\n\n\nInputs: AA, BB, WW, RR, WfW_f, horizon TT\nBackward pass — set PT=WfP_T = W_f; for t=T−1,…,0t = T-1, \\dots, 0:\n\nKt=(R+BTPt+1B)−1BTPt+1AK_t = (R + B^T P_{t+1} B)^{-1} B^T P_{t+1} A\nPt=W+ATPt+1(A−BKt)P_t = W + A^T P_{t+1}(A - BK_t)\n\nForward pass — given x0x_0, for t=0,…,T−1t = 0, \\dots, T-1:\n\nut*=−Ktxtu_t^* = -K_t\\, x_t\nxt+1=Axt+But*x_{t+1} = Ax_t + Bu_t^*\n\n\n\n\n\n\n\nGains {Kt}\\{K_t\\} depend only on A,B,W,R,Wf,TA, B, W, R, W_f, T — not on x0x_0. Cost JJ scales quadratically with ∥x0∥\\|x_0\\| by linearity."
+    "section": "Predicted Cost Improvement",
+    "text": "Predicted Cost Improvement\nThe backward pass implicitly computes the predicted improvement:\nΔJ=∑k=0T−1(q̂uTkt+12ktTQ̂uukt)=−12∑k=0T−1ktTQ̂uukt≤0\\Delta J = \\sum_{k=0}^{T-1}\\left(\\hat{q}_u^T k_{t} + \\frac{1}{2} k_{t}^T \\hat{Q}_{uu} k_{t}\\right) = -\\frac{1}{2}\\sum_{k=0}^{T-1} k_{t}^T \\hat{Q}_{uu} k_{t} \\;\\leq\\; 0\n\nThis motivates a stronger Armijo condition:\nJ(û)&lt;J(u‾)−γα|ΔJ|,γ∈(0,1)J(\\hat{u}) &lt; J(\\bar{u}) - \\gamma\\,\\alpha\\,|\\Delta J|, \\qquad \\gamma \\in (0,1)\nActual decrease must be at least a fraction γ\\gamma of the quadratic model’s prediction.\n\n\n\n\n\nAt convergence: kt→0k_{t} \\to 0 (because q̂u→0\\hat{q}_u \\to 0), so ΔJ→0\\Delta J \\to 0 and α=1\\alpha = 1 is accepted immediately on the first try — the line search costs nothing."
   },
   {
-    "objectID": "lqr_simple.html#double-integrator-lqr-control",
-    "href": "lqr_simple.html#double-integrator-lqr-control",
+    "objectID": "ilqr.html#exercise-optimality-at-convergence",
+    "href": "ilqr.html#exercise-optimality-at-convergence",
     "title": "Robot Modeling Control",
-    "section": "Double Integrator: LQR Control",
-    "text": "Double Integrator: LQR Control\nSet initial conditions x0=[p0,v0]Tx_0 = [p_0,\\, v_0]^T and observe the optimal trajectory.\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 580\n\nfrom shiny import App, render, ui\nimport numpy as np\n\napp_ui = ui.page_fluid(\n    ui.h4(\"Finite Horizon LQR — Double Integrator\"),\n    ui.layout_sidebar(\n        ui.sidebar(\n            ui.h6(\"Initial State x₀\"),\n            ui.input_slider(\"p0\", \"Position p₀\", min=-5.0, max=5.0, value=3.0, step=0.1),\n            ui.input_slider(\"v0\", \"Velocity v₀\", min=-5.0, max=5.0, value=0.0, step=0.1),\n            ui.hr(),\n            ui.h6(\"Horizon & Weights\"),\n            ui.input_slider(\"T\",  \"Horizon T\",         min=5,    max=60,   value=20,  step=5),\n            ui.input_slider(\"wp\", \"State weight wp\",   min=0.1,  max=10.0, value=1.0, step=0.1),\n            ui.input_slider(\"wv\", \"State weight wv\",   min=0.1,  max=10.0, value=1.0, step=0.1),\n            ui.input_slider(\"r\",  \"Control weight r\",  min=0.01, max=5.0,  value=1.0, step=0.05),\n            ui.input_slider(\"wf\", \"Terminal weight wf\",min=1.0,  max=50.0, value=10.0,step=1.0),\n            width=280,\n        ),\n        ui.output_plot(\"lqr_plot\"),\n    ),\n)\n\ndef server(input, output, session):\n    @render.plot\n    def lqr_plot():\n        import matplotlib.pyplot as plt\n        import matplotlib.gridspec as gridspec\n\n        dt = 0.1\n        T  = input.T()\n        wp, wv, r, wf = input.wp(), input.wv(), input.r(), input.wf()\n        x0 = np.array([input.p0(), input.v0()])\n\n        A = np.array([[1.0, dt], [0.0, 1.0]])\n        B = np.array([[0.5*dt**2], [dt]])\n        W  = np.diag([wp, wv])\n        R  = np.array([[r]])\n        Wf = wf * np.eye(2)\n\n        # --- Backward Riccati pass ---\n        P = Wf.copy()\n        Ks = []\n        for _ in range(T):\n            S  = R + B.T @ P @ B\n            K  = np.linalg.solve(S, B.T @ P @ A)\n            P  = W + A.T @ P @ (A - B @ K)\n            Ks.append(K)\n        Ks.reverse()\n\n        # --- Forward pass ---\n        xs = np.zeros((T + 1, 2))\n        us = np.zeros(T)\n        xs[0] = x0\n        J = 0.0\n        for t in range(T):\n            u = -(Ks[t] @ xs[t])\n            us[t] = u[0]\n            xs[t+1] = A @ xs[t] + B.flatten() * us[t]\n            J += xs[t] @ W @ xs[t] + r * us[t]**2\n        J += xs[T] @ Wf @ xs[T]\n\n        # --- Plot ---\n        time = np.arange(T + 1) * dt\n        fig  = plt.figure(figsize=(8, 6))\n        gs   = gridspec.GridSpec(3, 1, hspace=0.55)\n\n        ax1 = fig.add_subplot(gs[0])\n        ax1.plot(time, xs[:, 0], 'b-o', markersize=3, lw=1.5)\n        ax1.axhline(0, color='k', lw=0.8, ls='--')\n        ax1.set_ylabel(\"Position $p$\")\n        ax1.set_title(f\"Optimal Trajectory  (J = {J:.3f})\", fontsize=10)\n        ax1.grid(True, alpha=0.3)\n\n        ax2 = fig.add_subplot(gs[1])\n        ax2.plot(time, xs[:, 1], 'g-o', markersize=3, lw=1.5)\n        ax2.axhline(0, color='k', lw=0.8, ls='--')\n        ax2.set_ylabel(\"Velocity $v$\")\n        ax2.grid(True, alpha=0.3)\n\n        ax3 = fig.add_subplot(gs[2])\n        ax3.step(time[:-1], us, 'r-', where='post', lw=1.5)\n        ax3.axhline(0, color='k', lw=0.8, ls='--')\n        ax3.set_ylabel(\"Control $u$\")\n        ax3.set_xlabel(\"Time (s)\")\n        ax3.grid(True, alpha=0.3)\n\n        fig.tight_layout()\n        return fig\n\napp = App(app_ui, server)"
+    "section": "Exercise: Optimality at Convergence",
+    "text": "Exercise: Optimality at Convergence\nAt convergence, kt=−Q̂uu−1q̂u→0k_{t} = -\\hat{Q}_{uu}^{-1} \\hat{q}_u \\to 0, which means:\nq̂u=rt+BtT𝐯t+1=0for all t\\hat{q}_u = r_t + B_{t}^T \\mathbf{v}_{t+1} = 0 \\quad \\text{for all } t\n\nQuestion: Write out what this says in terms of the original cost and dynamics. What classical optimality condition does it correspond to?\n\n\nAnswer: This is the discrete-time Pontryagin Maximum Principle stationarity condition:\n∂ct∂ut+BtTλt+1=0,λt+1=𝐯t+1\\frac{\\partial c_{t}}{\\partial u_{t}} + B_{t}^T \\lambda_{t+1} = 0, \\qquad \\lambda_{t+1} = \\mathbf{v}_{t+1}\nwhere λt\\lambda_{t} is the costate (adjoint variable). iLQR converges precisely when the KKT conditions are satisfied."
   },
   {
-    "objectID": "lqr_simple.html#summary-1",
-    "href": "lqr_simple.html#summary-1",
+    "objectID": "ilqr.html#ilqr-complete-algorithm",
+    "href": "ilqr.html#ilqr-complete-algorithm",
+    "title": "Robot Modeling Control",
+    "section": "iLQR: Complete Algorithm",
+    "text": "iLQR: Complete Algorithm\n\n\n\niLQR\n\n\nInput: initial controls u‾0:T−1\\bar{u}_{0:T-1}, dynamics ftf_{t}, costs ctc_{t}, cTc_{T}\n1. Rollout: simulate x‾t+1=ft(x‾t,u‾t)\\bar{x}_{t+1} = f_{t}(\\bar{x}_{t}, \\bar{u}_{t}) to obtain the nominal trajectory.\n2. Repeat until convergence:\n2a. Backward pass — init 𝐯T=𝐜T\\mathbf{v}_{T} = \\mathbf{c}_{T}, 𝐕T=𝐂T\\mathbf{V}_{T} = \\mathbf{C}_{T}; for t=T−1,…,0t = T-1, \\dots, 0:\n\nCompute Jacobians At,BtA_{t}, B_{t} and cost derivatives at (x‾t,u‾t)(\\bar{x}_{t}, \\bar{u}_{t})\nCompute q̂x,q̂u,Q̂xx,Q̂uu,Q̂ux\\hat{q}_x, \\hat{q}_u, \\hat{Q}_{xx}, \\hat{Q}_{uu}, \\hat{Q}_{ux} via the recursion\nGains: kt=−Q̂uu−1q̂uk_{t} = -\\hat{Q}_{uu}^{-1} \\hat{q}_u, Kt=−Q̂uu−1Q̂ux\\quad K_{t} = -\\hat{Q}_{uu}^{-1} \\hat{Q}_{ux}\nUpdate: 𝐯t=q̂x+Q̂xukt\\mathbf{v}_{t} = \\hat{q}_x + \\hat{Q}_{xu} k_{t}, 𝐕t=Q̂xx+Q̂xuKt\\quad \\mathbf{V}_{t} = \\hat{Q}_{xx} + \\hat{Q}_{xu} K_{t}\n\n2b. Forward pass — from x̂0=x‾0\\hat{x}_0 = \\bar{x}_0, simulate with ût=u‾t+αkt+Kt(x̂t−x‾t)\\hat{u}_{t} = \\bar{u}_{t} + \\alpha k_{t} + K_{t}(\\hat{x}_{t} - \\bar{x}_{t})\n2c. Line search — if J(û)&lt;J(u‾)J(\\hat{u}) &lt; J(\\bar{u}): accept; else α←α/2\\alpha \\leftarrow \\alpha/2, repeat 2b\n2d. Update — x‾t←x̂t\\bar{x}_{t} \\leftarrow \\hat{x}_{t}, u‾t←ût\\;\\bar{u}_{t} \\leftarrow \\hat{u}_{t}"
+  },
+  {
+    "objectID": "ilqr.html#ilqr-vs.-lqr",
+    "href": "ilqr.html#ilqr-vs.-lqr",
+    "title": "Robot Modeling Control",
+    "section": "iLQR vs. LQR",
+    "text": "iLQR vs. LQR\n\n\n\n\n\n\n\n\nQuantity\nLQR\niLQR (per iteration)\n\n\n\n\nDynamics\nAtxt+BtutA_{t} x_{t} + B_{t} u_{t}\nx‾t+1+Atδxt+Btδut\\bar{x}_{t+1} + A_{t} \\delta x_{t} + B_{t} \\delta u_{t}\n\n\nCost\nQuadratic in (x,u)(x, u)\nQuadratic in (δx,δu)(\\delta x, \\delta u); linear terms nonzero\n\n\nQ̂uu\\hat{Q}_{uu}\nR+BTPBR + B^T P B\ncuu+BTVxxBc_{uu} + B^T V_{xx} B\n\n\nOptimal control\nu*=−Kxu^* = -K x\nδu*=k+Kδx\\delta u^* = k + K \\delta x\n\n\nFeedforward\nNone (q̂u=0\\hat{q}_u = 0 at optimum)\nk=−Q̂uu−1q̂uk = -\\hat{Q}_{uu}^{-1} \\hat{q}_u (drives improvement)\n\n\nHessian recursion\nDiscrete Riccati equation\nSame Schur complement form\n\n\n\n\n\n\n\nThe backward pass is structurally identical to LQR applied to the deviation problem. The only additions: (1) feedforward gains ktk_{t} from nonzero cost gradients; (2) re-linearize each iteration."
+  },
+  {
+    "objectID": "ilqr.html#demo-iterates",
+    "href": "ilqr.html#demo-iterates",
+    "title": "Robot Modeling Control",
+    "section": "Demo: Iterates",
+    "text": "Demo: Iterates"
+  },
+  {
+    "objectID": "ilqr.html#demo-iterates-1",
+    "href": "ilqr.html#demo-iterates-1",
+    "title": "Robot Modeling Control",
+    "section": "Demo: Iterates",
+    "text": "Demo: Iterates\nPendulum swing-up from θ0=3.0\\theta_0 = 3.0 rad, T=200T = 200 steps. Snapshots at iterations 0, 1, 2, 4, 8, 15, 25, 50, 100 (darker = later).\n\nPhase portrait (left): successive iterates sweep from the initial open-loop trajectory toward the swing-up.\nCost vs. iteration (right, log scale):\n\nEarly iterations: large cost drops (big ktk_{t}, α=1\\alpha = 1 accepted)\nLater iterations: smaller refinements, curve steepens → superlinear convergence near optimum\n\n\n\n\n\n\nDiscussion: Even at iteration 0 the trajectory stays bounded. Why? The KtK_{t} feedback keeps each rollout near the nominal — without it, early iterates would be far more erratic."
+  },
+  {
+    "objectID": "ilqr.html#beyond-ilqr",
+    "href": "ilqr.html#beyond-ilqr",
+    "title": "Robot Modeling Control",
+    "section": "Beyond iLQR",
+    "text": "Beyond iLQR\nDifferential Dynamic Programming (DDP):\niLQR uses only first-order Jacobians of ftf_{t}. DDP adds second-order terms:\nQ̂xx+=∑i(𝐯t+1)(i)ft,xx(i),Q̂uu+=⋯,Q̂ux+=⋯\\hat{Q}_{xx} \\mathrel{+}= \\sum_i (\\mathbf{v}_{t+1})^{(i)} f_{t,xx}^{(i)}, \\quad \\hat{Q}_{uu} \\mathrel{+}= \\cdots, \\quad \\hat{Q}_{ux} \\mathrel{+}= \\cdots\n\n\nTerms scale as 𝒪(∥𝐯t+1∥)\\mathcal{O}(\\|\\mathbf{v}_{t+1}\\|) — vanish near the optimum where 𝐯t+1→0\\mathbf{v}_{t+1} \\to 0\nBetter convergence rate far from the optimum; expensive and rarely used in practice\niLQR is sometimes called Gauss-Newton DDP"
+  },
+  {
+    "objectID": "ilqr.html#beyond-ilqr-1",
+    "href": "ilqr.html#beyond-ilqr-1",
+    "title": "Robot Modeling Control",
+    "section": "Beyond iLQR",
+    "text": "Beyond iLQR\nNatural extensions:\n\n\n\n\n\n\n\nExtension\nIdea\n\n\n\n\nConstrained iLQR\nHandle ut∈𝒰u_{t} \\in \\mathcal{U} via augmented Lagrangian (AL-iLQR)\n\n\nMPC\nRe-solve at each timestep with a receding horizon\n\n\nWarm-starting\nInitialize next solve from the shifted previous solution"
+  },
+  {
+    "objectID": "ilqr.html#summary-1",
+    "href": "ilqr.html#summary-1",
     "title": "Robot Modeling Control",
     "section": "Summary",
-    "text": "Summary\nBackward Riccati recursion — initialize PT=WfP_T = W_f; repeat for t=T−1,…,0t = T-1,\\dots,0:\nKt=(R+BTPt+1B)−1BTPt+1A,Pt=W+ATPt+1(A−BKt)K_t = (R + B^T P_{t+1} B)^{-1} B^T P_{t+1} A, \\qquad P_t = W + A^T P_{t+1}(A - BK_t)\nOptimal control at runtime: ut*=−Ktxtu_t^* = -K_t x_t\n\nTrade-offs to explore:\n\n\n\n\n\n\n\nChange\nEffect\n\n\n\n\nIncrease rr\nLess aggressive control, slower convergence\n\n\nIncrease wfw_f\nState forced closer to 0 at t=Tt = T\n\n\nIncrease TT\nSmoother trajectories, gains converge toward K∞K_\\infty\n\n\nLarge x0x_0\nCost JJ grows quadratically — gains unchanged\n\n\n\n\n\n\nSee lqr.qmd for the generalized formulation with augmented [𝐱t;𝐮t][\\mathbf{x}_t;\\mathbf{u}_t] cost matrices and the explicit Q-function, which extends to iLQR."
+    "text": "Summary\nForward pass update: ût=u‾t+αkt+Kt(x̂t−x‾t),x̂t+1=f(x̂t,ût)\\hat{u}_{t} = \\bar{u}_{t} + \\alpha\\, k_{t} + K_{t}(\\hat{x}_{t} - \\bar{x}_{t}), \\qquad \\hat{x}_{t+1} = f(\\hat{x}_{t}, \\hat{u}_{t})\n\n\nα\\alpha scales only ktk_{t} — the Newton search direction in uu\nKtδxtK_{t} \\delta x_{t} corrects for nonlinear drift; it is not a search direction unless dynamics are linear\nUsing nonlinear dynamics keeps the trajectory feasible at every iteration\n\n\n\nLine search: halve α\\alpha until JJ decreases; kt→0k_{t} \\to 0 signals convergence\nConvergence ↔︎ optimality: q̂u=0\\hat{q}_u = 0 is the discrete-time PMP stationarity condition\nDDP vs. iLQR: dynamics Hessian terms improve convergence rate but are rarely worth the cost"
   },
   {
-    "objectID": "posegraph.html#pose-graph-optimization",
-    "href": "posegraph.html#pose-graph-optimization",
-    "title": "Robot Modeling Control",
-    "section": "Pose Graph Optimization",
-    "text": "Pose Graph Optimization\n\nCorrecting Odometry Drift with Loop Closures\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  Odometry Drift Problem  Graph Structure  Nonlinear Least Squares Formulation"
-  },
-  {
-    "objectID": "posegraph.html#lesson-overview",
-    "href": "posegraph.html#lesson-overview",
-    "title": "Robot Modeling Control",
-    "section": "Lesson Overview",
-    "text": "Lesson Overview\n\nProblem: Odometry drift accumulates over time\nSolution: Add loop closure constraints and optimize\nFormulation: Pose graph as nonlinear least squares\nImplementation: Gauss-Newton on sparse graphs"
-  },
-  {
-    "objectID": "posegraph.html#paper-loam",
-    "href": "posegraph.html#paper-loam",
-    "title": "Robot Modeling Control",
-    "section": "Paper: LOAM",
-    "text": "Paper: LOAM"
-  },
-  {
-    "objectID": "posegraph.html#paper-fast-lio2",
-    "href": "posegraph.html#paper-fast-lio2",
-    "title": "Robot Modeling Control",
-    "section": "Paper: Fast-LIO2",
-    "text": "Paper: Fast-LIO2\n\nhttps://www.youtube.com/watch?v=uVcBa6NXAbk"
-  },
-  {
-    "objectID": "posegraph.html#recall-odometry-drift",
-    "href": "posegraph.html#recall-odometry-drift",
-    "title": "Robot Modeling Control",
-    "section": "Recall: Odometry Drift",
-    "text": "Recall: Odometry Drift\nFrom scan matching or wheel odometry, we chain relative poses:\n\\[\nT_{B_{k+1}}^{W} = T_{B_k}^{W} \\cdot T_{B_{k+1}}^{B_k}\n\\]\n\nEach relative measurement \\(T_{B_{k+1}}^{B_k}\\) has small errors that accumulate."
-  },
-  {
-    "objectID": "posegraph.html#drift-visualization",
-    "href": "posegraph.html#drift-visualization",
-    "title": "Robot Modeling Control",
-    "section": "Drift Visualization",
-    "text": "Drift Visualization"
-  },
-  {
-    "objectID": "posegraph.html#loop-closure",
-    "href": "posegraph.html#loop-closure",
-    "title": "Robot Modeling Control",
-    "section": "Loop Closure",
-    "text": "Loop Closure\nWhen the robot revisits a location, we can detect this by matching scans.\n\nThis gives us a constraint between non-sequential poses!\n\n\n\n\n\n\n\n\nLoop Closure\n\n\nA loop closure is a measurement that relates poses far apart in time but close in space."
-  },
-  {
-    "objectID": "posegraph.html#what-loop-closure-tells-us",
-    "href": "posegraph.html#what-loop-closure-tells-us",
-    "title": "Robot Modeling Control",
-    "section": "What Loop Closure Tells Us",
-    "text": "What Loop Closure Tells Us\nIf scan matching at time \\(k\\) finds a good match with the scan from time \\(j\\) (where \\(j \\ll k\\)):\n\nWe obtain an estimate of \\(T_{B_k}^{B_j}\\) — the relative pose between poses \\(j\\) and \\(k\\).\n\n\nProblem: This measurement contradicts our odometry chain!\n\nOdometry says: \\(T_{B_k}^{B_j} = T_{B_{j+1}}^{B_j} \\cdot T_{B_{j+2}}^{B_{j+1}} \\cdots T_{B_k}^{B_{k-1}}\\)\nLoop closure says: \\(T_{B_k}^{B_j} \\approx \\tilde{T}_{B_k}^{B_j}\\) (from scan matching)"
-  },
-  {
-    "objectID": "posegraph.html#the-optimization-problem",
-    "href": "posegraph.html#the-optimization-problem",
-    "title": "Robot Modeling Control",
-    "section": "The Optimization Problem",
-    "text": "The Optimization Problem\nWe want to find poses that best satisfy all constraints:\n\n\nSequential constraints from odometry\nLoop closure constraints from scan matching\n\n\n\nThis is a nonlinear least squares problem!"
-  },
-  {
-    "objectID": "posegraph.html#pose-graph-representation",
-    "href": "posegraph.html#pose-graph-representation",
-    "title": "Robot Modeling Control",
-    "section": "Pose Graph Representation",
-    "text": "Pose Graph Representation"
-  },
-  {
-    "objectID": "posegraph.html#graph-components",
-    "href": "posegraph.html#graph-components",
-    "title": "Robot Modeling Control",
-    "section": "Graph Components",
-    "text": "Graph Components\nNodes \\(\\mathcal{V} = \\{x_0, x_1, \\ldots, x_n\\}\\)\n\nEach node is a robot pose: \\(x_i = (x_i, y_i, \\theta_i) \\in SE(2)\\)\n\n\nEdges \\(\\mathcal{E} = \\{(i, j)\\}\\)\n\nEach edge represents a relative pose measurement \\(\\tilde{T}_{ij}\\)\nSequential edges: \\((0,1), (1,2), \\ldots\\) from odometry\nLoop closure edges: \\((j, k)\\) where \\(k \\gg j\\), from scan matching"
-  },
-  {
-    "objectID": "posegraph.html#edge-measurement",
-    "href": "posegraph.html#edge-measurement",
-    "title": "Robot Modeling Control",
-    "section": "Edge Measurement",
-    "text": "Edge Measurement\nAn edge \\((i, j)\\) stores:\n\nMeasured relative pose: \\(\\tilde{T}_{ij} = (\\tilde{t}_x, \\tilde{t}_y, \\tilde{\\theta})\\)\n\n“Pose \\(j\\) as seen from pose \\(i\\)”\n\n\n\n\nInformation matrix (optional): \\(\\Omega_{ij}\\)\n\nEncodes measurement confidence\nMore confident measurements have larger weight"
-  },
-  {
-    "objectID": "posegraph.html#residual-for-an-edge",
-    "href": "posegraph.html#residual-for-an-edge",
-    "title": "Robot Modeling Control",
-    "section": "Residual for an Edge",
-    "text": "Residual for an Edge\nGiven estimated poses \\(x_i = (x_i, y_i, \\theta_i)\\) and \\(x_j = (x_j, y_j, \\theta_j)\\):\n\nPredicted relative pose: \\[\n\\hat{T}_{ij} = T_i^{-1} \\circ T_j\n\\]\n\n\nResidual: Difference between predicted and measured \\[\ne_{ij} = \\hat{T}_{ij} \\ominus \\tilde{T}_{ij}\n\\]"
-  },
-  {
-    "objectID": "posegraph.html#se2-residual-computation",
-    "href": "posegraph.html#se2-residual-computation",
-    "title": "Robot Modeling Control",
-    "section": "SE(2) Residual Computation",
-    "text": "SE(2) Residual Computation\nIn 2D, the residual has three components:\n\ndef pose_to_matrix(x, y, theta):\n    \"\"\"Convert pose (x, y, theta) to SE(2) matrix.\"\"\"\n    c, s = np.cos(theta), np.sin(theta)\n    return np.array([[c, -s, x], [s, c, y], [0, 0, 1]])\n\ndef matrix_to_pose(T):\n    \"\"\"Extract (x, y, theta) from SE(2) matrix.\"\"\"\n    return T[0, 2], T[1, 2], np.arctan2(T[1, 0], T[0, 0])\n\ndef compute_residual(xi, xj, z_ij):\n    \"\"\"\n    Compute residual for edge (i, j).\n    xi, xj: poses (x, y, theta)\n    z_ij: measured relative pose (dx, dy, dtheta)\n    Returns: residual vector [ex, ey, etheta]\n\n    Residual: e = [R_i^T @ (p_j - p_i); theta_j - theta_i] - z_ij\n    \"\"\"\n    x_i, y_i, theta_i = xi[0], xi[1], xi[2]\n    x_j, y_j, theta_j = xj[0], xj[1], xj[2]\n    dx_meas, dy_meas, dtheta_meas = z_ij[0], z_ij[1], z_ij[2]\n\n    c, s = np.cos(theta_i), np.sin(theta_i)\n\n    # Predicted relative position (j in frame i)\n    dx_world = x_j - x_i\n    dy_world = y_j - y_i\n    dx_pred = c * dx_world + s * dy_world\n    dy_pred = -s * dx_world + c * dy_world\n    dtheta_pred = theta_j - theta_i\n\n    # Residual = predicted - measured\n    e = np.array([\n        dx_pred - dx_meas,\n        dy_pred - dy_meas,\n        np.arctan2(np.sin(dtheta_pred - dtheta_meas),\n                   np.cos(dtheta_pred - dtheta_meas))  # Wrap angle\n    ])\n    return e"
-  },
-  {
-    "objectID": "posegraph.html#cost-function",
-    "href": "posegraph.html#cost-function",
-    "title": "Robot Modeling Control",
-    "section": "Cost Function",
-    "text": "Cost Function\nThe total cost is the sum of squared residuals over all edges:\n\\[\nF(x) = \\sum_{(i,j) \\in \\mathcal{E}} e_{ij}^T \\Omega_{ij} \\, e_{ij}\n\\]\n\nwhere:\n\n\\(e_{ij} \\in \\mathbb{R}^3\\) is the residual for edge \\((i, j)\\)\n\\(\\Omega_{ij} \\in \\mathbb{R}^{3 \\times 3}\\) is the information matrix (often \\(I_3\\))\n\n\n\n\n\n\n\n\n\nNote\n\n\nThis is exactly the nonlinear least squares problem from earlier lectures!"
-  },
-  {
-    "objectID": "posegraph.html#jacobian-structure",
-    "href": "posegraph.html#jacobian-structure",
-    "title": "Robot Modeling Control",
-    "section": "Jacobian Structure",
-    "text": "Jacobian Structure\nThe residual \\(e_{ij}\\) depends only on poses \\(x_i\\) and \\(x_j\\).\n\nJacobians: \\[\nA_{ij} = \\frac{\\partial e_{ij}}{\\partial x_i} \\in \\mathbb{R}^{3 \\times 3}, \\quad\nB_{ij} = \\frac{\\partial e_{ij}}{\\partial x_j} \\in \\mathbb{R}^{3 \\times 3}\n\\]\n\n\nThe full Jacobian \\(J\\) is sparse: most entries are zero!"
-  },
-  {
-    "objectID": "posegraph.html#sparsity-pattern",
-    "href": "posegraph.html#sparsity-pattern",
-    "title": "Robot Modeling Control",
-    "section": "Sparsity Pattern",
-    "text": "Sparsity Pattern\n\n\n\n\n\n\n\nTip\n\n\nSparsity is what makes large-scale SLAM tractable!"
-  },
-  {
-    "objectID": "posegraph.html#jacobian-for-se2-edge",
-    "href": "posegraph.html#jacobian-for-se2-edge",
-    "title": "Robot Modeling Control",
-    "section": "Jacobian for SE(2) Edge",
-    "text": "Jacobian for SE(2) Edge\nFor residual \\(e_{ij}\\) with poses \\(x_i\\) and \\(x_j\\):\n\ndef compute_jacobians(xi, xj, z_ij):\n    \"\"\"\n    Compute Jacobians of residual w.r.t. poses xi and xj.\n    Returns: A (de/dxi), B (de/dxj), both 3x3\n    \"\"\"\n    theta_i = xi[2]\n    c, s = np.cos(theta_i), np.sin(theta_i)\n    dx = xj[0] - xi[0]\n    dy = xj[1] - xi[1]\n\n    # Jacobian w.r.t. xi\n    A = np.array([\n        [-c, -s,  -s * dx + c * dy],\n        [ s, -c,  -c * dx - s * dy],\n        [ 0,  0,  -1]\n    ])\n\n    # Jacobian w.r.t. xj\n    B = np.array([\n        [ c,  s,  0],\n        [-s,  c,  0],\n        [ 0,  0,  1]\n    ])\n\n    return A, B"
-  },
-  {
-    "objectID": "posegraph.html#gauss-newton-update",
-    "href": "posegraph.html#gauss-newton-update",
-    "title": "Robot Modeling Control",
-    "section": "Gauss-Newton Update",
-    "text": "Gauss-Newton Update\nStack all poses into vector \\(\\mathbf{x} \\in \\mathbb{R}^{3n}\\):\n\\[\n\\mathbf{x} = \\begin{bmatrix} x_0 \\\\ y_0 \\\\ \\theta_0 \\\\ x_1 \\\\ y_1 \\\\ \\theta_1 \\\\ \\vdots \\end{bmatrix}\n\\]\n\nGauss-Newton iteration: \\[\nH \\, \\Delta \\mathbf{x} = -\\mathbf{b}\n\\] where \\(H = J^T \\Omega J\\) (sparse!) and \\(\\mathbf{b} = J^T \\Omega \\, \\mathbf{e}\\)"
-  },
-  {
-    "objectID": "posegraph.html#building-the-linear-system",
-    "href": "posegraph.html#building-the-linear-system",
-    "title": "Robot Modeling Control",
-    "section": "Building the Linear System",
-    "text": "Building the Linear System\n\ndef build_linear_system(poses, edges, measurements):\n    \"\"\"\n    Build H and b for Gauss-Newton.\n    poses: list of (x, y, theta)\n    edges: list of (i, j) pairs\n    measurements: list of (dx, dy, dtheta) for each edge\n    \"\"\"\n    n = len(poses)\n    H = np.zeros((3*n, 3*n))\n    b = np.zeros(3*n)\n\n    for (i, j), z_ij in zip(edges, measurements):\n        xi, xj = poses[i], poses[j]\n        e_ij = compute_residual(xi, xj, z_ij)\n        A, B = compute_jacobians(xi, xj, z_ij)\n\n        # Add to H (using Omega = I)\n        H[3*i:3*i+3, 3*i:3*i+3] += A.T @ A\n        H[3*i:3*i+3, 3*j:3*j+3] += A.T @ B\n        H[3*j:3*j+3, 3*i:3*i+3] += B.T @ A\n        H[3*j:3*j+3, 3*j:3*j+3] += B.T @ B\n\n        # Add to b\n        b[3*i:3*i+3] += A.T @ e_ij\n        b[3*j:3*j+3] += B.T @ e_ij\n\n    return H, b"
-  },
-  {
-    "objectID": "posegraph.html#fixing-the-gauge",
-    "href": "posegraph.html#fixing-the-gauge",
-    "title": "Robot Modeling Control",
-    "section": "Fixing the Gauge",
-    "text": "Fixing the Gauge\nThe cost function is invariant to rigid transformations of all poses.\n\nProblem: \\(H\\) is rank-deficient (3 degrees of freedom)\n\n\nSolution: Fix the first pose \\(x_0 = (0, 0, 0)\\)\n\nRemove rows/columns for \\(x_0\\) from \\(H\\)\nOr add large diagonal entries: \\(H_{0:3, 0:3} += \\lambda I\\)"
-  },
-  {
-    "objectID": "posegraph.html#full-optimization-loop",
-    "href": "posegraph.html#full-optimization-loop",
-    "title": "Robot Modeling Control",
-    "section": "Full Optimization Loop",
-    "text": "Full Optimization Loop\n\ndef optimize_pose_graph(initial_poses, edges, measurements,\n                        n_iter=10, fix_first=True):\n    \"\"\"\n    Optimize pose graph using Gauss-Newton.\n    \"\"\"\n    poses = [np.array(p) for p in initial_poses]\n    n = len(poses)\n\n    for iteration in range(n_iter):\n        H, b = build_linear_system(poses, edges, measurements)\n\n        # Fix first pose (add large weight)\n        if fix_first:\n            H[0:3, 0:3] += 1e6 * np.eye(3)\n\n        # Solve\n        dx = np.linalg.solve(H, -b)\n\n        # Update poses\n        for i in range(n):\n            poses[i] = poses[i] + dx[3*i:3*i+3]\n            # Normalize angle\n            poses[i][2] = np.arctan2(np.sin(poses[i][2]),\n                                      np.cos(poses[i][2]))\n\n    return poses"
-  },
-  {
-    "objectID": "posegraph.html#example-square-loop",
-    "href": "posegraph.html#example-square-loop",
-    "title": "Robot Modeling Control",
-    "section": "Example: Square Loop",
-    "text": "Example: Square Loop\n\n\nCode\nnp.random.seed(123)\n\n# True poses: square path\ntrue_poses = [\n    (0, 0, 0),\n    (2, 0, 0),\n    (4, 0, np.pi/2),\n    (4, 2, np.pi/2),\n    (4, 4, np.pi),\n    (2, 4, np.pi),\n    (0, 4, -np.pi/2),\n    (0, 2, -np.pi/2),\n]\n\n# Generate noisy odometry measurements\nedges = [(i, i+1) for i in range(7)]  # Sequential\nedges.append((7, 0))  # Loop closure!\n\nmeasurements = []\nfor i, j in edges:\n    Ti = pose_to_matrix(*true_poses[i])\n    Tj = pose_to_matrix(*true_poses[j])\n    T_rel = np.linalg.inv(Ti) @ Tj\n    z = matrix_to_pose(T_rel)\n    # Add noise (more noise on odometry, less on loop closure)\n    if j == i + 1:  # Odometry\n        noise = np.array([0.1, 0.1, 0.05]) * np.random.randn(3)\n    else:  # Loop closure (often more accurate)\n        noise = np.array([0.05, 0.05, 0.02]) * np.random.randn(3)\n    measurements.append(tuple(np.array(z) + noise))\n\n# Initial poses from chaining odometry (with drift)\ninitial_poses = [np.array([0.0, 0.0, 0.0])]\nT_acc = np.eye(3)\nfor i in range(7):\n    T_rel = pose_to_matrix(*measurements[i])\n    T_acc = T_acc @ T_rel\n    initial_poses.append(np.array(matrix_to_pose(T_acc)))\n\n# Optimize\noptimized_poses = optimize_pose_graph(initial_poses, edges, measurements, n_iter=20)\n\n# Plot comparison\nfig, axes = plt.subplots(1, 2, figsize=(12, 5))\n\n# Before optimization\nax = axes[0]\ninit_arr = np.array(initial_poses)\ntrue_arr = np.array(true_poses)\nax.plot(true_arr[:, 0], true_arr[:, 1], 'g-o', markersize=8, linewidth=2, label='Ground Truth')\nax.plot(init_arr[:, 0], init_arr[:, 1], 'r-s', markersize=8, linewidth=2, label='Initial (Odometry)')\n# Draw loop closure gap\nax.plot([init_arr[-1, 0], init_arr[0, 0]], [init_arr[-1, 1], init_arr[0, 1]],\n        'r--', linewidth=2, alpha=0.5)\nax.set_xlabel('x (m)')\nax.set_ylabel('y (m)')\nax.set_aspect('equal')\nax.grid(True, alpha=0.3)\nax.legend()\nax.set_title('Before Optimization')\n\n# After optimization\nax = axes[1]\nopt_arr = np.array(optimized_poses)\nax.plot(true_arr[:, 0], true_arr[:, 1], 'g-o', markersize=8, linewidth=2, label='Ground Truth')\nax.plot(opt_arr[:, 0], opt_arr[:, 1], 'b-s', markersize=8, linewidth=2, label='Optimized')\nax.set_xlabel('x (m)')\nax.set_ylabel('y (m)')\nax.set_aspect('equal')\nax.grid(True, alpha=0.3)\nax.legend()\nax.set_title('After Optimization')\n\nplt.tight_layout()\nplt.show()\n\n# Print errors\ninit_error = np.mean([np.linalg.norm(init_arr[i, :2] - true_arr[i, :2]) for i in range(8)])\nopt_error = np.mean([np.linalg.norm(opt_arr[i, :2] - true_arr[i, :2]) for i in range(8)])\nprint(f\"Mean position error - Initial: {init_error:.3f} m, Optimized: {opt_error:.3f} m\")\n\n\n\nMean position error - Initial: 0.593 m, Optimized: 0.152 m"
-  },
-  {
-    "objectID": "posegraph.html#convergence",
-    "href": "posegraph.html#convergence",
-    "title": "Robot Modeling Control",
-    "section": "Convergence",
-    "text": "Convergence\n\n\nCode\n# Track cost over iterations\ndef compute_total_cost(poses, edges, measurements):\n    cost = 0\n    for (i, j), z_ij in zip(edges, measurements):\n        e = compute_residual(poses[i], poses[j], z_ij)\n        cost += e @ e\n    return cost\n\n# Re-run optimization tracking cost\nposes = [np.array(p) for p in initial_poses]\ncosts = [compute_total_cost(poses, edges, measurements)]\n\nfor iteration in range(20):\n    H, b = build_linear_system(poses, edges, measurements)\n    H[0:3, 0:3] += 1e6 * np.eye(3)\n    dx = np.linalg.solve(H, -b)\n    for i in range(len(poses)):\n        poses[i] = poses[i] + dx[3*i:3*i+3]\n        poses[i][2] = np.arctan2(np.sin(poses[i][2]), np.cos(poses[i][2]))\n    costs.append(compute_total_cost(poses, edges, measurements))\n\nfig, ax = plt.subplots(figsize=(8, 5))\nax.semilogy(costs, 'b-o', markersize=6)\nax.set_xlabel('Iteration')\nax.set_ylabel('Cost (log scale)')\nax.set_title('Gauss-Newton Convergence')\nax.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\nNote\n\n\nGauss-Newton converges quickly — typically 5-10 iterations suffice."
-  },
-  {
-    "objectID": "posegraph.html#weighted-edges",
-    "href": "posegraph.html#weighted-edges",
-    "title": "Robot Modeling Control",
-    "section": "Weighted Edges",
-    "text": "Weighted Edges\nDifferent measurements have different uncertainties.\n\nInformation matrix \\(\\Omega_{ij}\\):\n\nDiagonal: \\(\\Omega = \\text{diag}(\\sigma_x^{-2}, \\sigma_y^{-2}, \\sigma_\\theta^{-2})\\)\nMore confident measurements → larger \\(\\Omega\\) → more influence\n\n\n\nCost function becomes: \\[\nF(x) = \\sum_{(i,j) \\in \\mathcal{E}} e_{ij}^T \\Omega_{ij} \\, e_{ij}\n\\]"
-  },
-  {
-    "objectID": "posegraph.html#robust-cost-functions",
-    "href": "posegraph.html#robust-cost-functions",
-    "title": "Robot Modeling Control",
-    "section": "Robust Cost Functions",
-    "text": "Robust Cost Functions\nLoop closure detection can produce outliers (false matches).\n\nStandard least squares is sensitive to outliers!\n\n\nSolution: Use robust kernels\n\n\n\n\n\n\n\n\nKernel\nFormula\nEffect\n\n\n\n\nSquared\n\\(\\rho(r) = r^2\\)\nStandard (sensitive)\n\n\nHuber\n\\(\\rho(r) = \\begin{cases} r^2 & |r| \\leq k \\\\ 2k|r| - k^2 & |r| &gt; k \\end{cases}\\)\nLinear growth for outliers\n\n\nCauchy\n\\(\\rho(r) = \\log(1 + r^2)\\)\nBounded influence"
-  },
-  {
-    "objectID": "posegraph.html#robust-cost-visualization",
-    "href": "posegraph.html#robust-cost-visualization",
-    "title": "Robot Modeling Control",
-    "section": "Robust Cost Visualization",
-    "text": "Robust Cost Visualization"
-  },
-  {
-    "objectID": "posegraph.html#loop-closure-detection",
-    "href": "posegraph.html#loop-closure-detection",
-    "title": "Robot Modeling Control",
-    "section": "Loop Closure Detection",
-    "text": "Loop Closure Detection\nWe assumed loop closures are given. In practice, detecting them is challenging!\n\nApproaches:\n\nScan-to-scan matching: Match current scan against all previous scans\n\nExpensive: \\(O(n^2)\\) comparisons\n\nScan-to-map matching: Match against accumulated map\nPlace recognition: Use descriptors to find candidate matches\n\nBag-of-words, learning-based methods"
-  },
-  {
-    "objectID": "posegraph.html#libraries-for-pose-graph-optimization",
-    "href": "posegraph.html#libraries-for-pose-graph-optimization",
-    "title": "Robot Modeling Control",
-    "section": "Libraries for Pose Graph Optimization",
-    "text": "Libraries for Pose Graph Optimization\nIn practice, use optimized libraries:\n\nGTSAM (Georgia Tech Smoothing and Mapping)\n\nFactor graph formulation\nIncremental updates (iSAM2)\nWidely used in robotics research\n\n\n\ng2o (General Graph Optimization)\n\nC++ library\nUsed in ORB-SLAM, LSD-SLAM\n\n\n\nCeres Solver\n\nGoogle’s nonlinear least squares library\nVery flexible, automatic differentiation"
-  },
-  {
-    "objectID": "posegraph.html#factor-graph-view",
-    "href": "posegraph.html#factor-graph-view",
-    "title": "Robot Modeling Control",
-    "section": "Factor Graph View",
-    "text": "Factor Graph View\nGTSAM uses “factor graph” terminology:\n\n\n\n\n\n\n\nNote\n\n\nVariables are poses, factors are constraints (measurements). Same math, different visualization!"
-  },
-  {
-    "objectID": "posegraph.html#connection-to-your-assignment",
-    "href": "posegraph.html#connection-to-your-assignment",
-    "title": "Robot Modeling Control",
-    "section": "Connection to Your Assignment",
-    "text": "Connection to Your Assignment\nYour scan matching assignment involves:\n\n\nSequential scan matching → odometry edges\n\n\n\n\nLong-range scan matching → loop closure edges\n\nMatch scan \\(k\\) against scans \\(0, 1, \\ldots, k-10\\) (for example)\nIf match quality is good, add loop closure edge\n\n\n\n\n\nPose graph optimization → correct drift\n\nBuild graph with all edges\nOptimize to find best poses"
-  },
-  {
-    "objectID": "posegraph.html#summary",
-    "href": "posegraph.html#summary",
+    "objectID": "ilqr.html#summary-2",
+    "href": "ilqr.html#summary-2",
     "title": "Robot Modeling Control",
     "section": "Summary",
-    "text": "Summary\n\nProblem: Odometry drift accumulates; loop closures provide constraints\nGraph structure: Nodes = poses, edges = relative pose measurements\nFormulation: Nonlinear least squares on SE(2) residuals\nKey insight: Jacobian/Hessian is sparse → tractable for large graphs\nPractice: Use robust kernels for outliers, libraries for efficiency"
+    "text": "Summary\nComputational complexity per iteration:\n\n\n\n\n\n\n\nStep\nCost\n\n\n\n\nBackward pass\n𝒪(T(n3+m3))\\mathcal{O}(T(n^3 + m^3)) — matrix inversions dominate\n\n\nForward pass (per line-search trial)\n𝒪(T⋅cost of f)\\mathcal{O}(T \\cdot \\text{cost of } f)\n\n\nIterations to convergence\nTypically 10–100 for smooth problems"
   },
   {
-    "objectID": "posegraph.html#references",
-    "href": "posegraph.html#references",
-    "title": "Robot Modeling Control",
-    "section": "References",
-    "text": "References\n\nGrisetti, G., Kummerle, R., Stachniss, C., & Burgard, W. (2010). “A Tutorial on Graph-Based SLAM.” IEEE Intelligent Transportation Systems Magazine.\nDellaert, F., & Kaess, M. (2017). “Factor Graphs for Robot Perception.” Foundations and Trends in Robotics.\nCarlone, L., et al. (2025). “Slam handbook: From localization and mapping to spatial intelligence.”.\nGTSAM: https://gtsam.org\ng2o: https://github.com/RainerKuemmerle/g2o"
+    "objectID": "papers.html",
+    "href": "papers.html",
+    "title": "Papers",
+    "section": "",
+    "text": "Description\nTitle\nSource\nPreprint\n\n\n\n\nPID Control\nOn the PID tracking control of robot manipulators\nSCL\n\n\n\nGravity Compensation\nGravity compensation in robotics\nT&F\n\n\n\nControl\nExperimental evaluation of feedforward and computed torque control\nIEEE\n\n\n\nForce Control\nCompliance and Force Control for Computer Controlled Manipulators\nIEEE\n\n\n\nPDW\nPassive Dynamic Walking\nlink\n\n\n\nHybrid Zero Dynamics\nHybrid zero dynamics of planar biped walkers\nIEEE\n\n\n\nUnderactuation\nThe swing up control problem for the Acrobot\nIEEE\n\n\n\nUnderactuation\nPartial feedback linearization of underactuated mechanical systems\nIEEE\n\n\n\nPush recovery\nCapture Point: A Step toward Humanoid Push Recovery\nIEEE\n\n\n\nQuadrotor Diff Flatness\nA prototype of an autonomous controller for a quadrotor UAV\nIEEE\n\n\n\nQuadrotor\nTrajectory generation and control for precise aggressive maneuvers with quadrotors\nIJRR\n\n\n\nDifferential Drive Robots\nMinimum Wheel-Rotation Paths for Differential-Drive Mobile Robots\nIJRR\n\n\n\nMedical\nNonholonomic Modeling of Needle Steering\nIJRR\n\n\n\nConsensus-based Methods\nConsensus and Cooperation in Networked Multi-Agent Systems\nIEEE\n\n\n\nFormation Control\nModeling and control of formations of nonholonomic mobile robots\nIEEE\n\n\n\nSubsumption (Brooks)\nA robust layered control system for a mobile robot\nIEEE\n\n\n\nExoskeletons\nBiomechanical design of the Berkeley lower extremity exoskeleton (BLEEX)\nIEEE\n\n\n\nFiltering Body Pose\nDesign, Implementation, and Experimental Results of a Quaternion-Based Kalman Filter for Human Body Motion Tracking\nIEEE\n\n\n\nSnake Robot\nDesign of a modular snake robot\nIEEE",
+    "crumbs": [
+      "Home",
+      "Papers"
+    ]
   },
   {
-    "objectID": "overview.html#syllabus-1",
-    "href": "overview.html#syllabus-1",
-    "title": "Overview",
-    "section": "Syllabus",
-    "text": "Syllabus\n\nLecture: Tue & Thur 2:00pm - 3:15pm, FPAT 253.\nOffice Hours: TBD\nText: Notes +Modern Robotics+ Robot Modeling and Control\nWorkload: 2.5 hours of lecture, 8 hours of reading notes, papers, and writing simulation code per week.\nCourse announcements: I use canvas to send information, but don’t read inbox messages. Contacting me by email with [ME 676 RMC]: or [AER 676 RMC]: makes it easy for me to track and respond to your emails.\nCourse website: All course material will be available on the website, which will be updated as the course proceeds."
+    "objectID": "extras.html",
+    "href": "extras.html",
+    "title": "Resources",
+    "section": "",
+    "text": "Topic\nOther\n\n\n\n\nRobotics ’23\nUK Course\n\n\nOptimization\nUK Course\n\n\nConvex Optimization\nOG Source\n\n\nDeep Learning\nUK Course\n\n\nList of Robotics Courses\nLink\n\n\nLinear Algebra\nGilbert Strang’s lectures\n\n\nODEs\nODE Slides ODE Models, Mechanical Sys, Electrical Sys,\n\n\nServo Motors\nmynotes, PID, PMDC Motors, Gears, DC Motor Control\n\n\nControl Systems\nLaplace Transforms, Transfer Functions, Stability\n\n\nLinear Systems\nLinearization, LTI Systems\n\n\nProbability\nCS188 Lec11, mynotes\n\n\nAI as Search\nBerekeley CS 188 Lec1\n\n\nMarkov decision processes (MDPs)\nCS188 Lec 7, CS188 Lec 8\n\n\nReinforcement Learning\nSergey Levine’s course, mynotes\n\n\nDifferential Geometry\nmynotes",
+    "crumbs": [
+      "Home",
+      "Resources"
+    ]
   },
   {
-    "objectID": "overview.html#syllabus-2",
-    "href": "overview.html#syllabus-2",
-    "title": "Overview",
-    "section": "Syllabus",
-    "text": "Syllabus\n\nAcademic Integrity\nAccommodations due to disability\nAttendance Policy\nClassroom Conduct\nExcused Absences & Verification of Absences\nExams: None.\nHomework: Intermittent assignments, must adhere to rules in syllabus\nGrading: See Syllabus. Subject to change."
+    "objectID": "mujoco.html#basic-example",
+    "href": "mujoco.html#basic-example",
+    "title": "MuJoCo and XML",
+    "section": "Basic Example",
+    "text": "Basic Example\n\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\n\n\n\n\n\n\n\n\n\n\nRun python3 code/basic_mujoco.py"
   },
   {
-    "objectID": "overview.html#course-overview",
-    "href": "overview.html#course-overview",
-    "title": "Overview",
-    "section": "Course Overview",
-    "text": "Course Overview\n\n\n\n\n\n\nLearning Goal\n\n\nFor you to be able to read and assimilate both recent papers and early foundational papers on robotics. Furthermore, develop programming skills that enable you to implement and try (possibly new) methods in simulation."
+    "objectID": "mujoco.html#basic-example-1",
+    "href": "mujoco.html#basic-example-1",
+    "title": "MuJoCo and XML",
+    "section": "Basic Example",
+    "text": "Basic Example\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)"
   },
   {
-    "objectID": "overview.html#course-overview-1",
-    "href": "overview.html#course-overview-1",
-    "title": "Overview",
-    "section": "Course Overview",
-    "text": "Course Overview\nLearning Goals:\n\nUnderstand coordinates and robot configurations.\nUnderstand how to transform the robot configuration into task coordinates and vice versa, along with the challenges in these processes.\nLearn approaches to planning motions in both task coordinates and robot configurations.\nLearn approaches to achieving planned motions using feedback control.\nUnderstand the challenges of state estimation.\nLearn optimization-based approaches to planning and control.\nUnderstand contact modeling and control challenges.\nSimulate robotic systems and test control algorithms."
+    "objectID": "mujoco.html#basic-example-with-loading",
+    "href": "mujoco.html#basic-example-with-loading",
+    "title": "MuJoCo and XML",
+    "section": "Basic Example with Loading",
+    "text": "Basic Example with Loading\n\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\ncode/basic_mujoco.py\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\nmodel = mujoco.MjModel.from_xml_path('../models/simple_pendulum_act.xml')\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\ncode/mujoco_load_xml.py"
   },
   {
-    "objectID": "overview.html#course-overview-2",
-    "href": "overview.html#course-overview-2",
-    "title": "Overview",
-    "section": "Course Overview",
-    "text": "Course Overview\nApproaches for achieving goals:\n\nLecture/Discussion on\n\nCoordinates\nDynamical Systems: single and articulated rigid bodies\nPlanning Trajectories\nSensing and State Estimation\nFeedback Control\n\nResearch article discussions\nPractice through assignments (code and question) and Course Project"
+    "objectID": "mujoco.html#interactive",
+    "href": "mujoco.html#interactive",
+    "title": "MuJoCo and XML",
+    "section": "Interactive",
+    "text": "Interactive\n\npython3 -m mujoco.viewer \n\nand then drag and drop xml files from models/"
   },
   {
-    "objectID": "overview.html#grades",
-    "href": "overview.html#grades",
-    "title": "Overview",
-    "section": "Grades",
-    "text": "Grades\n\n\n\nName\nWeight\nDue (Tentative)\n\n\n\n\nAssignment 1\n20%\nWeek 3\n\n\nAssignment 2\n20%\nWeek 6\n\n\nResearch Article Discussions\n10%\nWeeks 7 -10\n\n\nProject Proposal\n10%\nWeek 11\n\n\nAssignment 3\n20%\nWeek 12\n\n\nProject Presentation\n20%\nWeek 15"
+    "objectID": "mujoco.html#block-example",
+    "href": "mujoco.html#block-example",
+    "title": "MuJoCo and XML",
+    "section": "Block Example",
+    "text": "Block Example\n&lt;mujoco&gt;\n&lt;option gravity=\"0 0 -9.81\"/&gt;\n    &lt;worldbody&gt;\n    &lt;light diffuse=\".5 .5 .5\" pos=\"0 0 3\" dir=\"0 0 -1\"/&gt;\n        &lt;geom type=\"plane\" size=\"1 1 0.1\" rgba=\".9 0 0 1\"/&gt;\n        &lt;body pos=\"0 0 1\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 .9 0 1\"/&gt;\n        &lt;/body&gt;\n    &lt;/worldbody&gt;\n&lt;/mujoco&gt;"
   },
   {
-    "objectID": "overview.html#expectations",
-    "href": "overview.html#expectations",
-    "title": "Overview",
-    "section": "Expectations",
-    "text": "Expectations\n\nYou are reviewing notes and slides.\nComfort with mathematics:\n\nAbstract definitions.\nImagining concrete examples to which they apply.\nApplying definitions to complete derivations and proofs.\n\nComfort with code:\n\nHow to use documentation describing installation and use of packages.\nAwareness of the need to test code frequently tests will need testing.\n\nStudy groups. Don’t go this one alone."
+    "objectID": "mujoco.html#blocks-example",
+    "href": "mujoco.html#blocks-example",
+    "title": "MuJoCo and XML",
+    "section": "Blocks Example",
+    "text": "Blocks Example\n\n\n&lt;mujoco&gt;\n&lt;option gravity=\"0 0 -9.81\"/&gt;\n    &lt;worldbody&gt;\n    &lt;light diffuse=\".5 .5 .5\" pos=\"0 0 3\" dir=\"0 0 -1\"/&gt;\n        &lt;geom type=\"plane\" size=\"1 1 0.1\" rgba=\".9 0 0 1\"/&gt;\n        &lt;body pos=\"0 0 1\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 .9 0 1\"/&gt;\n        &lt;/body&gt;\n        &lt;body pos=\"0.1 0 1.5\" euler=\"0 90 0\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 0 0.9 1\"/&gt;\n        &lt;/body&gt;\n        &lt;body pos=\"0.1 0 2.0\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"sphere\" size=\".1\" rgba=\"0.9 0.9 0 1\"/&gt;\n        &lt;/body&gt;\n    &lt;/worldbody&gt;\n&lt;/mujoco&gt;"
   },
   {
-    "objectID": "overview.html#about-me",
-    "href": "overview.html#about-me",
-    "title": "Overview",
-    "section": "About Me",
-    "text": "About Me\n\nGrew up in India (early childhood in England)\nUndergraduate degree in Mech. Engg. in India\nMasters in Mech. Engg focusing on Mechatronics\nPh.D in Electrical Engg. from UT Dallas: Legged Robots -&gt; Graph Theory + Multi-robot coordination + Quadrotors\nPostDoc at UT Austin: Stability Analysis of Classifier-in-the-Loop Systems\n\n\n\n\n\nResearch\n\n\nGoal: Get mechanical robots to control themselves."
+    "objectID": "mujoco.html#actuated-example",
+    "href": "mujoco.html#actuated-example",
+    "title": "MuJoCo and XML",
+    "section": "Actuated Example",
+    "text": "Actuated Example"
   },
   {
-    "objectID": "overview.html#inspiration",
-    "href": "overview.html#inspiration",
-    "title": "Overview",
-    "section": "Inspiration",
-    "text": "Inspiration"
+    "objectID": "mujoco.html#actuated-example-1",
+    "href": "mujoco.html#actuated-example-1",
+    "title": "MuJoCo and XML",
+    "section": "Actuated Example",
+    "text": "Actuated Example\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\nmodel = mujoco.MjModel.from_xml_path('../models/simple_pendulum_act.xml')\n\n\ndt: float = 0.002\nmodel.opt.timestep = dt\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch_passive(model, data,\n        show_left_ui=False,\n        show_right_ui=False,\n      )\ntry:\n    while viewer.is_running():\n        step_start = time.time()\n        # Step the simulation\n        data.ctrl[0] = -100*data.qpos[0] - 20*data.qvel[0]\n        print(data.qpos[0])\n        mujoco.mj_step(model, data)\n        # Update the viewer\n        viewer.sync()\n        # Add a small delay to control frame rate\n        time_until_next_step = dt - (time.time() - step_start)\n        if time_until_next_step &gt; 0:\n            time.sleep(time_until_next_step)\nexcept KeyboardInterrupt:\n    print(\"Viewer closed by user\")\nfinally:\n    viewer.close()\n\ncode/mujoco_load_xml_control.py"
   },
   {
-    "objectID": "overview.html#about-you",
-    "href": "overview.html#about-you",
-    "title": "Overview",
-    "section": "About You",
-    "text": "About You\nOn an index card / sheet of paper, write down:\n\nName\nFirst robot you were aware of and/or Favorite robot\nMotivation for taking this course\nConcerns about the course\nTopics you wish were on the syllabus\nTopics you have already studied\nLearning/teaching styles that you feel work well for you"
-  },
-  {
-    "objectID": "overview.html#motivation-1",
-    "href": "overview.html#motivation-1",
-    "title": "Overview",
-    "section": "Motivation",
-    "text": "Motivation"
-  },
-  {
-    "objectID": "overview.html#motivation-2",
-    "href": "overview.html#motivation-2",
-    "title": "Overview",
-    "section": "Motivation",
-    "text": "Motivation"
-  },
-  {
-    "objectID": "overview.html#motivation-3",
-    "href": "overview.html#motivation-3",
-    "title": "Overview",
-    "section": "Motivation",
-    "text": "Motivation"
-  },
-  {
-    "objectID": "overview.html#motivation-4",
-    "href": "overview.html#motivation-4",
-    "title": "Overview",
-    "section": "Motivation",
-    "text": "Motivation"
-  },
-  {
-    "objectID": "overview.html#motivation-5",
-    "href": "overview.html#motivation-5",
-    "title": "Overview",
-    "section": "Motivation",
-    "text": "Motivation"
-  },
-  {
-    "objectID": "overview.html#exercise",
-    "href": "overview.html#exercise",
-    "title": "Overview",
-    "section": "Exercise",
-    "text": "Exercise\nSketch a diagram describing your guess for the underlying system architecture that achieves these kinds of behaviors"
-  },
-  {
-    "objectID": "overview.html#whats-left",
-    "href": "overview.html#whats-left",
-    "title": "Overview",
-    "section": "What’s Left?",
-    "text": "What’s Left?\n\nTouch feedback\nHuman-Robot Interaction\nSafety\nReliability\nEnergetic Efficiency\n\nPrevious: Will the prototype work?\nNow: Will this be a viable commercial product?"
-  },
-  {
-    "objectID": "overview.html#goal",
-    "href": "overview.html#goal",
-    "title": "Overview",
-    "section": "Goal",
-    "text": "Goal\nGoal: Get mechanical robots to control themselves.\nDay-to-day:\n\nTheory from dynamics and control systems,\nAlgorithm development: optimization\n\nSimulations/experiments"
-  },
-  {
-    "objectID": "overview.html#navigation-using-deep-learning",
-    "href": "overview.html#navigation-using-deep-learning",
-    "title": "Overview",
-    "section": "Navigation using Deep Learning",
-    "text": "Navigation using Deep Learning"
-  },
-  {
-    "objectID": "overview.html#end-to-end-neural-net-control",
-    "href": "overview.html#end-to-end-neural-net-control",
-    "title": "Overview",
-    "section": "End-to-end Neural Net Control",
-    "text": "End-to-end Neural Net Control"
-  },
-  {
-    "objectID": "overview.html#navigation-using-machine-learning",
-    "href": "overview.html#navigation-using-machine-learning",
-    "title": "Overview",
-    "section": "Navigation using Machine Learning",
-    "text": "Navigation using Machine Learning\n\n\n\n\nSimple linear controller &lt;1&lt; 1 MB size\n\nBased on the Support Vector Machine\n\nGuaranteed to navigate hallway without crashing"
-  },
-  {
-    "objectID": "overview.html#results",
-    "href": "overview.html#results",
-    "title": "Overview",
-    "section": "Results",
-    "text": "Results"
-  },
-  {
-    "objectID": "overview.html#guaranteed-collision-avoidance",
-    "href": "overview.html#guaranteed-collision-avoidance",
-    "title": "Overview",
-    "section": "Guaranteed Collision Avoidance",
-    "text": "Guaranteed Collision Avoidance"
-  },
-  {
-    "objectID": "overview.html#mapping",
-    "href": "overview.html#mapping",
-    "title": "Overview",
-    "section": "Mapping",
-    "text": "Mapping\n\n\n\nUses Pose-Graph-based SLAM, A*^*, and pure pursuit algorithm to get to a location."
-  },
-  {
-    "objectID": "overview.html#distance-based-navigation",
-    "href": "overview.html#distance-based-navigation",
-    "title": "Overview",
-    "section": "Distance-based Navigation",
-    "text": "Distance-based Navigation"
-  },
-  {
-    "objectID": "overview.html#object-aware-navigation",
-    "href": "overview.html#object-aware-navigation",
-    "title": "Overview",
-    "section": "Object-aware Navigation",
-    "text": "Object-aware Navigation\n\n \n\n\nReplace 1/r(ϕ)1/r(\\phi) with measure of object presence at ϕ\\phi\n\n\n\n\n\n\n“Find bus below tree. Approach and help people getting on.”"
-  },
-  {
-    "objectID": "overview.html#yolov9-segmentation-model",
-    "href": "overview.html#yolov9-segmentation-model",
-    "title": "Overview",
-    "section": "Yolov9 Segmentation Model",
-    "text": "Yolov9 Segmentation Model\n\n\n\n\nSource: https://img.freepik.com/premium-vector/vector-realistic-washing-machine-white-3d-mockup_208581-782.jpg?semt=ais_hybrid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImplementation by Karthika Hariprasad, Paul Dunbar High School"
-  },
-  {
-    "objectID": "overview.html#contact-rich-manipulation",
-    "href": "overview.html#contact-rich-manipulation",
-    "title": "Overview",
-    "section": "Contact-Rich Manipulation",
-    "text": "Contact-Rich Manipulation"
-  },
-  {
-    "objectID": "overview.html#contact-rich-manipulation-1",
-    "href": "overview.html#contact-rich-manipulation-1",
-    "title": "Overview",
-    "section": "Contact-Rich Manipulation",
-    "text": "Contact-Rich Manipulation\n\n\n\n\n\nGuided Policy Search\n\n\n\n\nNo guidance"
-  },
-  {
-    "objectID": "overview.html#contact-rich-manipulation-2",
-    "href": "overview.html#contact-rich-manipulation-2",
-    "title": "Overview",
-    "section": "Contact-Rich Manipulation",
-    "text": "Contact-Rich Manipulation"
-  },
-  {
-    "objectID": "overview.html#dl-for-smart-sensors-and-data",
-    "href": "overview.html#dl-for-smart-sensors-and-data",
-    "title": "Overview",
-    "section": "DL for Smart Sensors and Data",
-    "text": "DL for Smart Sensors and Data"
-  },
-  {
-    "objectID": "overview.html#tracking-robot-arms",
-    "href": "overview.html#tracking-robot-arms",
-    "title": "Overview",
-    "section": "Tracking Robot Arms",
-    "text": "Tracking Robot Arms"
-  },
-  {
-    "objectID": "overview.html#dream-model",
-    "href": "overview.html#dream-model",
-    "title": "Overview",
-    "section": "DREAM Model",
-    "text": "DREAM Model\n\n\n\n\nhttps://sim2realai.github.io/assets/img/2020-06-29/Lee_etal_2020_dream_panda_reaching_frame.png"
-  },
-  {
-    "objectID": "overview.html#dream-model-1",
-    "href": "overview.html#dream-model-1",
-    "title": "Overview",
-    "section": "DREAM Model",
-    "text": "DREAM Model\n\n\n\n\nhttps://sim2realai.github.io/assets/img/2020-06-29/Lee_etal_2020_dream_pipeline.png\n\n\n\n\n80 - 200 MB model depending on the backbone (VGG-X vs ResNet-X)"
-  },
-  {
-    "objectID": "overview.html#dream-on-jetson-nanos",
-    "href": "overview.html#dream-on-jetson-nanos",
-    "title": "Overview",
-    "section": "DREAM On Jetson Nanos",
-    "text": "DREAM On Jetson Nanos\n\n  \n\n\n\n\n\nImplementation by Varun Hariprasad"
+    "objectID": "mujoco.html#extras",
+    "href": "mujoco.html#extras",
+    "title": "MuJoCo and XML",
+    "section": "Extras",
+    "text": "Extras\nModels\nMuJoCo menagerie\nSimulation\nMuJoCo Playground MJ Control"
   },
   {
     "objectID": "lio.html#lidar-inertial-odometry",
@@ -1722,243 +1435,550 @@
     "text": "References\n\nZhang, J. and Singh, S. “LOAM: Lidar Odometry and Mapping in Real-time” (RSS 2014)\nShan, T. et al. “LIO-SAM: Tightly-coupled Lidar Inertial Odometry via Smoothing and Mapping” (IROS 2020)\nXu, W. et al. “FAST-LIO2: Fast Direct LiDAR-Inertial Odometry” (T-RO 2022)\nBarfoot, T. “State Estimation for Robotics” (Cambridge University Press)"
   },
   {
-    "objectID": "mujoco.html#basic-example",
-    "href": "mujoco.html#basic-example",
-    "title": "MuJoCo and XML",
-    "section": "Basic Example",
-    "text": "Basic Example\n\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\n\n\n\n\n\n\n\n\n\n\nRun python3 code/basic_mujoco.py"
+    "objectID": "overview.html#syllabus-1",
+    "href": "overview.html#syllabus-1",
+    "title": "Overview",
+    "section": "Syllabus",
+    "text": "Syllabus\n\nLecture: Tue & Thur 2:00pm - 3:15pm, FPAT 253.\nOffice Hours: TBD\nText: Notes +Modern Robotics+ Robot Modeling and Control\nWorkload: 2.5 hours of lecture, 8 hours of reading notes, papers, and writing simulation code per week.\nCourse announcements: I use canvas to send information, but don’t read inbox messages. Contacting me by email with [ME 676 RMC]: or [AER 676 RMC]: makes it easy for me to track and respond to your emails.\nCourse website: All course material will be available on the website, which will be updated as the course proceeds."
   },
   {
-    "objectID": "mujoco.html#basic-example-1",
-    "href": "mujoco.html#basic-example-1",
-    "title": "MuJoCo and XML",
-    "section": "Basic Example",
-    "text": "Basic Example\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)"
+    "objectID": "overview.html#syllabus-2",
+    "href": "overview.html#syllabus-2",
+    "title": "Overview",
+    "section": "Syllabus",
+    "text": "Syllabus\n\nAcademic Integrity\nAccommodations due to disability\nAttendance Policy\nClassroom Conduct\nExcused Absences & Verification of Absences\nExams: None.\nHomework: Intermittent assignments, must adhere to rules in syllabus\nGrading: See Syllabus. Subject to change."
   },
   {
-    "objectID": "mujoco.html#basic-example-with-loading",
-    "href": "mujoco.html#basic-example-with-loading",
-    "title": "MuJoCo and XML",
-    "section": "Basic Example with Loading",
-    "text": "Basic Example with Loading\n\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\n# model = mujoco.MjModel.from_xml_path('path/to/your/model.xml')\n\n# Create a simple pendulum model\nmodel = mujoco.MjModel.from_xml_string(\"\"\"\n&lt;mujoco&gt;\n  \n  &lt;worldbody&gt;\n    &lt;light name=\"light1\" pos=\"0.3 0.3 1\"/&gt;\n    &lt;geom name=\"ground\" type=\"plane\" pos=\" 0 0 -1.2\" size=\"2 2 0.1\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n    \n    &lt;body name=\"pendulum\" pos=\"0 0 0\"&gt;\n      &lt;joint name=\"pivot\" type=\"hinge\" pos=\"0 0 0\" axis=\"0 1 0\" damping=\"0.1\"/&gt;\n      &lt;geom name=\"rod\" type=\"capsule\" fromto=\"0 0 0 0 0 0.6\" size=\"0.05\" rgba=\"0.5 0.5 0.5 1\"/&gt;\n      &lt;geom name=\"mass\" type=\"sphere\" pos=\"0 0 0.6\" size=\"0.07\" rgba=\"0.8 0.2 0.2 1\"/&gt;\n    &lt;/body&gt;\n  &lt;/worldbody&gt;\n&lt;/mujoco&gt;\n\"\"\")\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\ncode/basic_mujoco.py\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\nmodel = mujoco.MjModel.from_xml_path('../models/simple_pendulum_act.xml')\n\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch(model, data, \n        show_left_ui=False,\n        show_right_ui=False,\n)\ncode/mujoco_load_xml.py"
+    "objectID": "overview.html#course-overview",
+    "href": "overview.html#course-overview",
+    "title": "Overview",
+    "section": "Course Overview",
+    "text": "Course Overview\n\n\n\n\n\n\nLearning Goal\n\n\nFor you to be able to read and assimilate both recent papers and early foundational papers on robotics. Furthermore, develop programming skills that enable you to implement and try (possibly new) methods in simulation."
   },
   {
-    "objectID": "mujoco.html#interactive",
-    "href": "mujoco.html#interactive",
-    "title": "MuJoCo and XML",
-    "section": "Interactive",
-    "text": "Interactive\n\npython3 -m mujoco.viewer \n\nand then drag and drop xml files from models/"
+    "objectID": "overview.html#course-overview-1",
+    "href": "overview.html#course-overview-1",
+    "title": "Overview",
+    "section": "Course Overview",
+    "text": "Course Overview\nLearning Goals:\n\nUnderstand coordinates and robot configurations.\nUnderstand how to transform the robot configuration into task coordinates and vice versa, along with the challenges in these processes.\nLearn approaches to planning motions in both task coordinates and robot configurations.\nLearn approaches to achieving planned motions using feedback control.\nUnderstand the challenges of state estimation.\nLearn optimization-based approaches to planning and control.\nUnderstand contact modeling and control challenges.\nSimulate robotic systems and test control algorithms."
   },
   {
-    "objectID": "mujoco.html#block-example",
-    "href": "mujoco.html#block-example",
-    "title": "MuJoCo and XML",
-    "section": "Block Example",
-    "text": "Block Example\n&lt;mujoco&gt;\n&lt;option gravity=\"0 0 -9.81\"/&gt;\n    &lt;worldbody&gt;\n    &lt;light diffuse=\".5 .5 .5\" pos=\"0 0 3\" dir=\"0 0 -1\"/&gt;\n        &lt;geom type=\"plane\" size=\"1 1 0.1\" rgba=\".9 0 0 1\"/&gt;\n        &lt;body pos=\"0 0 1\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 .9 0 1\"/&gt;\n        &lt;/body&gt;\n    &lt;/worldbody&gt;\n&lt;/mujoco&gt;"
+    "objectID": "overview.html#course-overview-2",
+    "href": "overview.html#course-overview-2",
+    "title": "Overview",
+    "section": "Course Overview",
+    "text": "Course Overview\nApproaches for achieving goals:\n\nLecture/Discussion on\n\nCoordinates\nDynamical Systems: single and articulated rigid bodies\nPlanning Trajectories\nSensing and State Estimation\nFeedback Control\n\nResearch article discussions\nPractice through assignments (code and question) and Course Project"
   },
   {
-    "objectID": "mujoco.html#blocks-example",
-    "href": "mujoco.html#blocks-example",
-    "title": "MuJoCo and XML",
-    "section": "Blocks Example",
-    "text": "Blocks Example\n\n\n&lt;mujoco&gt;\n&lt;option gravity=\"0 0 -9.81\"/&gt;\n    &lt;worldbody&gt;\n    &lt;light diffuse=\".5 .5 .5\" pos=\"0 0 3\" dir=\"0 0 -1\"/&gt;\n        &lt;geom type=\"plane\" size=\"1 1 0.1\" rgba=\".9 0 0 1\"/&gt;\n        &lt;body pos=\"0 0 1\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 .9 0 1\"/&gt;\n        &lt;/body&gt;\n        &lt;body pos=\"0.1 0 1.5\" euler=\"0 90 0\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"box\" size=\".1 .2 .3\" rgba=\"0 0 0.9 1\"/&gt;\n        &lt;/body&gt;\n        &lt;body pos=\"0.1 0 2.0\"&gt;\n            &lt;joint type=\"free\"/&gt;\n            &lt;geom type=\"sphere\" size=\".1\" rgba=\"0.9 0.9 0 1\"/&gt;\n        &lt;/body&gt;\n    &lt;/worldbody&gt;\n&lt;/mujoco&gt;"
+    "objectID": "overview.html#grades",
+    "href": "overview.html#grades",
+    "title": "Overview",
+    "section": "Grades",
+    "text": "Grades\n\n\n\nName\nWeight\nDue (Tentative)\n\n\n\n\nAssignment 1\n20%\nWeek 3\n\n\nAssignment 2\n20%\nWeek 6\n\n\nResearch Article Discussions\n10%\nWeeks 7 -10\n\n\nProject Proposal\n10%\nWeek 11\n\n\nAssignment 3\n20%\nWeek 12\n\n\nProject Presentation\n20%\nWeek 15"
   },
   {
-    "objectID": "mujoco.html#actuated-example",
-    "href": "mujoco.html#actuated-example",
-    "title": "MuJoCo and XML",
-    "section": "Actuated Example",
-    "text": "Actuated Example"
+    "objectID": "overview.html#expectations",
+    "href": "overview.html#expectations",
+    "title": "Overview",
+    "section": "Expectations",
+    "text": "Expectations\n\nYou are reviewing notes and slides.\nComfort with mathematics:\n\nAbstract definitions.\nImagining concrete examples to which they apply.\nApplying definitions to complete derivations and proofs.\n\nComfort with code:\n\nHow to use documentation describing installation and use of packages.\nAwareness of the need to test code frequently tests will need testing.\n\nStudy groups. Don’t go this one alone."
   },
   {
-    "objectID": "mujoco.html#actuated-example-1",
-    "href": "mujoco.html#actuated-example-1",
-    "title": "MuJoCo and XML",
-    "section": "Actuated Example",
-    "text": "Actuated Example\n\nimport mujoco\nimport mujoco.viewer\nimport time \n\n# Load a model from a file (won't do this here to avoid external file calls)\nmodel = mujoco.MjModel.from_xml_path('../models/simple_pendulum_act.xml')\n\n\ndt: float = 0.002\nmodel.opt.timestep = dt\ndata = mujoco.MjData(model)\ndata.qpos[0]=0.01\n\n# Create a viewer\nviewer = mujoco.viewer.launch_passive(model, data,\n        show_left_ui=False,\n        show_right_ui=False,\n      )\ntry:\n    while viewer.is_running():\n        step_start = time.time()\n        # Step the simulation\n        data.ctrl[0] = -100*data.qpos[0] - 20*data.qvel[0]\n        print(data.qpos[0])\n        mujoco.mj_step(model, data)\n        # Update the viewer\n        viewer.sync()\n        # Add a small delay to control frame rate\n        time_until_next_step = dt - (time.time() - step_start)\n        if time_until_next_step &gt; 0:\n            time.sleep(time_until_next_step)\nexcept KeyboardInterrupt:\n    print(\"Viewer closed by user\")\nfinally:\n    viewer.close()\n\ncode/mujoco_load_xml_control.py"
+    "objectID": "overview.html#about-me",
+    "href": "overview.html#about-me",
+    "title": "Overview",
+    "section": "About Me",
+    "text": "About Me\n\nGrew up in India (early childhood in England)\nUndergraduate degree in Mech. Engg. in India\nMasters in Mech. Engg focusing on Mechatronics\nPh.D in Electrical Engg. from UT Dallas: Legged Robots -&gt; Graph Theory + Multi-robot coordination + Quadrotors\nPostDoc at UT Austin: Stability Analysis of Classifier-in-the-Loop Systems\n\n\n\n\n\nResearch\n\n\nGoal: Get mechanical robots to control themselves."
   },
   {
-    "objectID": "mujoco.html#extras",
-    "href": "mujoco.html#extras",
-    "title": "MuJoCo and XML",
-    "section": "Extras",
-    "text": "Extras\nModels\nMuJoCo menagerie\nSimulation\nMuJoCo Playground MJ Control"
+    "objectID": "overview.html#inspiration",
+    "href": "overview.html#inspiration",
+    "title": "Overview",
+    "section": "Inspiration",
+    "text": "Inspiration"
   },
   {
-    "objectID": "extras.html",
-    "href": "extras.html",
-    "title": "Resources",
-    "section": "",
-    "text": "Topic\nOther\n\n\n\n\nRobotics ’23\nUK Course\n\n\nOptimization\nUK Course\n\n\nConvex Optimization\nOG Source\n\n\nDeep Learning\nUK Course\n\n\nList of Robotics Courses\nLink\n\n\nLinear Algebra\nGilbert Strang’s lectures\n\n\nODEs\nODE Slides ODE Models, Mechanical Sys, Electrical Sys,\n\n\nServo Motors\nmynotes, PID, PMDC Motors, Gears, DC Motor Control\n\n\nControl Systems\nLaplace Transforms, Transfer Functions, Stability\n\n\nLinear Systems\nLinearization, LTI Systems\n\n\nProbability\nCS188 Lec11, mynotes\n\n\nAI as Search\nBerekeley CS 188 Lec1\n\n\nMarkov decision processes (MDPs)\nCS188 Lec 7, CS188 Lec 8\n\n\nReinforcement Learning\nSergey Levine’s course, mynotes\n\n\nDifferential Geometry\nmynotes",
-    "crumbs": [
-      "Home",
-      "Resources"
-    ]
+    "objectID": "overview.html#about-you",
+    "href": "overview.html#about-you",
+    "title": "Overview",
+    "section": "About You",
+    "text": "About You\nOn an index card / sheet of paper, write down:\n\nName\nFirst robot you were aware of and/or Favorite robot\nMotivation for taking this course\nConcerns about the course\nTopics you wish were on the syllabus\nTopics you have already studied\nLearning/teaching styles that you feel work well for you"
   },
   {
-    "objectID": "papers.html",
-    "href": "papers.html",
-    "title": "Papers",
-    "section": "",
-    "text": "Description\nTitle\nSource\nPreprint\n\n\n\n\nPID Control\nOn the PID tracking control of robot manipulators\nSCL\n\n\n\nGravity Compensation\nGravity compensation in robotics\nT&F\n\n\n\nControl\nExperimental evaluation of feedforward and computed torque control\nIEEE\n\n\n\nForce Control\nCompliance and Force Control for Computer Controlled Manipulators\nIEEE\n\n\n\nPDW\nPassive Dynamic Walking\nlink\n\n\n\nHybrid Zero Dynamics\nHybrid zero dynamics of planar biped walkers\nIEEE\n\n\n\nUnderactuation\nThe swing up control problem for the Acrobot\nIEEE\n\n\n\nUnderactuation\nPartial feedback linearization of underactuated mechanical systems\nIEEE\n\n\n\nPush recovery\nCapture Point: A Step toward Humanoid Push Recovery\nIEEE\n\n\n\nQuadrotor Diff Flatness\nA prototype of an autonomous controller for a quadrotor UAV\nIEEE\n\n\n\nQuadrotor\nTrajectory generation and control for precise aggressive maneuvers with quadrotors\nIJRR\n\n\n\nDifferential Drive Robots\nMinimum Wheel-Rotation Paths for Differential-Drive Mobile Robots\nIJRR\n\n\n\nMedical\nNonholonomic Modeling of Needle Steering\nIJRR\n\n\n\nConsensus-based Methods\nConsensus and Cooperation in Networked Multi-Agent Systems\nIEEE\n\n\n\nFormation Control\nModeling and control of formations of nonholonomic mobile robots\nIEEE\n\n\n\nSubsumption (Brooks)\nA robust layered control system for a mobile robot\nIEEE\n\n\n\nExoskeletons\nBiomechanical design of the Berkeley lower extremity exoskeleton (BLEEX)\nIEEE\n\n\n\nFiltering Body Pose\nDesign, Implementation, and Experimental Results of a Quaternion-Based Kalman Filter for Human Body Motion Tracking\nIEEE\n\n\n\nSnake Robot\nDesign of a modular snake robot\nIEEE",
-    "crumbs": [
-      "Home",
-      "Papers"
-    ]
+    "objectID": "overview.html#motivation-1",
+    "href": "overview.html#motivation-1",
+    "title": "Overview",
+    "section": "Motivation",
+    "text": "Motivation"
   },
   {
-    "objectID": "ilqr.html#iterative-lqr-ilqr",
-    "href": "ilqr.html#iterative-lqr-ilqr",
+    "objectID": "overview.html#motivation-2",
+    "href": "overview.html#motivation-2",
+    "title": "Overview",
+    "section": "Motivation",
+    "text": "Motivation"
+  },
+  {
+    "objectID": "overview.html#motivation-3",
+    "href": "overview.html#motivation-3",
+    "title": "Overview",
+    "section": "Motivation",
+    "text": "Motivation"
+  },
+  {
+    "objectID": "overview.html#motivation-4",
+    "href": "overview.html#motivation-4",
+    "title": "Overview",
+    "section": "Motivation",
+    "text": "Motivation"
+  },
+  {
+    "objectID": "overview.html#motivation-5",
+    "href": "overview.html#motivation-5",
+    "title": "Overview",
+    "section": "Motivation",
+    "text": "Motivation"
+  },
+  {
+    "objectID": "overview.html#exercise",
+    "href": "overview.html#exercise",
+    "title": "Overview",
+    "section": "Exercise",
+    "text": "Exercise\nSketch a diagram describing your guess for the underlying system architecture that achieves these kinds of behaviors"
+  },
+  {
+    "objectID": "overview.html#whats-left",
+    "href": "overview.html#whats-left",
+    "title": "Overview",
+    "section": "What’s Left?",
+    "text": "What’s Left?\n\nTouch feedback\nHuman-Robot Interaction\nSafety\nReliability\nEnergetic Efficiency\n\nPrevious: Will the prototype work?\nNow: Will this be a viable commercial product?"
+  },
+  {
+    "objectID": "overview.html#goal",
+    "href": "overview.html#goal",
+    "title": "Overview",
+    "section": "Goal",
+    "text": "Goal\nGoal: Get mechanical robots to control themselves.\nDay-to-day:\n\nTheory from dynamics and control systems,\nAlgorithm development: optimization\n\nSimulations/experiments"
+  },
+  {
+    "objectID": "overview.html#navigation-using-deep-learning",
+    "href": "overview.html#navigation-using-deep-learning",
+    "title": "Overview",
+    "section": "Navigation using Deep Learning",
+    "text": "Navigation using Deep Learning"
+  },
+  {
+    "objectID": "overview.html#end-to-end-neural-net-control",
+    "href": "overview.html#end-to-end-neural-net-control",
+    "title": "Overview",
+    "section": "End-to-end Neural Net Control",
+    "text": "End-to-end Neural Net Control"
+  },
+  {
+    "objectID": "overview.html#navigation-using-machine-learning",
+    "href": "overview.html#navigation-using-machine-learning",
+    "title": "Overview",
+    "section": "Navigation using Machine Learning",
+    "text": "Navigation using Machine Learning\n\n\n\n\nSimple linear controller &lt;1&lt; 1 MB size\n\nBased on the Support Vector Machine\n\nGuaranteed to navigate hallway without crashing"
+  },
+  {
+    "objectID": "overview.html#results",
+    "href": "overview.html#results",
+    "title": "Overview",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "overview.html#guaranteed-collision-avoidance",
+    "href": "overview.html#guaranteed-collision-avoidance",
+    "title": "Overview",
+    "section": "Guaranteed Collision Avoidance",
+    "text": "Guaranteed Collision Avoidance"
+  },
+  {
+    "objectID": "overview.html#mapping",
+    "href": "overview.html#mapping",
+    "title": "Overview",
+    "section": "Mapping",
+    "text": "Mapping\n\n\n\nUses Pose-Graph-based SLAM, A*^*, and pure pursuit algorithm to get to a location."
+  },
+  {
+    "objectID": "overview.html#distance-based-navigation",
+    "href": "overview.html#distance-based-navigation",
+    "title": "Overview",
+    "section": "Distance-based Navigation",
+    "text": "Distance-based Navigation"
+  },
+  {
+    "objectID": "overview.html#object-aware-navigation",
+    "href": "overview.html#object-aware-navigation",
+    "title": "Overview",
+    "section": "Object-aware Navigation",
+    "text": "Object-aware Navigation\n\n \n\n\nReplace 1/r(ϕ)1/r(\\phi) with measure of object presence at ϕ\\phi\n\n\n\n\n\n\n“Find bus below tree. Approach and help people getting on.”"
+  },
+  {
+    "objectID": "overview.html#yolov9-segmentation-model",
+    "href": "overview.html#yolov9-segmentation-model",
+    "title": "Overview",
+    "section": "Yolov9 Segmentation Model",
+    "text": "Yolov9 Segmentation Model\n\n\n\n\nSource: https://img.freepik.com/premium-vector/vector-realistic-washing-machine-white-3d-mockup_208581-782.jpg?semt=ais_hybrid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImplementation by Karthika Hariprasad, Paul Dunbar High School"
+  },
+  {
+    "objectID": "overview.html#contact-rich-manipulation",
+    "href": "overview.html#contact-rich-manipulation",
+    "title": "Overview",
+    "section": "Contact-Rich Manipulation",
+    "text": "Contact-Rich Manipulation"
+  },
+  {
+    "objectID": "overview.html#contact-rich-manipulation-1",
+    "href": "overview.html#contact-rich-manipulation-1",
+    "title": "Overview",
+    "section": "Contact-Rich Manipulation",
+    "text": "Contact-Rich Manipulation\n\n\n\n\n\nGuided Policy Search\n\n\n\n\nNo guidance"
+  },
+  {
+    "objectID": "overview.html#contact-rich-manipulation-2",
+    "href": "overview.html#contact-rich-manipulation-2",
+    "title": "Overview",
+    "section": "Contact-Rich Manipulation",
+    "text": "Contact-Rich Manipulation"
+  },
+  {
+    "objectID": "overview.html#dl-for-smart-sensors-and-data",
+    "href": "overview.html#dl-for-smart-sensors-and-data",
+    "title": "Overview",
+    "section": "DL for Smart Sensors and Data",
+    "text": "DL for Smart Sensors and Data"
+  },
+  {
+    "objectID": "overview.html#tracking-robot-arms",
+    "href": "overview.html#tracking-robot-arms",
+    "title": "Overview",
+    "section": "Tracking Robot Arms",
+    "text": "Tracking Robot Arms"
+  },
+  {
+    "objectID": "overview.html#dream-model",
+    "href": "overview.html#dream-model",
+    "title": "Overview",
+    "section": "DREAM Model",
+    "text": "DREAM Model\n\n\n\n\nhttps://sim2realai.github.io/assets/img/2020-06-29/Lee_etal_2020_dream_panda_reaching_frame.png"
+  },
+  {
+    "objectID": "overview.html#dream-model-1",
+    "href": "overview.html#dream-model-1",
+    "title": "Overview",
+    "section": "DREAM Model",
+    "text": "DREAM Model\n\n\n\n\nhttps://sim2realai.github.io/assets/img/2020-06-29/Lee_etal_2020_dream_pipeline.png\n\n\n\n\n80 - 200 MB model depending on the backbone (VGG-X vs ResNet-X)"
+  },
+  {
+    "objectID": "overview.html#dream-on-jetson-nanos",
+    "href": "overview.html#dream-on-jetson-nanos",
+    "title": "Overview",
+    "section": "DREAM On Jetson Nanos",
+    "text": "DREAM On Jetson Nanos\n\n  \n\n\n\n\n\nImplementation by Varun Hariprasad"
+  },
+  {
+    "objectID": "posegraph.html#pose-graph-optimization",
+    "href": "posegraph.html#pose-graph-optimization",
     "title": "Robot Modeling Control",
-    "section": "Iterative LQR (iLQR)",
-    "text": "Iterative LQR (iLQR)\n\nLine Search, Forward Pass, and Full Algorithm\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  Why α\\alpha scales only ktk_{t}  Nonlinear forward pass  Backtracking line search  Full algorithm"
+    "section": "Pose Graph Optimization",
+    "text": "Pose Graph Optimization\n\nCorrecting Odometry Drift with Loop Closures\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  Odometry Drift Problem  Graph Structure  Nonlinear Least Squares Formulation"
   },
   {
-    "objectID": "ilqr.html#the-setup",
-    "href": "ilqr.html#the-setup",
+    "objectID": "posegraph.html#lesson-overview",
+    "href": "posegraph.html#lesson-overview",
     "title": "Robot Modeling Control",
-    "section": "The Setup",
-    "text": "The Setup\nNominal trajectory x‾0,u‾0,…,x‾T−1,u‾T−1,x‾T,u‾T−1,x‾T\\bar{x}_0, \\bar{u}_0, \\dots, \\bar{x}_{T-1}, \\bar{u}_{T-1}, \\bar{x}_{T}, \\bar{u}_{T-1}, \\bar{x}_{T} satisfies the true nonlinear dynamics.\nDefine deviations: δxt=xt−x‾t\\delta x_{t} = x_{t} - \\bar{x}_{t}, δut=ut−u‾t\\quad \\delta u_{t} = u_{t} - \\bar{u}_{t}.\nLinearized error dynamics around the nominal: δxt+1≈Atδxt+Btδut,At=∂f∂x|x‾t,u‾t,Bt=∂f∂u|x‾t,u‾t\\delta x_{t+1} \\approx A_{t}\\,\\delta x_{t} + B_{t}\\,\\delta u_{t}, \\qquad A_{t} = \\left.\\frac{\\partial f}{\\partial x}\\right|_{\\bar{x}_{t},\\bar{u}_{t}}, \\quad B_{t} = \\left.\\frac{\\partial f}{\\partial u}\\right|_{\\bar{x}_{t},\\bar{u}_{t}}\nQuadratic cost (second-order Taylor expansion of ctc_{t} around nominal):\nct≈c‾t+[qtrt]T[δxδu]+12[δxδu]T[QtcostStTStRt][δxδu]c_{t} \\approx \\bar{c}_{t} + \\begin{bmatrix}q_{t} \\\\ r_{t}\\end{bmatrix}^{\\!T} \\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix} + \\frac{1}{2}\\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix}^{\\!T} \\begin{bmatrix} Q_t^{cost} & S_t^{\\!T} \\\\ S_t & R_t\\end{bmatrix}\\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix}\n\n\n\nUnlike LQR, the linear terms qtq_t and rtr_t are generally nonzero — the nominal is not yet optimal."
+    "section": "Lesson Overview",
+    "text": "Lesson Overview\n\nProblem: Odometry drift accumulates over time\nSolution: Add loop closure constraints and optimize\nFormulation: Pose graph as nonlinear least squares\nImplementation: Gauss-Newton on sparse graphs"
   },
   {
-    "objectID": "ilqr.html#backward-pass-q-function",
-    "href": "ilqr.html#backward-pass-q-function",
+    "objectID": "posegraph.html#paper-loam",
+    "href": "posegraph.html#paper-loam",
     "title": "Robot Modeling Control",
-    "section": "Backward Pass: Q-function",
-    "text": "Backward Pass: Q-function\nThe Q-function for the deviation problem:\nQ̃t(δx,δu)≈const+[QxQu]T[δxδu]+12[δxδu]T[QxxQxuQuxQuu][δxδu]\\tilde{Q}_{t}(\\delta x, \\delta u) \\approx \\text{const} + \\begin{bmatrix}Q_x \\\\ Q_u\\end{bmatrix}^{\\!T} \\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix} + \\frac{1}{2}\\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix}^{\\!T} \\begin{bmatrix}Q_{xx} & Q_{xu} \\\\ Q_{ux} & Q_{uu}\\end{bmatrix}\\begin{bmatrix}\\delta x \\\\ \\delta u\\end{bmatrix}\nBackward recursion (initialize VT,x=cT,xV_{T,x} = c_{T,x}, VT,xx=cT,xxV_{T,xx} = c_{T,xx}):\nQx=qt+AtTVt+1,x,Qu=rt+BtTVt+1,xQ_x = q_t + A_{t}^T V_{t+1,x}, \\qquad Q_u = r_t + B_{t}^T V_{t+1,x} Qxx=ct,xx+AtTVt+1,xxAt,Quu=ct,uu+BtTVt+1,xxBt,Qux=ct,ux+BtTVt+1,xxAtQ_{xx} = c_{t,xx} + A_{t}^T V_{t+1,xx} A_{t}, \\quad Q_{uu} = c_{t,uu} + B_{t}^T V_{t+1,xx} B_{t}, \\quad Q_{ux} = c_{t,ux} + B_{t}^T V_{t+1,xx} A_{t} Qxx=Qtcost+AtTVt+1,xxAt,Quu=Rt+BtTVt+1,xxBt,Qux=St+BtTVt+1,xxAtQ_{xx} = Q_t^{cost} + A_{t}^T V_{t+1,xx} A_{t}, \\quad Q_{uu} = R_t + B_{t}^T V_{t+1,xx} B_{t}, \\quad Q_{ux} = S_t + B_{t}^T V_{t+1,xx} A_{t}"
+    "section": "Paper: LOAM",
+    "text": "Paper: LOAM"
   },
   {
-    "objectID": "ilqr.html#backward-pass-optimal-gains",
-    "href": "ilqr.html#backward-pass-optimal-gains",
+    "objectID": "posegraph.html#paper-fast-lio2",
+    "href": "posegraph.html#paper-fast-lio2",
     "title": "Robot Modeling Control",
-    "section": "Backward Pass: Optimal Gains",
-    "text": "Backward Pass: Optimal Gains\nMinimize Q̃t\\tilde{Q}_{t} over δu\\delta u (holding δx\\delta x fixed): ∂Q̃t∂δu=Qu+Quuδu+Quxδx=0\\frac{\\partial \\tilde{Q}_{t}}{\\partial \\,\\delta u} = Q_u + Q_{uu}\\,\\delta u + Q_{ux}\\,\\delta x = 0\n\n⟹δut*=−Quu−1Qu⏟kt+(−Quu−1Qux)⏟Ktδxt\\implies \\delta u_{t}^* = \\underbrace{-Q_{uu}^{-1} Q_u}_{k_{t}} + \\underbrace{(-Q_{uu}^{-1} Q_{ux})}_{K_{t}}\\,\\delta x_{t}\n\n\n\n\n\n\n\n\n\n\nGain\nExpression\nRole\n\n\n\n\nkt∈ℝmk_{t} \\in \\mathbb{R}^m\n−Quu−1Qu-Q_{uu}^{-1} Q_u\nFeedforward — optimization step\n\n\nKt∈ℝm×nK_{t} \\in \\mathbb{R}^{m \\times n}\n−Quu−1Qux-Q_{uu}^{-1} Q_{ux}\nFeedback — state-dependent correction\n\n\n\nValue function updated as: Vt,x=Qx+QxuktV_{t,x} = Q_x + Q_{xu} k_{t}, Vt,xx=Qxx+QxuKt\\quad V_{t,xx} = Q_{xx} + Q_{xu} K_{t}\n\n\n\n\n\nAt the optimum Qu=rt+BtTVt+1,x=0Q_u = r_t + B_{t}^T V_{t+1,x} = 0, so kt=0k_{t} = 0 — identical to LQR."
+    "section": "Paper: Fast-LIO2",
+    "text": "Paper: Fast-LIO2\n\nhttps://www.youtube.com/watch?v=uVcBa6NXAbk"
   },
   {
-    "objectID": "ilqr.html#the-forward-pass-update",
-    "href": "ilqr.html#the-forward-pass-update",
+    "objectID": "posegraph.html#recall-odometry-drift",
+    "href": "posegraph.html#recall-odometry-drift",
     "title": "Robot Modeling Control",
-    "section": "The Forward Pass Update",
-    "text": "The Forward Pass Update\nStarting from x̂0=x‾0\\hat{x}_0 = \\bar{x}_0, for t=0,1,…,T−1t = 0, 1, \\dots, T-1:\nût=u‾t+αkt+Kt(x̂t−x‾t)⏟δxt\\boxed{\\hat{u}_{t} = \\bar{u}_{t} + \\alpha\\, k_{t} + K_{t}\\underbrace{(\\hat{x}_{t} - \\bar{x}_{t})}_{\\delta x_{t}}} x̂t+1=f(x̂t,ût)←true nonlinear dynamics\\hat{x}_{t+1} = f\\!\\left(\\hat{x}_{t},\\; \\hat{u}_{t}\\right) \\qquad \\leftarrow \\text{true nonlinear dynamics}\n\n\n\n\nDiscussion: α\\alpha multiplies ktk_{t} but not KtK_{t}. Shouldn’t we scale the entire update δut=α(kt+Ktδxt)\\delta u_{t} = \\alpha(k_{t} + K_{t} \\delta x_{t})?"
+    "section": "Recall: Odometry Drift",
+    "text": "Recall: Odometry Drift\nFrom scan matching or wheel odometry, we chain relative poses:\n\\[\nT_{B_{k+1}}^{W} = T_{B_k}^{W} \\cdot T_{B_{k+1}}^{B_k}\n\\]\n\nEach relative measurement \\(T_{B_{k+1}}^{B_k}\\) has small errors that accumulate."
   },
   {
-    "objectID": "ilqr.html#why-alpha-scales-only-k_t",
-    "href": "ilqr.html#why-alpha-scales-only-k_t",
+    "objectID": "posegraph.html#drift-visualization",
+    "href": "posegraph.html#drift-visualization",
     "title": "Robot Modeling Control",
-    "section": "Why α\\alpha Scales Only ktk_{t}",
-    "text": "Why α\\alpha Scales Only ktk_{t}\nBoth ktk_{t} and KtδxtK_{t} \\delta x_{t} arise from minimizing Q̃t\\tilde{Q}_{t} — both are part of the optimal solution to the linearized sub-problem. The distinction is open-loop vs. closed-loop:\n\n\n\n\n\n\n\n\nTerm\nCharacter\nRole\n\n\n\n\nkt=−Quu−1Quk_{t} = -Q_{uu}^{-1} Q_u\nOpen-loop (feedforward)\nDepends only on tt; the search direction\n\n\nKtδxtK_{t} \\delta x_{t}\nClosed-loop (feedback)\nReacts to whatever δxt\\delta x_{t} the nonlinear rollout produces\n\n\n\n\n\n\nConnection to LQR: In LQR the full optimal policy is ut*=−Ktxtu_t^* = -K_t x_t — the feedback gain IS the solution, not a correction. iLQR adds the feedforward ktk_t only because Qu≠0Q_u \\neq 0 off the optimum; at convergence kt→0k_t \\to 0 and only the feedback remains."
+    "section": "Drift Visualization",
+    "text": "Drift Visualization"
   },
   {
-    "objectID": "ilqr.html#why-alpha-scales-only-k_t-1",
-    "href": "ilqr.html#why-alpha-scales-only-k_t-1",
+    "objectID": "posegraph.html#loop-closure",
+    "href": "posegraph.html#loop-closure",
     "title": "Robot Modeling Control",
-    "section": "Why α\\alpha Scales Only ktk_{t}",
-    "text": "Why α\\alpha Scales Only ktk_{t}\n\nWhy α\\alpha does not multiply KtδxtK_{t} \\delta x_{t}:\nα\\alpha is a step size along the open-loop search direction ktk_{t}. The closed-loop term KtδxtK_{t} \\delta x_{t} should always be applied at full strength — δxt\\delta x_{t} is determined by the nonlinear dynamics, not by how aggressively we step. Scaling it by α\\alpha would under-correct for nonlinear drift without any line-search benefit.\n\n\nSpecial case — linearized forward pass: if δxt\\delta x_{t} propagates through Atδxt+BtδutA_{t} \\delta x_{t} + B_{t} \\delta u_{t}, then δxt\\delta x_{t} is also a Newton direction and one could scale the full pair α(kt+Ktδxt)\\alpha(k_{t} + K_{t} \\delta x_{t}). The nonlinear pass breaks this symmetry, leaving ktk_{t} as the only clean search direction."
+    "section": "Loop Closure",
+    "text": "Loop Closure\nWhen the robot revisits a location, we can detect this by matching scans.\n\nThis gives us a constraint between non-sequential poses!\n\n\n\n\n\n\n\n\nLoop Closure\n\n\nA loop closure is a measurement that relates poses far apart in time but close in space."
   },
   {
-    "objectID": "ilqr.html#thought-experiment",
-    "href": "ilqr.html#thought-experiment",
+    "objectID": "posegraph.html#what-loop-closure-tells-us",
+    "href": "posegraph.html#what-loop-closure-tells-us",
     "title": "Robot Modeling Control",
-    "section": "Thought Experiment",
-    "text": "Thought Experiment\nForward pass: ût=u‾t+αkt+Kt(x̂t−x‾t)\\hat{u}_{t} = \\bar{u}_{t} + \\alpha\\, k_{t} + K_{t}(\\hat{x}_{t} - \\bar{x}_{t})\n\nα=0\\alpha = 0: ût=u‾t+Kt(x̂t−x‾t)\\quad \\hat{u}_{t} = \\bar{u}_{t} + K_{t}(\\hat{x}_{t} - \\bar{x}_{t})\n\nFeedforward ktk_{t} is switched off — no optimization progress\nKtK_{t} corrects for nonlinear drift, keeping the trajectory near nominal\nCost stays approximately the same\n\n\n\nα=1\\alpha = 1: Full Newton step on the open-loop component.\n\nKtδxtK_{t} \\delta x_{t} is applied at full strength throughout — its magnitude is set by the nonlinear dynamics, not by α\\alpha\n\n\n\nAt t=0t = 0: x̂0=x‾0\\hat{x}_0 = \\bar{x}_0 always, so δx0=0\\delta x_0 = 0.\n\nThe feedback plays no role at the first step regardless of α\\alpha\nOnly αk0\\alpha k_0 changes the control there\nFeedback activates only as deviations accumulate along the horizon"
+    "section": "What Loop Closure Tells Us",
+    "text": "What Loop Closure Tells Us\nIf scan matching at time \\(k\\) finds a good match with the scan from time \\(j\\) (where \\(j \\ll k\\)):\n\nWe obtain an estimate of \\(T_{B_k}^{B_j}\\) — the relative pose between poses \\(j\\) and \\(k\\).\n\n\nProblem: This measurement contradicts our odometry chain!\n\nOdometry says: \\(T_{B_k}^{B_j} = T_{B_{j+1}}^{B_j} \\cdot T_{B_{j+2}}^{B_{j+1}} \\cdots T_{B_k}^{B_{k-1}}\\)\nLoop closure says: \\(T_{B_k}^{B_j} \\approx \\tilde{T}_{B_k}^{B_j}\\) (from scan matching)"
   },
   {
-    "objectID": "ilqr.html#two-choices-for-the-forward-pass",
-    "href": "ilqr.html#two-choices-for-the-forward-pass",
+    "objectID": "posegraph.html#the-optimization-problem",
+    "href": "posegraph.html#the-optimization-problem",
     "title": "Robot Modeling Control",
-    "section": "Two Choices for the Forward Pass",
-    "text": "Two Choices for the Forward Pass\n\n\n\n\n\n\n\n\n\nNonlinear (standard iLQR)\nLinearized\n\n\n\n\nState propagation\nx̂t+1=f(x̂t,ût)\\hat{x}_{t+1} = f(\\hat{x}_{t}, \\hat{u}_{t})\nδxt+1=Atδxt+Btδut\\delta x_{t+1} = A_{t} \\delta x_{t} + B_{t} \\delta u_{t}\n\n\nTrajectory feasible?\nYes — on true dynamics\nNo — satisfies only linear model\n\n\nIs δxt\\delta x_{t} a Newton direction?\nNo — nonlinear residuals corrupt it\nYes\n\n\nα\\alpha appropriately scales\nOnly ktk_{t}\nFull α(kt+Ktδxt)\\alpha(k_{t} + K_{t} \\delta x_{t})\n\n\nBest suited for\nHighly nonlinear systems\nNear-optimal, mildly nonlinear\n\n\n\n\n\n\n\nNear convergence, linearization error →0\\to 0 and the two approaches become equivalent. The difference matters most in the early iterations."
+    "section": "The Optimization Problem",
+    "text": "The Optimization Problem\nWe want to find poses that best satisfy all constraints:\n\n\nSequential constraints from odometry\nLoop closure constraints from scan matching\n\n\n\nThis is a nonlinear least squares problem!"
   },
   {
-    "objectID": "ilqr.html#demo-nonlinear-vs.-linearized",
-    "href": "ilqr.html#demo-nonlinear-vs.-linearized",
+    "objectID": "posegraph.html#pose-graph-representation",
+    "href": "posegraph.html#pose-graph-representation",
     "title": "Robot Modeling Control",
-    "section": "Demo: Nonlinear vs. Linearized",
-    "text": "Demo: Nonlinear vs. Linearized\n\n\n\nFinal true costs:  nonlinear=1266.6992  linear=1266.3377"
+    "section": "Pose Graph Representation",
+    "text": "Pose Graph Representation"
   },
   {
-    "objectID": "ilqr.html#demo-nonlinear-vs.-linearized-1",
-    "href": "ilqr.html#demo-nonlinear-vs.-linearized-1",
+    "objectID": "posegraph.html#graph-components",
+    "href": "posegraph.html#graph-components",
     "title": "Robot Modeling Control",
-    "section": "Demo: Nonlinear vs. Linearized",
-    "text": "Demo: Nonlinear vs. Linearized\nPendulum swing-up: θ0=2.5\\theta_0 = 2.5 rad, T=100T = 100, zero-control initialization.\nThree-panel figure:\n\nLeft (blue): Nonlinear iLQR iterates — actual trajectories converge to swing-up\nCenter (red): Linearized iterates — actual trajectories (rolled out with true ff) diverge or stagnate\nRight: True cost vs. iteration for both methods on a log scale\n\n\n\n\n\nWhat to observe: The linearized method produces controls that look optimal in the linear model, but the true (nonlinear) trajectory they generate is far from the goal. The nonlinear pass wins decisively on this problem."
+    "section": "Graph Components",
+    "text": "Graph Components\nNodes \\(\\mathcal{V} = \\{x_0, x_1, \\ldots, x_n\\}\\)\n\nEach node is a robot pose: \\(x_i = (x_i, y_i, \\theta_i) \\in SE(2)\\)\n\n\nEdges \\(\\mathcal{E} = \\{(i, j)\\}\\)\n\nEach edge represents a relative pose measurement \\(\\tilde{T}_{ij}\\)\nSequential edges: \\((0,1), (1,2), \\ldots\\) from odometry\nLoop closure edges: \\((j, k)\\) where \\(k \\gg j\\), from scan matching"
   },
   {
-    "objectID": "ilqr.html#backtracking-line-search",
-    "href": "ilqr.html#backtracking-line-search",
+    "objectID": "posegraph.html#edge-measurement",
+    "href": "posegraph.html#edge-measurement",
     "title": "Robot Modeling Control",
-    "section": "Backtracking Line Search",
-    "text": "Backtracking Line Search\nGoal: find α∈(0,1]\\alpha \\in (0, 1] such that the updated trajectory strictly reduces cost.\n\nAlgorithm:\n\nSet α=1\\alpha = 1\nRun nonlinear forward pass with current α\\alpha; evaluate J(û)J(\\hat{u})\nIf J(û)&lt;J(u‾)J(\\hat{u}) &lt; J(\\bar{u}): accept, update x‾←x̂\\bar{x} \\leftarrow \\hat{x}, u‾←û\\bar{u} \\leftarrow \\hat{u}\nElse: α←α/2\\alpha \\leftarrow \\alpha/2, repeat from step 2\nAfter 50 halvings: if α&lt;2×10−6\\alpha &lt; 2\\times 10^{-6}, declare convergence\n\n\n\nalpha = 1.0\nfor _ in range(50):\n    for t in range(T):\n        delta_u = K[t] @ (x_new[t] - x_nom[t]) + alpha * k_ff[t]\n        u_new[t] = u_nom[t] + delta_u\n        x_new[t+1] = f(x_new[t], u_new[t])   # nonlinear step\n    if new_cost &lt; current_cost:\n        break\n    alpha *= 0.5"
+    "section": "Edge Measurement",
+    "text": "Edge Measurement\nAn edge \\((i, j)\\) stores:\n\nMeasured relative pose: \\(\\tilde{T}_{ij} = (\\tilde{t}_x, \\tilde{t}_y, \\tilde{\\theta})\\)\n\n“Pose \\(j\\) as seen from pose \\(i\\)”\n\n\n\n\nInformation matrix (optional): \\(\\Omega_{ij}\\)\n\nEncodes measurement confidence\nMore confident measurements have larger weight"
   },
   {
-    "objectID": "ilqr.html#predicted-cost-improvement",
-    "href": "ilqr.html#predicted-cost-improvement",
+    "objectID": "posegraph.html#residual-for-an-edge",
+    "href": "posegraph.html#residual-for-an-edge",
     "title": "Robot Modeling Control",
-    "section": "Predicted Cost Improvement",
-    "text": "Predicted Cost Improvement\nThe backward pass implicitly computes the predicted improvement:\nΔJ=∑k=0T−1(QuTkt+12ktTQuukt)=−12∑k=0T−1ktTQuukt≤0\\Delta J = \\sum_{k=0}^{T-1}\\left(Q_u^T k_{t} + \\frac{1}{2} k_{t}^T Q_{uu} k_{t}\\right) = -\\frac{1}{2}\\sum_{k=0}^{T-1} k_{t}^T Q_{uu} k_{t} \\;\\leq\\; 0\n\nThis motivates a stronger Armijo condition:\nJ(û)&lt;J(u‾)−γα|ΔJ|,γ∈(0,1)J(\\hat{u}) &lt; J(\\bar{u}) - \\gamma\\,\\alpha\\,|\\Delta J|, \\qquad \\gamma \\in (0,1)\nActual decrease must be at least a fraction γ\\gamma of the quadratic model’s prediction.\n\n\n\n\n\nAt convergence: kt→0k_{t} \\to 0 (because Qu→0Q_u \\to 0), so ΔJ→0\\Delta J \\to 0 and α=1\\alpha = 1 is accepted immediately on the first try — the line search costs nothing."
+    "section": "Residual for an Edge",
+    "text": "Residual for an Edge\nGiven estimated poses \\(x_i = (x_i, y_i, \\theta_i)\\) and \\(x_j = (x_j, y_j, \\theta_j)\\):\n\nPredicted relative pose: \\[\n\\hat{T}_{ij} = T_i^{-1} \\circ T_j\n\\]\n\n\nResidual: Difference between predicted and measured \\[\ne_{ij} = \\hat{T}_{ij} \\ominus \\tilde{T}_{ij}\n\\]"
   },
   {
-    "objectID": "ilqr.html#exercise-optimality-at-convergence",
-    "href": "ilqr.html#exercise-optimality-at-convergence",
+    "objectID": "posegraph.html#se2-residual-computation",
+    "href": "posegraph.html#se2-residual-computation",
     "title": "Robot Modeling Control",
-    "section": "Exercise: Optimality at Convergence",
-    "text": "Exercise: Optimality at Convergence\nAt convergence, kt=−Quu−1Qu→0k_{t} = -Q_{uu}^{-1} Q_u \\to 0, which means:\nQu=rt+BtTVt+1,x=0for all tQ_u = r_t + B_{t}^T V_{t+1,x} = 0 \\quad \\text{for all } t\n\nQuestion: Write out what this says in terms of the original cost and dynamics. What classical optimality condition does it correspond to?\n\n\nAnswer: This is the discrete-time Pontryagin Maximum Principle stationarity condition:\n∂ct∂ut+BtTλt+1=0,λt+1=Vt+1,x\\frac{\\partial c_{t}}{\\partial u_{t}} + B_{t}^T \\lambda_{t+1} = 0, \\qquad \\lambda_{t+1} = V_{t+1,x}\nwhere λt\\lambda_{t} is the costate (adjoint variable). iLQR converges precisely when the KKT conditions are satisfied."
+    "section": "SE(2) Residual Computation",
+    "text": "SE(2) Residual Computation\nIn 2D, the residual has three components:\n\ndef pose_to_matrix(x, y, theta):\n    \"\"\"Convert pose (x, y, theta) to SE(2) matrix.\"\"\"\n    c, s = np.cos(theta), np.sin(theta)\n    return np.array([[c, -s, x], [s, c, y], [0, 0, 1]])\n\ndef matrix_to_pose(T):\n    \"\"\"Extract (x, y, theta) from SE(2) matrix.\"\"\"\n    return T[0, 2], T[1, 2], np.arctan2(T[1, 0], T[0, 0])\n\ndef compute_residual(xi, xj, z_ij):\n    \"\"\"\n    Compute residual for edge (i, j).\n    xi, xj: poses (x, y, theta)\n    z_ij: measured relative pose (dx, dy, dtheta)\n    Returns: residual vector [ex, ey, etheta]\n\n    Residual: e = [R_i^T @ (p_j - p_i); theta_j - theta_i] - z_ij\n    \"\"\"\n    x_i, y_i, theta_i = xi[0], xi[1], xi[2]\n    x_j, y_j, theta_j = xj[0], xj[1], xj[2]\n    dx_meas, dy_meas, dtheta_meas = z_ij[0], z_ij[1], z_ij[2]\n\n    c, s = np.cos(theta_i), np.sin(theta_i)\n\n    # Predicted relative position (j in frame i)\n    dx_world = x_j - x_i\n    dy_world = y_j - y_i\n    dx_pred = c * dx_world + s * dy_world\n    dy_pred = -s * dx_world + c * dy_world\n    dtheta_pred = theta_j - theta_i\n\n    # Residual = predicted - measured\n    e = np.array([\n        dx_pred - dx_meas,\n        dy_pred - dy_meas,\n        np.arctan2(np.sin(dtheta_pred - dtheta_meas),\n                   np.cos(dtheta_pred - dtheta_meas))  # Wrap angle\n    ])\n    return e"
   },
   {
-    "objectID": "ilqr.html#ilqr-complete-algorithm",
-    "href": "ilqr.html#ilqr-complete-algorithm",
+    "objectID": "posegraph.html#cost-function",
+    "href": "posegraph.html#cost-function",
     "title": "Robot Modeling Control",
-    "section": "iLQR: Complete Algorithm",
-    "text": "iLQR: Complete Algorithm\n\n\n\niLQR\n\n\nInput: initial controls u‾0:T−1\\bar{u}_{0:T-1}, dynamics ftf_{t}, costs ctc_{t}, cTc_{T}\n1. Rollout: simulate x‾t+1=ft(x‾t,u‾t)\\bar{x}_{t+1} = f_{t}(\\bar{x}_{t}, \\bar{u}_{t}) to obtain the nominal trajectory.\n2. Repeat until convergence:\n2a. Backward pass — init VT,x=cT,xV_{T,x} = c_{T,x}, VT,xx=cT,xxV_{T,xx} = c_{T,xx}; for t=T−1,…,0t = T-1, \\dots, 0:\n\nCompute Jacobians At,BtA_{t}, B_{t} and cost derivatives at (x‾t,u‾t)(\\bar{x}_{t}, \\bar{u}_{t})\nCompute Qx,Qu,Qxx,Quu,QuxQ_x, Q_u, Q_{xx}, Q_{uu}, Q_{ux} via the recursion\nGains: kt=−Quu−1Quk_{t} = -Q_{uu}^{-1} Q_u, Kt=−Quu−1Qux\\quad K_{t} = -Q_{uu}^{-1} Q_{ux}\nUpdate: Vt,x=Qx+QxuktV_{t,x} = Q_x + Q_{xu} k_{t}, Vt,xx=Qxx+QxuKt\\quad V_{t,xx} = Q_{xx} + Q_{xu} K_{t}\n\n2b. Forward pass — from x̂0=x‾0\\hat{x}_0 = \\bar{x}_0, simulate with ût=u‾t+αkt+Kt(x̂t−x‾t)\\hat{u}_{t} = \\bar{u}_{t} + \\alpha k_{t} + K_{t}(\\hat{x}_{t} - \\bar{x}_{t})\n2c. Line search — if J(û)&lt;J(u‾)J(\\hat{u}) &lt; J(\\bar{u}): accept; else α←α/2\\alpha \\leftarrow \\alpha/2, repeat 2b\n2d. Update — x‾t←x̂t\\bar{x}_{t} \\leftarrow \\hat{x}_{t}, u‾t←ût\\;\\bar{u}_{t} \\leftarrow \\hat{u}_{t}"
+    "section": "Cost Function",
+    "text": "Cost Function\nThe total cost is the sum of squared residuals over all edges:\n\\[\nF(x) = \\sum_{(i,j) \\in \\mathcal{E}} e_{ij}^T \\Omega_{ij} \\, e_{ij}\n\\]\n\nwhere:\n\n\\(e_{ij} \\in \\mathbb{R}^3\\) is the residual for edge \\((i, j)\\)\n\\(\\Omega_{ij} \\in \\mathbb{R}^{3 \\times 3}\\) is the information matrix (often \\(I_3\\))\n\n\n\n\n\n\n\n\n\nNote\n\n\nThis is exactly the nonlinear least squares problem from earlier lectures!"
   },
   {
-    "objectID": "ilqr.html#ilqr-vs.-lqr",
-    "href": "ilqr.html#ilqr-vs.-lqr",
+    "objectID": "posegraph.html#jacobian-structure",
+    "href": "posegraph.html#jacobian-structure",
     "title": "Robot Modeling Control",
-    "section": "iLQR vs. LQR",
-    "text": "iLQR vs. LQR\n\n\n\n\n\n\n\n\nQuantity\nLQR\niLQR (per iteration)\n\n\n\n\nDynamics\nAtxt+BtutA_{t} x_{t} + B_{t} u_{t}\nx‾t+1+Atδxt+Btδut\\bar{x}_{t+1} + A_{t} \\delta x_{t} + B_{t} \\delta u_{t}\n\n\nCost\nQuadratic in (x,u)(x, u)\nQuadratic in (δx,δu)(\\delta x, \\delta u); linear terms nonzero\n\n\nQuuQ_{uu}\nR+BTPBR + B^T P B\ncuu+BTVxxBc_{uu} + B^T V_{xx} B\n\n\nOptimal control\nu*=−Kxu^* = -K x\nδu*=k+Kδx\\delta u^* = k + K \\delta x\n\n\nFeedforward\nNone (Qu=0Q_u = 0 at optimum)\nk=−Quu−1Quk = -Q_{uu}^{-1} Q_u (drives improvement)\n\n\nHessian recursion\nDiscrete Riccati equation\nSame Schur complement form\n\n\n\n\n\n\n\nThe backward pass is structurally identical to LQR applied to the deviation problem. The only additions: (1) feedforward gains ktk_{t} from nonzero cost gradients; (2) re-linearize each iteration."
+    "section": "Jacobian Structure",
+    "text": "Jacobian Structure\nThe residual \\(e_{ij}\\) depends only on poses \\(x_i\\) and \\(x_j\\).\n\nJacobians: \\[\nA_{ij} = \\frac{\\partial e_{ij}}{\\partial x_i} \\in \\mathbb{R}^{3 \\times 3}, \\quad\nB_{ij} = \\frac{\\partial e_{ij}}{\\partial x_j} \\in \\mathbb{R}^{3 \\times 3}\n\\]\n\n\nThe full Jacobian \\(J\\) is sparse: most entries are zero!"
   },
   {
-    "objectID": "ilqr.html#demo-iterates",
-    "href": "ilqr.html#demo-iterates",
+    "objectID": "posegraph.html#sparsity-pattern",
+    "href": "posegraph.html#sparsity-pattern",
     "title": "Robot Modeling Control",
-    "section": "Demo: Iterates",
-    "text": "Demo: Iterates"
+    "section": "Sparsity Pattern",
+    "text": "Sparsity Pattern\n\n\n\n\n\n\n\nTip\n\n\nSparsity is what makes large-scale SLAM tractable!"
   },
   {
-    "objectID": "ilqr.html#demo-iterates-1",
-    "href": "ilqr.html#demo-iterates-1",
+    "objectID": "posegraph.html#jacobian-for-se2-edge",
+    "href": "posegraph.html#jacobian-for-se2-edge",
     "title": "Robot Modeling Control",
-    "section": "Demo: Iterates",
-    "text": "Demo: Iterates\nPendulum swing-up from θ0=3.0\\theta_0 = 3.0 rad, T=200T = 200 steps. Snapshots at iterations 0, 1, 2, 4, 8, 15, 25, 50, 100 (darker = later).\n\nPhase portrait (left): successive iterates sweep from the initial open-loop trajectory toward the swing-up.\nCost vs. iteration (right, log scale):\n\nEarly iterations: large cost drops (big ktk_{t}, α=1\\alpha = 1 accepted)\nLater iterations: smaller refinements, curve steepens → superlinear convergence near optimum\n\n\n\n\n\n\nDiscussion: Even at iteration 0 the trajectory stays bounded. Why? The KtK_{t} feedback keeps each rollout near the nominal — without it, early iterates would be far more erratic."
+    "section": "Jacobian for SE(2) Edge",
+    "text": "Jacobian for SE(2) Edge\nFor residual \\(e_{ij}\\) with poses \\(x_i\\) and \\(x_j\\):\n\ndef compute_jacobians(xi, xj, z_ij):\n    \"\"\"\n    Compute Jacobians of residual w.r.t. poses xi and xj.\n    Returns: A (de/dxi), B (de/dxj), both 3x3\n    \"\"\"\n    theta_i = xi[2]\n    c, s = np.cos(theta_i), np.sin(theta_i)\n    dx = xj[0] - xi[0]\n    dy = xj[1] - xi[1]\n\n    # Jacobian w.r.t. xi\n    A = np.array([\n        [-c, -s,  -s * dx + c * dy],\n        [ s, -c,  -c * dx - s * dy],\n        [ 0,  0,  -1]\n    ])\n\n    # Jacobian w.r.t. xj\n    B = np.array([\n        [ c,  s,  0],\n        [-s,  c,  0],\n        [ 0,  0,  1]\n    ])\n\n    return A, B"
   },
   {
-    "objectID": "ilqr.html#beyond-ilqr",
-    "href": "ilqr.html#beyond-ilqr",
+    "objectID": "posegraph.html#gauss-newton-update",
+    "href": "posegraph.html#gauss-newton-update",
     "title": "Robot Modeling Control",
-    "section": "Beyond iLQR",
-    "text": "Beyond iLQR\nDifferential Dynamic Programming (DDP):\niLQR uses only first-order Jacobians of ftf_{t}. DDP adds second-order terms:\nQxx+=∑i(Vt+1,x)(i)ft,xx(i),Quu+=⋯,Qux+=⋯Q_{xx} \\mathrel{+}= \\sum_i (V_{t+1,x})^{(i)} f_{t,xx}^{(i)}, \\quad Q_{uu} \\mathrel{+}= \\cdots, \\quad Q_{ux} \\mathrel{+}= \\cdots\n\n\nTerms scale as 𝒪(∥Vt+1,x∥)\\mathcal{O}(\\|V_{t+1,x}\\|) — vanish near the optimum where Vt+1,x→0V_{t+1,x} \\to 0\nBetter convergence rate far from the optimum; expensive and rarely used in practice\niLQR is sometimes called Gauss-Newton DDP"
+    "section": "Gauss-Newton Update",
+    "text": "Gauss-Newton Update\nStack all poses into vector \\(\\mathbf{x} \\in \\mathbb{R}^{3n}\\):\n\\[\n\\mathbf{x} = \\begin{bmatrix} x_0 \\\\ y_0 \\\\ \\theta_0 \\\\ x_1 \\\\ y_1 \\\\ \\theta_1 \\\\ \\vdots \\end{bmatrix}\n\\]\n\nGauss-Newton iteration: \\[\nH \\, \\Delta \\mathbf{x} = -\\mathbf{b}\n\\] where \\(H = J^T \\Omega J\\) (sparse!) and \\(\\mathbf{b} = J^T \\Omega \\, \\mathbf{e}\\)"
   },
   {
-    "objectID": "ilqr.html#beyond-ilqr-1",
-    "href": "ilqr.html#beyond-ilqr-1",
+    "objectID": "posegraph.html#building-the-linear-system",
+    "href": "posegraph.html#building-the-linear-system",
     "title": "Robot Modeling Control",
-    "section": "Beyond iLQR",
-    "text": "Beyond iLQR\nNatural extensions:\n\n\n\n\n\n\n\nExtension\nIdea\n\n\n\n\nConstrained iLQR\nHandle ut∈𝒰u_{t} \\in \\mathcal{U} via augmented Lagrangian (AL-iLQR)\n\n\nMPC\nRe-solve at each timestep with a receding horizon\n\n\nWarm-starting\nInitialize next solve from the shifted previous solution"
+    "section": "Building the Linear System",
+    "text": "Building the Linear System\n\ndef build_linear_system(poses, edges, measurements):\n    \"\"\"\n    Build H and b for Gauss-Newton.\n    poses: list of (x, y, theta)\n    edges: list of (i, j) pairs\n    measurements: list of (dx, dy, dtheta) for each edge\n    \"\"\"\n    n = len(poses)\n    H = np.zeros((3*n, 3*n))\n    b = np.zeros(3*n)\n\n    for (i, j), z_ij in zip(edges, measurements):\n        xi, xj = poses[i], poses[j]\n        e_ij = compute_residual(xi, xj, z_ij)\n        A, B = compute_jacobians(xi, xj, z_ij)\n\n        # Add to H (using Omega = I)\n        H[3*i:3*i+3, 3*i:3*i+3] += A.T @ A\n        H[3*i:3*i+3, 3*j:3*j+3] += A.T @ B\n        H[3*j:3*j+3, 3*i:3*i+3] += B.T @ A\n        H[3*j:3*j+3, 3*j:3*j+3] += B.T @ B\n\n        # Add to b\n        b[3*i:3*i+3] += A.T @ e_ij\n        b[3*j:3*j+3] += B.T @ e_ij\n\n    return H, b"
   },
   {
-    "objectID": "ilqr.html#summary-1",
-    "href": "ilqr.html#summary-1",
+    "objectID": "posegraph.html#fixing-the-gauge",
+    "href": "posegraph.html#fixing-the-gauge",
+    "title": "Robot Modeling Control",
+    "section": "Fixing the Gauge",
+    "text": "Fixing the Gauge\nThe cost function is invariant to rigid transformations of all poses.\n\nProblem: \\(H\\) is rank-deficient (3 degrees of freedom)\n\n\nSolution: Fix the first pose \\(x_0 = (0, 0, 0)\\)\n\nRemove rows/columns for \\(x_0\\) from \\(H\\)\nOr add large diagonal entries: \\(H_{0:3, 0:3} += \\lambda I\\)"
+  },
+  {
+    "objectID": "posegraph.html#full-optimization-loop",
+    "href": "posegraph.html#full-optimization-loop",
+    "title": "Robot Modeling Control",
+    "section": "Full Optimization Loop",
+    "text": "Full Optimization Loop\n\ndef optimize_pose_graph(initial_poses, edges, measurements,\n                        n_iter=10, fix_first=True):\n    \"\"\"\n    Optimize pose graph using Gauss-Newton.\n    \"\"\"\n    poses = [np.array(p) for p in initial_poses]\n    n = len(poses)\n\n    for iteration in range(n_iter):\n        H, b = build_linear_system(poses, edges, measurements)\n\n        # Fix first pose (add large weight)\n        if fix_first:\n            H[0:3, 0:3] += 1e6 * np.eye(3)\n\n        # Solve\n        dx = np.linalg.solve(H, -b)\n\n        # Update poses\n        for i in range(n):\n            poses[i] = poses[i] + dx[3*i:3*i+3]\n            # Normalize angle\n            poses[i][2] = np.arctan2(np.sin(poses[i][2]),\n                                      np.cos(poses[i][2]))\n\n    return poses"
+  },
+  {
+    "objectID": "posegraph.html#example-square-loop",
+    "href": "posegraph.html#example-square-loop",
+    "title": "Robot Modeling Control",
+    "section": "Example: Square Loop",
+    "text": "Example: Square Loop\n\n\nCode\nnp.random.seed(123)\n\n# True poses: square path\ntrue_poses = [\n    (0, 0, 0),\n    (2, 0, 0),\n    (4, 0, np.pi/2),\n    (4, 2, np.pi/2),\n    (4, 4, np.pi),\n    (2, 4, np.pi),\n    (0, 4, -np.pi/2),\n    (0, 2, -np.pi/2),\n]\n\n# Generate noisy odometry measurements\nedges = [(i, i+1) for i in range(7)]  # Sequential\nedges.append((7, 0))  # Loop closure!\n\nmeasurements = []\nfor i, j in edges:\n    Ti = pose_to_matrix(*true_poses[i])\n    Tj = pose_to_matrix(*true_poses[j])\n    T_rel = np.linalg.inv(Ti) @ Tj\n    z = matrix_to_pose(T_rel)\n    # Add noise (more noise on odometry, less on loop closure)\n    if j == i + 1:  # Odometry\n        noise = np.array([0.1, 0.1, 0.05]) * np.random.randn(3)\n    else:  # Loop closure (often more accurate)\n        noise = np.array([0.05, 0.05, 0.02]) * np.random.randn(3)\n    measurements.append(tuple(np.array(z) + noise))\n\n# Initial poses from chaining odometry (with drift)\ninitial_poses = [np.array([0.0, 0.0, 0.0])]\nT_acc = np.eye(3)\nfor i in range(7):\n    T_rel = pose_to_matrix(*measurements[i])\n    T_acc = T_acc @ T_rel\n    initial_poses.append(np.array(matrix_to_pose(T_acc)))\n\n# Optimize\noptimized_poses = optimize_pose_graph(initial_poses, edges, measurements, n_iter=20)\n\n# Plot comparison\nfig, axes = plt.subplots(1, 2, figsize=(12, 5))\n\n# Before optimization\nax = axes[0]\ninit_arr = np.array(initial_poses)\ntrue_arr = np.array(true_poses)\nax.plot(true_arr[:, 0], true_arr[:, 1], 'g-o', markersize=8, linewidth=2, label='Ground Truth')\nax.plot(init_arr[:, 0], init_arr[:, 1], 'r-s', markersize=8, linewidth=2, label='Initial (Odometry)')\n# Draw loop closure gap\nax.plot([init_arr[-1, 0], init_arr[0, 0]], [init_arr[-1, 1], init_arr[0, 1]],\n        'r--', linewidth=2, alpha=0.5)\nax.set_xlabel('x (m)')\nax.set_ylabel('y (m)')\nax.set_aspect('equal')\nax.grid(True, alpha=0.3)\nax.legend()\nax.set_title('Before Optimization')\n\n# After optimization\nax = axes[1]\nopt_arr = np.array(optimized_poses)\nax.plot(true_arr[:, 0], true_arr[:, 1], 'g-o', markersize=8, linewidth=2, label='Ground Truth')\nax.plot(opt_arr[:, 0], opt_arr[:, 1], 'b-s', markersize=8, linewidth=2, label='Optimized')\nax.set_xlabel('x (m)')\nax.set_ylabel('y (m)')\nax.set_aspect('equal')\nax.grid(True, alpha=0.3)\nax.legend()\nax.set_title('After Optimization')\n\nplt.tight_layout()\nplt.show()\n\n# Print errors\ninit_error = np.mean([np.linalg.norm(init_arr[i, :2] - true_arr[i, :2]) for i in range(8)])\nopt_error = np.mean([np.linalg.norm(opt_arr[i, :2] - true_arr[i, :2]) for i in range(8)])\nprint(f\"Mean position error - Initial: {init_error:.3f} m, Optimized: {opt_error:.3f} m\")\n\n\n\nMean position error - Initial: 0.593 m, Optimized: 0.152 m"
+  },
+  {
+    "objectID": "posegraph.html#convergence",
+    "href": "posegraph.html#convergence",
+    "title": "Robot Modeling Control",
+    "section": "Convergence",
+    "text": "Convergence\n\n\nCode\n# Track cost over iterations\ndef compute_total_cost(poses, edges, measurements):\n    cost = 0\n    for (i, j), z_ij in zip(edges, measurements):\n        e = compute_residual(poses[i], poses[j], z_ij)\n        cost += e @ e\n    return cost\n\n# Re-run optimization tracking cost\nposes = [np.array(p) for p in initial_poses]\ncosts = [compute_total_cost(poses, edges, measurements)]\n\nfor iteration in range(20):\n    H, b = build_linear_system(poses, edges, measurements)\n    H[0:3, 0:3] += 1e6 * np.eye(3)\n    dx = np.linalg.solve(H, -b)\n    for i in range(len(poses)):\n        poses[i] = poses[i] + dx[3*i:3*i+3]\n        poses[i][2] = np.arctan2(np.sin(poses[i][2]), np.cos(poses[i][2]))\n    costs.append(compute_total_cost(poses, edges, measurements))\n\nfig, ax = plt.subplots(figsize=(8, 5))\nax.semilogy(costs, 'b-o', markersize=6)\nax.set_xlabel('Iteration')\nax.set_ylabel('Cost (log scale)')\nax.set_title('Gauss-Newton Convergence')\nax.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\nNote\n\n\nGauss-Newton converges quickly — typically 5-10 iterations suffice."
+  },
+  {
+    "objectID": "posegraph.html#weighted-edges",
+    "href": "posegraph.html#weighted-edges",
+    "title": "Robot Modeling Control",
+    "section": "Weighted Edges",
+    "text": "Weighted Edges\nDifferent measurements have different uncertainties.\n\nInformation matrix \\(\\Omega_{ij}\\):\n\nDiagonal: \\(\\Omega = \\text{diag}(\\sigma_x^{-2}, \\sigma_y^{-2}, \\sigma_\\theta^{-2})\\)\nMore confident measurements → larger \\(\\Omega\\) → more influence\n\n\n\nCost function becomes: \\[\nF(x) = \\sum_{(i,j) \\in \\mathcal{E}} e_{ij}^T \\Omega_{ij} \\, e_{ij}\n\\]"
+  },
+  {
+    "objectID": "posegraph.html#robust-cost-functions",
+    "href": "posegraph.html#robust-cost-functions",
+    "title": "Robot Modeling Control",
+    "section": "Robust Cost Functions",
+    "text": "Robust Cost Functions\nLoop closure detection can produce outliers (false matches).\n\nStandard least squares is sensitive to outliers!\n\n\nSolution: Use robust kernels\n\n\n\n\n\n\n\n\nKernel\nFormula\nEffect\n\n\n\n\nSquared\n\\(\\rho(r) = r^2\\)\nStandard (sensitive)\n\n\nHuber\n\\(\\rho(r) = \\begin{cases} r^2 & |r| \\leq k \\\\ 2k|r| - k^2 & |r| &gt; k \\end{cases}\\)\nLinear growth for outliers\n\n\nCauchy\n\\(\\rho(r) = \\log(1 + r^2)\\)\nBounded influence"
+  },
+  {
+    "objectID": "posegraph.html#robust-cost-visualization",
+    "href": "posegraph.html#robust-cost-visualization",
+    "title": "Robot Modeling Control",
+    "section": "Robust Cost Visualization",
+    "text": "Robust Cost Visualization"
+  },
+  {
+    "objectID": "posegraph.html#loop-closure-detection",
+    "href": "posegraph.html#loop-closure-detection",
+    "title": "Robot Modeling Control",
+    "section": "Loop Closure Detection",
+    "text": "Loop Closure Detection\nWe assumed loop closures are given. In practice, detecting them is challenging!\n\nApproaches:\n\nScan-to-scan matching: Match current scan against all previous scans\n\nExpensive: \\(O(n^2)\\) comparisons\n\nScan-to-map matching: Match against accumulated map\nPlace recognition: Use descriptors to find candidate matches\n\nBag-of-words, learning-based methods"
+  },
+  {
+    "objectID": "posegraph.html#libraries-for-pose-graph-optimization",
+    "href": "posegraph.html#libraries-for-pose-graph-optimization",
+    "title": "Robot Modeling Control",
+    "section": "Libraries for Pose Graph Optimization",
+    "text": "Libraries for Pose Graph Optimization\nIn practice, use optimized libraries:\n\nGTSAM (Georgia Tech Smoothing and Mapping)\n\nFactor graph formulation\nIncremental updates (iSAM2)\nWidely used in robotics research\n\n\n\ng2o (General Graph Optimization)\n\nC++ library\nUsed in ORB-SLAM, LSD-SLAM\n\n\n\nCeres Solver\n\nGoogle’s nonlinear least squares library\nVery flexible, automatic differentiation"
+  },
+  {
+    "objectID": "posegraph.html#factor-graph-view",
+    "href": "posegraph.html#factor-graph-view",
+    "title": "Robot Modeling Control",
+    "section": "Factor Graph View",
+    "text": "Factor Graph View\nGTSAM uses “factor graph” terminology:\n\n\n\n\n\n\n\nNote\n\n\nVariables are poses, factors are constraints (measurements). Same math, different visualization!"
+  },
+  {
+    "objectID": "posegraph.html#connection-to-your-assignment",
+    "href": "posegraph.html#connection-to-your-assignment",
+    "title": "Robot Modeling Control",
+    "section": "Connection to Your Assignment",
+    "text": "Connection to Your Assignment\nYour scan matching assignment involves:\n\n\nSequential scan matching → odometry edges\n\n\n\n\nLong-range scan matching → loop closure edges\n\nMatch scan \\(k\\) against scans \\(0, 1, \\ldots, k-10\\) (for example)\nIf match quality is good, add loop closure edge\n\n\n\n\n\nPose graph optimization → correct drift\n\nBuild graph with all edges\nOptimize to find best poses"
+  },
+  {
+    "objectID": "posegraph.html#summary",
+    "href": "posegraph.html#summary",
     "title": "Robot Modeling Control",
     "section": "Summary",
-    "text": "Summary\nForward pass update: ût=u‾t+αkt+Kt(x̂t−x‾t),x̂t+1=f(x̂t,ût)\\hat{u}_{t} = \\bar{u}_{t} + \\alpha\\, k_{t} + K_{t}(\\hat{x}_{t} - \\bar{x}_{t}), \\qquad \\hat{x}_{t+1} = f(\\hat{x}_{t}, \\hat{u}_{t})\n\n\nα\\alpha scales only ktk_{t} — the Newton search direction in uu\nKtδxtK_{t} \\delta x_{t} corrects for nonlinear drift; it is not a search direction unless dynamics are linear\nUsing nonlinear dynamics keeps the trajectory feasible at every iteration\n\n\n\nLine search: halve α\\alpha until JJ decreases; kt→0k_{t} \\to 0 signals convergence\nConvergence ↔︎ optimality: Qu=0Q_u = 0 is the discrete-time PMP stationarity condition\nDDP vs. iLQR: dynamics Hessian terms improve convergence rate but are rarely worth the cost"
+    "text": "Summary\n\nProblem: Odometry drift accumulates; loop closures provide constraints\nGraph structure: Nodes = poses, edges = relative pose measurements\nFormulation: Nonlinear least squares on SE(2) residuals\nKey insight: Jacobian/Hessian is sparse → tractable for large graphs\nPractice: Use robust kernels for outliers, libraries for efficiency"
   },
   {
-    "objectID": "ilqr.html#summary-2",
-    "href": "ilqr.html#summary-2",
+    "objectID": "posegraph.html#references",
+    "href": "posegraph.html#references",
+    "title": "Robot Modeling Control",
+    "section": "References",
+    "text": "References\n\nGrisetti, G., Kummerle, R., Stachniss, C., & Burgard, W. (2010). “A Tutorial on Graph-Based SLAM.” IEEE Intelligent Transportation Systems Magazine.\nDellaert, F., & Kaess, M. (2017). “Factor Graphs for Robot Perception.” Foundations and Trends in Robotics.\nCarlone, L., et al. (2025). “Slam handbook: From localization and mapping to spatial intelligence.”.\nGTSAM: https://gtsam.org\ng2o: https://github.com/RainerKuemmerle/g2o"
+  },
+  {
+    "objectID": "lqr_simple.html#finite-horizon-lqr",
+    "href": "lqr_simple.html#finite-horizon-lqr",
+    "title": "Robot Modeling Control",
+    "section": "Finite Horizon LQR",
+    "text": "Finite Horizon LQR\n\nStandard Form for Regulation\n\n\n\n\n\n\n\nInstructor: Hasan A. Poonawala  Mechanical and Aerospace Engineering  University of Kentucky, Lexington, KY, USA\n\n\nTopics:  Double Integrator Model  LQR Cost Function  Backward Riccati Recursion  Interactive Demo"
+  },
+  {
+    "objectID": "lqr_simple.html#the-double-integrator",
+    "href": "lqr_simple.html#the-double-integrator",
+    "title": "Robot Modeling Control",
+    "section": "The Double Integrator",
+    "text": "The Double Integrator\nA particle with unit mass moving in 1D under applied force uu:\np̈=u\\ddot{p} = u\nDefine state x=[p,v]Tx = [p,\\, v]^T. Discrete dynamics with timestep Δt\\Delta t:\nxt+1=[1Δt01]⏟Axt+[Δt22Δt]⏟Butx_{t+1} = \\underbrace{\\begin{bmatrix}1 & \\Delta t \\\\ 0 & 1\\end{bmatrix}}_{A} x_t + \\underbrace{\\begin{bmatrix}\\tfrac{\\Delta t^2}{2} \\\\ \\Delta t\\end{bmatrix}}_{B} u_t\n\n\n\nHere AA and BB are the usual state-transition and input matrices — kept separate, unlike the augmented form in the generalized LQR."
+  },
+  {
+    "objectID": "lqr_simple.html#cost-function",
+    "href": "lqr_simple.html#cost-function",
+    "title": "Robot Modeling Control",
+    "section": "Cost Function",
+    "text": "Cost Function\nMinimize over u0,u1,…,uT−1u_0, u_1, \\dots, u_{T-1}:\nJ=xTTWfxT⏟terminal cost+∑t=0T−1(xtTWxt⏟state cost+utTRut⏟control cost)J = \\underbrace{x_T^T W_f\\, x_T}_{\\text{terminal cost}} + \\sum_{t=0}^{T-1}\\left(\\underbrace{x_t^T W x_t}_{\\text{state cost}} + \\underbrace{u_t^T R\\, u_t}_{\\text{control cost}}\\right)\nsubject to xt+1=Axt+Butx_{t+1} = A x_t + B u_t.\n\n\n\n\n\n\n\n\n\nSymbol\nRole\nRequirement\n\n\n\n\nW∈ℝn×nW \\in \\mathbb{R}^{n\\times n}\nState cost matrix\nW=WT≽0W = W^T \\succeq 0\n\n\nR∈ℝm×mR \\in \\mathbb{R}^{m\\times m}\nControl cost matrix\nR=RT≻0R = R^T \\succ 0\n\n\nWf∈ℝn×nW_f \\in \\mathbb{R}^{n\\times n}\nTerminal cost matrix\nWf=WfT≽0W_f = W_f^T \\succeq 0\n\n\n\n\n\n\nWe write WW (not QQ) for the state cost to avoid conflict with the Q-function 𝐐t(⋅)\\mathbf{Q}_t(\\cdot) used in the generalized formulation."
+  },
+  {
+    "objectID": "lqr_simple.html#value-function",
+    "href": "lqr_simple.html#value-function",
+    "title": "Robot Modeling Control",
+    "section": "Value Function",
+    "text": "Value Function\nDefine the cost-to-go from time tt:\nVt(x)=minut,…,uT−1[xTTWfxT+∑s=tT−1(xsTWxs+usTRus)]V_t(x) = \\min_{u_t,\\dots,u_{T-1}} \\left[x_T^T W_f x_T + \\sum_{s=t}^{T-1}(x_s^T W x_s + u_s^T R\\, u_s)\\right]\n\nTerminal condition: VT(x)=xTWfx=xTPTx⟹PT=WfV_T(x) = x^T W_f\\, x = x^T P_T\\, x \\implies P_T = W_f\n\n\nBellman recursion: for t=T−1,…,0t = T-1, \\dots, 0: Vt(x)=minu[xTWx+uTRu+Vt+1(Ax+Bu)]V_t(x) = \\min_u \\left[x^T W x + u^T R u + V_{t+1}(Ax + Bu)\\right]"
+  },
+  {
+    "objectID": "lqr_simple.html#backward-riccati-recursion",
+    "href": "lqr_simple.html#backward-riccati-recursion",
+    "title": "Robot Modeling Control",
+    "section": "Backward Riccati Recursion",
+    "text": "Backward Riccati Recursion\nAssume Vt+1(x)=xTPt+1xV_{t+1}(x) = x^T P_{t+1} x. Expand and minimize over uu:\n∂∂u[xTWx+uTRu+(Ax+Bu)TPt+1(Ax+Bu)]=0\\frac{\\partial}{\\partial u}\\left[x^T W x + u^T R u + (Ax+Bu)^T P_{t+1}(Ax+Bu)\\right] = 0\n\n⟹2Ru+2BTPt+1(Ax+Bu)=0\\implies 2Ru + 2B^T P_{t+1}(Ax + Bu) = 0\n⟹ut*=−(R+BTPt+1B)−1BTPt+1A⏟Ktxt\\implies u_t^* = -\\underbrace{(R + B^T P_{t+1} B)^{-1} B^T P_{t+1} A}_{K_t}\\, x_t\n\n\nSubstituting back: Vt(x)=xTPtxV_t(x) = x^T P_t x where\nPt=W+ATPt+1(A−BKt)\\boxed{P_t = W + A^T P_{t+1}(A - BK_t)} Kt=(R+BTPt+1B)−1BTPt+1A\\boxed{K_t = (R + B^T P_{t+1} B)^{-1} B^T P_{t+1} A}"
+  },
+  {
+    "objectID": "lqr_simple.html#algorithm",
+    "href": "lqr_simple.html#algorithm",
+    "title": "Robot Modeling Control",
+    "section": "Algorithm",
+    "text": "Algorithm\n\n\n\nFinite Horizon LQR (Standard Form)\n\n\nInputs: AA, BB, WW, RR, WfW_f, horizon TT\nBackward pass — set PT=WfP_T = W_f; for t=T−1,…,0t = T-1, \\dots, 0:\n\nKt=(R+BTPt+1B)−1BTPt+1AK_t = (R + B^T P_{t+1} B)^{-1} B^T P_{t+1} A\nPt=W+ATPt+1(A−BKt)P_t = W + A^T P_{t+1}(A - BK_t)\n\nForward pass — given x0x_0, for t=0,…,T−1t = 0, \\dots, T-1:\n\nut*=−Ktxtu_t^* = -K_t\\, x_t\nxt+1=Axt+But*x_{t+1} = Ax_t + Bu_t^*\n\n\n\n\n\n\n\nGains {Kt}\\{K_t\\} depend only on A,B,W,R,Wf,TA, B, W, R, W_f, T — not on x0x_0. Cost JJ scales quadratically with ∥x0∥\\|x_0\\| by linearity."
+  },
+  {
+    "objectID": "lqr_simple.html#double-integrator-lqr-control",
+    "href": "lqr_simple.html#double-integrator-lqr-control",
+    "title": "Robot Modeling Control",
+    "section": "Double Integrator: LQR Control",
+    "text": "Double Integrator: LQR Control\nSet initial conditions x0=[p0,v0]Tx_0 = [p_0,\\, v_0]^T and observe the optimal trajectory.\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 580\n\nfrom shiny import App, render, ui\nimport numpy as np\n\napp_ui = ui.page_fluid(\n    ui.h4(\"Finite Horizon LQR — Double Integrator\"),\n    ui.layout_sidebar(\n        ui.sidebar(\n            ui.h6(\"Initial State x₀\"),\n            ui.input_slider(\"p0\", \"Position p₀\", min=-5.0, max=5.0, value=3.0, step=0.1),\n            ui.input_slider(\"v0\", \"Velocity v₀\", min=-5.0, max=5.0, value=0.0, step=0.1),\n            ui.hr(),\n            ui.h6(\"Horizon & Weights\"),\n            ui.input_slider(\"T\",  \"Horizon T\",         min=5,    max=60,   value=20,  step=5),\n            ui.input_slider(\"wp\", \"State weight wp\",   min=0.1,  max=10.0, value=1.0, step=0.1),\n            ui.input_slider(\"wv\", \"State weight wv\",   min=0.1,  max=10.0, value=1.0, step=0.1),\n            ui.input_slider(\"r\",  \"Control weight r\",  min=0.01, max=5.0,  value=1.0, step=0.05),\n            ui.input_slider(\"wf\", \"Terminal weight wf\",min=1.0,  max=50.0, value=10.0,step=1.0),\n            width=280,\n        ),\n        ui.output_plot(\"lqr_plot\"),\n    ),\n)\n\ndef server(input, output, session):\n    @render.plot\n    def lqr_plot():\n        import matplotlib.pyplot as plt\n        import matplotlib.gridspec as gridspec\n\n        dt = 0.1\n        T  = input.T()\n        wp, wv, r, wf = input.wp(), input.wv(), input.r(), input.wf()\n        x0 = np.array([input.p0(), input.v0()])\n\n        A = np.array([[1.0, dt], [0.0, 1.0]])\n        B = np.array([[0.5*dt**2], [dt]])\n        W  = np.diag([wp, wv])\n        R  = np.array([[r]])\n        Wf = wf * np.eye(2)\n\n        # --- Backward Riccati pass ---\n        P = Wf.copy()\n        Ks = []\n        for _ in range(T):\n            S  = R + B.T @ P @ B\n            K  = np.linalg.solve(S, B.T @ P @ A)\n            P  = W + A.T @ P @ (A - B @ K)\n            Ks.append(K)\n        Ks.reverse()\n\n        # --- Forward pass ---\n        xs = np.zeros((T + 1, 2))\n        us = np.zeros(T)\n        xs[0] = x0\n        J = 0.0\n        for t in range(T):\n            u = -(Ks[t] @ xs[t])\n            us[t] = u[0]\n            xs[t+1] = A @ xs[t] + B.flatten() * us[t]\n            J += xs[t] @ W @ xs[t] + r * us[t]**2\n        J += xs[T] @ Wf @ xs[T]\n\n        # --- Plot ---\n        time = np.arange(T + 1) * dt\n        fig  = plt.figure(figsize=(8, 6))\n        gs   = gridspec.GridSpec(3, 1, hspace=0.55)\n\n        ax1 = fig.add_subplot(gs[0])\n        ax1.plot(time, xs[:, 0], 'b-o', markersize=3, lw=1.5)\n        ax1.axhline(0, color='k', lw=0.8, ls='--')\n        ax1.set_ylabel(\"Position $p$\")\n        ax1.set_title(f\"Optimal Trajectory  (J = {J:.3f})\", fontsize=10)\n        ax1.grid(True, alpha=0.3)\n\n        ax2 = fig.add_subplot(gs[1])\n        ax2.plot(time, xs[:, 1], 'g-o', markersize=3, lw=1.5)\n        ax2.axhline(0, color='k', lw=0.8, ls='--')\n        ax2.set_ylabel(\"Velocity $v$\")\n        ax2.grid(True, alpha=0.3)\n\n        ax3 = fig.add_subplot(gs[2])\n        ax3.step(time[:-1], us, 'r-', where='post', lw=1.5)\n        ax3.axhline(0, color='k', lw=0.8, ls='--')\n        ax3.set_ylabel(\"Control $u$\")\n        ax3.set_xlabel(\"Time (s)\")\n        ax3.grid(True, alpha=0.3)\n\n        fig.tight_layout()\n        return fig\n\napp = App(app_ui, server)"
+  },
+  {
+    "objectID": "lqr_simple.html#summary-1",
+    "href": "lqr_simple.html#summary-1",
     "title": "Robot Modeling Control",
     "section": "Summary",
-    "text": "Summary\nComputational complexity per iteration:\n\n\n\n\n\n\n\nStep\nCost\n\n\n\n\nBackward pass\n𝒪(T(n3+m3))\\mathcal{O}(T(n^3 + m^3)) — matrix inversions dominate\n\n\nForward pass (per line-search trial)\n𝒪(T⋅cost of f)\\mathcal{O}(T \\cdot \\text{cost of } f)\n\n\nIterations to convergence\nTypically 10–100 for smooth problems"
+    "text": "Summary\nBackward Riccati recursion — initialize PT=WfP_T = W_f; repeat for t=T−1,…,0t = T-1,\\dots,0:\nKt=(R+BTPt+1B)−1BTPt+1A,Pt=W+ATPt+1(A−BKt)K_t = (R + B^T P_{t+1} B)^{-1} B^T P_{t+1} A, \\qquad P_t = W + A^T P_{t+1}(A - BK_t)\nOptimal control at runtime: ut*=−Ktxtu_t^* = -K_t x_t\n\nTrade-offs to explore:\n\n\n\n\n\n\n\nChange\nEffect\n\n\n\n\nIncrease rr\nLess aggressive control, slower convergence\n\n\nIncrease wfw_f\nState forced closer to 0 at t=Tt = T\n\n\nIncrease TT\nSmoother trajectories, gains converge toward K∞K_\\infty\n\n\nLarge x0x_0\nCost JJ grows quadratically — gains unchanged\n\n\n\n\n\n\nSee lqr.qmd for the generalized formulation with augmented [𝐱t;𝐮t][\\mathbf{x}_t;\\mathbf{u}_t] cost matrices and the explicit Q-function, which extends to iLQR."
+  },
+  {
+    "objectID": "test_shinylive.html#interactive-demo-mass-spring-damper",
+    "href": "test_shinylive.html#interactive-demo-mass-spring-damper",
+    "title": "Robot Modeling Control",
+    "section": "Interactive Demo: Mass-Spring-Damper",
+    "text": "Interactive Demo: Mass-Spring-Damper\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 600\n\nfrom shiny import App, render, ui\nimport numpy as np\n\napp_ui = ui.page_fluid(\n    ui.h4(\"Damped Second-Order System Response\"),\n    ui.layout_sidebar(\n        ui.sidebar(\n            ui.input_slider(\"wn\", \"Natural frequency (rad/s)\", min=0.5, max=10.0, value=2.0, step=0.1),\n            ui.input_slider(\"zeta\", \"Damping ratio\", min=0.0, max=2.0, value=0.3, step=0.05),\n            ui.input_slider(\"tf\", \"Simulation time (s)\", min=1.0, max=20.0, value=10.0, step=0.5),\n        ),\n        ui.output_plot(\"response_plot\"),\n    ),\n)\n\ndef server(input, output, session):\n    @render.plot\n    def response_plot():\n        import matplotlib.pyplot as plt\n\n        wn = input.wn()\n        zeta = input.zeta()\n        tf = input.tf()\n        t = np.linspace(0, tf, 500)\n\n        if zeta &lt; 1.0:\n            wd = wn * np.sqrt(1 - zeta**2)\n            y = 1 - np.exp(-zeta * wn * t) * (\n                np.cos(wd * t) + (zeta * wn / wd) * np.sin(wd * t)\n            )\n            label = f\"Underdamped ($\\\\zeta$={zeta:.2f})\"\n        elif zeta == 1.0:\n            y = 1 - (1 + wn * t) * np.exp(-wn * t)\n            label = f\"Critically damped ($\\\\zeta$=1.00)\"\n        else:\n            s1 = -wn * (zeta - np.sqrt(zeta**2 - 1))\n            s2 = -wn * (zeta + np.sqrt(zeta**2 - 1))\n            y = 1 + (s1 * np.exp(s2 * t) - s2 * np.exp(s1 * t)) / (s2 - s1)\n            label = f\"Overdamped ($\\\\zeta$={zeta:.2f})\"\n\n        fig, ax = plt.subplots(figsize=(7, 4))\n        ax.plot(t, y, linewidth=2, label=label)\n        ax.axhline(y=1.0, color=\"gray\", linestyle=\"--\", alpha=0.5)\n        ax.set_xlabel(\"Time (s)\")\n        ax.set_ylabel(\"Step Response\")\n        ax.set_title(f\"$\\\\omega_n$={wn:.1f} rad/s, $\\\\zeta$={zeta:.2f}\")\n        ax.set_ylim(-0.1, 2.0)\n        ax.legend()\n        ax.grid(True, alpha=0.3)\n        fig.tight_layout()\n        return fig\n\napp = App(app_ui, server)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Robot Modeling Control",
+    "section": "",
+    "text": "This course covers methods for planning and executing the movement of mobile robots (navigation), robot arms (manipulation) and legs (locomotion).\nCourse github: poonawalalab/robotics-course"
   },
   {
     "objectID": "about.html",
