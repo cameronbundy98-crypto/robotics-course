@@ -30,7 +30,7 @@ data  = mujoco.MjData(model)
 #   j4 ∈ [-3.07, -0.30]   j5 ∈ [-2.90,  2.90]   j6 ∈ [-0.90,  0.90]
 #   j7 ∈ [-0.90,  0.90]
 q_target = np.array([-2.89, -0.4, 0.0, -1.8, 0.0, 1.4, 0.0])
-q_target = np.array([0.4  ,1.5  ,0.0 ,0.0  , 0.0, 0.0, 0.0 ])
+q_target = np.array([0.4  ,0.8  ,0.0 ,0.0  , 0.0, 0.0, 0.0 ])
 
 # ── Compute target end-effector position via forward kinematics ───────────────
 ee_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_SITE, "end_effector")
@@ -87,6 +87,7 @@ with mujoco.viewer.launch_passive(
 
             # Get current end-effector position
             ee_curr_pos = data.site_xpos[ee_id].copy()
+            print(" target: ", ee_target_pos ,". Actual: ", ee_curr_pos )
 
             # Draw both EE markers in the viewer overlay
             with viewer.lock():

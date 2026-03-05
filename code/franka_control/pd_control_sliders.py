@@ -124,6 +124,7 @@ with mujoco.viewer.launch_passive(
             mujoco.mj_step(model, data)
 
             ee_curr_pos = data.site_xpos[ee_id].copy()
+            print(" target: ", ee_target_pos ,". Actual: ", ee_curr_pos )
 
             with viewer.lock():
                 add_sphere(viewer.user_scn, 0, ee_curr_pos,   [0.0, 0.8, 1.0, 0.9])  # cyan

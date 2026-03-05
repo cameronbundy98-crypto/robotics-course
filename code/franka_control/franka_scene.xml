@@ -51,7 +51,7 @@
             <joint name="joint3" type="hinge" axis="0 0 1" range="-2.8973 2.8973" damping="1"/>
             <geom name="link3_geom" type="capsule" fromto="0 0 0 0.0 0 0.1" size="0.05" rgba="0.5 0.5 0.5 1" contype="1" conaffinity="1"/>
             <body name="link4" pos="0.0 0 0.2">
-              <joint name="joint4" type="hinge" axis="0 1 0" range="-3.0718 -0.3" damping="1"/>
+              <joint name="joint4" type="hinge" axis="0 1 0" range="-3.0718 3." damping="1"/>
               <geom name="link4_geom_a" type="capsule" fromto="0 0 0 0.0 0.0 0.2" size="0.05" rgba="0.1 0.1 0.0 1" contype="1" conaffinity="1"/>
               <body name="link5" pos="0.0 0.0 0.2">
                 <joint name="joint5" type="hinge" axis="0 0 1" range="-2.8973 2.8973" damping="1"/>
