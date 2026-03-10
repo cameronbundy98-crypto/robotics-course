@@ -1,14 +1,17 @@
 """
 Franka Joint-Space Trajectory Tracking
 ========================================
-A PD controller tracks a periodic sinusoidal reference in joint space.
+A controller tracks a periodic sinusoidal reference in joint space.
 A live plot window (spawned as a subprocess) shows actual vs reference
 joint angles over a moving time window.
 
 Usage:
-    mjpython trajectory_tracking.py
+    mjpython trajectory_tracking.py pd
+    mjpython trajectory_tracking.py pdplus
+    mjpython trajectory_tracking.py invdyn
 """
 
+import argparse
 import json
 import os
 import shutil
@@ -19,6 +22,14 @@ import time
 import mujoco
 import mujoco.viewer
 import numpy as np
+
+# ── Controller selection ──────────────────────────────────────────────────────
+parser = argparse.ArgumentParser()
+parser.add_argument("controller", choices=["pd", "pdplus", "invdyn"],
+                    help="pd: PD only | pdplus: PD + gravity | invdyn: inverse dynamics")
+args = parser.parse_args()
+CONTROLLER = args.controller
+print(f"Controller: {CONTROLLER}")
 
 # ── Model ─────────────────────────────────────────────────────────────────────
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -123,14 +134,14 @@ with mujoco.viewer.launch_passive(
             data.qvel = qd.copy() # restore velocities
             Gq = data.qfrc_bias # = C(q,qdot)+ G = G when qdot=0
 
-            # PD torques
-            tau = Kp * (q_ref - q) + Kd *(qd_ref - qd) 
-            # PD+ torques
-            tau = Kp * (q_ref - q) + Kd *(qd_ref - qd) +Gq 
-            # Inverse Dynamics Control
-            data.qacc = Kp * (q_ref - q) + Kd *(qd_ref - qd) + qdd
-            mujoco.mj_inverse(model, data)
-            tau=data.qfrc_inverse
+            if CONTROLLER == "pd":
+                tau = Kp * (q_ref - q) + Kd * (qd_ref - qd)
+            elif CONTROLLER == "pdplus":
+                tau = Kp * (q_ref - q) + Kd * (qd_ref - qd) + Gq
+            else:  # invdyn
+                data.qacc = Kp * (q_ref - q) + Kd * (qd_ref - qd) + qdd
+                mujoco.mj_inverse(model, data)
+                tau = data.qfrc_inverse
 
             data.ctrl[:] = np.clip(tau, ctrl_limits[:, 0], ctrl_limits[:, 1])
             mujoco.mj_step(model, data)
