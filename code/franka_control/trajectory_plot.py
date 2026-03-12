@@ -20,10 +20,11 @@ WINDOW     = 10.0   # seconds of history visible
 MAXPOINTS  = 600    # deque capacity (~30 s at 20 Hz)
 
 # ── Shared data (written by reader thread, read by plot thread) ────────────────
-times = deque(maxlen=MAXPOINTS)
-q_act = [deque(maxlen=MAXPOINTS) for _ in range(N_JOINTS)]
-q_ref = [deque(maxlen=MAXPOINTS) for _ in range(N_JOINTS)]
+times  = deque(maxlen=MAXPOINTS)
+q_act  = [deque(maxlen=MAXPOINTS) for _ in range(N_JOINTS)]
+q_ref  = [deque(maxlen=MAXPOINTS) for _ in range(N_JOINTS)]
 q_norm = deque(maxlen=MAXPOINTS)
+_lock  = threading.Lock()
 stdin_open = True
 
 def _read_stdin():
@@ -31,11 +32,12 @@ def _read_stdin():
     for line in sys.stdin:
         try:
             d = json.loads(line)
-            times.append(d["t"])
-            for i in range(N_JOINTS):
-                q_act[i].append(d["q"][i])
-                q_ref[i].append(d["qr"][i])
-            q_norm.append(np.linalg.norm(np.array(d["q"]) - np.array(d["qr"])))
+            with _lock:
+                times.append(d["t"])
+                for i in range(N_JOINTS):
+                    q_act[i].append(d["q"][i])
+                    q_ref[i].append(d["qr"][i])
+                q_norm.append(np.linalg.norm(np.array(d["q"]) - np.array(d["qr"])))
         except (json.JSONDecodeError, KeyError):
             pass
     stdin_open = False
@@ -93,15 +95,21 @@ try:
             plt.pause(0.05)
             continue
 
-        t_arr  = np.array(times)
+        with _lock:
+            t_snap  = list(times)
+            qa_snap = [list(q_act[i]) for i in range(N_JOINTS)]
+            qr_snap = [list(q_ref[i]) for i in range(N_JOINTS)]
+            qn_snap = list(q_norm)
+
+        t_arr  = np.array(t_snap)
         t_now  = t_arr[-1]
         t_min  = t_now - WINDOW
         mask   = t_arr >= t_min
         t_win  = t_arr[mask]
 
         for i in range(N_JOINTS):
-            a = np.array(q_act[i])[mask]
-            r = np.array(q_ref[i])[mask]
+            a = np.array(qa_snap[i])[mask]
+            r = np.array(qr_snap[i])[mask]
             lines_act[i].set_data(t_win, a)
             lines_ref[i].set_data(t_win, r)
             axes[i].set_xlim(t_min, t_now + 0.2)
@@ -112,7 +120,7 @@ try:
                 pad = max(0.05, 0.12 * (hi - lo))
                 axes[i].set_ylim(lo - pad, hi + pad)
 
-        a = np.array(q_norm)[mask]
+        a = np.array(qn_snap)[mask]
         lines_act[N_JOINTS].set_data(t_win, a)
         axes[N_JOINTS].set_xlim(t_min, t_now + 0.2)
         if len(a):

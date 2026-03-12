@@ -9,6 +9,7 @@ Usage:
     mjpython trajectory_tracking.py pd
     mjpython trajectory_tracking.py pdplus
     mjpython trajectory_tracking.py invdyn
+    mjpython trajectory_tracking.py pid
 """
 
 import argparse
@@ -25,8 +26,8 @@ import numpy as np
 
 # ── Controller selection ──────────────────────────────────────────────────────
 parser = argparse.ArgumentParser()
-parser.add_argument("controller", choices=["pd", "pdplus", "invdyn"],
-                    help="pd: PD only | pdplus: PD + gravity | invdyn: inverse dynamics")
+parser.add_argument("controller", choices=["pd", "pdplus", "invdyn", "pid"],
+                    help="pd: PD only | pdplus: PD + gravity | invdyn: inverse dynamics | pid: PD + integral")
 args = parser.parse_args()
 CONTROLLER = args.controller
 print(f"Controller: {CONTROLLER}")
@@ -39,39 +40,29 @@ data_fk = mujoco.MjData(model)
 
 ee_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_SITE, "end_effector")
 
-# ── PD gains ──────────────────────────────────────────────────────────────────
+# ── PD / PID gains ────────────────────────────────────────────────────────────
 Kp = np.array([200.0, 200.0, 200.0, 200.0,  50.0,  50.0,  50.0])*0.5
 Kd = np.array([ 30.0,  30.0,  30.0,  30.0,  10.0,  10.0,  10.0])*0.5
+Ki = 1.00*np.array([  5.0,   5.0,   5.0,   5.0,   2.0,   2.0,   2.0])
 ctrl_limits = model.actuator_ctrlrange.copy()
 
-# ── Reference trajectory ───────────────────────────────────────────────────────
-# Sinusoidal trajectory; joint 4 is offset to keep the elbow bent.
+# ── Reference trajectory parameters ───────────────────────────────────────────
+#                j1     j2     j3     j4     j5     j6     j7
+A    = np.array([0.80,  0.40,  0.50,  0.80,  0.50,  0.30,  0.50])  # amplitude (rad)
+W    = np.array([2.50,  1.50,  2.00,  1.25,  3.00,  2.00,  1.75])  # angular frequency (rad/s)
+W    = np.array([2.50,  1.50,  2.00,  1.25,  3.00,  2.00,  1.75])  # angular frequency (rad/s)
+PHI  = np.array([0.00,  0.00,  0.50,  0.00,  1.00,  0.30,  0.70])  # phase (rad)
+BIAS = np.array([0.00,  0.00,  0.00, -1.57,  0.00,  0.00,  0.00])  # constant offset (rad)
+
+# Sinusoidal trajectory: q_i(t) = A_i*sin(W_i*t + PHI_i) + BIAS_i
+# Derivatives follow analytically; joint 4 is offset to keep the elbow bent.
 def reference(t):
-    return np.array([
-        0.8  * np.sin(0.50 * 5 * t),
-        0.4  * np.sin(0.30 * 5 * t),
-        0.5  * np.sin(0.40 * 5 * t + 0.50),
-        0.8  * np.sin(0.25 * 5 * t)-1.5,   # stays in [-2.3, -0.7]
-        0.5  * np.sin(0.60 * 5 * t + 1.00),
-        0.3  * np.sin(0.40 * 5 * t + 0.30),
-        0.5  * np.sin(0.35 * 5 * t + 0.70),
-    ]), np.array([
-        0.8  * 0.50 * 5 * np.cos(0.50 * 5 * t),
-        0.4  * 0.30 * 5 * np.cos(0.30 * 5 * t),
-        0.5  * 0.40 * 5 * np.cos(0.40 * 5 * t + 0.50),
-        0.8  * 0.25 * 5 * np.cos(0.25 * 5 * t),   # stays in [-2.3, -0.7]
-        0.5  * 0.60 * 5 * np.cos(0.60 * 5 * t + 1.00),
-        0.3  * 0.40 * 5 * np.cos(0.40 * 5 * t + 0.30),
-        0.5  * 0.35 * 5 * np.cos(0.35 * 5 * t + 0.70),
-    ]), np.array([
-        - 0.8  * 0.50 * 5 * 0.50 * 5 * np.sin(0.50 * 5 * t),
-        - 0.4  * 0.30 * 5 * 0.30 * 5 * np.sin(0.30 * 5 * t),
-        - 0.5  * 0.40 * 5 * 0.40 * 5 * np.sin(0.40 * 5 * t + 0.50),
-        - 0.8  * 0.25 * 5 * 0.25 * 5 * np.sin(0.25 * 5 * t),   # stays in [-2.3, -0.7]
-        - 0.5  * 0.60 * 5 * 0.60 * 5 * np.sin(0.60 * 5 * t + 1.00),
-        - 0.3  * 0.40 * 5 * 0.40 * 5 * np.sin(0.40 * 5 * t + 0.30),
-        - 0.5  * 0.35 * 5 * 0.35 * 5 * np.sin(0.35 * 5 * t + 0.70),
-    ])
+    theta = W * t + PHI
+    return (
+        A * np.sin(theta) + BIAS,
+        A * W * np.cos(theta),
+       -A * W**2 * np.sin(theta),
+    )
 
 # ── Spawn live-plot subprocess ─────────────────────────────────────────────────
 _bin = os.path.dirname(os.path.abspath(sys.executable))
@@ -115,8 +106,9 @@ with mujoco.viewer.launch_passive(
     show_right_ui=False,
 ) as viewer:
     try:
-        step  = 0
-        t_sim = 0.0
+        step        = 0
+        t_sim       = 0.0
+        integral_e  = np.zeros(7)   # accumulated position error for PID
 
         while viewer.is_running():
             if plot_proc.poll() is not None:   # plot window was closed
@@ -138,6 +130,9 @@ with mujoco.viewer.launch_passive(
                 tau = Kp * (q_ref - q) + Kd * (qd_ref - qd)
             elif CONTROLLER == "pdplus":
                 tau = Kp * (q_ref - q) + Kd * (qd_ref - qd) + Gq
+            elif CONTROLLER == "pid":
+                integral_e += (q_ref - q) * dt
+                tau = Kp * (q_ref - q) + Ki * integral_e + Kd * (qd_ref - qd)
             else:  # invdyn
                 data.qacc = Kp * (q_ref - q) + Kd * (qd_ref - qd) + qdd
                 mujoco.mj_inverse(model, data)
