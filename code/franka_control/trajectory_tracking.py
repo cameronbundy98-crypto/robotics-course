@@ -18,6 +18,7 @@ import os
 import shutil
 import subprocess
 import sys
+import threading
 import time
 
 import mujoco
@@ -54,14 +55,23 @@ W    = np.array([2.50,  1.50,  2.00,  1.25,  3.00,  2.00,  1.75])  # angular fre
 PHI  = np.array([0.00,  0.00,  0.50,  0.00,  1.00,  0.30,  0.70])  # phase (rad)
 BIAS = np.array([0.00,  0.00,  0.00, -1.57,  0.00,  0.00,  0.00])  # constant offset (rad)
 
+# ── Live parameters (updated by traj_param_ui.py slider subprocess) ───────────
+_traj_lock = threading.Lock()
+_live = {"A": A.copy(), "speed": 1.0, "bias4": float(BIAS[3])}
+
 # Sinusoidal trajectory: q_i(t) = A_i*sin(W_i*t + PHI_i) + BIAS_i
 # Derivatives follow analytically; joint 4 is offset to keep the elbow bent.
 def reference(t):
-    theta = W * t + PHI
+    with _traj_lock:
+        A_l = _live["A"].copy()
+        W_l = W * _live["speed"]
+        B_l = BIAS.copy()
+        B_l[3] = _live["bias4"]
+    theta = W_l * t + PHI
     return (
-        A * np.sin(theta) + BIAS,
-        A * W * np.cos(theta),
-       -A * W**2 * np.sin(theta),
+        A_l * np.sin(theta) + B_l,
+        A_l * W_l * np.cos(theta),
+       -A_l * W_l**2 * np.sin(theta),
     )
 
 # ── Spawn live-plot subprocess ─────────────────────────────────────────────────
@@ -79,6 +89,26 @@ plot_proc = subprocess.Popen(
     text=True,
     bufsize=1,
 )
+
+param_proc = subprocess.Popen(
+    [_python3, os.path.join(SCRIPT_DIR, "traj_param_ui.py")],
+    stdout=subprocess.PIPE,
+    text=True,
+    bufsize=1,
+)
+
+def _read_params():
+    for line in param_proc.stdout:
+        try:
+            d = json.loads(line)
+            with _traj_lock:
+                _live["speed"] = d["speed"]
+                _live["A"][:] = d["A"]
+                _live["bias4"] = d["bias4"]
+        except (json.JSONDecodeError, KeyError, ValueError):
+            pass
+
+threading.Thread(target=_read_params, daemon=True).start()
 
 # ── Viewer overlay helpers ─────────────────────────────────────────────────────
 def add_sphere(scene, slot, pos, rgba, radius=0.03):
@@ -173,3 +203,4 @@ with mujoco.viewer.launch_passive(
         pass
     finally:
         plot_proc.terminate()
+        param_proc.terminate()

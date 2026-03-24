@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
+
+  <meta name="author" content="Hasan A. Poonawala">
+  <title>Robot Modeling Control – 3D Orientations</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-bbe7401fe57d4b791b917637bb662036.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="d-orientations" class="slide level2 center smaller">
+<h2>3D Orientations</h2>
+<hr>
+<h3 id="rotation-matrices-euler-angles-quaternions">Rotation Matrices · Euler Angles · Quaternions</h3>
+<p><br></p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[120, 60]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: flex-start;">
+<p><strong>Instructor</strong>: Hasan A. Poonawala<br> <br> Mechanical and Aerospace Engineering <br> University of Kentucky, Lexington, KY, USA</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<p><strong>Topics</strong>: <br> Rotation Matrices (SO(3)) <br> Euler Angles <br> Quaternions <br> Comparison &amp; Practical Notes <br></p>
+</div>
+</div>
+</div>
+</section>
+<section>
+<section id="rotation-matrices" class="title-slide slide level1 center">
+<h1>Rotation Matrices</h1>
+
+</section>
+<section id="what-is-an-orientation" class="slide level2 smaller">
+<h2>What Is an Orientation?</h2>
+<p>A <strong>coordinate frame</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>B</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{B\}</annotation></semantics></math> attached to a rigid body is described by three orthonormal axes <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐛</mi><mn>1</mn></msub><mo>,</mo><msub><mi>𝐛</mi><mn>2</mn></msub><mo>,</mo><msub><mi>𝐛</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">\mathbf{b}_1, \mathbf{b}_2, \mathbf{b}_3</annotation></semantics></math> expressed in a fixed world frame <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>W</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{W\}</annotation></semantics></math>.</p>
+<div class="fragment">
+<p>The <strong>rotation matrix</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mi>W</mi></msup><msub><mi>R</mi><mi>B</mi></msub><mo>∈</mo><msup><mi>ℝ</mi><mrow><mn>3</mn><mo>×</mo><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">{}^W R_B \in \mathbb{R}^{3\times 3}</annotation></semantics></math> stacks those axes as columns:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mi>W</mi></msup><msub><mi>R</mi><mi>B</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mo stretchy="false" form="prefix">|</mo></mtd><mtd columnalign="center" style="text-align: center"><mo stretchy="false" form="prefix">|</mo></mtd><mtd columnalign="center" style="text-align: center"><mo stretchy="false" form="prefix">|</mo></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>𝐛</mi><mn>1</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>𝐛</mi><mn>2</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>𝐛</mi><mn>3</mn></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mo stretchy="false" form="prefix">|</mo></mtd><mtd columnalign="center" style="text-align: center"><mo stretchy="false" form="prefix">|</mo></mtd><mtd columnalign="center" style="text-align: center"><mo stretchy="false" form="prefix">|</mo></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">{}^W R_B = \begin{bmatrix} | &amp; | &amp; | \\ \mathbf{b}_1 &amp; \mathbf{b}_2 &amp; \mathbf{b}_3 \\ | &amp; | &amp; | \end{bmatrix}</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Each column is a unit vector of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>B</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{B\}</annotation></semantics></math> written in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>W</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{W\}</annotation></semantics></math> coordinates. Reading columns gives “where the body axes point.”</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-special-orthogonal-group-so3" class="slide level2 smaller">
+<h2>The Special Orthogonal Group SO(3)</h2>
+<p>A rotation matrix satisfies two conditions:</p>
+<ol type="1">
+<li><strong>Orthonormality</strong> — <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mi>T</mi></msup><mi>R</mi><mo>=</mo><msub><mi>I</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">R^T R = I_3</annotation></semantics></math>, equivalently <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo>=</mo><msup><mi>R</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">R^{-1} = R^T</annotation></semantics></math></li>
+<li><strong>Proper rotation</strong> — <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>det</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>R</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>+</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">\det(R) = +1</annotation></semantics></math></li>
+</ol>
+<div class="fragment">
+<p>The set of all such matrices forms the <strong>Lie group SO(3)</strong>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">O</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">{</mo><mi>R</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mn>3</mn><mo>×</mo><mn>3</mn></mrow></msup><mo>∣</mo><msup><mi>R</mi><mi>T</mi></msup><mi>R</mi><mo>=</mo><mi>I</mi><mo>,</mo><mspace width="0.222em"></mspace><mo>det</mo><mi>R</mi><mo>=</mo><mn>1</mn><mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\mathrm{SO}(3) = \bigl\{R \in \mathbb{R}^{3\times 3} \mid R^T R = I,\ \det R = 1\bigr\}</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>SO(3) is a group: closed under multiplication, has identity <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>, every element has an inverse <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo>=</mo><msup><mi>R</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">R^{-1} = R^T</annotation></semantics></math>, and multiplication is associative.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="basic-rotations" class="slide level2 smaller">
+<h2>Basic Rotations</h2>
+<p>Rotation by angle <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> about the <strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>-axis</strong>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>x</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mo>cos</mo><mi>θ</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>−</mi><mo>sin</mo><mi>θ</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mo>sin</mo><mi>θ</mi></mtd><mtd columnalign="center" style="text-align: center"><mo>cos</mo><mi>θ</mi></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">R_x(\theta) = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \cos\theta &amp; -\sin\theta \\ 0 &amp; \sin\theta &amp; \cos\theta \end{bmatrix}</annotation></semantics></math></p>
+<div class="fragment">
+<p>About the <strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>-axis</strong>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>y</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mo>cos</mo><mi>θ</mi></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mo>sin</mo><mi>θ</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>−</mi><mo>sin</mo><mi>θ</mi></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mo>cos</mo><mi>θ</mi></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">R_y(\theta) = \begin{bmatrix} \cos\theta &amp; 0 &amp; \sin\theta \\ 0 &amp; 1 &amp; 0 \\ -\sin\theta &amp; 0 &amp; \cos\theta \end{bmatrix}</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<p>About the <strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>-axis</strong>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>z</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mo>cos</mo><mi>θ</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>−</mi><mo>sin</mo><mi>θ</mi></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mo>sin</mo><mi>θ</mi></mtd><mtd columnalign="center" style="text-align: center"><mo>cos</mo><mi>θ</mi></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">R_z(\theta) = \begin{bmatrix} \cos\theta &amp; -\sin\theta &amp; 0 \\ \sin\theta &amp; \cos\theta &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}</annotation></semantics></math></p>
+</div>
+</section>
+<section id="rotating-vectors" class="slide level2 smaller">
+<h2>Rotating Vectors</h2>
+<p>If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐩</mi><mi>B</mi></msup><annotation encoding="application/x-tex">\mathbf{p}^B</annotation></semantics></math> are the coordinates of a point in frame <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>B</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{B\}</annotation></semantics></math>, its coordinates in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>W</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{W\}</annotation></semantics></math> are:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐩</mi><mi>W</mi></msup><mo>=</mo><msup><mrow></mrow><mi>W</mi></msup><msub><mi>R</mi><mi>B</mi></msub><mspace width="0.167em"></mspace><msup><mi>𝐩</mi><mi>B</mi></msup></mrow><annotation encoding="application/x-tex">\mathbf{p}^W = {}^W R_B\, \mathbf{p}^B</annotation></semantics></math></p>
+<div class="fragment">
+<p>To go the other direction — from world to body — use <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo>=</mo><msup><mi>R</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">R^{-1} = R^T</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐩</mi><mi>B</mi></msup><mo>=</mo><msup><mrow></mrow><mi>W</mi></msup><msubsup><mi>R</mi><mi>B</mi><mi>T</mi></msubsup><mspace width="0.167em"></mspace><msup><mi>𝐩</mi><mi>W</mi></msup></mrow><annotation encoding="application/x-tex">\mathbf{p}^B = {}^W R_B^T\, \mathbf{p}^W</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><strong>Active vs.&nbsp;passive interpretation.</strong> The same matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> can either rotate a vector (active) or change the frame in which it is expressed (passive). We use the passive interpretation: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> maps body coordinates to world coordinates.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="composing-rotations" class="slide level2 smaller">
+<h2>Composing Rotations</h2>
+<p>Two sequential rotations compose by <strong>matrix multiplication</strong>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mi>W</mi></msup><msub><mi>R</mi><mi>C</mi></msub><mo>=</mo><msup><mrow></mrow><mi>W</mi></msup><msub><mi>R</mi><mi>B</mi></msub><mo>⋅</mo><msup><mrow></mrow><mi>B</mi></msup><msub><mi>R</mi><mi>C</mi></msub></mrow><annotation encoding="application/x-tex">{}^W R_C = {}^W R_B \cdot {}^B R_C</annotation></semantics></math></p>
+<div class="fragment">
+<p>Order matters — rotation is <strong>not commutative</strong>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>x</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msub><mi>R</mi><mi>z</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>β</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>≠</mo><msub><mi>R</mi><mi>z</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>β</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msub><mi>R</mi><mi>x</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="1.0em"></mspace><mtext mathvariant="normal">in general</mtext></mrow><annotation encoding="application/x-tex">R_x(\alpha)\,R_z(\beta) \neq R_z(\beta)\,R_x(\alpha) \quad \text{in general}</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Read the composition <strong>right to left</strong>: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mi>W</mi></msup><msub><mi>R</mi><mi>C</mi></msub></mrow><annotation encoding="application/x-tex">{}^W R_C</annotation></semantics></math> first applies <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mi>B</mi></msup><msub><mi>R</mi><mi>C</mi></msub></mrow><annotation encoding="application/x-tex">{}^B R_C</annotation></semantics></math> (body → intermediate), then <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mi>W</mi></msup><msub><mi>R</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">{}^W R_B</annotation></semantics></math> (intermediate → world).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="properties-summary" class="slide level2 smaller">
+<h2>Properties Summary</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Expression</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Inverse = transpose</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo>=</mo><msup><mi>R</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">R^{-1} = R^T</annotation></semantics></math></td>
+</tr>
+<tr class="even">
+<td>Determinant</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>det</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>R</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>+</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">\det(R) = +1</annotation></semantics></math></td>
+</tr>
+<tr class="odd">
+<td>Columns are orthonormal</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mi>T</mi></msup><mi>R</mi><mo>=</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">R^T R = I</annotation></semantics></math></td>
+</tr>
+<tr class="even">
+<td>Composition</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>A</mi><mi>C</mi></mrow></msub><mo>=</mo><msub><mi>R</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><msub><mi>R</mi><mrow><mi>B</mi><mi>C</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{AC} = R_{AB} R_{BC}</annotation></semantics></math></td>
+</tr>
+<tr class="odd">
+<td>Identity</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><msub><mi>I</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">R = I_3</annotation></semantics></math> (no rotation)</td>
+</tr>
+<tr class="even">
+<td>9 entries, 3 DOF</td>
+<td>6 orthonormality constraints</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Rotation matrices have <strong>9 numbers</strong> but only <strong>3 degrees of freedom</strong>. The 6 orthonormality constraints reduce the effective dimension.</p>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="euler-angles" class="title-slide slide level1 center">
+<h1>Euler Angles</h1>
+
+</section>
+<section id="eulers-theorem" class="slide level2 smaller">
+<h2>Euler’s Theorem</h2>
+<blockquote>
+<p><strong>Euler’s Rotation Theorem:</strong> Any orientation of a rigid body can be achieved by a single rotation about some axis through the origin.</p>
+</blockquote>
+<div class="fragment">
+<p>A practical consequence: we can parameterize any <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>∈</mo><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">O</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">R \in \mathrm{SO}(3)</annotation></semantics></math> with just <strong>three numbers</strong>.</p>
+</div>
+<div class="fragment">
+<p><strong>Euler angles</strong> do this by decomposing <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> into three successive rotations about (body or world) axes:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><msub><mi>R</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msub><mi>R</mi><mi>j</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>β</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msub><mi>R</mi><mi>k</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>γ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mi>i</mi><mo>,</mo><mi>j</mi><mo>,</mo><mi>k</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>z</mi><mo stretchy="false" form="postfix">}</mo><mo>,</mo><mspace width="0.222em"></mspace><mi>i</mi><mo>≠</mo><mi>j</mi><mo>≠</mo><mi>i</mi></mrow><annotation encoding="application/x-tex">R = R_{i}(\alpha)\, R_{j}(\beta)\, R_{k}(\gamma), \quad i,j,k \in \{x, y, z\},\ i \neq j \neq i</annotation></semantics></math></p>
+</div>
+</section>
+<section id="zyx-convention-yawpitchroll" class="slide level2 smaller">
+<h2>ZYX Convention (Yaw–Pitch–Roll)</h2>
+<p>The most common convention in aerospace and robotics:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><msub><mi>R</mi><mi>z</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>ψ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msub><mi>R</mi><mi>y</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msub><mi>R</mi><mi>x</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>ϕ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">R = R_z(\psi)\, R_y(\theta)\, R_x(\phi)</annotation></semantics></math></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Angle</th>
+<th>Symbol</th>
+<th>Rotation Axis</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1st</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ψ</mi><annotation encoding="application/x-tex">\psi</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math></td>
+<td>Yaw</td>
+</tr>
+<tr class="even">
+<td>2nd</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math></td>
+<td>Pitch</td>
+</tr>
+<tr class="odd">
+<td>3rd</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math></td>
+<td>Roll</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p>Applied right to left: first roll about <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>, then pitch about (new) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>, then yaw about (new) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>.</p>
+</div>
+<div class="fragment">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>This is an <strong>intrinsic</strong> sequence — each rotation is about the <strong>body’s</strong> current axis. Equivalently, the same result is obtained by <strong>extrinsic</strong> rotations in the reversed order: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>x</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>ϕ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">R_x(\phi)</annotation></semantics></math> then <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>y</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">R_y(\theta)</annotation></semantics></math> then <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>z</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>ψ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">R_z(\psi)</annotation></semantics></math> about <strong>fixed</strong> world axes.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="expanded-zyx-matrix" class="slide level2 smaller">
+<h2>Expanded ZYX Matrix</h2>
+<p>Multiplying out <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>z</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>ψ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msub><mi>R</mi><mi>y</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msub><mi>R</mi><mi>x</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>ϕ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">R_z(\psi)\,R_y(\theta)\,R_x(\phi)</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>c</mi><mi>ψ</mi></msub><msub><mi>c</mi><mi>θ</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>c</mi><mi>ψ</mi></msub><msub><mi>s</mi><mi>θ</mi></msub><msub><mi>s</mi><mi>ϕ</mi></msub><mo>−</mo><msub><mi>s</mi><mi>ψ</mi></msub><msub><mi>c</mi><mi>ϕ</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>c</mi><mi>ψ</mi></msub><msub><mi>s</mi><mi>θ</mi></msub><msub><mi>c</mi><mi>ϕ</mi></msub><mo>+</mo><msub><mi>s</mi><mi>ψ</mi></msub><msub><mi>s</mi><mi>ϕ</mi></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>s</mi><mi>ψ</mi></msub><msub><mi>c</mi><mi>θ</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>s</mi><mi>ψ</mi></msub><msub><mi>s</mi><mi>θ</mi></msub><msub><mi>s</mi><mi>ϕ</mi></msub><mo>+</mo><msub><mi>c</mi><mi>ψ</mi></msub><msub><mi>c</mi><mi>ϕ</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>s</mi><mi>ψ</mi></msub><msub><mi>s</mi><mi>θ</mi></msub><msub><mi>c</mi><mi>ϕ</mi></msub><mo>−</mo><msub><mi>c</mi><mi>ψ</mi></msub><msub><mi>s</mi><mi>ϕ</mi></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>−</mi><msub><mi>s</mi><mi>θ</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>c</mi><mi>θ</mi></msub><msub><mi>s</mi><mi>ϕ</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>c</mi><mi>θ</mi></msub><msub><mi>c</mi><mi>ϕ</mi></msub></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">R = \begin{bmatrix}
+c_\psi c_\theta &amp; c_\psi s_\theta s_\phi - s_\psi c_\phi &amp; c_\psi s_\theta c_\phi + s_\psi s_\phi \\
+s_\psi c_\theta &amp; s_\psi s_\theta s_\phi + c_\psi c_\phi &amp; s_\psi s_\theta c_\phi - c_\psi s_\phi \\
+-s_\theta        &amp; c_\theta s_\phi                         &amp; c_\theta c_\phi
+\end{bmatrix}</annotation></semantics></math></p>
+<p>where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mi>α</mi></msub><mo>≡</mo><mo>cos</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">c_\alpha \equiv \cos\alpha</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mi>α</mi></msub><mo>≡</mo><mo>sin</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">s_\alpha \equiv \sin\alpha</annotation></semantics></math>.</p>
+<div class="fragment">
+<p><strong>Extracting angles</strong> from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> (when <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>cos</mo><mi>θ</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\cos\theta \neq 0</annotation></semantics></math>):</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mo>arcsin</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><msub><mi>R</mi><mn>31</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mi>ϕ</mi><mo>=</mo><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">n</mi><mn mathvariant="normal">2</mn></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>R</mi><mn>32</mn></msub><mo>,</mo><msub><mi>R</mi><mn>33</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mi>ψ</mi><mo>=</mo><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">n</mi><mn mathvariant="normal">2</mn></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>R</mi><mn>21</mn></msub><mo>,</mo><msub><mi>R</mi><mn>11</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\theta = \arcsin(-R_{31}), \quad \phi = \mathrm{atan2}(R_{32}, R_{33}), \quad \psi = \mathrm{atan2}(R_{21}, R_{11})</annotation></semantics></math></p>
+</div>
+</section>
+<section id="gimbal-lock" class="slide level2 smaller">
+<h2>Gimbal Lock</h2>
+<p>When <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mi>±</mi><mn>90</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">\theta = \pm 90°</annotation></semantics></math> (pitch straight up or down), the matrix simplifies and <strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ψ</mi><annotation encoding="application/x-tex">\psi</annotation></semantics></math> become indistinguishable</strong> — one degree of freedom is lost.</p>
+<div class="fragment">
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><strong>Gimbal lock</strong> is not a physical constraint — the body can still rotate freely. It is a <strong>singularity of the parameterization</strong>: infinitely many <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>ϕ</mi><mo>,</mo><mi>ψ</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\phi, \psi)</annotation></semantics></math> pairs map to the same <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> when <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mi>±</mi><mn>90</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">\theta = \pm 90°</annotation></semantics></math>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Practical consequences:</p>
+<ul>
+<li>Numerical instability near <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mi>±</mi><mn>90</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">\theta = \pm 90°</annotation></semantics></math></li>
+<li>Cannot smoothly interpolate through singularity</li>
+<li>Discontinuous angle extraction</li>
+</ul>
+</div>
+</section>
+<section id="euler-angle-pros-and-cons" class="slide level2 smaller">
+<h2>Euler Angle Pros and Cons</h2>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[50,50]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><strong>Advantages</strong></p>
+<ul>
+<li>Minimal — only 3 numbers</li>
+<li>Intuitive for human interpretation</li>
+<li>Easy to specify end-effector poses</li>
+<li>Singularity-free away from gimbal lock</li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><strong>Disadvantages</strong></p>
+<ul>
+<li>Gimbal lock at certain configurations</li>
+<li>Many conventions (12+ in use)</li>
+<li>Not unique (multiple angle sets → same <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>)</li>
+<li>Poor for interpolation near singularity</li>
+<li>Velocity kinematics require a Jacobian</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="quaternions" class="title-slide slide level1 center">
+<h1>Quaternions</h1>
+
+</section>
+<section id="motivation" class="slide level2 smaller">
+<h2>Motivation</h2>
+<p>Can we find a <strong>compact, singularity-free</strong> representation?</p>
+<div class="fragment">
+<p><strong>Axis-angle</strong> representation: any rotation is a rotation by angle <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> about unit axis <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>u</mi><mi>x</mi></msub><mo>,</mo><msub><mi>u</mi><mi>y</mi></msub><mo>,</mo><msub><mi>u</mi><mi>z</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">\hat{\mathbf{u}} = (u_x, u_y, u_z)^T</annotation></semantics></math>, giving the Rodrigues formula:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mi>I</mi><mo>+</mo><mo>sin</mo><mi>θ</mi><mspace width="0.167em"></mspace><msub><mrow><mo stretchy="true" form="prefix">[</mo><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo></msub><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mo>cos</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msubsup><mrow><mo stretchy="true" form="prefix">[</mo><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">R = I + \sin\theta\, [\hat{\mathbf{u}}]_\times + (1-\cos\theta)\, [\hat{\mathbf{u}}]_\times^2</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<p>where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mrow><mo stretchy="true" form="prefix">[</mo><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo></msub><annotation encoding="application/x-tex">[\hat{\mathbf{u}}]_\times</annotation></semantics></math> is the skew-symmetric cross-product matrix:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mo stretchy="true" form="prefix">[</mo><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mi>−</mi><msub><mi>u</mi><mi>z</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>u</mi><mi>y</mi></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>u</mi><mi>z</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mi>−</mi><msub><mi>u</mi><mi>x</mi></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>−</mi><msub><mi>u</mi><mi>y</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>u</mi><mi>x</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">[\hat{\mathbf{u}}]_\times = \begin{bmatrix} 0 &amp; -u_z &amp; u_y \\ u_z &amp; 0 &amp; -u_x \\ -u_y &amp; u_x &amp; 0 \end{bmatrix}</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Axis-angle still has a singularity at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\theta = 0</annotation></semantics></math> (axis is undefined). Quaternions resolve this by encoding both axis and angle algebraically.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="unit-quaternions" class="slide level2 smaller">
+<h2>Unit Quaternions</h2>
+<p>A <strong>quaternion</strong> is a 4-tuple:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐪</mi><mo>=</mo><mi>w</mi><mo>+</mo><mi>x</mi><mspace width="0.167em"></mspace><mi>𝐢</mi><mo>+</mo><mi>y</mi><mspace width="0.167em"></mspace><mi>𝐣</mi><mo>+</mo><mi>z</mi><mspace width="0.167em"></mspace><mi>𝐤</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>w</mi><mo>,</mo><mspace width="0.167em"></mspace><mi>𝐯</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mi>𝐯</mi><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">\mathbf{q} = w + x\,\mathbf{i} + y\,\mathbf{j} + z\,\mathbf{k} = (w,\, \mathbf{v}), \quad \mathbf{v} = (x,y,z)^T</annotation></semantics></math></p>
+<div class="fragment">
+<p>For rotations we use <strong>unit quaternions</strong> — those with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><mi>𝐪</mi><mo stretchy="false" form="postfix">∥</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\|\mathbf{q}\| = 1</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>w</mi><mn>2</mn></msup><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>+</mo><msup><mi>z</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">w^2 + x^2 + y^2 + z^2 = 1</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<p><strong>Encoding axis-angle</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mo>,</mo><mi>θ</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\hat{\mathbf{u}}, \theta)</annotation></semantics></math> as a quaternion:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐪</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>cos</mo><mfrac><mi>θ</mi><mn>2</mn></mfrac><mo>,</mo><mspace width="0.278em"></mspace><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mo>sin</mo><mfrac><mi>θ</mi><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{q} = \left(\cos\frac{\theta}{2},\; \hat{\mathbf{u}}\sin\frac{\theta}{2}\right)</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><strong>Double cover:</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐪</mi><annotation encoding="application/x-tex">\mathbf{q}</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mi>𝐪</mi></mrow><annotation encoding="application/x-tex">-\mathbf{q}</annotation></semantics></math> encode the <strong>same rotation</strong>. Unit quaternions live on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>S</mi><mn>3</mn></msup><mo>⊂</mo><msup><mi>ℝ</mi><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">S^3 \subset \mathbb{R}^4</annotation></semantics></math>, and SO(3) is the quotient <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>S</mi><mn>3</mn></msup><mi>/</mi><mo stretchy="false" form="prefix">{</mo><mi>±</mi><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">S^3/\{\pm 1\}</annotation></semantics></math>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="quaternion-algebra" class="slide level2 smaller">
+<h2>Quaternion Algebra</h2>
+<p>The imaginary units satisfy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐢</mi><mn>2</mn></msup><mo>=</mo><msup><mi>𝐣</mi><mn>2</mn></msup><mo>=</mo><msup><mi>𝐤</mi><mn>2</mn></msup><mo>=</mo><mrow><mi>𝐢</mi><mi>𝐣</mi><mi>𝐤</mi></mrow><mo>=</mo><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">\mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = \mathbf{ijk} = -1</annotation></semantics></math>, giving:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐢</mi><mi>𝐣</mi><mo>=</mo><mi>𝐤</mi><mo>,</mo><mspace width="1.0em"></mspace><mi>𝐣</mi><mi>𝐤</mi><mo>=</mo><mi>𝐢</mi><mo>,</mo><mspace width="1.0em"></mspace><mi>𝐤</mi><mi>𝐢</mi><mo>=</mo><mi>𝐣</mi></mrow><annotation encoding="application/x-tex">\mathbf{i}\mathbf{j} = \mathbf{k},\quad \mathbf{j}\mathbf{k} = \mathbf{i},\quad \mathbf{k}\mathbf{i} = \mathbf{j}</annotation></semantics></math></p>
+<div class="fragment">
+<p><strong>Quaternion product</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>w</mi><mn>1</mn></msub><mo>,</mo><msub><mi>𝐯</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>⊗</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>w</mi><mn>2</mn></msub><mo>,</mo><msub><mi>𝐯</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(w_1, \mathbf{v}_1) \otimes (w_2, \mathbf{v}_2)</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐪</mi><mn>1</mn></msub><mo>⊗</mo><msub><mi>𝐪</mi><mn>2</mn></msub><mo>=</mo><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">(</mo><msub><mi>w</mi><mn>1</mn></msub><msub><mi>w</mi><mn>2</mn></msub><mo>−</mo><msub><mi>𝐯</mi><mn>1</mn></msub><mo>⋅</mo><msub><mi>𝐯</mi><mn>2</mn></msub><mo>,</mo><mspace width="0.278em"></mspace><msub><mi>w</mi><mn>1</mn></msub><msub><mi>𝐯</mi><mn>2</mn></msub><mo>+</mo><msub><mi>w</mi><mn>2</mn></msub><msub><mi>𝐯</mi><mn>1</mn></msub><mo>+</mo><msub><mi>𝐯</mi><mn>1</mn></msub><mo>×</mo><msub><mi>𝐯</mi><mn>2</mn></msub><mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{q}_1 \otimes \mathbf{q}_2 = \bigl(w_1 w_2 - \mathbf{v}_1\cdot\mathbf{v}_2,\; w_1\mathbf{v}_2 + w_2\mathbf{v}_1 + \mathbf{v}_1 \times \mathbf{v}_2\bigr)</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<p><strong>Conjugate</strong> and <strong>inverse</strong> (for unit quaternions):</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐪</mi><mo>*</mo></msup><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>w</mi><mo>,</mo><mi>−</mi><mi>𝐯</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msup><mi>𝐪</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo>=</mo><msup><mi>𝐪</mi><mo>*</mo></msup><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mtext mathvariant="normal">since </mtext><mspace width="0.333em"></mspace></mrow><mo stretchy="false" form="postfix">∥</mo><mi>𝐪</mi><mo stretchy="false" form="postfix">∥</mo><mo>=</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{q}^* = (w, -\mathbf{v}), \qquad \mathbf{q}^{-1} = \mathbf{q}^* \quad (\text{since } \|\mathbf{q}\|=1)</annotation></semantics></math></p>
+</div>
+</section>
+<section id="rotating-a-vector" class="slide level2 smaller">
+<h2>Rotating a Vector</h2>
+<p>To rotate a 3-vector <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐩</mi><annotation encoding="application/x-tex">\mathbf{p}</annotation></semantics></math> by quaternion <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐪</mi><annotation encoding="application/x-tex">\mathbf{q}</annotation></semantics></math>, embed <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐩</mi><annotation encoding="application/x-tex">\mathbf{p}</annotation></semantics></math> as a pure quaternion <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>𝐩</mi><mo accent="true">̃</mo></mover><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mi>𝐩</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\tilde{\mathbf{p}} = (0, \mathbf{p})</annotation></semantics></math> and compute:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>𝐩</mi><mo accent="true">̃</mo></mover><mi>′</mi><mo>=</mo><mi>𝐪</mi><mo>⊗</mo><mover><mi>𝐩</mi><mo accent="true">̃</mo></mover><mo>⊗</mo><msup><mi>𝐪</mi><mo>*</mo></msup></mrow><annotation encoding="application/x-tex">\tilde{\mathbf{p}}' = \mathbf{q} \otimes \tilde{\mathbf{p}} \otimes \mathbf{q}^*</annotation></semantics></math></p>
+<div class="fragment">
+<p>The result <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>𝐩</mi><mo accent="true">̃</mo></mover><mi>′</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mi>𝐩</mi><mi>′</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\tilde{\mathbf{p}}' = (0, \mathbf{p}')</annotation></semantics></math> is again a pure quaternion, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐩</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">\mathbf{p}'</annotation></semantics></math> is the rotated vector.</p>
+</div>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>This is equivalent to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐩</mi><mi>′</mi><mo>=</mo><mi>R</mi><mspace width="0.167em"></mspace><mi>𝐩</mi></mrow><annotation encoding="application/x-tex">\mathbf{p}' = R\,\mathbf{p}</annotation></semantics></math> where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> is the rotation matrix corresponding to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐪</mi><annotation encoding="application/x-tex">\mathbf{q}</annotation></semantics></math>. The sandwich product <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐪</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>⋅</mi><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>𝐪</mi><mo>*</mo></msup></mrow><annotation encoding="application/x-tex">\mathbf{q}(\cdot)\mathbf{q}^*</annotation></semantics></math> preserves vector length.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="quaternion-to-rotation-matrix" class="slide level2 smaller">
+<h2>Quaternion to Rotation Matrix</h2>
+<p>Given <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐪</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>w</mi><mo>,</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{q} = (w, x, y, z)</annotation></semantics></math>, the equivalent rotation matrix is:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐪</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>1</mn><mo>−</mo><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>y</mi><mn>2</mn></msup><mo>+</mo><msup><mi>z</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mi>y</mi><mo>−</mo><mi>w</mi><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mi>z</mi><mo>+</mo><mi>w</mi><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mi>y</mi><mo>+</mo><mi>w</mi><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mn>1</mn><mo>−</mo><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>z</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mi>z</mi><mo>−</mo><mi>w</mi><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mi>z</mi><mo>−</mo><mi>w</mi><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mi>z</mi><mo>+</mo><mi>w</mi><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mn>1</mn><mo>−</mo><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">R(\mathbf{q}) = \begin{bmatrix}
+1 - 2(y^2+z^2) &amp; 2(xy - wz) &amp; 2(xz + wy) \\
+2(xy + wz) &amp; 1 - 2(x^2+z^2) &amp; 2(yz - wx) \\
+2(xz - wy) &amp; 2(yz + wx) &amp; 1 - 2(x^2+y^2)
+\end{bmatrix}</annotation></semantics></math></p>
+<div class="fragment">
+<p>This follows directly from expanding <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐪</mi><mo>⊗</mo><mover><mi>𝐩</mi><mo accent="true">̃</mo></mover><mo>⊗</mo><msup><mi>𝐪</mi><mo>*</mo></msup></mrow><annotation encoding="application/x-tex">\mathbf{q} \otimes \tilde{\mathbf{p}} \otimes \mathbf{q}^*</annotation></semantics></math> and collecting terms.</p>
+</div>
+</section>
+<section id="composing-rotations-1" class="slide level2 smaller">
+<h2>Composing Rotations</h2>
+<p>Two sequential rotations compose by quaternion multiplication:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐪</mi><mrow><mi>A</mi><mi>C</mi></mrow></msub><mo>=</mo><msub><mi>𝐪</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><mo>⊗</mo><msub><mi>𝐪</mi><mrow><mi>B</mi><mi>C</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbf{q}_{AC} = \mathbf{q}_{AB} \otimes \mathbf{q}_{BC}</annotation></semantics></math></p>
+<div class="fragment">
+<p>This mirrors matrix composition — read right to left.</p>
+</div>
+<div class="fragment">
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><strong>Numerical drift:</strong> After many multiplications, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><mi>𝐪</mi><mo stretchy="false" form="postfix">∥</mo></mrow><annotation encoding="application/x-tex">\|\mathbf{q}\|</annotation></semantics></math> may drift from 1 due to floating-point errors. Re-normalize periodically: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐪</mi><mo>←</mo><mfrac><mi>𝐪</mi><mrow><mo stretchy="false" form="postfix">∥</mo><mi>𝐪</mi><mo stretchy="false" form="postfix">∥</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\mathbf{q} \leftarrow \frac{\mathbf{q}}{\|\mathbf{q}\|}</annotation></semantics></math></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="spherical-linear-interpolation-slerp" class="slide level2 smaller">
+<h2>Spherical Linear Interpolation (SLERP)</h2>
+<p>Quaternions enable smooth interpolation between two orientations <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐪</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\mathbf{q}_0</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐪</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\mathbf{q}_1</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">p</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐪</mi><mn>0</mn></msub><mo>,</mo><msub><mi>𝐪</mi><mn>1</mn></msub><mo>,</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>𝐪</mi><mn>0</mn></msub><msup><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>𝐪</mi><mn>0</mn><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><mo>⊗</mo><msub><mi>𝐪</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>t</mi></msup><mo>,</mo><mspace width="1.0em"></mspace><mi>t</mi><mo>∈</mo><mrow><mo stretchy="true" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{slerp}(\mathbf{q}_0, \mathbf{q}_1, t) = \mathbf{q}_0 \left(\mathbf{q}_0^{-1} \otimes \mathbf{q}_1\right)^t, \quad t \in [0, 1]</annotation></semantics></math></p>
+<div class="fragment">
+<p>Or equivalently, via the angle <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mo>=</mo><mo>arccos</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐪</mi><mn>0</mn></msub><mo>⋅</mo><msub><mi>𝐪</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega = \arccos(\mathbf{q}_0 \cdot \mathbf{q}_1)</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">p</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐪</mi><mn>0</mn></msub><mo>,</mo><msub><mi>𝐪</mi><mn>1</mn></msub><mo>,</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mo>sin</mo><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>Ω</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mo>sin</mo><mi>Ω</mi></mrow></mfrac><mspace width="0.167em"></mspace><msub><mi>𝐪</mi><mn>0</mn></msub><mo>+</mo><mfrac><mrow><mo>sin</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mi>Ω</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mo>sin</mo><mi>Ω</mi></mrow></mfrac><mspace width="0.167em"></mspace><msub><mi>𝐪</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\mathrm{slerp}(\mathbf{q}_0, \mathbf{q}_1, t) = \frac{\sin((1-t)\Omega)}{\sin\Omega}\,\mathbf{q}_0 + \frac{\sin(t\Omega)}{\sin\Omega}\,\mathbf{q}_1</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>SLERP traces a <strong>geodesic</strong> on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>S</mi><mn>3</mn></msup><annotation encoding="application/x-tex">S^3</annotation></semantics></math> — the shortest path between two orientations. Simple linear interpolation of Euler angles does not give the shortest path and can produce unexpected trajectories.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="slerp-numerical-example" class="slide level2 smaller">
+<h2>SLERP: Numerical Example</h2>
+<p><strong>Setup:</strong> interpolate from identity to 90° rotation about <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>z</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{z}</annotation></semantics></math>, evaluate at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">t = 0.5</annotation></semantics></math>.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐪</mi><mn>0</mn></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>𝐪</mi><mn>1</mn></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>cos</mo><mn>45</mn><mi>°</mi><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mo>sin</mo><mn>45</mn><mi>°</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac displaystyle="false"><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mfrac displaystyle="false"><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{q}_0 = (1,\;0,\;0,\;0), \qquad \mathbf{q}_1 = \left(\cos 45°,\;0,\;0,\;\sin 45°\right) = \left(\tfrac{\sqrt{2}}{2},\;0,\;0,\;\tfrac{\sqrt{2}}{2}\right)</annotation></semantics></math></p>
+<div class="fragment">
+<p><strong>Step 1 — find <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>:</strong></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>cos</mo><mi>Ω</mi><mo>=</mo><msub><mi>𝐪</mi><mn>0</mn></msub><mo>⋅</mo><msub><mi>𝐪</mi><mn>1</mn></msub><mo>=</mo><mfrac displaystyle="false"><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mspace width="0.278em"></mspace><mo>⇒</mo><mspace width="0.278em"></mspace><mi>Ω</mi><mo>=</mo><mn>45</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">\cos\Omega = \mathbf{q}_0 \cdot \mathbf{q}_1 = \tfrac{\sqrt{2}}{2} \;\Longrightarrow\; \Omega = 45°</annotation></semantics></math></p>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mo>=</mo><mn>45</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">\Omega = 45°</annotation></semantics></math> is <strong>half</strong> the rotation angle (90°). This is a direct consequence of the half-angle encoding <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo><mo>cos</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>θ</mi><mi>/</mi><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">w = \cos(\theta/2)</annotation></semantics></math>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Step 2 — evaluate at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">t = 0.5</annotation></semantics></math>:</strong></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">p</mi></mrow><mo>=</mo><mfrac><mrow><mo>sin</mo><mn>22.5</mn><mi>°</mi></mrow><mrow><mo>sin</mo><mn>45</mn><mi>°</mi></mrow></mfrac><mspace width="0.167em"></mspace><msub><mi>𝐪</mi><mn>0</mn></msub><mo>+</mo><mfrac><mrow><mo>sin</mo><mn>22.5</mn><mi>°</mi></mrow><mrow><mo>sin</mo><mn>45</mn><mi>°</mi></mrow></mfrac><mspace width="0.167em"></mspace><msub><mi>𝐪</mi><mn>1</mn></msub><mo>≈</mo><mn>0.541</mn><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐪</mi><mn>0</mn></msub><mo>+</mo><msub><mi>𝐪</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{slerp} = \frac{\sin 22.5°}{\sin 45°}\,\mathbf{q}_0 + \frac{\sin 22.5°}{\sin 45°}\,\mathbf{q}_1 \approx 0.541\,(\mathbf{q}_0 + \mathbf{q}_1)</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mn>0.541</mn><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>1.707</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0.707</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>≈</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0.924</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0.383</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">= 0.541\,(1.707,\;0,\;0,\;0.707) \approx (0.924,\;0,\;0,\;0.383)</annotation></semantics></math></p>
+</div>
+</section>
+<section id="slerp-decoding-the-result" class="slide level2 smaller">
+<h2>SLERP: Decoding the Result</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐪</mi><mn>0.5</mn></msub><mo>≈</mo><mrow><mo stretchy="true" form="prefix">(</mo><munder><munder><mn>0.924</mn><mo accent="true">⏟</mo></munder><mi>w</mi></munder><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><munder><munder><mn>0.383</mn><mo accent="true">⏟</mo></munder><msub><mi>v</mi><mi>z</mi></msub></munder><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{q}_{0.5} \approx (\underbrace{0.924}_{w},\;0,\;0,\;\underbrace{0.383}_{v_z})</annotation></semantics></math></p>
+<div class="fragment">
+<p><strong>Decode the rotation angle:</strong></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo><mo>cos</mo><mspace width="-0.167em"></mspace><mfrac displaystyle="false"><mi>θ</mi><mn>2</mn></mfrac><mo>=</mo><mn>0.924</mn><mo>=</mo><mo>cos</mo><mn>22.5</mn><mi>°</mi><mspace width="0.278em"></mspace><mo>⇒</mo><mspace width="0.278em"></mspace><mi>θ</mi><mo>=</mo><mn>45</mn><mi>°</mi></mrow><annotation encoding="application/x-tex">w = \cos\!\tfrac{\theta}{2} = 0.924 = \cos 22.5° \;\Longrightarrow\; \theta = 45°</annotation></semantics></math></p>
+<p><strong>Decode the rotation axis:</strong></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mo>=</mo><mfrac><mi>𝐯</mi><mrow><mo stretchy="false" form="postfix">∥</mo><mi>𝐯</mi><mo stretchy="false" form="postfix">∥</mo></mrow></mfrac><mo>=</mo><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0.383</mn><mo stretchy="true" form="postfix">)</mo></mrow><mn>0.383</mn></mfrac><mo>=</mo><mover><mi>z</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">\hat{\mathbf{u}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} = \frac{(0,\;0,\;0.383)}{0.383} = \hat{z}</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<p>So <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐪</mi><mn>0.5</mn></msub><annotation encoding="application/x-tex">\mathbf{q}_{0.5}</annotation></semantics></math> is a <strong>45° rotation about <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>z</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{z}</annotation></semantics></math></strong> — exactly halfway between 0° and 90°, on the same axis. ✓</p>
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>This holds generally: SLERP between two rotations <strong>about the same axis</strong> stays on that axis and scales the angle linearly. For rotations about different axes, the intermediate axis traces a curved path on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>S</mi><mn>3</mn></msup><annotation encoding="application/x-tex">S^3</annotation></semantics></math>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="slerp-where-is-the-axis-computed" class="slide level2 smaller">
+<h2>SLERP: Where Is the Axis Computed?</h2>
+<p>In the multiplicative form <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">p</mi></mrow><mo>=</mo><msub><mi>𝐪</mi><mn>0</mn></msub><msup><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>𝐪</mi><mn>0</mn><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><mo>⊗</mo><msub><mi>𝐪</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>t</mi></msup></mrow><annotation encoding="application/x-tex">\mathrm{slerp} = \mathbf{q}_0 \left(\mathbf{q}_0^{-1} \otimes \mathbf{q}_1\right)^t</annotation></semantics></math>, the axis is explicit:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐪</mi><mrow><mi>r</mi><mi>e</mi><mi>l</mi></mrow></msub><mo>=</mo><msubsup><mi>𝐪</mi><mn>0</mn><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><mo>⊗</mo><msub><mi>𝐪</mi><mn>1</mn></msub><mspace width="1.0em"></mspace><mo>←</mo><mrow><mtext mathvariant="normal">relative rotation from </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>𝐪</mi><mn>0</mn></msub><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> to </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>𝐪</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\mathbf{q}_{rel} = \mathbf{q}_0^{-1} \otimes \mathbf{q}_1 \quad \leftarrow \text{relative rotation from } \mathbf{q}_0 \text{ to } \mathbf{q}_1</annotation></semantics></math></p>
+<p>The <strong>axis of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐪</mi><mrow><mi>r</mi><mi>e</mi><mi>l</mi></mrow></msub><annotation encoding="application/x-tex">\mathbf{q}_{rel}</annotation></semantics></math></strong> (the normalized vector part) is the axis about which SLERP rotates. Raising to the power <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> scales only the angle, leaving the axis unchanged:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>𝐪</mi><mrow><mi>r</mi><mi>e</mi><mi>l</mi></mrow><mi>t</mi></msubsup><mspace width="0.278em"></mspace><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> corresponds to angle </mtext><mspace width="0.333em"></mspace></mrow><mi>t</mi><mi>α</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> about </mtext><mspace width="0.333em"></mspace></mrow><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mspace width="1.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐪</mi><mrow><mi>r</mi><mi>e</mi><mi>l</mi></mrow></msub><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> encodes angle </mtext><mspace width="0.333em"></mspace></mrow><mi>α</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> about </mtext><mspace width="0.333em"></mspace></mrow><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{q}_{rel}^t \;\text{ corresponds to angle } t\alpha \text{ about } \hat{\mathbf{u}} \quad (\mathbf{q}_{rel} \text{ encodes angle } \alpha \text{ about } \hat{\mathbf{u}})</annotation></semantics></math></p>
+<div class="fragment">
+<p><strong>In our example</strong> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐪</mi><mn>0</mn></msub><mo>=</mo></mrow><annotation encoding="application/x-tex">\mathbf{q}_0 =</annotation></semantics></math> identity):</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐪</mi><mrow><mi>r</mi><mi>e</mi><mi>l</mi></mrow></msub><mo>=</mo><msubsup><mi>𝐪</mi><mn>0</mn><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><mo>⊗</mo><msub><mi>𝐪</mi><mn>1</mn></msub><mo>=</mo><msub><mi>𝐪</mi><mn>1</mn></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac displaystyle="false"><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mn>0</mn><mo>,</mo><mspace width="0.278em"></mspace><mfrac displaystyle="false"><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.278em"></mspace><mo>⇒</mo><mspace width="0.278em"></mspace><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><mo>=</mo><mover><mi>z</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">\mathbf{q}_{rel} = \mathbf{q}_0^{-1} \otimes \mathbf{q}_1 = \mathbf{q}_1 = \left(\tfrac{\sqrt{2}}{2},\;0,\;0,\;\tfrac{\sqrt{2}}{2}\right) \;\Rightarrow\; \hat{\mathbf{u}} = \hat{z}</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<p>In the <strong>dot-product formula</strong>, the axis is not extracted explicitly — it is preserved implicitly because the weighted sum <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mn>0</mn></msub><mspace width="0.167em"></mspace><msub><mi>𝐪</mi><mn>0</mn></msub><mo>+</mo><msub><mi>α</mi><mn>1</mn></msub><mspace width="0.167em"></mspace><msub><mi>𝐪</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\alpha_0\,\mathbf{q}_0 + \alpha_1\,\mathbf{q}_1</annotation></semantics></math> stays on the great circle whose tangent direction encodes <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>𝐮</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\mathbf{u}}</annotation></semantics></math>.</p>
+</div>
+</section></section>
+<section>
+<section id="comparison" class="title-slide slide level1 center">
+<h1>Comparison</h1>
+
+</section>
+<section id="side-by-side-comparison" class="slide level2 smaller">
+<h2>Side-by-Side Comparison</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Rotation Matrix</th>
+<th>Euler Angles</th>
+<th>Quaternion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Parameters</strong></td>
+<td>9 (3 DOF)</td>
+<td>3</td>
+<td>4 (3 DOF)</td>
+</tr>
+<tr class="even">
+<td><strong>Constraints</strong></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>R</mi><mi>T</mi></msup><mi>R</mi><mo>=</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">R^TR=I</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>det</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\det=1</annotation></semantics></math></td>
+<td>none</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><mi>𝐪</mi><mo stretchy="false" form="postfix">∥</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\|\mathbf{q}\|=1</annotation></semantics></math></td>
+</tr>
+<tr class="odd">
+<td><strong>Singularities</strong></td>
+<td>none</td>
+<td>gimbal lock</td>
+<td>none</td>
+</tr>
+<tr class="even">
+<td><strong>Composition</strong></td>
+<td>matrix multiply</td>
+<td>convert → multiply → convert</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>⊗</mi><annotation encoding="application/x-tex">\otimes</annotation></semantics></math> multiply</td>
+</tr>
+<tr class="odd">
+<td><strong>Interpolation</strong></td>
+<td>complex</td>
+<td>problematic</td>
+<td>SLERP</td>
+</tr>
+<tr class="even">
+<td><strong>Human intuition</strong></td>
+<td>low</td>
+<td>high</td>
+<td>low</td>
+</tr>
+<tr class="odd">
+<td><strong>Memory</strong></td>
+<td>9 floats</td>
+<td>3 floats</td>
+<td>4 floats</td>
+</tr>
+<tr class="even">
+<td><strong>Numerical stability</strong></td>
+<td>drifts from SO(3)</td>
+<td>-</td>
+<td>normalize periodically</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="when-to-use-which" class="slide level2 smaller">
+<h2>When to Use Which</h2>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[33,33,33]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<p><strong>Rotation Matrices</strong></p>
+<p>Best for:</p>
+<ul>
+<li>Deriving equations (Jacobians, dynamics)</li>
+<li>Linear algebra manipulations</li>
+<li>Expressing velocity relations</li>
+<li>Composing many transforms analytically</li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<p><strong>Euler Angles</strong></p>
+<p>Best for:</p>
+<ul>
+<li>User interfaces / teleoperation</li>
+<li>Specifying initial conditions</li>
+<li>Small-angle approximations</li>
+<li>Aerospace attitude display</li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<p><strong>Quaternions</strong></p>
+<p>Best for:</p>
+<ul>
+<li>Real-time control / estimation</li>
+<li>Motion planning &amp; interpolation</li>
+<li>Simulation &amp; numerical integration</li>
+<li>State estimation (EKF, UKF)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>In practice: <strong>store</strong> orientations as quaternions, <strong>display</strong> as Euler angles, <strong>derive</strong> equations with rotation matrices.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="key-relationships" class="slide level2 smaller">
+<h2>Key Relationships</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><munder><mrow><mo stretchy="true" form="prefix">(</mo><mi>ϕ</mi><mo>,</mo><mi>θ</mi><mo>,</mo><mi>ψ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo accent="true">⏟</mo></munder><mtext mathvariant="normal">Euler ZYX</mtext></munder><mover><mo>→</mo><mtext mathvariant="normal">3 basic rotations</mtext></mover><munder><munder><mrow><mi>R</mi><mo>∈</mo><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">O</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mo accent="true">⏟</mo></munder><mtext mathvariant="normal">rotation matrix</mtext></munder><mover><mo>→</mo><mtext mathvariant="normal">Shepperd’s method</mtext></mover><munder><munder><mrow><mi>𝐪</mi><mo>∈</mo><msup><mi>S</mi><mn>3</mn></msup></mrow><mo accent="true">⏟</mo></munder><mtext mathvariant="normal">unit quaternion</mtext></munder></mrow><annotation encoding="application/x-tex">\underbrace{(\phi, \theta, \psi)}_{\text{Euler ZYX}} \xrightarrow{\text{3 basic rotations}} \underbrace{R \in \mathrm{SO}(3)}_{\text{rotation matrix}} \xrightarrow{\text{Shepperd's method}} \underbrace{\mathbf{q} \in S^3}_{\text{unit quaternion}}</annotation></semantics></math></p>
+<div class="fragment">
+<p>Going backwards:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐪</mi><mover><mo>→</mo><mrow><mi>R</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐪</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mover><mi>R</mi><mover><mo>→</mo><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">n</mi><mn mathvariant="normal">2</mn></mrow></mover><mrow><mo stretchy="true" form="prefix">(</mo><mi>ϕ</mi><mo>,</mo><mi>θ</mi><mo>,</mo><mi>ψ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{q} \xrightarrow{R(\mathbf{q})} R \xrightarrow{\mathrm{atan2}} (\phi, \theta, \psi)</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<p>The <strong>Lie algebra</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>𝔰</mi><mi>𝔬</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathfrak{so}(3)</annotation></semantics></math> (skew-symmetric matrices) relates to all three via the <strong>exponential map</strong>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><msup><mi>e</mi><msub><mrow><mo stretchy="true" form="prefix">[</mo><mi>𝛚</mi><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo></msub></msup><mo>,</mo><mspace width="2.0em"></mspace><mi>𝐪</mi><mo>≈</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mspace width="0.167em"></mspace><mfrac displaystyle="false"><mi>𝛚</mi><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> for small </mtext><mspace width="0.333em"></mspace></mrow><mo stretchy="false" form="postfix">∥</mo><mi>𝛚</mi><mo stretchy="false" form="postfix">∥</mo></mrow><annotation encoding="application/x-tex">R = e^{[\boldsymbol{\omega}]_\times}, \qquad \mathbf{q} \approx \left(1,\, \tfrac{\boldsymbol{\omega}}{2}\right) \text{ for small } \|\boldsymbol{\omega}\|</annotation></semantics></math></p>
+</div>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>The vector <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝛚</mi><mo>∈</mo><msup><mi>ℝ</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">\boldsymbol{\omega} \in \mathbb{R}^3</annotation></semantics></math> is the <strong>rotation vector</strong> (axis times angle). It is the minimal, globally-defined representation — but it too has a singularity at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><mi>𝛚</mi><mo stretchy="false" form="postfix">∥</mo><mo>=</mo><mn>2</mn><mi>π</mi><mi>k</mi></mrow><annotation encoding="application/x-tex">\|\boldsymbol{\omega}\| = 2\pi k</annotation></semantics></math>.</p>
+</div>
+</div>
+</div>
+
+
+</div>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>3D Orientations •<a href="index.html"> ME 676 Home</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true,"theme":"whiteboard","boardmarkerWidth":3},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
