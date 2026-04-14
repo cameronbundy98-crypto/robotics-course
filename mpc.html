@@ -178,12 +178,12 @@
 <pre><code>t=0:  [●━━━━━━━━━━━━━━━━━━━━●]         solve, apply u_0*
 t=1:    [●━━━━━━━━━━━━━━━━━━━━●]       solve, apply u_1*
 t=2:      [●━━━━━━━━━━━━━━━━━━━━●]     solve, apply u_2*
-           ↑ current state              ↑ horizon end</code></pre>
+           ↑ current state      ↑ horizon end</code></pre>
 <div class="fragment" data-fragment-index="1">
 <p><strong>Key properties:</strong></p>
 <ul>
 <li>The horizon always looks <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math> steps into the future (same length each time)</li>
-<li>Only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>u</mi><mn>0</mn><mo>*</mo></msubsup><annotation encoding="application/x-tex">u_0^*</annotation></semantics></math> is ever applied — the rest of the plan is discarded and recomputed</li>
+<li>Only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>u</mi><mi>t</mi><mo>*</mo></msubsup><annotation encoding="application/x-tex">u_t^*</annotation></semantics></math> is ever applied — the rest of the plan is discarded and recomputed</li>
 <li>The re-solve at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t+1</annotation></semantics></math> can be <strong>warm-started</strong> from the shifted solution at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math></li>
 </ul>
 </div>
@@ -211,7 +211,7 @@ t=2:      [●━━━━━━━━━━━━━━━━━━━━●]  
 </div>
 <div class="fragment" data-fragment-index="2">
 <p><strong>Linear MPC:</strong> solve the same problem online at each <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mi>t</mi></msub><annotation encoding="application/x-tex">x_t</annotation></semantics></math>.</p>
-<p>Without constraints: <strong>LQR and MPC give the identical control</strong> — MPC adds no benefit, just cost.</p>
+<p>Without non-dynamics constraints <strong>LQR and MPC give the identical control</strong> (finite horizon case)</p>
 </div>
 <div class="fragment" data-fragment-index="3">
 <div class="callout callout-tip no-icon callout-style-simple">
