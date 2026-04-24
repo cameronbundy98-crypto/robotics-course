@@ -1,7 +1,3 @@
-"""
-Assignment 3 - Franka grasp FSM solution.
-"""
-
 from enum import Enum, auto
 import mujoco
 import numpy as np
@@ -33,10 +29,6 @@ class ArmFSM:
         self.grasp_hold = self.q_home.copy()
         self.lift_start_z = data.body(self.cube_body_id).xpos[2]
 
-        self.home_tol = 0.08
-        self.approach_tol = 0.012
-        self.lift_tol = 0.12
-
         self.callback = None
 
     def transition(self, data=None):
@@ -47,6 +39,7 @@ class ArmFSM:
             State.GRASP_CLOSE: State.LIFT,
             State.LIFT: State.HOME,
         }
+
         self.state = transitions[self.state]
 
         if data is not None:
@@ -109,40 +102,35 @@ class ArmFSM:
     def _near_home(self, model, data):
         q = data.qpos[:self.n_arm]
         qd = data.qvel[:self.n_arm]
+
         q_error = np.linalg.norm(self.q_home - q)
         qd_error = np.linalg.norm(qd)
-        return q_error < self.home_tol and qd_error < 0.35
+
+        return q_error < 0.10 and qd_error < 0.50
 
     def _grasp_opened(self, model, data):
         fingers = data.qpos[self.n_arm:self.n_arm + 2]
-        return np.linalg.norm(fingers - self.gripper_open) < 0.006
+        return np.linalg.norm(fingers - self.gripper_open) < 0.008
 
     def _near_object(self, data):
         cube_pos = data.body(self.cube_body_id).xpos.copy()
         ee_pos = data.site(self.site_id).xpos.copy()
 
-        horizontal_error = np.linalg.norm((cube_pos - ee_pos)[:2])
-        vertical_error = abs(cube_pos[2] - ee_pos[2])
+        dx = cube_pos - ee_pos
 
-        return horizontal_error < self.approach_tol and vertical_error < 0.025
+        return np.linalg.norm(dx) < 0.035
 
     def _grasp_stable(self, model, data):
-        fingers = data.qpos[self.n_arm:self.n_arm + 2]
-        finger_gap = abs(fingers[0] - fingers[1])
-
-        waited = self._time_in_state(data) > 0.55
-        almost_closed = finger_gap < 0.030
-
-        return waited and almost_closed
+        return self._time_in_state(data) > 0.60
 
     def _lifted(self, model, data):
         cube_z = data.body(self.cube_body_id).xpos[2]
+        waited = self._time_in_state(data) > 0.90
 
-        arm_near_lift_pose = np.linalg.norm(self.q_home - data.qpos[:self.n_arm]) < self.lift_tol
-        cube_raised = cube_z > self.lift_start_z + 0.08 or cube_z > 1.08
-        waited = self._time_in_state(data) > 0.80
+        cube_raised = cube_z > self.lift_start_z + 0.06
+        arm_near_home = np.linalg.norm(self.q_home - data.qpos[:self.n_arm]) < 0.18
 
-        return waited and arm_near_lift_pose and cube_raised
+        return waited and (cube_raised or arm_near_home)
 
     def _homing_control(self, model, data):
         self._joint_pd_control(model, data, self.q_home)
@@ -152,7 +140,8 @@ class ArmFSM:
 
     def _approach_control(self, model, data):
         cube_pos = data.body(self.cube_body_id).xpos.copy()
-        target_pos = cube_pos + np.array([0.0, 0.0, 0.004])
+
+        target_pos = cube_pos + np.array([0.0, 0.0, 0.02])
 
         self._site_position_control(model, data, target_pos, q_bias=self.q_grasp_bias)
 
@@ -172,19 +161,22 @@ class ArmFSM:
         q = data.qpos[:self.n_arm]
         qd = data.qvel[:self.n_arm]
 
-        kp = np.array([85.0, 85.0, 75.0, 70.0, 45.0, 35.0, 25.0])
+        kp = np.array([90.0, 90.0, 80.0, 75.0, 50.0, 35.0, 25.0])
         kd = np.array([18.0, 18.0, 16.0, 14.0, 9.0, 7.0, 5.0])
 
         tau = kp * (q_target - q) - kd * qd + data.qfrc_bias[:self.n_arm]
+
         data.ctrl[:self.n_arm] = self._clip_arm_torque(model, tau)
 
     def _site_position_control(self, model, data, target_pos, q_bias=None):
         q = data.qpos[:self.n_arm]
         qd = data.qvel[:self.n_arm]
+
         ee_pos = data.site(self.site_id).xpos.copy()
 
         jacp = np.zeros((3, model.nv))
         jacr = np.zeros((3, model.nv))
+
         mujoco.mj_jacSite(model, data, jacp, jacr, self.site_id)
 
         J = jacp[:, :self.n_arm]
@@ -192,22 +184,24 @@ class ArmFSM:
 
         pos_error = target_pos - ee_pos
 
-        desired_force = 420.0 * pos_error - 35.0 * ee_vel
-        desired_force = np.clip(desired_force, -45.0, 45.0)
+        desired_force = 350.0 * pos_error - 30.0 * ee_vel
+        desired_force = np.clip(desired_force, -40.0, 40.0)
 
         tau_task = J.T @ desired_force
 
         if q_bias is None:
             q_bias = self.q_grasp_bias
 
-        tau_posture = 12.0 * (q_bias - q) - 3.0 * qd
+        tau_posture = 10.0 * (q_bias - q) - 2.5 * qd
 
         tau = tau_task + tau_posture + data.qfrc_bias[:self.n_arm]
+
         data.ctrl[:self.n_arm] = self._clip_arm_torque(model, tau)
 
     def _clip_arm_torque(self, model, tau):
         ctrl_min = model.actuator_ctrlrange[:self.n_arm, 0]
         ctrl_max = model.actuator_ctrlrange[:self.n_arm, 1]
+
         return np.clip(tau, ctrl_min, ctrl_max)
 
     def print_contacts(self, model, data):
@@ -221,14 +215,10 @@ class ArmFSM:
             print("geoms:", g1, g2)
 
             if (
-                g1 in [
-                    "gripper0_right_finger1_pad_collision",
-                    "gripper0_right_finger2_pad_collision",
-                ]
-                or g2 in [
-                    "gripper0_right_finger1_pad_collision",
-                    "gripper0_right_finger2_pad_collision",
-                ]
+                g1 == "gripper0_right_finger1_pad_collision"
+                or g1 == "gripper0_right_finger2_pad_collision"
+                or g2 == "gripper0_right_finger1_pad_collision"
+                or g2 == "gripper0_right_finger2_pad_collision"
             ):
                 forcetorque = np.zeros(6)
                 mujoco.mj_contactForce(model, data, i, forcetorque)
